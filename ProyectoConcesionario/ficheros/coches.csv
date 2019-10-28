@@ -1,0 +1,3 @@
+String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca, String modelo,
+			boolean motorDiesel, boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
+			boolean modoDeportivo

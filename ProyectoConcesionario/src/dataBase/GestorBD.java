@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Usuario;
+import model.Persona;
 
 public class GestorBD {
 private Connection conn;
@@ -24,23 +24,35 @@ private Connection conn;
 		conn.close();
 	}
 	
-	public List<Usuario> obtenerUsuarios() throws SQLException, ParseException{
-		String sql = "SELECT login, password, email, dni FROM usuario";
+	public void iniciarBBDDpersonas() throws SQLException {
+		String sql  = "INSERT INTO persona (persona, password, creation_date) VALUES (?,?,?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		Persona persona= new Persona();
+		
+		stmt.setString(1, persona.getLogin());
+		stmt.setString(2, persona.getPassword());
+		stmt.setString(3, persona.getEmail());
+		
+		stmt.executeUpdate();
+	}
+	
+	public List<Persona> obtenerpersonas() throws SQLException, ParseException{
+		String sql = "SELECT login, password, email, dni FROM persona";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Persona> personas = new ArrayList<Persona>();
 		
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()){
-			Usuario usuario = new Usuario();
-			usuario.setLogin(rs.getString("login"));
-			usuario.setPassword(rs.getString("password"));
-			usuario.setEmail(rs.getString("email"));
+			Persona persona = new Persona();
+			persona.setLogin(rs.getString("login"));
+			persona.setPassword(rs.getString("password"));
+			persona.setEmail(rs.getString("email"));
 			
-			usuarios.add(usuario);
+			personas.add(persona);
 		}
 		
-		return usuarios;
+		return personas;
 	}
 	
 
