@@ -11,11 +11,13 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Ventana1 extends JFrame {
+public class VentanaLogin extends JFrame {
+	
 	private JTextField textoUsuario;
 	private JPasswordField textoContrasenya;
 	private JButton botonIniciar;
-	public Ventana1() {
+	
+	public VentanaLogin() {
 		getContentPane().setBackground(new Color(255, 255, 224));
 		getContentPane().setLayout(null);
 		
