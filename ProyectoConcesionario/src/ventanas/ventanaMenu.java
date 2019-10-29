@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ventanaMenu extends JFrame {
+
 	public ventanaMenu() {
 		getContentPane().setBackground(new Color(255, 255, 224));
 		getContentPane().setLayout(null);

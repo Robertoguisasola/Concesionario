@@ -1,8 +1,10 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Concesionario {
 	private static List<Cliente> clientes = new ArrayList<Cliente>();
@@ -10,7 +12,41 @@ public class Concesionario {
 	private static List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 	
 	//TODO métodos para añadir los elementos
-	
+
+	public static void iniciarClientes() {
+		try {
+			File f = new File("clientes.csv");
+			Scanner sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
+				// Partimos la línea por ;
+				Cliente c = new Cliente();
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				c.setLogin(campos[0]);
+				c.setPassword(campos[1]);
+				c.setEmail(campos[2]);
+				c.setdNI(campos[3]);
+				c.setNombre(campos[4]);
+				c.setApellidos(campos[5]);
+				c.setFechaNacimiento(campos[6]);
+				c.setNumTarjeta(Integer.parseInt(campos[7]));
+				
+				clientes.add(c);
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		for (Persona persona : leidas) {
+			System.out.println(persona);
+		}
+	}
+
 	public static void addVehiculo(Vehiculo vehiculo){
 		//Crea para cada marca un arrayList de vehiculos (Honda tiene las dos)
 		if(!vehiculos.containsKey(vehiculo.getMarca())) {

@@ -60,6 +60,14 @@ public class VentanaLogin extends JFrame {
 		botonRegistrar = new JButton("Registrar nuevo usuario");
 		botonRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				VentanaRegistrar ventanaRegistrar = new VentanaRegistrar();
+				ventanaRegistrar.setVisible(true);
+				ventanaRegistrar.setSize(450,560);
+				ventanaRegistrar.setLocationRelativeTo(null);
+				
+				dispose();
+				
+				
 			}
 		});
 		botonRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
