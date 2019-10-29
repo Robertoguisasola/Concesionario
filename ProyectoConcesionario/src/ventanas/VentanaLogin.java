@@ -13,9 +13,14 @@ import java.awt.event.ActionEvent;
 
 public class VentanaLogin extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textoUsuario;
 	private JPasswordField textoContrasenya;
 	private JButton botonIniciar;
+	private JButton botonRegistrar;
 	
 	public VentanaLogin() {
 		getContentPane().setBackground(new Color(255, 255, 224));
@@ -52,7 +57,17 @@ public class VentanaLogin extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		botonIniciar.setBounds(177, 166, 86, 23);
+		botonIniciar.setBounds(291, 177, 86, 23);
 		getContentPane().add(botonIniciar);
+		
+		botonRegistrar = new JButton("Registrar nuevo usuario");
+		botonRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		botonRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		botonRegistrar.setBounds(42, 177, 147, 23);
+		getContentPane().add(botonRegistrar);
+		
 	}
 }
