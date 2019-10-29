@@ -18,6 +18,10 @@ public class VentanaLogin extends JFrame {
 	private JButton botonIniciar;
 	
 	public VentanaLogin() {
+		
+		
+		
+		
 		getContentPane().setBackground(new Color(255, 255, 224));
 		getContentPane().setLayout(null);
 		
