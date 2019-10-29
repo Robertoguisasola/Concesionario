@@ -24,9 +24,6 @@ public class VentanaLogin extends JFrame {
 	
 	public VentanaLogin() {
 		
-		
-		
-		
 		getContentPane().setBackground(new Color(255, 255, 224));
 		getContentPane().setLayout(null);
 		
