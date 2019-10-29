@@ -25,6 +25,7 @@ private Connection conn;
 	}
 	
 	public void iniciarBBDDpersonas() throws SQLException {
+		//TODO modificar valores según las tablas
 		String sql  = "INSERT INTO persona (persona, password, creation_date) VALUES (?,?,?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		Persona persona= new Persona();

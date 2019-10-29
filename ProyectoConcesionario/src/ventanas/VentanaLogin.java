@@ -12,11 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaLogin extends JFrame {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private JTextField textoUsuario;
 	private JPasswordField textoContrasenya;
 	private JButton botonIniciar;

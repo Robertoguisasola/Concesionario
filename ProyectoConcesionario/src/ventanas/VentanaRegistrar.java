@@ -16,6 +16,7 @@ public class VentanaRegistrar extends JFrame {
 	private JTextField textApellidos;
 	private JTextField textFechaNacimiento;
 	private JTextField textNumeroTarjeta;
+
 	public VentanaRegistrar() {
 		getContentPane().setLayout(null);
 		
