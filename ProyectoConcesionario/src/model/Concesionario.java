@@ -40,6 +40,35 @@ public class Concesionario {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void iniciarTrabajadores() {
+		try {
+			File f = new File("ficheros/trabajadores.csv");
+			Scanner sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
+				//Cada campo está partido por ;
+				Trabajador t = new Trabajador();
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				t.setLogin(campos[0]);
+				t.setPassword(campos[1]);
+				t.setEmail(campos[2]);
+				t.setdNI(campos[3]);
+				t.setNombre(campos[4]);
+				t.setApellidos(campos[5]);
+				t.setFechaNacimientoString((campos[6]));
+				t.setSueldo(Integer.parseInt(campos[7]));
+				
+				trabajadores.add(t);	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	public static void addVehiculo(Vehiculo vehiculo){
 		//Crea para cada marca un arrayList de vehiculos (Honda tiene las dos)
