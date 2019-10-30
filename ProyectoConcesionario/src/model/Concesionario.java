@@ -24,7 +24,9 @@ public class Concesionario {
 				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
 				//Cada campo está partido por ;
 				Cliente c = new Cliente();
+				
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				
 				c.setLogin(campos[0]);
 				c.setPassword(campos[1]);
 				c.setEmail(campos[2]);
@@ -36,9 +38,12 @@ public class Concesionario {
 				
 				clientes.add(c);	
 			}
+			
+			sc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void iniciarTrabajadores() {
@@ -49,10 +54,11 @@ public class Concesionario {
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
 
-				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
 				//Cada campo está partido por ;
 				Trabajador t = new Trabajador();
+				
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				
 				t.setLogin(campos[0]);
 				t.setPassword(campos[1]);
 				t.setEmail(campos[2]);
@@ -64,6 +70,8 @@ public class Concesionario {
 				
 				trabajadores.add(t);	
 			}
+			
+			sc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
