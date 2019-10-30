@@ -38,6 +38,7 @@ private Connection conn;
 	}
 	
 	public List<Persona> obtenerpersonas() throws SQLException, ParseException{
+		//TODO modificar valores según las tablas
 		String sql = "SELECT login, password, email, dni FROM persona";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		

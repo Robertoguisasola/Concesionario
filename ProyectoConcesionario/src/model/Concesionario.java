@@ -17,14 +17,12 @@ public class Concesionario {
 		try {
 			File f = new File("ficheros/clientes.csv");
 			Scanner sc = new Scanner(f);
-			
-			System.out.println("Patata");
 
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
 
 				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
-				// Partimos la línea por ;
+				//Cada campo está partido por ;
 				Cliente c = new Cliente();
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
 				c.setLogin(campos[0]);
@@ -36,11 +34,8 @@ public class Concesionario {
 				c.setFechaNacimientoString((campos[6]));
 				c.setNumTarjeta(Long.parseLong(campos[7]));
 				
-				
-				clientes.add(c);
-				
+				clientes.add(c);	
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

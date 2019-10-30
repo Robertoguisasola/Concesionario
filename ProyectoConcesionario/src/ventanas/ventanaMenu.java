@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ventanaMenu extends JFrame {
+	
+	//TODO combinar con VentanaLogin.java y luego eliminarla
 
 	public ventanaMenu() {
 		getContentPane().setBackground(new Color(255, 255, 224));
