@@ -1,5 +1,7 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Persona {
@@ -12,6 +14,7 @@ public class Persona {
 	protected String apellidos;
 	protected String nombre;
 	protected Date fechaNacimiento;
+	private SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public Persona(String login, String password, String email, String dNI, String nombre, String apellidos,
 			Date fechaNacimiento) {
@@ -101,5 +104,9 @@ public class Persona {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	public void setFechaNacimientoString (String fechaNacimiento) throws ParseException {
+		this.fechaNacimiento = df.parse(fechaNacimiento);
 	}
 }

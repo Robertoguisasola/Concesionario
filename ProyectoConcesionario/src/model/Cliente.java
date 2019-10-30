@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Cliente extends Persona {
 	
-	private int numTarjeta;
+	private long numTarjeta;
 
 	public Cliente(String login, String password, String email, String dNI, String nombre, String apellidos,
-			Date fechaNacimiento, int numTarjeta) {
+			Date fechaNacimiento, long numTarjeta) {
 		super(login, password, email, dNI, nombre, apellidos, fechaNacimiento);
 		this.numTarjeta = numTarjeta;
 	}
@@ -22,16 +22,18 @@ public class Cliente extends Persona {
 		this.numTarjeta = c.numTarjeta;
 	}
 
-	public int getNumTarjeta() {
+	public long getNumTarjeta() {
 		return numTarjeta;
 	}
 
-	public void setNumTarjeta(int numTarjeta) {
+	public void setNumTarjeta(long numTarjeta) {
 		this.numTarjeta = numTarjeta;
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [numTarjeta=" + numTarjeta + "]";
+		return "Cliente [numTarjeta=" + numTarjeta + ", login=" + login + ", password=" + password + ", email=" + email
+				+ ", dNI=" + dNI + ", apellidos=" + apellidos + ", nombre=" + nombre + ", fechaNacimiento="
+				+ fechaNacimiento + "]";
 	}
 }

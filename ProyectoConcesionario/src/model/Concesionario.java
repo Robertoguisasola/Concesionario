@@ -15,8 +15,10 @@ public class Concesionario {
 
 	public static void iniciarClientes() {
 		try {
-			File f = new File("clientes.csv");
+			File f = new File("ficheros/clientes.csv");
 			Scanner sc = new Scanner(f);
+			
+			System.out.println("Patata");
 
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
@@ -31,8 +33,9 @@ public class Concesionario {
 				c.setdNI(campos[3]);
 				c.setNombre(campos[4]);
 				c.setApellidos(campos[5]);
-				c.setFechaNacimiento(campos[6]);
-				c.setNumTarjeta(Integer.parseInt(campos[7]));
+				c.setFechaNacimientoString((campos[6]));
+				c.setNumTarjeta(Long.parseLong(campos[7]));
+				
 				
 				clientes.add(c);
 				
@@ -40,10 +43,6 @@ public class Concesionario {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		for (Persona persona : leidas) {
-			System.out.println(persona);
 		}
 	}
 
