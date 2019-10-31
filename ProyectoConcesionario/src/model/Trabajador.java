@@ -32,6 +32,10 @@ public class Trabajador extends Persona{
 
 	@Override
 	public String toString() {
-		return "Trabajador [sueldo=" + sueldo + "]";
+		return "Trabajador [sueldo=" + sueldo + ", login=" + login + ", password=" + password + ", email=" + email
+				+ ", dNI=" + dNI + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento="
+				+ fechaNacimiento + "]";
 	}
+
+
 }

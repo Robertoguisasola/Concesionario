@@ -42,9 +42,11 @@ public class Moto extends Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Moto [SestructuraProtectora=" + estructuraProtectora + ", grosorRuedas=" + grosorRuedas + "]";
+		return "Moto [estructuraProtectora=" + estructuraProtectora + ", grosorRuedas=" + grosorRuedas + ", matricula="
+				+ matricula + ", numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas=" + nPlazas
+				+ ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", motorDiesel=" + motorDiesel
+				+ ", automatico=" + automatico + ", lucesLed=" + lucesLed + "]";
 	}
 	
 	
-
 }

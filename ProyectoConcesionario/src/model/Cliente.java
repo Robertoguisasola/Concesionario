@@ -36,4 +36,6 @@ public class Cliente extends Persona {
 				+ ", dNI=" + dNI + ", apellidos=" + apellidos + ", nombre=" + nombre + ", fechaNacimiento="
 				+ fechaNacimiento + "]";
 	}
+
+	
 }

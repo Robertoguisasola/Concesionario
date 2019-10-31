@@ -11,8 +11,8 @@ public class Persona {
 	protected String password;
 	protected String email;
 	protected String dNI;
-	protected String apellidos;
 	protected String nombre;
+	protected String apellidos;
 	protected Date fechaNacimiento;
 	private SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -100,6 +100,10 @@ public class Persona {
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
+	}
+	
+	public String getFechaNacimientoString() {
+		return df.format(fechaNacimiento);
 	}
 
 	public void setFechaNacimiento(Date fechaNacimiento) {

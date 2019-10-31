@@ -7,13 +7,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Concesionario {
-	private static List<Cliente> clientes = new ArrayList<Cliente>();
-	private static HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
-	private static List<Trabajador> trabajadores = new ArrayList<Trabajador>();
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	private HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
+	private List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 	
-	//TODO métodos para añadir los elementos a la bbdd
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
 
-	public static void iniciarClientes() {
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public HashMap<String, List<Vehiculo>> getVehiculos() {
+		return vehiculos;
+	}
+
+	public void setVehiculos(HashMap<String, List<Vehiculo>> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public List<Trabajador> getTrabajadores() {
+		return trabajadores;
+	}
+
+	public void setTrabajadores(List<Trabajador> trabajadores) {
+		this.trabajadores = trabajadores;
+	}
+
+	@Override
+	public String toString() {
+		return "Concesionario [clientes=" + clientes + ", vehiculos=" + vehiculos + ", trabajadores=" + trabajadores
+				+ ", getClientes()=" + getClientes() + ", getVehiculos()=" + getVehiculos() + ", getTrabajadores()="
+				+ getTrabajadores() + "]";
+	}
+	
+
+	//TODO métodos para añadir los elementos a la bbd
+
+	public void cargarClientes() {
 		try {
 			File f = new File("ficheros/clientes.csv");
 			Scanner sc = new Scanner(f);
@@ -37,15 +69,13 @@ public class Concesionario {
 				
 				clientes.add(c);	
 			}
-			
 			sc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
-	public static void iniciarTrabajadores() {
+	public void cargarTrabajadores() {
 		try {
 			File f = new File("ficheros/trabajadores.csv");
 			Scanner sc = new Scanner(f);
@@ -76,12 +106,13 @@ public class Concesionario {
 		}
 	}
 	
+	//TODO añadir vehículos
 
-	public static void addVehiculo(Vehiculo vehiculo){
+	/*public static void addVehiculo(Vehiculo vehiculo){
 		//Crea para cada marca un arrayList de vehiculos (Honda tiene las dos)
 		if(!vehiculos.containsKey(vehiculo.getMarca())) {
 			vehiculos.put(vehiculo.getMarca(), new ArrayList<Vehiculo>());
 		}
 		vehiculos.get(vehiculo.getMarca()).add(vehiculo);
-	}
+	}*/
 }
