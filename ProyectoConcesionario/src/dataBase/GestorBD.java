@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import model.Cliente;
 import model.Persona;
+import model.Trabajador;
 
 public class GestorBD {
 private Connection conn;
@@ -24,17 +27,54 @@ private Connection conn;
 		conn.close();
 	}
 	
-	public void iniciarBBDDpersonas() throws SQLException {
-		//TODO modificar valores según las tablas
-		String sql  = "INSERT INTO persona (persona, password, creation_date) VALUES (?,?,?)";
+	public void iniciarBBDDtrabajadores(List<Trabajador> trabajadores) throws SQLException {
+		//TODO crear test de prueba
+		Iterator<Trabajador>it = trabajadores.iterator();
+		
+		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
+		
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		Persona persona= new Persona();
 		
-		stmt.setString(1, persona.getLogin());
-		stmt.setString(2, persona.getPassword());
-		stmt.setString(3, persona.getEmail());
+		while (it.hasNext()){			
+			Trabajador t  = it.next();
+			
+			stmt.setString(1, t.getLogin());
+			stmt.setString(2, t.getPassword());
+			stmt.setString(3, t.getEmail());
+			stmt.setString(4, t.getdNI());
+			stmt.setString(5, t.getNombre());
+			stmt.setString(6, t.getApellidos());
+			stmt.setString(7, t.getFechaNacimientoString());
+			stmt.setInt(8, t.getSueldo());
+			
+			stmt.executeUpdate();
+		}	
+	}
+	
+	public void iniciarBBDDclientes(List<Cliente> clientes) throws SQLException {
+		//TODO crear test de prueba
+		Iterator<Cliente>it = clientes.iterator();
 		
-		stmt.executeUpdate();
+		String sql  = "INSERT INTO cliente (login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		while (it.hasNext()){			
+			Cliente c  = it.next();
+			
+			stmt.setString(1, c.getLogin());
+			stmt.setString(2, c.getPassword());
+			stmt.setString(3, c.getEmail());
+			stmt.setString(4, c.getdNI());
+			stmt.setString(5, c.getNombre());
+			stmt.setString(6, c.getApellidos());
+			stmt.setString(7, c.getFechaNacimientoString());
+			stmt.setLong(8, c.getNumTarjeta());
+			
+			stmt.executeUpdate();
+		}	
 	}
 	
 	public List<Persona> obtenerpersonas() throws SQLException, ParseException{

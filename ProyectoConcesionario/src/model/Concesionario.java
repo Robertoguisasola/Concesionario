@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Concesionario {
 	private static List<Cliente> clientes = new ArrayList<Cliente>();
-	private static HashMap<String, ArrayList<Vehiculo>> vehiculos = new HashMap<String, ArrayList<Vehiculo>>();
+	private static HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
 	private static List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 	
-	//TODO métodos para añadir los elementos
+	//TODO métodos para añadir los elementos a la bbdd
 
 	public static void iniciarClientes() {
 		try {
@@ -21,7 +21,6 @@ public class Concesionario {
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
 
-				//TODO castear la fecha desde aquí o hacer simpledateFormat en cliente
 				//Cada campo está partido por ;
 				Cliente c = new Cliente();
 				
