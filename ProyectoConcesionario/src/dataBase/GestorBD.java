@@ -77,25 +77,22 @@ private Connection conn;
 		}	
 	}
 	
-	public List<Persona> obtenerpersonas() throws SQLException, ParseException{
+	public List<Trabajador> obtenerTrabajadores() throws SQLException, ParseException{
 		//TODO modificar valores según las tablas
-		String sql = "SELECT login, password, email, dni FROM persona";
+		String sql = "SELECT nombre, apellidos, dNI FROM trabajadores";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
-		List<Persona> personas = new ArrayList<Persona>();
+		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 		
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()){
-			Persona persona = new Persona();
-			persona.setLogin(rs.getString("login"));
-			persona.setPassword(rs.getString("password"));
-			persona.setEmail(rs.getString("email"));
+			Trabajador t = new Trabajador();
+			t.setNombre(rs.getString("nombre"));
+			t.setApellidos(rs.getString("apellidos"));
+			t.setdNI(rs.getString("dNI"));
 			
-			personas.add(persona);
+			trabajadores.add(t);
 		}
-		
-		return personas;
+		return trabajadores;
 	}
-	
-
 }
