@@ -6,8 +6,8 @@ public class Moto extends Vehiculo {
 	private int grosorRuedas;
 	
 	public Moto(String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca, String modelo,
-			boolean motorDiesel, boolean automatico, boolean lucesLed, boolean estructuraProtectora, int grosorRuedas) {
-		super(matricula, numRuedas, caballos, nPlazas, color, marca, modelo, motorDiesel, automatico, lucesLed);
+			 boolean automatico, boolean lucesLed, boolean estructuraProtectora, int grosorRuedas) {
+		super(matricula, numRuedas, caballos, nPlazas, color, marca, modelo, automatico, lucesLed);
 		this.estructuraProtectora = estructuraProtectora;
 		this.grosorRuedas = grosorRuedas;
 	}
@@ -19,7 +19,7 @@ public class Moto extends Vehiculo {
 	}
 
 	public Moto(Moto m) {
-		super(m.matricula, m.numRuedas, m.caballos, m.nPlazas, m.color, m.marca, m.modelo, m.motorDiesel, m.automatico, m.lucesLed);
+		super(m.matricula, m.numRuedas, m.caballos, m.nPlazas, m.color, m.marca, m.modelo, m.automatico, m.lucesLed);
 		this.estructuraProtectora = m.estructuraProtectora;
 		this.grosorRuedas = m.grosorRuedas;
 	}
@@ -44,9 +44,12 @@ public class Moto extends Vehiculo {
 	public String toString() {
 		return "Moto [estructuraProtectora=" + estructuraProtectora + ", grosorRuedas=" + grosorRuedas + ", matricula="
 				+ matricula + ", numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas=" + nPlazas
-				+ ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", motorDiesel=" + motorDiesel
-				+ ", automatico=" + automatico + ", lucesLed=" + lucesLed + "]";
+				+ ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", automatico=" + automatico
+				+ ", lucesLed=" + lucesLed + "]";
 	}
+	
+
+
 	
 	
 }

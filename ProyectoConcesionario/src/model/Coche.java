@@ -7,9 +7,9 @@ public class Coche extends Vehiculo {
 	private boolean modoDeportivo;
 	
 	public Coche(String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca, String modelo,
-			boolean motorDiesel, boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
+			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
 			boolean modoDeportivo) {
-		super(matricula, numRuedas, caballos, nPlazas, color, marca, modelo, motorDiesel, automatico, lucesLed);
+		super(matricula, numRuedas, caballos, nPlazas, color, marca, modelo, automatico, lucesLed);
 		this.techoPanoramico = techoPanoramico;
 		this.traccion4x4 = traccion4x4;
 		this.modoDeportivo = modoDeportivo;
@@ -23,7 +23,7 @@ public class Coche extends Vehiculo {
 	}
 
 	public Coche(Coche c) {
-		super(c.matricula, c.numRuedas, c.caballos, c.nPlazas, c.color, c.marca, c.modelo, c.motorDiesel, c.automatico, c.lucesLed);
+		super(c.matricula, c.numRuedas, c.caballos, c.nPlazas, c.color, c.marca, c.modelo, c.automatico, c.lucesLed);
 		this.techoPanoramico = c.techoPanoramico;
 		this.traccion4x4 = c.traccion4x4;
 		this.modoDeportivo = c.modoDeportivo;
@@ -58,6 +58,7 @@ public class Coche extends Vehiculo {
 		return "Coche [techoPanoramico=" + techoPanoramico + ", traccion4x4=" + traccion4x4 + ", modoDeportivo="
 				+ modoDeportivo + ", matricula=" + matricula + ", numRuedas=" + numRuedas + ", caballos=" + caballos
 				+ ", nPlazas=" + nPlazas + ", color=" + color + ", marca=" + marca + ", modelo=" + modelo
-				+ ", motorDiesel=" + motorDiesel + ", automatico=" + automatico + ", lucesLed=" + lucesLed + "]";
+				+ ", automatico=" + automatico + ", lucesLed=" + lucesLed + "]";
 	}
+
 }

@@ -9,13 +9,12 @@ public class Vehiculo {
 	protected String color;
 	protected String marca;
 	protected String modelo;
-	protected boolean motorDiesel;
 	protected boolean automatico;
 	protected boolean lucesLed;
 	
 	
 	public Vehiculo(String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca,
-			String modelo, boolean motorDiesel, boolean automatico, boolean lucesLed) {
+			String modelo, boolean automatico, boolean lucesLed) {
 		super();
 		this.matricula = matricula;
 		this.numRuedas = numRuedas;
@@ -24,7 +23,6 @@ public class Vehiculo {
 		this.color = color;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.motorDiesel = motorDiesel;
 		this.automatico = automatico;
 		this.lucesLed = lucesLed;
 	}
@@ -39,7 +37,6 @@ public class Vehiculo {
 		this.color = "";
 		this.marca = "";
 		this.modelo = "";
-		this.motorDiesel = false;
 		this.automatico = false;
 		this.lucesLed = false;
 	}
@@ -54,7 +51,6 @@ public class Vehiculo {
 		this.color = v.color;
 		this.marca = v.marca;
 		this.modelo = v.modelo;
-		this.motorDiesel = v.motorDiesel;
 		this.automatico = v.automatico;
 		this.lucesLed = v.lucesLed;
 	}
@@ -115,14 +111,6 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 
-	public boolean isMotorDiesel() {
-		return motorDiesel;
-	}
-
-	public void setMotorDiesel(boolean motorDiesel) {
-		this.motorDiesel = motorDiesel;
-	}
-
 	public boolean isAutomatico() {
 		return automatico;
 	}
@@ -139,10 +127,13 @@ public class Vehiculo {
 		this.lucesLed = lucesLed;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Vehiculo [matricula=" + matricula + ", numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas="
-				+ nPlazas + ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", motorDiesel="
-				+ motorDiesel + ", automatico=" + automatico + ", lucesLed=" + lucesLed + "]";
+				+ nPlazas + ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", automatico="
+				+ automatico + ", lucesLed=" + lucesLed + "]";
 	}
+
+
 }
