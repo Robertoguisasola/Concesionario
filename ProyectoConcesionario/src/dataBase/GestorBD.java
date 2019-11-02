@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.Cliente;
-import model.Persona;
 import model.Trabajador;
 
 public class GestorBD {
@@ -79,7 +78,7 @@ private Connection conn;
 	
 	public List<Trabajador> obtenerTrabajadores() throws SQLException, ParseException{
 		//TODO crear test de prueba
-		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajadores";
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -99,5 +98,29 @@ private Connection conn;
 			trabajadores.add(t);
 		}
 		return trabajadores;
+	}
+	
+	public List<Cliente> obtenerClientes() throws SQLException, ParseException{
+		//TODO crear test de prueba
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()){
+			Cliente c = new Cliente();
+			c.setLogin(rs.getString("login"));
+			c.setPassword(rs.getString("passwordw"));
+			c.setEmail(rs.getString("email"));
+			c.setdNI(rs.getString("dNI"));
+			c.setNombre(rs.getString("nombre"));
+			c.setApellidos(rs.getString("apellidos"));
+			c.setFechaNacimientoString(rs.getString("fechaNacimiento"));
+			c.setNumTarjeta(rs.getLong("numTarjeta"));
+			
+			clientes.add(c);
+		}
+		return clientes;
 	}
 }
