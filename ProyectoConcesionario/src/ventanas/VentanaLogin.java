@@ -1,11 +1,19 @@
 package ventanas;
 
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import java.sql.*;
+
+import dataBase.GestorBD;
+
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -52,6 +60,21 @@ public class VentanaLogin extends JFrame {
 		botonIniciar = new JButton("Iniciar");
 		botonIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
+					Statement stmt = con.createStatement();
+					String sql="Select *from tbLogin whre login= '"+ textoUsuario.getText()+ "' and password='" +textoContrasenya.getText().toString()+ "'";
+					ResultSet rs= stmt.executeQuery(sql);
+					if (rs.next()) {
+						JOptionPane.showConfirmDialog(null, "Iniciando sesion...");
+					} else {
+						JOptionPane.showConfirmDialog(null, "nombre o contraseña incorrecta...");
+					}
+					con.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 		});
 		botonIniciar.setBounds(291, 177, 86, 23);
@@ -60,18 +83,18 @@ public class VentanaLogin extends JFrame {
 		botonRegistrar = new JButton("Registrar nuevo usuario");
 		botonRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaRegistrar ventanaRegistrar = new VentanaRegistrar();
+				/*VentanaRegistrar ventanaRegistrar = new VentanaRegistrar();
 				ventanaRegistrar.setVisible(true);
 				ventanaRegistrar.setSize(450,560);
 				ventanaRegistrar.setLocationRelativeTo(null);
 				
 				dispose();
-				
+				*/
 				
 			}
 		});
 		botonRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		botonRegistrar.setBounds(42, 177, 147, 23);
+		botonRegistrar.setBounds(27, 177, 191, 23);
 		getContentPane().add(botonRegistrar);
 		
 	}

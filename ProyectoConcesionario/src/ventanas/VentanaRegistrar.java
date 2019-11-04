@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class VentanaRegistrar extends JFrame {
 	private JTextField textNombreLogin;
@@ -18,6 +19,8 @@ public class VentanaRegistrar extends JFrame {
 	private JTextField textNumeroTarjeta;
 
 	public VentanaRegistrar() {
+		getContentPane().setBackground(new Color(255, 255, 224));
+		getContentPane().setForeground(new Color(255, 255, 224));
 		getContentPane().setLayout(null);
 		
 		JLabel lblRegistrarCuenta = new JLabel("Registrar Cuenta");

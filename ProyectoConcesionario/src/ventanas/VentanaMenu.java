@@ -35,11 +35,21 @@ public class VentanaMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnIniciarSesin.setBounds(159, 63, 102, 23);
+		btnIniciarSesin.setBounds(127, 65, 160, 23);
 		getContentPane().add(btnIniciarSesin);
 		
 		JButton btnRegistrarCuenta = new JButton("Registrar cuenta");
-		btnRegistrarCuenta.setBounds(159, 118, 102, 23);
+		btnRegistrarCuenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaRegistrar ventanaRegistrarDelMenu = new VentanaRegistrar();
+				ventanaRegistrarDelMenu.setVisible(true);
+				ventanaRegistrarDelMenu.setSize(450,560);
+				ventanaRegistrarDelMenu.setLocationRelativeTo(null);
+				
+				dispose();
+			}
+		});
+		btnRegistrarCuenta.setBounds(127, 118, 160, 23);
 		getContentPane().add(btnRegistrarCuenta);
 	}
 }

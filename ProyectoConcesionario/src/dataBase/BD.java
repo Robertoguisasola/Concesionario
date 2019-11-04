@@ -30,6 +30,10 @@ public class BD {
 			return null;
 		}
 	}
+	
+	
+	
+	
 
 	/** Devuelve statement para usar la base de datos
 	 * @param con	Conexión ya creada y abierta a la base de datos
