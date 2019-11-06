@@ -26,7 +26,7 @@ private Connection conn;
 		conn.close();
 	}
 	
-	public void iniciarBBDDtrabajadores(List<Trabajador> trabajadores) throws SQLException {
+	public void iniciarBBDDTrabajadoresFichero(List<Trabajador> trabajadores) throws SQLException {
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 		
@@ -51,7 +51,7 @@ private Connection conn;
 		}	
 	}
 	
-	public void iniciarBBDDclientes(List<Cliente> clientes) throws SQLException {
+	public void iniciarBBDDClientesFichero(List<Cliente> clientes) throws SQLException {
 		//TODO crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 		
@@ -188,5 +188,44 @@ private Connection conn;
 			}	
 		}
 		return false;
+	}
+	
+	public void anadirNuevoCliente(Cliente c) throws SQLException {
+		//TODO crear un nuevo cliente
+		String sql  = "INSERT INTO cliente (login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, c.getLogin());
+			stmt.setString(2, c.getPassword());
+			stmt.setString(3, c.getEmail());
+			stmt.setString(4, c.getdNI());
+			stmt.setString(5, c.getNombre());
+			stmt.setString(6, c.getApellidos());
+			stmt.setString(7, c.getFechaNacimientoString());
+			stmt.setLong(8, c.getNumTarjeta());
+			
+			stmt.executeUpdate();
+	}
+	
+	public void anadirNuevoTrabajador(Trabajador t) throws SQLException {
+		//TODO crear un nuevo trabajador
+		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+
+		stmt.setString(1, t.getLogin());
+		stmt.setString(2, t.getPassword());
+		stmt.setString(3, t.getEmail());
+		stmt.setString(4, t.getdNI());
+		stmt.setString(5, t.getNombre());
+		stmt.setString(6, t.getApellidos());
+		stmt.setString(7, t.getFechaNacimientoString());
+		stmt.setInt(8, t.getSueldo());
+
+		stmt.executeUpdate();
 	}
 }
