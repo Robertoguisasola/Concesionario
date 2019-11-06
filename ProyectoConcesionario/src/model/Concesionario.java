@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import dataBase.GestorBD;
+
 public class Concesionario {
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	private HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
@@ -73,6 +75,10 @@ public class Concesionario {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		GestorBD bd = new GestorBD();
+		bd.iniciarBBDDClientesFichero(clientes);
+		bd.desconectar();
 	}
 	
 	public void cargarTrabajadores() {
@@ -104,6 +110,10 @@ public class Concesionario {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		GestorBD bd = new GestorBD();
+		bd.iniciarBBDDTrabajadoresFichero(trabajadores);
+		bd.desconectar();
 	}
 	
 	//TODO añadir vehículos
