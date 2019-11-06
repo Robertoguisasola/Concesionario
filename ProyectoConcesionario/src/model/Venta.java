@@ -11,12 +11,14 @@ public class Venta {
 		this.vehiculo = vehiculo;
 		this.precio = precio;
 	}
+	
 	public Venta() {
 		super();
 		this.comprador = null;
 		this.vehiculo = null;
 		this.precio = 0;
 	}
+	
 	public Venta(Venta v) {
 		super();
 		this.comprador = v.comprador;
