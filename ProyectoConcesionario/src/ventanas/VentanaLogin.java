@@ -60,6 +60,7 @@ public class VentanaLogin extends JFrame {
 		botonIniciar = new JButton("Iniciar");
 		botonIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO iniciar sesión con los métodos de la BBDD
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection con=DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
