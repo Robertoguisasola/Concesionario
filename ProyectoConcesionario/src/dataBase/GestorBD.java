@@ -87,7 +87,7 @@ private Connection conn;
 		while (rs.next()){
 			Trabajador t = new Trabajador();
 			t.setLogin(rs.getString("login"));
-			t.setPassword(rs.getString("passwordw"));
+			t.setPassword(rs.getString("password"));
 			t.setEmail(rs.getString("email"));
 			t.setdNI(rs.getString("dNI"));
 			t.setNombre(rs.getString("nombre"));
@@ -111,7 +111,7 @@ private Connection conn;
 		while (rs.next()){
 			Cliente c = new Cliente();
 			c.setLogin(rs.getString("login"));
-			c.setPassword(rs.getString("passwordw"));
+			c.setPassword(rs.getString("password"));
 			c.setEmail(rs.getString("email"));
 			c.setdNI(rs.getString("dNI"));
 			c.setNombre(rs.getString("nombre"));
@@ -122,5 +122,71 @@ private Connection conn;
 			clientes.add(c);
 		}
 		return clientes;
+	}
+	
+	public boolean iniciarSesionCliente(String usuario, String contra) throws SQLException {
+		//TODO iniciar sesión clientes
+		String sql = "SELECT login, password FROM cliente";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()){
+			Cliente c = new Cliente();
+			c.setLogin(rs.getString("login"));
+			c.setPassword(rs.getString("password"));
+			
+			clientes.add(c);
+		}
+		
+		Iterator<Cliente> itClientes = clientes.iterator();
+		
+		while (itClientes.hasNext()) {
+			Cliente c = itClientes.next();
+			
+			String login = c.getLogin();
+			String password = c.getPassword();
+			
+			if (login.equals(usuario)) {
+				if (password.equals(contra)) {
+					return true;
+				}
+			}	
+		}
+		return false;
+	}
+	
+	public boolean iniciarSesionTrabajador(String usuario, String contra) throws SQLException {
+		//TODO iniciar sesión trabajadores
+		String sql = "SELECT login, password FROM trabajador";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
+		
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()){
+			Trabajador t = new Trabajador();
+			t.setLogin(rs.getString("login"));
+			t.setPassword(rs.getString("password"));
+			
+			trabajadores.add(t);
+		}
+		
+		Iterator<Trabajador> itTrabajadores = trabajadores.iterator();
+		
+		while (itTrabajadores.hasNext()) {
+			Trabajador t = new Trabajador();
+			
+			String login = t.getLogin();
+			String password = t.getPassword();
+			
+			if (login.equals(usuario)) {
+				if (password.equals(contra)) {
+					return true;
+				}
+			}	
+		}
+		return false;
 	}
 }
