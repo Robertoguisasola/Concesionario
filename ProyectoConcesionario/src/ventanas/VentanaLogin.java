@@ -115,7 +115,6 @@ public class VentanaLogin extends JFrame {
 		botonIniciar = new JButton("Iniciar");
 		botonIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO iniciar sesión con los métodos de la BBDD
 				try {
 					GestorBD bd = new GestorBD();
 					String usuario = textoUsuario.getText();
