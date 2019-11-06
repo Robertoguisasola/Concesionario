@@ -15,15 +15,36 @@ import model.Trabajador;
 
 public class GestorBD {
 private Connection conn;
+
 	
-	public void conectar() throws ClassNotFoundException, SQLException{
-		Class.forName("org.sqlite.JDBC");
+	
+	public GestorBD() {
+	conectar();
+}
+
+	private void conectar(){
+		try {
+			Class.forName("org.sqlite.JDBC");
+			conn = DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		conn = DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
+		
 	}
 	
-	public void desconectar() throws SQLException{
-		conn.close();
+	public void desconectar(){
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void iniciarBBDDTrabajadoresFichero(List<Trabajador> trabajadores) throws SQLException {

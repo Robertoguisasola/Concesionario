@@ -62,17 +62,18 @@ public class VentanaLogin extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO iniciar sesión con los métodos de la BBDD
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
-					Statement stmt = con.createStatement();
-					String sql="Select *from tbLogin whre login= '"+ textoUsuario.getText()+ "' and password='" +textoContrasenya.getText().toString()+ "'";
-					ResultSet rs= stmt.executeQuery(sql);
-					if (rs.next()) {
-						JOptionPane.showConfirmDialog(null, "Iniciando sesion...");
-					} else {
-						JOptionPane.showConfirmDialog(null, "nombre o contraseña incorrecta...");
+					GestorBD bd = new GestorBD();
+					String usuario = textoUsuario.getText();
+					String contra = new String(textoContrasenya.getPassword());
+					
+					if (bd.iniciarSesionCliente(usuario, contra)) {
+						//TODO lanza ventana de cliente
+					}else if (bd.iniciarSesionTrabajador(usuario, contra)) {
+						//TODO lanza ventana de trabajadores
+					}else if (usuario.equals("admin")&& contra.equals("1234")) {
+						//TODO lanza ventana de administrador
 					}
-					con.close();
+					bd.desconectar();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
