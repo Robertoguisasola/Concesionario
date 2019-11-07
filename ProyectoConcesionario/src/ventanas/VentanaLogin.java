@@ -76,6 +76,16 @@ public class VentanaLogin extends JFrame {
 		
 		buttonsBox = new Box(BoxLayout.X_AXIS);
 		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaInicial menu = new VentanaInicial();
+				menu.setVisible(true);
+				menu.setSize(450,260);
+				menu.setLocationRelativeTo(null);
+				menu.setVisible(true);
+				dispose();
+			}
+		});
 		acceptButton = new JButton("Aceptar");
 		buttonsPanel.add(acceptButton);
 		
@@ -88,11 +98,27 @@ public class VentanaLogin extends JFrame {
 					String contra = new String(passwordField.getPassword());
 					
 					if (bd.iniciarSesionCliente(usuario, contra)) {
-						//TODO lanza ventana de cliente
+						VentanaCliente ventanaCliente = new VentanaCliente();
+						ventanaCliente.setVisible(true);
+						ventanaCliente.setSize(450,260);
+						ventanaCliente.setLocationRelativeTo(null);
+						ventanaCliente.setVisible(true);
+						dispose();
 					}else if (bd.iniciarSesionTrabajador(usuario, contra)) {
-						//TODO lanza ventana de trabajadores
+						VentanaTrabajador ventanaTrabajador = new VentanaTrabajador();
+						ventanaTrabajador.setVisible(true);
+						ventanaTrabajador.setSize(450,260);
+						ventanaTrabajador.setLocationRelativeTo(null);
+						ventanaTrabajador.setVisible(true);
+						dispose();
 					}else if (usuario.equals("admin")&& contra.equals("1234")) {
-						//TODO lanza ventana de administrador
+						//TODO da fallo al meter estos valores, creo que es porque falla al iniciar la base de datos
+						VentanaAdministrador ventanaAdministrador= new VentanaAdministrador();
+						ventanaAdministrador.setVisible(true);
+						ventanaAdministrador.setSize(450,260);
+						ventanaAdministrador.setLocationRelativeTo(null);
+						ventanaAdministrador.setVisible(true);
+						dispose();
 					}else {
 						falloInicio.setVisible(true);
 					}

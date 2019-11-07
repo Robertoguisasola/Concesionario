@@ -18,6 +18,7 @@ public class Main {
 		menu.setLocationRelativeTo(null);
 		menu.setVisible(true);
 		
+		
 		Iterator<Trabajador>it = c.getTrabajadores().iterator();
 		
 		while (it.hasNext()){
