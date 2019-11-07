@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import model.Concesionario;
 import model.Trabajador;
-import ventanas.VentanaMenu;
+import ventanas.VentanaInicial;
 
 public class Main {
 
@@ -12,7 +12,7 @@ public class Main {
 		Concesionario c = new Concesionario();
 		c.cargarTrabajadores();
 		
-		VentanaMenu menu = new VentanaMenu();
+		VentanaInicial menu = new VentanaInicial();
 		menu.setVisible(true);
 		menu.setSize(450,260);
 		menu.setLocationRelativeTo(null);
