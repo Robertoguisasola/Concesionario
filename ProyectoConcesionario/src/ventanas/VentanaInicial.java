@@ -67,4 +67,12 @@ public class VentanaInicial extends JFrame {
 		
 		this.setVisible(true);
 	}
+	
+	public static void abirVentanaInicial() {
+		VentanaInicial menu = new VentanaInicial();
+		menu.setVisible(true);
+		menu.setSize(450,260);
+		menu.setLocationRelativeTo(null);
+		menu.setVisible(true);
+	}
 }

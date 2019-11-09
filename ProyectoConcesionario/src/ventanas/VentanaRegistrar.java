@@ -39,7 +39,7 @@ public class VentanaRegistrar extends JFrame {
 	//TODO ESTO ES UNA PRUENA
 	
 
-	private static Connection conectar(Cliente c){
+	private static Connection conectar(){
 		Connection con = null;
 		
 		try {
@@ -256,9 +256,9 @@ public class VentanaRegistrar extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				Connection con = null;
-				Cliente c = new Cliente();
+				
 				try {
-					con = conectar(c);
+					con = conectar();
 					ps = con.prepareStatement("INSERT INTO Cliente (Login, Password, Email, Dni, Nombre, Apellidos, FechaNacimineto, NumTarjeta) VALUES(?,?,?,?,?,?,?,?)");
 					ps.setString(1, textNombreLogin.getText());
 					ps.setString(2, textContrasenya.getText());

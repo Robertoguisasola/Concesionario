@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import model.Concesionario;
 import model.Trabajador;
+
+import ventanas.VentanaCatalogoCoche;
 import ventanas.VentanaInicial;
 
 public class Main {
@@ -12,12 +14,10 @@ public class Main {
 		Concesionario c = new Concesionario();
 		c.cargarTrabajadores();
 		
-		VentanaInicial menu = new VentanaInicial();
-		menu.setVisible(true);
-		menu.setSize(450,260);
-		menu.setLocationRelativeTo(null);
-		menu.setVisible(true);
+		//VentanaInicial.abirVentanaInicial(); //esto inicializa la ventana Inicial.
 		
+		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche();
+		ventanaCatalogoCoche.setVisible(true);
 		
 		Iterator<Trabajador>it = c.getTrabajadores().iterator();
 		
