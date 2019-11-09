@@ -2,13 +2,26 @@ package ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import model.Cliente;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class VentanaRegistrar extends JFrame {
 	private JTextField textNombreLogin;
@@ -20,7 +33,38 @@ public class VentanaRegistrar extends JFrame {
 	private JTextField textApellidos;
 	private JTextField textFechaNacimiento;
 	private JTextField textNumeroTarjeta;
+	private static Connection conn;
+	PreparedStatement ps;
+	ResultSet rs;
+	//TODO ESTO ES UNA PRUENA
+	
 
+	private static Connection conectar(Cliente c){
+		Connection con = null;
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			conn = DriverManager.getConnection("jdbc:sqlite:ficheros/Cliente.sql");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return con;
+	}
+	
+	
+	private void limpiarCajas() {
+		textNombreLogin.setText(null);
+		textContrasenya.setText(null);
+		textEmail.setText(null);
+		textDni.setText(null);
+		textNombre.setText(null);
+		textApellidos.setText(null);
+		textFechaNacimiento.setText(null);
+		textNumeroTarjeta.setText(null);
+	}
+	
 	public VentanaRegistrar() {
 		getContentPane().setBackground(new Color(255, 255, 224));
 		getContentPane().setForeground(new Color(255, 255, 224));
@@ -206,6 +250,46 @@ public class VentanaRegistrar extends JFrame {
 		textNumeroTarjeta.setColumns(10);
 		
 		JButton botonAceptar = new JButton("Aceptar");
+		botonAceptar.addActionListener(new ActionListener() {
+			
+			//TODO ESTO ES UNA PRUEBA
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Connection con = null;
+				Cliente c = new Cliente();
+				try {
+					con = conectar(c);
+					ps = con.prepareStatement("INSERT INTO Cliente (Login, Password, Email, Dni, Nombre, Apellidos, FechaNacimineto, NumTarjeta) VALUES(?,?,?,?,?,?,?,?)");
+					ps.setString(1, textNombreLogin.getText());
+					ps.setString(2, textContrasenya.getText());
+					ps.setString(3, textEmail.getText());
+					ps.setString(4, textDni.getText());
+					ps.setString(5, textNombre.getText());
+					ps.setString(6, textApellidos.getText());
+					ps.setDate(7, Date.valueOf(textFechaNacimiento.getText()));
+					ps.setString(8, textNumeroTarjeta.getText());
+					
+					int res = ps.executeUpdate();
+					
+					if(res > 0) {
+						JOptionPane.showMessageDialog(null, "Cuenta Registrada");
+						limpiarCajas();
+					}else {
+						JOptionPane.showMessageDialog(null, "Error al Registrar la cuenta");
+						limpiarCajas();
+					}
+					
+					con.close();
+					
+					
+					
+				} catch (Exception e) {
+					System.err.println(e);
+				}
+				
+			}	
+		
+		});
 		GridBagConstraints gbc_botonAceptar = new GridBagConstraints();
 		gbc_botonAceptar.anchor = GridBagConstraints.NORTH;
 		gbc_botonAceptar.gridx = 3;

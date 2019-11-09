@@ -43,7 +43,7 @@ public class GestorBD {
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
-		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
+		String sql  = "INSERT INTO trabajadores (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;
@@ -103,7 +103,7 @@ public class GestorBD {
 
 	public List<Trabajador> obtenerTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajadores";
 		PreparedStatement stmt;
 
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();

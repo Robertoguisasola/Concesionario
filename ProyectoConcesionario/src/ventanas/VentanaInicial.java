@@ -40,10 +40,20 @@ public class VentanaInicial extends JFrame {
 				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
-				dispose(); // El dispose es para que cuando cliques un botón y vaya a otra ventana se cierre la anterior.
+				dispose(); // El dispose es para que cuando cliques un botón y vaya a otra ventana se cierre la anterior. 	
 			}
 		});
 		registrarCuentaButton = new JButton("Registrar cuenta");
+		registrarCuentaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaRegistrar ventanaRegistrat = new VentanaRegistrar();
+				ventanaRegistrat.setVisible(true);
+				ventanaRegistrat.setSize(450,260);
+				ventanaRegistrat.setLocationRelativeTo(null);
+				ventanaRegistrat.setVisible(true);
+				dispose();
+			}
+		});
 		
 		buttonsBox.add(iniciarSesionButton);
 		buttonsBox.add(Box.createRigidArea(new Dimension(0,40)));
