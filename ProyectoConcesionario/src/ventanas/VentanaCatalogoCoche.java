@@ -93,8 +93,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		mainContainer.add(topPanel, BorderLayout.NORTH);
 		topPanel.add(barraCatalogo);
 		
-		//MiddlePanel
-		
+
 		middlePanel = new JPanel();
 		middlePanel.setBorder(new LineBorder(Color.black, 3));
 		middlePanel.setLayout(new FlowLayout(4,4,4));		
@@ -136,10 +135,13 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		centerPanel = new JPanel();
 		centerPanel.setLayout(new GridLayout());
 		centerPanel.setBorder(new LineBorder(Color.BLACK, 3));
-		
+	
 		middlePanel.add(gridPanel);
 		mainContainer.add(centerPanel);
 		mainContainer.add(middlePanel, BorderLayout.WEST);
+		
+		
+		
 		
  	}
 
@@ -149,9 +151,19 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 			VentanaInicial.abirVentanaInicial();
 			dispose();
 			JOptionPane.showMessageDialog(null, "Se ha cerrado la sesion correctamente...");
+		} else if(evento.getSource()==cochesItem){
+			visualizarPanelesCoche();
 		}
 		
 		
+		
+	}
+	
+	public void visualizarPanelesCoche() {
+		//MiddlePanel
+		
+				
+				
 	}
 	
 }

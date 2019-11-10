@@ -34,26 +34,9 @@ public class VentanaRegistrar extends JFrame {
 	private JTextField textFechaNacimiento;
 	private JTextField textNumeroTarjeta;
 	private static Connection conn;
-	PreparedStatement ps;
-	ResultSet rs;
-	//TODO ESTO ES UNA PRUENA
-	
-
-	private static Connection conectar(){
-		Connection con = null;
-		
-		try {
-			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:ficheros/Cliente.sql");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
 	
 	
+	//TODO hacer un boton que tenga este metodo en el action listeners
 	private void limpiarCajas() {
 		textNombreLogin.setText(null);
 		textContrasenya.setText(null);
@@ -252,42 +235,10 @@ public class VentanaRegistrar extends JFrame {
 		JButton botonAceptar = new JButton("Aceptar");
 		botonAceptar.addActionListener(new ActionListener() {
 			
-			//TODO ESTO ES UNA PRUEBA
+			
 			
 			public void actionPerformed(ActionEvent arg0) {
-				Connection con = null;
-				
-				try {
-					con = conectar();
-					ps = con.prepareStatement("INSERT INTO Cliente (Login, Password, Email, Dni, Nombre, Apellidos, FechaNacimineto, NumTarjeta) VALUES(?,?,?,?,?,?,?,?)");
-					ps.setString(1, textNombreLogin.getText());
-					ps.setString(2, textContrasenya.getText());
-					ps.setString(3, textEmail.getText());
-					ps.setString(4, textDni.getText());
-					ps.setString(5, textNombre.getText());
-					ps.setString(6, textApellidos.getText());
-					ps.setDate(7, Date.valueOf(textFechaNacimiento.getText()));
-					ps.setString(8, textNumeroTarjeta.getText());
-					
-					int res = ps.executeUpdate();
-					
-					if(res > 0) {
-						JOptionPane.showMessageDialog(null, "Cuenta Registrada");
-						limpiarCajas();
-					}else {
-						JOptionPane.showMessageDialog(null, "Error al Registrar la cuenta");
-						limpiarCajas();
-					}
-					
-					con.close();
-					
-					
-					
-				} catch (Exception e) {
-					System.err.println(e);
-				}
-				
-			}	
+			}
 		
 		});
 		GridBagConstraints gbc_botonAceptar = new GridBagConstraints();

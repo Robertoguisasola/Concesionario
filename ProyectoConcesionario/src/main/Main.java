@@ -14,10 +14,10 @@ public class Main {
 		Concesionario c = new Concesionario();
 		c.cargarTrabajadores();
 		
-		//VentanaInicial.abirVentanaInicial(); //esto inicializa la ventana Inicial.
+		VentanaInicial.abirVentanaInicial(); //esto inicializa la ventana Inicial.
 		
-		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche();
-		ventanaCatalogoCoche.setVisible(true);
+		//VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche();
+		//ventanaCatalogoCoche.setVisible(true);
 		
 		Iterator<Trabajador>it = c.getTrabajadores().iterator();
 		
