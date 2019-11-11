@@ -175,7 +175,7 @@ public class GestorBD {
 		return clientes;
 	}
 
-	public boolean iniciarSesionCliente(String usuario, String contra){
+	public Cliente iniciarSesionCliente(String usuario, String contra){
 		//TODO iniciar sesión clientes
 		String sql = "SELECT login, password FROM cliente";
 		PreparedStatement stmt;
@@ -205,17 +205,17 @@ public class GestorBD {
 
 				if (login.equals(usuario)) {
 					if (password.equals(contra)) {
-						return true;
+						return c;
 					}
 				}	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
-		return false;
+		return null;
 	}
 
-	public boolean iniciarSesionTrabajador(String usuario, String contra){
+	public Trabajador iniciarSesionTrabajador(String usuario, String contra){
 		//TODO iniciar sesión trabajadores
 		String sql = "SELECT login, password FROM trabajador";
 		PreparedStatement stmt;
@@ -239,21 +239,21 @@ public class GestorBD {
 			Iterator<Trabajador> itTrabajadores = trabajadores.iterator();
 
 			while (itTrabajadores.hasNext()) {
-				Trabajador t = new Trabajador();
+				Trabajador t = itTrabajadores.next();
 
 				String login = t.getLogin();
 				String password = t.getPassword();
 
 				if (login.equals(usuario)) {
 					if (password.equals(contra)) {
-						return true;
+						return t;
 					}
 				}	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 	public void anadirNuevoCliente(Cliente c){

@@ -40,9 +40,10 @@ public class VentanaInicial extends JFrame {
 				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
-				dispose(); // El dispose es para que cuando cliques un botón y vaya a otra ventana se cierre la anterior. 	
+				dispose();
 			}
 		});
+		
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

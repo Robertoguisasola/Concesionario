@@ -16,6 +16,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dataBase.GestorBD;
+import model.Cliente;
+import model.Trabajador;
+
 import java.awt.Color;
 
 public class VentanaLogin extends JFrame {
@@ -91,21 +94,22 @@ public class VentanaLogin extends JFrame {
 		
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO se peta al darle a aceptar
 				try {
 					GestorBD bd = new GestorBD();
-					String usuario = loginLabel.getText();
+					String usuario = loginField.getText();
 					String contra = new String(passwordField.getPassword());
 					
-					if (bd.iniciarSesionCliente(usuario, contra)) {
-						VentanaCliente ventanaCliente = new VentanaCliente();
+					Cliente c = null;
+					Trabajador t = null;
+					if ((c =bd.iniciarSesionCliente(usuario, contra)) != null) {
+						VentanaCliente ventanaCliente = new VentanaCliente(c);
 						ventanaCliente.setVisible(true);
 						ventanaCliente.setSize(450,260);
 						ventanaCliente.setLocationRelativeTo(null);
 						ventanaCliente.setVisible(true);
 						dispose();
-					}else if (bd.iniciarSesionTrabajador(usuario, contra)) {
-						VentanaTrabajador ventanaTrabajador = new VentanaTrabajador();
+					}else if ((t =bd.iniciarSesionTrabajador(usuario, contra)) != null) {
+						VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
 						ventanaTrabajador.setVisible(true);
 						ventanaTrabajador.setSize(450,260);
 						ventanaTrabajador.setLocationRelativeTo(null);
