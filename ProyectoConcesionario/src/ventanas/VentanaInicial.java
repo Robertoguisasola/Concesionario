@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaInicial extends JFrame {
-	//TODO enlazar ventana como principal
 	
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
@@ -70,10 +69,10 @@ public class VentanaInicial extends JFrame {
 	}
 	
 	public static void abirVentanaInicial() {
-		VentanaInicial menu = new VentanaInicial();
-		menu.setVisible(true);
-		menu.setSize(450,260);
-		menu.setLocationRelativeTo(null);
-		menu.setVisible(true);
+		VentanaInicial inicio = new VentanaInicial();
+		inicio.setVisible(true);
+		inicio.setSize(450,260);
+		inicio.setLocationRelativeTo(null);
+		inicio.setVisible(true);
 	}
 }
