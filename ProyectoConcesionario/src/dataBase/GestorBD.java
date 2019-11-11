@@ -43,7 +43,7 @@ public class GestorBD {
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
-		String sql  = "INSERT INTO baseDeDatos.db (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
+		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;
@@ -217,7 +217,7 @@ public class GestorBD {
 
 	public boolean iniciarSesionTrabajador(String usuario, String contra){
 		//TODO iniciar sesión trabajadores
-		String sql = "SELECT login, password FROM baseDeDatos.db";
+		String sql = "SELECT login, password FROM trabajador";
 		PreparedStatement stmt;
 
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -282,7 +282,7 @@ public class GestorBD {
 
 	public void anadirNuevoTrabajador(Trabajador t) {
 		//TODO crear un nuevo trabajador
-		String sql  = "INSERT INTO baseDeDatos.db (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
+		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;

@@ -91,7 +91,7 @@ public class VentanaLogin extends JFrame {
 		
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO que deje intentar de nuevo en caso de fallo en el inicio de sesión
+				//TODO se peta al darle a aceptar
 				try {
 					GestorBD bd = new GestorBD();
 					String usuario = loginLabel.getText();
