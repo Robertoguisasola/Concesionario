@@ -2,9 +2,9 @@ package model;
 
 public class Coche extends Vehiculo {
 
-	private boolean techoPanoramico;
-	private boolean traccion4x4;
-	private boolean modoDeportivo;
+	protected boolean techoPanoramico;
+	protected boolean traccion4x4;
+	protected boolean modoDeportivo;
 	
 	public Coche(String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca, String modelo,
 			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
