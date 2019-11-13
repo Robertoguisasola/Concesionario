@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -20,8 +21,6 @@ import javax.swing.JTextField;
 import dataBase.GestorBD;
 import model.Cliente;
 import model.Trabajador;
-
-import java.awt.Color;
 
 public class VentanaLogin extends JFrame {
 	

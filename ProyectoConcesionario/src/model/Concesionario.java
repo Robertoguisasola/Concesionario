@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import dataBase.GestorBD;
-
 public class Concesionario {
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	private HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();

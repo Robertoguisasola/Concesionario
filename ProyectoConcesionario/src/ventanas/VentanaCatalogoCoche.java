@@ -17,10 +17,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class VentanaCatalogoCoche extends JFrame implements ActionListener{
+	
+	//TODO poner los putos privateeeeeee
 	
 	JMenuBar barraCatalogo;
 	JMenu vehiculosCatalogo;
@@ -53,8 +54,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		this.setSize(700, 800);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
+				
 		barraCatalogo = new JMenuBar();
 		
 		vehiculosCatalogo = new JMenu("VEHICULOS");
@@ -77,11 +77,9 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		cuentaCatalogo.addSeparator();
 		cuentaCatalogo.add(cerrarSesionItem);
 		
-		
 		barraCatalogo.add(vehiculosCatalogo);
 		barraCatalogo.add(ofertasCatalogo);
 		barraCatalogo.add(cuentaCatalogo);
-		
 		
 		mainContainer = this.getContentPane();
 		mainContainer.setLayout(new BorderLayout(8,6));
@@ -92,8 +90,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		topPanel.setLayout(new FlowLayout(5));
 		mainContainer.add(topPanel, BorderLayout.NORTH);
 		topPanel.add(barraCatalogo);
-		
-
+	
 		middlePanel = new JPanel();
 		middlePanel.setBorder(new LineBorder(Color.black, 3));
 		middlePanel.setLayout(new FlowLayout(4,4,4));		
@@ -139,10 +136,6 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		middlePanel.add(gridPanel);
 		mainContainer.add(centerPanel);
 		mainContainer.add(middlePanel, BorderLayout.WEST);
-		
-		
-		
-		
  	}
 
 	@Override
@@ -154,16 +147,10 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		} else if(evento.getSource()==cochesItem){
 			visualizarPanelesCoche();
 		}
-		
-		
-		
 	}
 	
 	public void visualizarPanelesCoche() {
-		//MiddlePanel
-		
-				
-				
+		//MiddlePanel				
 	}
 	
 }

@@ -1,14 +1,8 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,6 +15,7 @@ import javax.swing.JTextField;
 
 public class VentanaRegistrar extends JFrame {
 	
+	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
 	private Box formBox;
@@ -63,11 +58,17 @@ public class VentanaRegistrar extends JFrame {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(450,260);
+		this.setSize(450,420);
 		this.setResizable(true);
 		
-		bienvenidaLabel = new JLabel("BIENVENIDO AL CONCESIONARIO \nIntroduzca sus datos para registrarse");
-		add(bienvenidaLabel, BorderLayout.NORTH);
+		bienvenidaPanel = new JPanel();
+		
+		String bienvenida = "<html><body><center>BIENVENIDO AL CONCESIONARIO <br>Introduzca sus datos para registrarse</center></body></html>";
+		
+		bienvenidaLabel = new JLabel(bienvenida);
+		bienvenidaPanel.add(bienvenidaLabel);
+		
+		getContentPane().add(bienvenidaPanel, BorderLayout.NORTH);
 		
 		formPanel = new JPanel();
 		formPanel.setLayout(new GridBagLayout());
@@ -78,9 +79,11 @@ public class VentanaRegistrar extends JFrame {
 		usuarioLabel = new JLabel("Nombre de usuario: ");
 		usuarioField = new JTextField(12);
 		
+		//TODO mover cajas vacias con windowBuilder para alinear todos los cuadros
+		
 		usuarioBox = new Box(BoxLayout.X_AXIS);
 		usuarioBox.add(usuarioLabel);
-		usuarioBox.add(Box.createRigidArea(new Dimension(40,0)));
+		usuarioBox.add(Box.createRigidArea(new Dimension(46, 12)));
 		usuarioBox.add(usuarioField);
 		
 		passwordLabel = new JLabel("Contraseña: ");
@@ -88,7 +91,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		passwordBox = new Box(BoxLayout.X_AXIS);
 		passwordBox.add(passwordLabel);
-		passwordBox.add(Box.createRigidArea(new Dimension(40,0)));
+		passwordBox.add(Box.createRigidArea(new Dimension(93, 12)));
 		passwordBox.add(passwordField);
 		
 		passwordRLabel = new JLabel("Repita la contraseña: ");
@@ -187,6 +190,7 @@ public class VentanaRegistrar extends JFrame {
 		getContentPane().add(formPanel, BorderLayout.CENTER);
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
+	
 	
 	private void limpiarCajas() {
 		usuarioField.setText(null);
