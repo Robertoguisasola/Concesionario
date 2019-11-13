@@ -4,15 +4,13 @@ import java.util.Iterator;
 
 import model.Concesionario;
 import model.Trabajador;
-
-import ventanas.VentanaCatalogoCoche;
 import ventanas.VentanaInicial;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Concesionario c = new Concesionario();
-		c.cargarTrabajadores();
+		
 		
 		VentanaInicial.abirVentanaInicial(); //esto inicializa la ventana Inicial.
 		

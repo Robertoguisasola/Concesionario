@@ -81,10 +81,6 @@ public class Concesionario {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		GestorBD bd = new GestorBD();
-		bd.iniciarBBDDClientesFichero(clientes);
-		bd.desconectar();
 	}
 	
 	public void cargarTrabajadores() {
@@ -116,14 +112,10 @@ public class Concesionario {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		GestorBD bd = new GestorBD();
-		bd.iniciarBBDDTrabajadoresFichero(trabajadores);
-		bd.desconectar();
 	}
 	
 	//TODO añadir vehículos
-
+	
 	/*public static void addVehiculo(Vehiculo vehiculo){
 		//Crea para cada marca un arrayList de vehiculos (Honda tiene las dos)
 		if(!vehiculos.containsKey(vehiculo.getMarca())) {

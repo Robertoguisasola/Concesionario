@@ -35,8 +35,6 @@ public class VentanaInicial extends JFrame {
 		iniciarSesionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaLogin ventanaLogin = new VentanaLogin();
-				ventanaLogin.setVisible(true);
-				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();
@@ -47,8 +45,6 @@ public class VentanaInicial extends JFrame {
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaRegistrar ventanaRegistrat = new VentanaRegistrar();
-				ventanaRegistrat.setVisible(true);
-				ventanaRegistrat.setSize(450,260);
 				ventanaRegistrat.setLocationRelativeTo(null);
 				ventanaRegistrat.setVisible(true);
 				dispose();

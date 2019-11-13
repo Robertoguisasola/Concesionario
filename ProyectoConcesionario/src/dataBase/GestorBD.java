@@ -39,7 +39,7 @@ public class GestorBD {
 		}
 	}
 
-	public void iniciarBBDDTrabajadoresFichero(List<Trabajador> trabajadores){
+	public void importarBBDDTrabajadoresFichero(List<Trabajador> trabajadores){
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
@@ -71,7 +71,7 @@ public class GestorBD {
 
 	}	
 
-	public void iniciarBBDDClientesFichero(List<Cliente> clientes) {
+	public void importarBBDDClientesFichero(List<Cliente> clientes) {
 		//TODO crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 
@@ -176,7 +176,6 @@ public class GestorBD {
 	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
-		//TODO iniciar sesión clientes
 		String sql = "SELECT login, password FROM cliente";
 		PreparedStatement stmt;
 
@@ -216,7 +215,6 @@ public class GestorBD {
 	}
 
 	public Trabajador iniciarSesionTrabajador(String usuario, String contra){
-		//TODO iniciar sesión trabajadores
 		String sql = "SELECT login, password FROM trabajador";
 		PreparedStatement stmt;
 
@@ -300,7 +298,6 @@ public class GestorBD {
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

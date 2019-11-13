@@ -23,6 +23,7 @@ public class VentanaRegistrar extends JFrame {
 	
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
+	private Box formBox;
 	private JPanel buttonsPanel;
 	private JLabel usuarioLabel;
 	private JTextField usuarioField;
@@ -56,17 +57,23 @@ public class VentanaRegistrar extends JFrame {
 	private Box buttonsBox;
 	
 	
-	//TODO Terminar ventana, añadir las box al panel y los botones. Faltan las acciones también
+	//TODO Como poner que la ventan se ajuste al tamaño
 	
 	public VentanaRegistrar() {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(320, 240);
+		this.setSize(450,260);
 		this.setResizable(true);
 		
 		bienvenidaLabel = new JLabel("BIENVENIDO AL CONCESIONARIO \nIntroduzca sus datos para registrarse");
 		add(bienvenidaLabel, BorderLayout.NORTH);
+		
+		formPanel = new JPanel();
+		formPanel.setLayout(new GridBagLayout());
+		
+		buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new GridBagLayout());
 		
 		usuarioLabel = new JLabel("Nombre de usuario: ");
 		usuarioField = new JTextField(12);
@@ -115,15 +122,15 @@ public class VentanaRegistrar extends JFrame {
 		nombreBox.add(nombreLabel);
 		nombreBox.add(Box.createRigidArea(new Dimension(40,0)));
 		nombreBox.add(nombreField);
-		
+
 		apellidosLabel = new JLabel("Apellidos: ");
 		apellidosField = new JTextField();
-		
-	apellidosBox = new Box(BoxLayout.X_AXIS);
+
+		apellidosBox = new Box(BoxLayout.X_AXIS);
 		apellidosBox.add(apellidosLabel);
 		apellidosBox.add(Box.createRigidArea(new Dimension(40,0)));
 		apellidosBox.add(apellidosField);
-		
+
 		//TODO cambiar a dia, mes año
 		
 		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
@@ -142,6 +149,43 @@ public class VentanaRegistrar extends JFrame {
 		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(40,0)));
 		numeroTarjetaBox.add(numeroTarjetaField);
 		
+		formPanel = new JPanel();
+		
+		formBox = new Box(BoxLayout.Y_AXIS);
+		formBox.add(usuarioBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(passwordBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(passwordRBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(emailBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(dniBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(nombreBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(apellidosBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(fechaNacimientoBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(numeroTarjetaBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+
+		formPanel.add(formBox);
+		
+		acceptButton = new JButton("Cancelar");
+		
+		cancelButton = new JButton("Registrarme");
+		
+		buttonsBox = new Box(BoxLayout.X_AXIS);
+		buttonsBox.add(acceptButton);
+		buttonsBox.add(Box.createRigidArea(new Dimension(40, 0)));
+		buttonsBox.add(cancelButton);
+		
+		buttonsPanel.add(buttonsBox);
+		
+		getContentPane().add(formPanel, BorderLayout.CENTER);
+		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
 	private void limpiarCajas() {

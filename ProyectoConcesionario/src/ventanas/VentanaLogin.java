@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -41,7 +43,7 @@ public class VentanaLogin extends JFrame {
 		this.setTitle("Login");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(320, 240);
+		this.setSize(450,260);
 		this.setResizable(true);
 		
 		formPanel = new JPanel();
@@ -57,6 +59,17 @@ public class VentanaLogin extends JFrame {
 		
 		passwordLabel = new JLabel("Password");
 		passwordField = new JPasswordField(12);
+		passwordField.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int tecla = e.getKeyCode();
+				if(tecla == 10 ) {
+					iniciarSesion();
+				}
+			}
+			
+		});
 		
 		passwordBox = new Box(BoxLayout.X_AXIS);
 		passwordBox.add(passwordLabel);
@@ -94,42 +107,7 @@ public class VentanaLogin extends JFrame {
 		
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					GestorBD bd = new GestorBD();
-					String usuario = loginField.getText();
-					String contra = new String(passwordField.getPassword());
-					
-					Cliente c = null;
-					Trabajador t = null;
-					if ((c =bd.iniciarSesionCliente(usuario, contra)) != null) {
-						VentanaCliente ventanaCliente = new VentanaCliente(c);
-						ventanaCliente.setVisible(true);
-						ventanaCliente.setSize(450,260);
-						ventanaCliente.setLocationRelativeTo(null);
-						ventanaCliente.setVisible(true);
-						dispose();
-					}else if ((t =bd.iniciarSesionTrabajador(usuario, contra)) != null) {
-						VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
-						ventanaTrabajador.setVisible(true);
-						ventanaTrabajador.setSize(450,260);
-						ventanaTrabajador.setLocationRelativeTo(null);
-						ventanaTrabajador.setVisible(true);
-						dispose();
-					}else if (usuario.equals("admin")&& contra.equals("1234")) {
-						//TODO da fallo al meter estos valores, creo que es porque falla al iniciar la base de datos
-						VentanaAdministrador ventanaAdministrador= new VentanaAdministrador();
-						ventanaAdministrador.setVisible(true);
-						ventanaAdministrador.setSize(450,260);
-						ventanaAdministrador.setLocationRelativeTo(null);
-						ventanaAdministrador.setVisible(true);
-						dispose();
-					}else {
-						falloInicio.setVisible(true);
-					}
-					bd.desconectar();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				iniciarSesion();
 			}
 		});
 		buttonsBox.add(Box.createRigidArea(new Dimension(10,0)));
@@ -141,5 +119,38 @@ public class VentanaLogin extends JFrame {
 		getContentPane().add(buttonsPanel,BorderLayout.SOUTH);
 		
 		this.setVisible(true);
+	}
+	
+	private void iniciarSesion() {
+		try {
+			GestorBD bd = new GestorBD();
+			String usuario = loginField.getText();
+			String contra = new String(passwordField.getPassword());
+			
+			Cliente c = null;
+			Trabajador t = null;
+			if ((c =bd.iniciarSesionCliente(usuario, contra)) != null) {
+				VentanaCliente ventanaCliente = new VentanaCliente(c);
+				ventanaCliente.setLocationRelativeTo(null);
+				ventanaCliente.setVisible(true);
+				dispose();
+			}else if ((t =bd.iniciarSesionTrabajador(usuario, contra)) != null) {
+				VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
+				ventanaTrabajador.setLocationRelativeTo(null);
+				ventanaTrabajador.setVisible(true);
+				dispose();
+			}else if (usuario.equals("admin")&& contra.equals("1234")) {
+				VentanaAdministrador ventanaAdministrador= new VentanaAdministrador();
+				ventanaAdministrador.setLocationRelativeTo(null);
+				ventanaAdministrador.setVisible(true);
+				dispose();
+			}else {
+				falloInicio.setVisible(true);
+			}
+			bd.desconectar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("No conecta a la base de datos");
+		}
 	}
 }
