@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -11,16 +10,21 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class VentanaAdministrador extends JFrame {
-	
+public class VentanaDespedirTrabajador extends JFrame{
+
 	private JPanel opcionesPanel;
+	private Box trabajadorBox;
+	private JLabel trabajadorLabel;
+	private JTextField trabajadorField;
 	private Box buttonsBox;
 	private JButton despedirTrabajadorButton;
 	
-	public VentanaAdministrador(){
-		this.setTitle("Menu del administrador");
+	public VentanaDespedirTrabajador(){
+		this.setTitle("Despido trabajador");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(320, 240);
@@ -28,6 +32,12 @@ public class VentanaAdministrador extends JFrame {
 		
 		opcionesPanel = new JPanel();
 		opcionesPanel.setLayout(new GridBagLayout());
+		
+		trabajadorBox = new Box(BoxLayout.Y_AXIS);
+		trabajadorLabel= new JLabel("DNI del trabajador: ");
+		trabajadorField= new JTextField();
+		trabajadorBox.add(trabajadorLabel);
+		trabajadorBox.add(trabajadorField);
 		
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
 		despedirTrabajadorButton = new JButton("Despedir trabajador");
@@ -43,6 +53,10 @@ public class VentanaAdministrador extends JFrame {
 		
 		buttonsBox.add(despedirTrabajadorButton);
 				
+		GridBagConstraints gbc_trabajadorBox = new GridBagConstraints();
+		gbc_trabajadorBox.gridx = 0;
+		opcionesPanel.add(trabajadorBox, gbc_trabajadorBox);
+		
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;
 		opcionesPanel.add(buttonsBox, gbc_buttonsBox);
