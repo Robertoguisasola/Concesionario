@@ -21,34 +21,32 @@ import javax.swing.border.LineBorder;
 
 public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	
-	//TODO poner los putos privateeeeeee
-	
-	JMenuBar barraCatalogo;
-	JMenu vehiculosCatalogo;
-	JMenu ofertasCatalogo;
-	JMenu cuentaCatalogo;
-	JMenuItem cochesItem;
-	JMenuItem motosItem;
-	JMenuItem datosItem;
-	JMenuItem cerrarSesionItem;
-	Container mainContainer;
-	JPanel topPanel;
-	JPanel middlePanel;
-	JPanel gridPanel;
-	JPanel centerPanel;
-	JLabel labelCaballos;
-	JLabel labelPlazas;
-	JLabel labelColor;
-	JLabel labelMarca;
-	JComboBox comboCaballos;
-	JComboBox comboPlazas;
-	JComboBox comboColor;
-	JComboBox comboMarca;
-	JCheckBox checkAutomatico;
-	JCheckBox checkLucesLed;
-	JCheckBox checkTechoPanoramico;
-	JCheckBox checkTraccion;
-	JCheckBox checkModoDeportivo;
+	private JMenuBar barraCatalogo;
+	private JMenu vehiculosCatalogo;
+	private JMenu ofertasCatalogo;
+	private JMenu cuentaCatalogo;
+	private JMenuItem cochesItem;
+	private JMenuItem motosItem;
+	private JMenuItem datosItem;
+	private JMenuItem cerrarSesionItem;
+	private Container mainContainer;
+	private JPanel topPanel;
+	private JPanel middlePanel;
+	private JPanel gridPanel;
+	private JPanel centerPanel;
+	private JLabel labelCaballos;
+	private JLabel labelPlazas;
+	private JLabel labelColor;
+	private JLabel labelMarca;
+	private JComboBox comboCaballos;
+	private JComboBox comboPlazas;
+	private JComboBox comboColor;
+	private JComboBox comboMarca;
+	private JCheckBox checkAutomatico;
+	private JCheckBox checkLucesLed;
+	private JCheckBox checkTechoPanoramico;
+	private JCheckBox checkTraccion;
+	private JCheckBox checkModoDeportivo;
 	
 	public VentanaCatalogoCoche() {
 		this.setSize(700, 800);
@@ -103,12 +101,33 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		//TODO hay que meter los items en los JComoBoxes
 		labelCaballos = new JLabel("Caballos: ");
 		comboCaballos = new JComboBox();
+		comboCaballos.addItem("70");
+		comboCaballos.addItem("100");
+		comboCaballos.addItem("120");
+		comboCaballos.addItem("150");
+		comboCaballos.addItem("200");
 		labelPlazas = new JLabel("Plazas: ");
 		comboPlazas = new JComboBox();
+		comboPlazas.addItem("1");
+		comboPlazas.addItem("2");
+		comboPlazas.addItem("4");
+		comboPlazas.addItem("5");
+		comboPlazas.addItem("7");
+		comboPlazas.addItem("9");
 		labelColor = new JLabel("Color: ");
 		comboColor = new JComboBox();
+		comboColor.addItem("Negro");
+		comboColor.addItem("Blanco");
+		comboColor.addItem("Azul");
+		comboColor.addItem("Rojo");
+		comboColor.addItem("Gris");
 		labelMarca = new JLabel("Marca: ");
 		comboMarca = new JComboBox();
+		comboMarca.addItem("Renault");
+		comboMarca.addItem("BMW");
+		comboMarca.addItem("Seat");
+		comboMarca.addItem("Honda");
+		comboMarca.addItem("Kia");
 		checkAutomatico = new JCheckBox("Automático");
 		checkLucesLed = new JCheckBox("Luces led");
 		checkTechoPanoramico = new JCheckBox("Techo panorámico");
