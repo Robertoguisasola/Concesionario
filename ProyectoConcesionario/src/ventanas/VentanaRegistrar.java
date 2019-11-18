@@ -3,6 +3,9 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import dataBase.GestorBD;
+import model.Cliente;
+import model.Trabajador;
 
 public class VentanaRegistrar extends JFrame {
 	
@@ -176,9 +183,25 @@ public class VentanaRegistrar extends JFrame {
 
 		formPanel.add(formBox);
 		
-		acceptButton = new JButton("Cancelar");
+		acceptButton = new JButton("Registrarme");
+		acceptButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				registrar();
+			}
+			
+		});
 		
-		cancelButton = new JButton("Registrarme");
+		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaInicial menu = new VentanaInicial();
+				menu.setVisible(true);
+				menu.setSize(450,260);
+				menu.setLocationRelativeTo(null);
+				menu.setVisible(true);
+				dispose();
+			}
+		});
 		
 		buttonsBox = new Box(BoxLayout.X_AXIS);
 		buttonsBox.add(acceptButton);
@@ -202,5 +225,28 @@ public class VentanaRegistrar extends JFrame {
 		apellidosField.setText(null);
 		fechaNacimietoField.setText(null);
 		numeroTarjetaField.setText(null);
+	}
+	
+	private void registrar() {
+		try {
+			GestorBD bd = new GestorBD();
+			String usuario = usuarioField.getText();
+			String contra = new String(passwordField.getPassword());
+			String email = emailField.getText();
+			String dNI = dniField.getText();
+			String nombre = nombreField.getText();
+			String apellidos = apellidosField.getText();
+			String fechaNacimientoString = fechaNacimietoField.getText();
+			long numTarjeta =0; //numeroTarjetaField.getText();
+			
+			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, null, numTarjeta);
+			c.setFechaNacimientoString(fechaNacimientoString);
+			
+			bd.anadirNuevoCliente(c);
+			bd.desconectar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("No conecta a la base de datos");
+		}
 	}
 }
