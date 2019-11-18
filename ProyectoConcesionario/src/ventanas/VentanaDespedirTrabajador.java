@@ -44,10 +44,7 @@ public class VentanaDespedirTrabajador extends JFrame{
 		despedirTrabajadorButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaDespedirTrabajador ventanaDespedir = new VentanaDespedirTrabajador();
-				ventanaDespedir.setLocationRelativeTo(null);
-				ventanaDespedir.setVisible(true);
-				dispose();
+				String dniTrabajador= trabajadorField.getText();
 			}
 		});
 		
