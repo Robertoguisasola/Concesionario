@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -9,21 +10,26 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import model.Trabajador;
+import model.Coche;
 
-public class VentanaTrabajador extends JFrame{
-
+public class VentanaRetirarCoche extends JFrame {
+	
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
-	private JButton anadirCocheButton;
+	private JLabel labelMatricula;
+	private JTextField fieldMatricula;
 	private JButton retirarCocheButton;
 	
-	public VentanaTrabajador(Trabajador t) {
+	public VentanaRetirarCoche() {
 		//El trabajador es para poner Hola y el nombre en un punto de la ventana
-		this.setTitle("Bienvenido "+t.getNombre()+" "+t.getApellidos());
+		this.setTitle("Retirar coche");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(320, 240);
@@ -32,28 +38,21 @@ public class VentanaTrabajador extends JFrame{
 		opcionesPanel = new JPanel();
 		opcionesPanel.setLayout(new GridBagLayout());
 		
-		anadirCocheButton = new JButton("Registrar coche");
-		anadirCocheButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche();
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
-				dispose();
-			}
-		});
+		labelMatricula = new JLabel("Matricula: ");
+		fieldMatricula = new JTextField();
 		
-		retirarCocheButton = new JButton("Registrar coche");
-		retirarCocheButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				VentanaRetirarCoche ventanaRetirarCoche = new VentanaRetirarCoche();
-				ventanaRetirarCoche.setLocationRelativeTo(null);
-				ventanaRetirarCoche.setVisible(true);
-				dispose();
-			}
-		});
+		opcionesPanel.add(labelMatricula);
+		opcionesPanel.add(fieldMatricula);
 		
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
-		buttonsBox.add(anadirCocheButton);
+		retirarCocheButton = new JButton("Eliminar coche");
+		retirarCocheButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String matriculaCoche=fieldMatricula.getText();
+				//FALTA ELIMINAR EL COCHE DE LA BASE DE DATOS
+			}
+		});
+		
 		buttonsBox.add(retirarCocheButton);
 				
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
@@ -63,7 +62,6 @@ public class VentanaTrabajador extends JFrame{
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
-	}
-	
 
+	}
 }
