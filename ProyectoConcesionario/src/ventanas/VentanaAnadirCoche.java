@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import model.Coche;
+import model.Trabajador;
 
 public class VentanaAnadirCoche extends JFrame {
 	
@@ -28,6 +29,7 @@ public class VentanaAnadirCoche extends JFrame {
 	private JPanel botonesPanel;
 	private Box buttonsBox;
 	private JButton anadirCocheButton;
+	private JButton cancelButton;
 	
 	private JLabel labelMatricula;
 	private JTextField fieldMatricula;
@@ -56,7 +58,9 @@ public class VentanaAnadirCoche extends JFrame {
 	private JCheckBox checkTraccion;
 	private JCheckBox checkModoDeportivo;
 	
-	public VentanaAnadirCoche() {
+	public VentanaAnadirCoche(Trabajador t) {
+		//TODO que muestre un titulo personalizado para el trabajador
+		//this.setTitle(t.getNombre()+" "+t.getApellidos()+", añada un coche a la base de datos");
 		this.setTitle("Añadir coche");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -142,6 +146,7 @@ public class VentanaAnadirCoche extends JFrame {
 		botonesPanel.setLayout(new GridLayout(1,8));
 		botonesPanel.setBorder(new LineBorder(Color.BLACK, 3));
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
+		
 		anadirCocheButton = new JButton("Registrar coche");
 		anadirCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -162,7 +167,18 @@ public class VentanaAnadirCoche extends JFrame {
 			}
 		});
 		
+		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
+				ventanaTrabajador.setLocationRelativeTo(null);
+				ventanaTrabajador.setVisible(true);
+				dispose();
+			}
+		});
+		
 		buttonsBox.add(anadirCocheButton);
+		buttonsBox.add(cancelButton);
 				
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;

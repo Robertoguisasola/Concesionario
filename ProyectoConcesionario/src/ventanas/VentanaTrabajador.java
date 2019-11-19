@@ -20,10 +20,12 @@ public class VentanaTrabajador extends JFrame{
 	private Box buttonsBox;
 	private JButton anadirCocheButton;
 	private JButton retirarCocheButton;
+	private JButton cancelButton;
 	
 	public VentanaTrabajador(Trabajador t) {
-		//El trabajador es para poner Hola y el nombre en un punto de la ventana
-		this.setTitle("Bienvenido "+t.getNombre()+" "+t.getApellidos());
+		//TODO titulo personalizado
+		//this.setTitle("Bienvenido "+t.getNombre()+t.getApellidos());
+		this.setTitle("Bienvenido");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(320, 240);
@@ -35,7 +37,7 @@ public class VentanaTrabajador extends JFrame{
 		anadirCocheButton = new JButton("Registrar coche");
 		anadirCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche();
+				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
 				ventanaAnadirCoche.setLocationRelativeTo(null);
 				ventanaAnadirCoche.setVisible(true);
 				dispose();
@@ -45,9 +47,19 @@ public class VentanaTrabajador extends JFrame{
 		retirarCocheButton = new JButton("Eliminar coche");
 		retirarCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaRetirarCoche ventanaRetirarCoche = new VentanaRetirarCoche();
+				VentanaRetirarCoche ventanaRetirarCoche = new VentanaRetirarCoche(t);
 				ventanaRetirarCoche.setLocationRelativeTo(null);
 				ventanaRetirarCoche.setVisible(true);
+				dispose();
+			}
+		});
+		
+		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaLogin ventanaLogin = new VentanaLogin();
+				ventanaLogin.setLocationRelativeTo(null);
+				ventanaLogin.setVisible(true);
 				dispose();
 			}
 		});
@@ -55,6 +67,7 @@ public class VentanaTrabajador extends JFrame{
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
 		buttonsBox.add(anadirCocheButton);
 		buttonsBox.add(retirarCocheButton);
+		buttonsBox.add(cancelButton);
 				
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;

@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Coche;
+import model.Trabajador;
 
 public class VentanaRetirarCoche extends JFrame {
 	
@@ -28,8 +29,9 @@ public class VentanaRetirarCoche extends JFrame {
 	private JButton retirarCocheButton;
 	private JButton cancelButton;
 	
-	public VentanaRetirarCoche() {
-		//El trabajador es para poner Hola y el nombre en un punto de la ventana
+	public VentanaRetirarCoche(Trabajador t) {
+		//TODO que muestre un titulo personalizado para el trabajador
+		//this.setTitle(t.getNombre()+" "+t.getApellidos()+", retire un coche a la base de datos");
 		this.setTitle("Retirar coche");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +42,7 @@ public class VentanaRetirarCoche extends JFrame {
 		opcionesPanel.setLayout(new GridBagLayout());
 		
 		labelMatricula = new JLabel("Matricula: ");
-		fieldMatricula = new JTextField();
+		fieldMatricula = new JTextField(12);
 		
 		opcionesPanel.add(labelMatricula);
 		opcionesPanel.add(fieldMatricula);
@@ -56,18 +58,13 @@ public class VentanaRetirarCoche extends JFrame {
 		
 		cancelButton= new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerfomed(ActionEvent arg0) {
-				VentanaAdministrador ventanaAdmin= new VentanaAdministrador();
-				ventanaAdmin.setLocationRelativeTo(null);
-				ventanaAdmin.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				VentanaTrabajador ventanaTrabajador= new VentanaTrabajador(t);
+				ventanaTrabajador.setLocationRelativeTo(null);
+				ventanaTrabajador.setVisible(true);
 				dispose();
 			}
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
 		});
 		
 		
