@@ -46,6 +46,7 @@ public class VentanaDespedirTrabajador extends JFrame{
 		despedirTrabajadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String dniTrabajador= trabajadorField.getText();
+				//TODO eliminar el trabajador de la base de datos dado el DNI
 			}
 		});
 		

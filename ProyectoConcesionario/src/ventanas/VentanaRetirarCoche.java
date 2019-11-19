@@ -26,6 +26,7 @@ public class VentanaRetirarCoche extends JFrame {
 	private JLabel labelMatricula;
 	private JTextField fieldMatricula;
 	private JButton retirarCocheButton;
+	private JButton cancelButton;
 	
 	public VentanaRetirarCoche() {
 		//El trabajador es para poner Hola y el nombre en un punto de la ventana
@@ -49,12 +50,30 @@ public class VentanaRetirarCoche extends JFrame {
 		retirarCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String matriculaCoche=fieldMatricula.getText();
-				//FALTA ELIMINAR EL COCHE DE LA BASE DE DATOS
+				//TODO FALTA ELIMINAR EL COCHE DE LA BASE DE DATOS
 			}
 		});
 		
-		buttonsBox.add(retirarCocheButton);
+		cancelButton= new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerfomed(ActionEvent arg0) {
+				VentanaAdministrador ventanaAdmin= new VentanaAdministrador();
+				ventanaAdmin.setLocationRelativeTo(null);
+				ventanaAdmin.setVisible(true);
+				dispose();
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
 				
+			}
+		});
+		
+		
+		buttonsBox.add(retirarCocheButton);
+		buttonsBox.add(cancelButton);
+		
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;
 		opcionesPanel.add(buttonsBox, gbc_buttonsBox);

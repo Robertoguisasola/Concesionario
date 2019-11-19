@@ -53,7 +53,6 @@ public class VentanaAnadirCoche extends JFrame {
 	private JCheckBox checkModoDeportivo;
 	
 	public VentanaAnadirCoche() {
-		//El trabajador es para poner Hola y el nombre en un punto de la ventana
 		this.setTitle("Añadir coche");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,7 +113,6 @@ public class VentanaAnadirCoche extends JFrame {
 		checkTraccion = new JCheckBox("Tracción 4x4");
 		checkModoDeportivo = new JCheckBox("Modo deportivo");
 
-		
 		opcionesPanel.add(labelMatricula);
 		opcionesPanel.add(fieldMatricula);
 		opcionesPanel.add(labelNRuedas);
@@ -152,7 +150,7 @@ public class VentanaAnadirCoche extends JFrame {
 				c.setTechoPanoramico(checkTechoPanoramico.isSelected());
 				c.setTraccion4x4(checkTraccion.isSelected());
 				c.setModoDeportivo(checkModoDeportivo.isSelected());
-				//FALTA REGISTRAR EL COCHE EN LA BASE DE DATOS
+				//TODO FALTA REGISTRAR EL COCHE EN LA BASE DE DATOS
 			}
 		});
 		

@@ -188,8 +188,8 @@ public class VentanaContratarTrabajador extends JFrame{
 				e.printStackTrace();
 			}
 			t.setSueldo(0);
-			//AÑADIR TRABAJADOR A BASE DE DATOS
-			//HAY QUE OBTENER EL SUELDO DE LOS DATOS
+			//TODO AÑADIR TRABAJADOR A BASE DE DATOS
+			//TODO HAY QUE OBTENER EL SUELDO DE LOS DATOS
 		}
 		
 	});
