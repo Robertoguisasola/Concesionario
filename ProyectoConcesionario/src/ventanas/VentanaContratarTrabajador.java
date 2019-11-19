@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import dataBase.GestorBD;
+import model.Cliente;
 import model.Trabajador;
 
 public class VentanaContratarTrabajador extends JFrame{
@@ -172,24 +174,8 @@ public class VentanaContratarTrabajador extends JFrame{
 	
 	acceptButton = new JButton("Contratar Trabajador");
 	acceptButton.addActionListener(new ActionListener(){
-		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent arg0) {
-			Trabajador t= new Trabajador();
-			t.setLogin(usuarioField.getText());
-			t.setPassword(passwordField.getText());
-			t.setEmail(emailField.getText());
-			t.setdNI(dniField.getText());
-			t.setNombre(nombreField.getText());
-			t.setApellidos(apellidosField.getText());
-			try {
-				t.setFechaNacimientoString(fechaNacimientoField.getText());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			t.setSueldo(0);
-			//TODO AÑADIR TRABAJADOR A BASE DE DATOS
-			//TODO HAY QUE OBTENER EL SUELDO DE LOS DATOS
+			contratar();
 		}
 		
 	});
@@ -215,5 +201,29 @@ public class VentanaContratarTrabajador extends JFrame{
 	
 	getContentPane().add(formPanel, BorderLayout.CENTER);
 	getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
-}}
+}
+
+	private void contratar() {
+		try {
+			GestorBD bd = new GestorBD();
+			String usuario = usuarioField.getText();
+			String contra = new String(passwordField.getPassword());
+			String email = emailField.getText();
+			String dNI = dniField.getText();
+			String nombre = nombreField.getText();
+			String apellidos = apellidosField.getText();
+			String fechaNacimientoString = fechaNacimientoField.getText();
+			int sueldo= Integer.parseInt(sueldoField.getText());
+			
+			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, null, sueldo);
+			t.setFechaNacimientoString(fechaNacimientoString);
+			
+			bd.anadirNuevoTrabajador(t);
+			bd.desconectar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("No conecta a la base de datos");
+		}
+	}
+}
 

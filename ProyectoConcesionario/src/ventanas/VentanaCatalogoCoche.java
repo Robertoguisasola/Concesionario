@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -51,6 +53,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	private JCheckBox checkTraccion;
 	private JCheckBox checkModoDeportivo;
 	private JButton buscarButton;
+	private Box buttonBox;
 	
 	public VentanaCatalogoCoche() {
 		this.setSize(700, 800);

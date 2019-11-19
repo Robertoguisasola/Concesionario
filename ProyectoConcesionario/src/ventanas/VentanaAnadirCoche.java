@@ -1,9 +1,11 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,12 +18,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import model.Coche;
 
 public class VentanaAnadirCoche extends JFrame {
 	
 	private JPanel opcionesPanel;
+	private JPanel botonesPanel;
 	private Box buttonsBox;
 	private JButton anadirCocheButton;
 	
@@ -56,11 +60,12 @@ public class VentanaAnadirCoche extends JFrame {
 		this.setTitle("Añadir coche");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(320, 240);
+		this.setSize(480, 360);
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
-		opcionesPanel.setLayout(new GridBagLayout());
+		opcionesPanel.setLayout(new GridLayout(13,2));
+		opcionesPanel.setBorder(new LineBorder(Color.BLACK, 3));
 		
 		labelMatricula = new JLabel("Matricula: ");
 		fieldMatricula = new JTextField();
@@ -133,6 +138,9 @@ public class VentanaAnadirCoche extends JFrame {
 		opcionesPanel.add(checkTraccion);
 		opcionesPanel.add(checkModoDeportivo);
 		
+		botonesPanel = new JPanel();
+		botonesPanel.setLayout(new GridLayout(1,8));
+		botonesPanel.setBorder(new LineBorder(Color.BLACK, 3));
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
 		anadirCocheButton = new JButton("Registrar coche");
 		anadirCocheButton.addActionListener(new ActionListener() {
@@ -158,9 +166,10 @@ public class VentanaAnadirCoche extends JFrame {
 				
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;
-		opcionesPanel.add(buttonsBox, gbc_buttonsBox);
+		botonesPanel.add(buttonsBox, gbc_buttonsBox);
 		
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
+		getContentPane().add(botonesPanel,BorderLayout.SOUTH);
 		
 		this.setVisible(true);
 

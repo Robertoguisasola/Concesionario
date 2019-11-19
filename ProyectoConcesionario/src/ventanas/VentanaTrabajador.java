@@ -42,7 +42,7 @@ public class VentanaTrabajador extends JFrame{
 			}
 		});
 		
-		retirarCocheButton = new JButton("Registrar coche");
+		retirarCocheButton = new JButton("Eliminar coche");
 		retirarCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaRetirarCoche ventanaRetirarCoche = new VentanaRetirarCoche();
