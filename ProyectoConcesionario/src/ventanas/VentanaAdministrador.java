@@ -17,7 +17,9 @@ public class VentanaAdministrador extends JFrame {
 	
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
+	private JButton contratarTrabajadorButton;
 	private JButton despedirTrabajadorButton;
+	private JButton cancelButton;
 	
 	public VentanaAdministrador(){
 		this.setTitle("Menu del administrador");
@@ -30,9 +32,19 @@ public class VentanaAdministrador extends JFrame {
 		opcionesPanel.setLayout(new GridBagLayout());
 		
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
+
+		contratarTrabajadorButton = new JButton("Contratar trabajador");
+		contratarTrabajadorButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaContratarTrabajador ventanaContratar = new VentanaContratarTrabajador();
+				ventanaContratar.setLocationRelativeTo(null);
+				ventanaContratar.setVisible(true);
+				dispose();
+			}
+		});
+		
 		despedirTrabajadorButton = new JButton("Despedir trabajador");
 		despedirTrabajadorButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaDespedirTrabajador ventanaDespedir = new VentanaDespedirTrabajador();
 				ventanaDespedir.setLocationRelativeTo(null);
@@ -41,7 +53,20 @@ public class VentanaAdministrador extends JFrame {
 			}
 		});
 		
+		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaLogin ventanaLogin = new VentanaLogin();
+				ventanaLogin.setLocationRelativeTo(null);
+				ventanaLogin.setVisible(true);
+				dispose();
+			}
+		});
+		
+		buttonsBox.add(contratarTrabajadorButton);
 		buttonsBox.add(despedirTrabajadorButton);
+		buttonsBox.add(cancelButton);
 				
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;

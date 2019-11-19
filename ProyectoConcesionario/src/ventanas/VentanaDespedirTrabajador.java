@@ -22,6 +22,7 @@ public class VentanaDespedirTrabajador extends JFrame{
 	private JTextField trabajadorField;
 	private Box buttonsBox;
 	private JButton despedirTrabajadorButton;
+	private JButton cancelButton;
 	
 	public VentanaDespedirTrabajador(){
 		this.setTitle("Despido trabajador");
@@ -40,15 +41,28 @@ public class VentanaDespedirTrabajador extends JFrame{
 		trabajadorBox.add(trabajadorField);
 		
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
+		
 		despedirTrabajadorButton = new JButton("Despedir trabajador");
 		despedirTrabajadorButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				String dniTrabajador= trabajadorField.getText();
 			}
 		});
 		
+		cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+				ventanaAdmin.setVisible(true);
+				ventanaAdmin.setSize(450,260);
+				ventanaAdmin.setLocationRelativeTo(null);
+				ventanaAdmin.setVisible(true);
+				dispose();
+			}
+		});
+		
 		buttonsBox.add(despedirTrabajadorButton);
+		buttonsBox.add(cancelButton);
 				
 		GridBagConstraints gbc_trabajadorBox = new GridBagConstraints();
 		gbc_trabajadorBox.gridx = 0;

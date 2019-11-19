@@ -197,11 +197,11 @@ public class VentanaContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VentanaInicial menu = new VentanaInicial();
-			menu.setVisible(true);
-			menu.setSize(450,260);
-			menu.setLocationRelativeTo(null);
-			menu.setVisible(true);
+			VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+			ventanaAdmin.setVisible(true);
+			ventanaAdmin.setSize(450,260);
+			ventanaAdmin.setLocationRelativeTo(null);
+			ventanaAdmin.setVisible(true);
 			dispose();
 		}
 	});
