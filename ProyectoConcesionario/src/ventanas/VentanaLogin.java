@@ -24,6 +24,10 @@ import model.Trabajador;
 
 public class VentanaLogin extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel formPanel;
 	private JLabel loginLabel;
 	private JTextField loginField;

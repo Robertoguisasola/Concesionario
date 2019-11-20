@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 
 public class VentanaInicial extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton iniciarSesionButton;
