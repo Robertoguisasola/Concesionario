@@ -69,13 +69,10 @@ public class GestorBD {
 				stmt.setString(7, t.getFechaNacimientoString());
 				stmt.setInt(8, t.getSueldo());
 
-				stmt.executeUpdate();
-				
-				
+				stmt.executeUpdate();	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		}
 	}	
 
@@ -111,7 +108,7 @@ public class GestorBD {
 
 	public List<Trabajador> obtenerTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM baseDeDatos.db";
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
 		PreparedStatement stmt;
 
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -137,9 +134,13 @@ public class GestorBD {
 				t.setSueldo(rs.getInt("sueldo"));
 
 				trabajadores.add(t);
+				
+				log(Level.INFO, "Lista de trabajadores obtenida", null);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log(Level.SEVERE, "La lista de trabajadores no pudo ser obtenida correctametne", e);
+			lastError=e;
 		}
 
 
@@ -175,8 +176,13 @@ public class GestorBD {
 
 				clientes.add(c);
 			}
+			
+			log(Level.INFO, "Lista de clientes obtenida", null);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log(Level.SEVERE, "La lista de clientes no pudo ser obtenida correctametne", e);
+			lastError=e;
 		}
 
 
@@ -216,8 +222,12 @@ public class GestorBD {
 					}
 				}	
 			}
+
+			log(Level.INFO, "Sesión iniciada como cliente", null);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log(Level.SEVERE, "La lista de trabajadores no pudo ser obtenida correctametne", e);
+			lastError=e;
 		}	
 		return null;
 	}
@@ -256,8 +266,12 @@ public class GestorBD {
 					}
 				}	
 			}
+
+			log(Level.INFO, "Sesión iniciada como cliente", null);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log(Level.SEVERE, "La lista de trabajadores no pudo ser obtenida correctametne", e);
+			lastError=e;
 		}
 		return null;
 	}
@@ -320,10 +334,11 @@ public class GestorBD {
 	public static void setLogger( Logger logger ) {
 		GestorBD.logger = logger;
 	}
+	
 	// Método local para loggear (si no se asigna un logger externo, se asigna uno local)
-	private static void log( Level level, String msg, Throwable excepcion ) {
+	private static void log(Level level, String msg, Throwable excepcion) {
 		if (logger==null) {  // Logger por defecto local:
-			logger = Logger.getLogger( GestorBD.class.getName() );  // Nombre del logger - el de la clase
+			logger = Logger.getLogger(GestorBD.class.getName());  // Nombre del logger - el de la clase
 			logger.setLevel( Level.ALL );  // Loguea todos los niveles
 			try {
 				// logger.addHandler( new FileHandler( "bd-" + System.currentTimeMillis() + ".log.xml" ) );  // Y saca el log a fichero xml
