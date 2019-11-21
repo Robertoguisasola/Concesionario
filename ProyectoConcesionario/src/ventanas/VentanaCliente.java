@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -17,6 +16,10 @@ import model.Cliente;
 
 public class VentanaCliente extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton catalogoCochesButton;

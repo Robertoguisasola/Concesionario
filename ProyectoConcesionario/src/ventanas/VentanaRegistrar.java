@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,10 +17,13 @@ import javax.swing.JTextField;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Trabajador;
 
 public class VentanaRegistrar extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -188,7 +190,6 @@ public class VentanaRegistrar extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				registrar();
 			}
-			
 		});
 		
 		cancelButton = new JButton("Cancelar");
@@ -214,7 +215,8 @@ public class VentanaRegistrar extends JFrame {
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	
+	//TODO PARA QUE SE USA ESTO????
+	@SuppressWarnings("unused")
 	private void limpiarCajas() {
 		usuarioField.setText(null);
 		passwordField.setText(null);

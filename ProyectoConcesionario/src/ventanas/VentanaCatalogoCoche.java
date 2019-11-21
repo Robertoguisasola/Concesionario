@@ -123,6 +123,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		
 		//meter los componentes del girdPanel.
 		//TODO hay que meter los items en los JComoBoxes
+		//TODO HOLA??? QUE ES ESTO????
 		labelCaballos = new JLabel("Caballos: ");
 		comboCaballos = new JComboBox();
 		comboCaballos.addItem("70");

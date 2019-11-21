@@ -1,7 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -11,22 +11,35 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class VentanaAdministrador extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
+	private JPanel bienvenidaPanel;
+	private JLabel bienvenidaLabel;
 	private Box buttonsBox;
 	private JButton contratarTrabajadorButton;
 	private JButton despedirTrabajadorButton;
 	private JButton cancelButton;
 	
 	public VentanaAdministrador(){
-		this.setTitle("Menu del administrador");
+		this.setTitle("Menú del administrador");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(320, 240);
+		this.setSize(450,260);
 		this.setResizable(true);
+		
+		bienvenidaPanel = new JPanel();
+		bienvenidaPanel.setLayout(new FlowLayout());
+		
+		bienvenidaLabel = new JLabel("Hola administrador");
+		bienvenidaPanel.add(bienvenidaLabel);
 		
 		opcionesPanel = new JPanel();
 		opcionesPanel.setLayout(new GridBagLayout());
@@ -72,6 +85,7 @@ public class VentanaAdministrador extends JFrame {
 		gbc_buttonsBox.gridx = 0;
 		opcionesPanel.add(buttonsBox, gbc_buttonsBox);
 		
+		getContentPane().add(bienvenidaPanel, BorderLayout.NORTH);
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);

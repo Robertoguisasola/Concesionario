@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -10,18 +9,19 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Coche;
 import model.Trabajador;
 
 public class VentanaRetirarCoche extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JLabel labelMatricula;
@@ -51,7 +51,8 @@ public class VentanaRetirarCoche extends JFrame {
 		retirarCocheButton = new JButton("Eliminar coche");
 		retirarCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String matriculaCoche=fieldMatricula.getText();
+				//TODO QUE COJONES HACE ESTE MÉTODO???
+				//String matriculaCoche=fieldMatricula.getText();
 				//TODO FALTA ELIMINAR EL COCHE DE LA BASE DE DATOS
 			}
 		});
