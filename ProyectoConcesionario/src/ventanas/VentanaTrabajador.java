@@ -58,7 +58,7 @@ public class VentanaTrabajador extends JFrame{
 			}
 		});
 		
-		cancelButton = new JButton("Cancelar");
+		cancelButton = new JButton("Cerrar Sesión");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaLogin ventanaLogin = new VentanaLogin();

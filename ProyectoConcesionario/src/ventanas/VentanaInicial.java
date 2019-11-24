@@ -68,7 +68,7 @@ public class VentanaInicial extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public static void abirVentanaInicial() {
+	public static void abrirVentanaInicial() {
 		VentanaInicial inicio = new VentanaInicial();
 		inicio.setVisible(true);
 		inicio.setSize(450,260);

@@ -66,7 +66,7 @@ public class VentanaAdministrador extends JFrame {
 			}
 		});
 		
-		cancelButton = new JButton("Cancelar");
+		cancelButton = new JButton("Cerrar Sesión");
 		cancelButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
