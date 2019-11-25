@@ -6,6 +6,10 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -229,7 +233,11 @@ public class VentanaRegistrar extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
+	
+	//TODO revisar esto de la fehca, en principio funciona.
 	private void registrar() {
+			Cliente c = new Cliente();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			GestorBD bd = new GestorBD();
 			String usuario = usuarioField.getText();
@@ -238,14 +246,17 @@ public class VentanaRegistrar extends JFrame {
 			String dNI = dniField.getText();
 			String nombre = nombreField.getText();
 			String apellidos = apellidosField.getText();
-			String fechaNacimientoString = fechaNacimietoField.getText();
+			Date fechaNacimiento = formatter.parse(fechaNacimietoField.getText());
 			long numTarjeta =0; //numeroTarjetaField.getText();
+			//c.setFechaNacimientoString(fechaNacimientoString);
 			
-			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, null, numTarjeta);
-			c.setFechaNacimientoString(fechaNacimientoString);
+			c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
+			
+			
 			
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
