@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-27T18:14:49</date>
+  <millis>1574874889883</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-27T18:15:03</date>
+  <millis>1574874903587</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-27T18:15:03</date>
+  <millis>1574874903604</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>El cliente  ha sido añadido</message>
+</record>
+</log>

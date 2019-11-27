@@ -1,10 +1,13 @@
 package ventanas;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,14 +19,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dataBase.GestorBD;
+import model.Cliente;
 import model.Trabajador;
 
 public class VentanaContratarTrabajador extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;

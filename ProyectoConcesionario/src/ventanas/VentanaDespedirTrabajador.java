@@ -16,10 +16,6 @@ import javax.swing.JTextField;
 
 public class VentanaDespedirTrabajador extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box trabajadorBox;
 	private JLabel trabajadorLabel;
@@ -49,8 +45,7 @@ public class VentanaDespedirTrabajador extends JFrame{
 		despedirTrabajadorButton = new JButton("Despedir trabajador");
 		despedirTrabajadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO OTRA MIERDA QUE NO SE PARA QUE SIRVE NI NADA
-				//String dniTrabajador= trabajadorField.getText();
+				String dniTrabajador= trabajadorField.getText();
 				//TODO eliminar el trabajador de la base de datos dado el DNI
 			}
 		});

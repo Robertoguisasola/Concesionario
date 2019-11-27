@@ -16,10 +16,6 @@ import model.Trabajador;
 
 public class VentanaTrabajador extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton anadirCocheButton;
@@ -27,7 +23,7 @@ public class VentanaTrabajador extends JFrame{
 	private JButton cancelButton;
 	
 	public VentanaTrabajador(Trabajador t) {
-		//TODO una puta mierda de ventana, no sirve para nada prácticamente
+		//TODO titulo personalizado
 		//this.setTitle("Bienvenido "+t.getNombre()+t.getApellidos());
 		this.setTitle("Bienvenido");
 		
@@ -58,7 +54,7 @@ public class VentanaTrabajador extends JFrame{
 			}
 		});
 		
-		cancelButton = new JButton("Cerrar Sesión");
+		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaLogin ventanaLogin = new VentanaLogin();

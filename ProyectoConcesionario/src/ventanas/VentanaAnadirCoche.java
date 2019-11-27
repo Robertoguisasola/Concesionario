@@ -1,6 +1,5 @@
 package ventanas;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -24,10 +23,6 @@ import model.Trabajador;
 
 public class VentanaAnadirCoche extends JFrame {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private JPanel botonesPanel;
 	private Box buttonsBox;
@@ -47,7 +42,7 @@ public class VentanaAnadirCoche extends JFrame {
 	private JComboBox<Integer> comboPlazas;
 	
 	private JLabel labelColor;
-	private JComboBox<String> comboColor;
+	private JComboBox<model.Color> comboColor;
 	
 	private JLabel labelMarca;
 	private JComboBox<String> comboMarca;
@@ -101,12 +96,10 @@ public class VentanaAnadirCoche extends JFrame {
 		comboPlazas.addItem(9);
 		
 		labelColor = new JLabel("Color: ");
-		comboColor = new JComboBox<String>();
-		comboColor.addItem("Negro");
-		comboColor.addItem("Blanco");
-		comboColor.addItem("Azul");
-		comboColor.addItem("Rojo");
-		comboColor.addItem("Gris");
+		comboColor = new JComboBox<model.Color>();
+		for(model.Color color : model.Color.values())
+			comboColor.addItem(color);
+
 		
 		labelMarca = new JLabel("Marca: ");
 		comboMarca = new JComboBox<String>();
@@ -154,11 +147,10 @@ public class VentanaAnadirCoche extends JFrame {
 		anadirCocheButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Coche c= new Coche();
-				c.setMatricula(fieldMatricula.getText());
 				c.setNumRuedas((int)comboNRuedas.getSelectedItem());
 				c.setCaballos((int)comboCaballos.getSelectedItem());
 				c.setnPlazas((int)comboPlazas.getSelectedItem());
-				c.setColor(comboColor.getSelectedItem().toString());
+				c.setColor((model.Color) comboColor.getSelectedItem());
 				c.setMarca(comboMarca.getSelectedItem().toString());
 				c.setModelo(fieldModelo.getText());
 				c.setAutomatico(checkAutomatico.isSelected());

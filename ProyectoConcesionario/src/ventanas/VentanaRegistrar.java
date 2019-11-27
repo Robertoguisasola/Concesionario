@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -15,19 +15,18 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
 import model.Cliente;
+import model.Persona;
 
 public class VentanaRegistrar extends JFrame {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -104,7 +103,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		passwordBox = new Box(BoxLayout.X_AXIS);
 		passwordBox.add(passwordLabel);
-		passwordBox.add(Box.createRigidArea(new Dimension(93, 12)));
+		passwordBox.add(Box.createRigidArea(new Dimension(90, 12)));
 		passwordBox.add(passwordField);
 		
 		passwordRLabel = new JLabel("Repita la contraseña: ");
@@ -112,7 +111,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		passwordRBox = new Box(BoxLayout.X_AXIS);
 		passwordRBox.add(passwordRLabel);
-		passwordRBox.add(Box.createRigidArea(new Dimension(40,0)));
+		passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
 		passwordRBox.add(passwordRField);
 		
 		emailLabel = new JLabel("Email: ");
@@ -120,7 +119,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		emailBox = new Box(BoxLayout.X_AXIS);
 		emailBox.add(emailLabel);
-		emailBox.add(Box.createRigidArea(new Dimension(40,0)));
+		emailBox.add(Box.createRigidArea(new Dimension(124, 12)));
 		emailBox.add(emailField);
 		
 		dniLabel = new JLabel("DNI: ");
@@ -128,7 +127,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		dniBox = new Box(BoxLayout.X_AXIS);
 		dniBox.add(dniLabel);
-		dniBox.add(Box.createRigidArea(new Dimension(40,0)));
+		dniBox.add(Box.createRigidArea(new Dimension(135, 12)));
 		dniBox.add(dniField);
 		
 		nombreLabel = new JLabel("Nombre: ");
@@ -136,7 +135,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		nombreBox = new Box(BoxLayout.X_AXIS);
 		nombreBox.add(nombreLabel);
-		nombreBox.add(Box.createRigidArea(new Dimension(40,0)));
+		nombreBox.add(Box.createRigidArea(new Dimension(110, 12)));
 		nombreBox.add(nombreField);
 
 		apellidosLabel = new JLabel("Apellidos: ");
@@ -144,17 +143,23 @@ public class VentanaRegistrar extends JFrame {
 
 		apellidosBox = new Box(BoxLayout.X_AXIS);
 		apellidosBox.add(apellidosLabel);
-		apellidosBox.add(Box.createRigidArea(new Dimension(40,0)));
+		apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
 		apellidosBox.add(apellidosField);
-
-		//TODO cambiar a dia, mes año
 		
 		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
 		fechaNacimietoField = new JTextField();
+		fechaNacimietoField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fechaNacimietoField.setText("");
+			}
+		});
+		fechaNacimietoField.setHorizontalAlignment(SwingConstants.CENTER);
+		fechaNacimietoField.setText("dd-MM-yyyy");
 		
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
-		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(40,0)));
+		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
 		fechaNacimientoBox.add(fechaNacimietoField);
 		
 		numeroTarjetaLabel = new JLabel("Número de tarjeta: ");
@@ -162,7 +167,7 @@ public class VentanaRegistrar extends JFrame {
 		
 		numeroTarjetaBox = new Box(BoxLayout.X_AXIS);
 		numeroTarjetaBox.add(numeroTarjetaLabel);
-		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(40,0)));
+		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(51, 12)));
 		numeroTarjetaBox.add(numeroTarjetaField);
 		
 		formPanel = new JPanel();
@@ -194,6 +199,7 @@ public class VentanaRegistrar extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				registrar();
 			}
+			
 		});
 		
 		cancelButton = new JButton("Cancelar");
@@ -219,8 +225,7 @@ public class VentanaRegistrar extends JFrame {
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	//TODO PARA QUE SE USA ESTO????
-	@SuppressWarnings("unused")
+	
 	private void limpiarCajas() {
 		usuarioField.setText(null);
 		passwordField.setText(null);
@@ -233,12 +238,10 @@ public class VentanaRegistrar extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
-	
-	//TODO revisar esto de la fehca, en principio funciona.
 	private void registrar() {
-			Cliente c = new Cliente();
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		try {
+			String fechaNacimientoString = fechaNacimietoField.getText();
+			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			GestorBD bd = new GestorBD();
 			String usuario = usuarioField.getText();
 			String contra = new String(passwordField.getPassword());
@@ -246,18 +249,17 @@ public class VentanaRegistrar extends JFrame {
 			String dNI = dniField.getText();
 			String nombre = nombreField.getText();
 			String apellidos = apellidosField.getText();
-			Date fechaNacimiento = formatter.parse(fechaNacimietoField.getText());
-			long numTarjeta =0; //numeroTarjetaField.getText();
-			//c.setFechaNacimientoString(fechaNacimientoString);
+			long numTarjeta = 0;
 			
-			c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
-			
-			
+			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
 			
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
-			
-		} catch (Exception e) {
+		} 
+		catch (ParseException ex) {
+			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
 		}

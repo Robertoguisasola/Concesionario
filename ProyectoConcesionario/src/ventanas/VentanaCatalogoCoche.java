@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,10 +24,6 @@ import javax.swing.border.LineBorder;
 
 public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JMenuBar barraCatalogo;
 	private JMenu vehiculosCatalogo;
 	private JMenu ofertasCatalogo;
@@ -38,20 +37,23 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	private JPanel topPanel;
 	private JPanel middlePanel;
 	private JPanel gridPanel;
+	private JPanel buscarPanel;
 	private JPanel centerPanel;
 	private JLabel labelCaballos;
 	private JLabel labelPlazas;
 	private JLabel labelColor;
 	private JLabel labelMarca;
-	private JComboBox<Integer> comboCaballos;
-	private JComboBox<Integer> comboPlazas;
-	private JComboBox<String> comboColor;
-	private JComboBox<String> comboMarca;
+	private JComboBox comboCaballos;
+	private JComboBox comboPlazas;
+	private JComboBox comboColor;
+	private JComboBox comboMarca;
 	private JCheckBox checkAutomatico;
 	private JCheckBox checkLucesLed;
 	private JCheckBox checkTechoPanoramico;
 	private JCheckBox checkTraccion;
 	private JCheckBox checkModoDeportivo;
+	private JButton buscarButton;
+	private Box buttonBox;
 	
 	public VentanaCatalogoCoche() {
 		this.setSize(700, 800);
@@ -115,33 +117,38 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		gridPanel.setLayout(new GridLayout(13,2));
 		gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
 		
+		buscarPanel = new JPanel();
+		buscarPanel.setLayout(new GridLayout(1,2));
+		buscarPanel.setBorder(new LineBorder(Color.BLACK, 3));
+		
 		//meter los componentes del girdPanel.
 		//TODO hay que meter los items en los JComoBoxes
-		//TODO HOLA??? QUE ES ESTO????
 		labelCaballos = new JLabel("Caballos: ");
-		comboCaballos = new JComboBox<Integer>();
-		comboCaballos.addItem(70);
-		comboCaballos.addItem(100);
-		comboCaballos.addItem(120);
-		comboCaballos.addItem(150);
-		comboCaballos.addItem(200);
+		comboCaballos = new JComboBox();
+		comboCaballos.addItem("70");
+		comboCaballos.addItem("100");
+		comboCaballos.addItem("120");
+		comboCaballos.addItem("150");
+		comboCaballos.addItem("200");
 		labelPlazas = new JLabel("Plazas: ");
-		comboPlazas = new JComboBox<Integer>();
-		comboPlazas.addItem(1);
-		comboPlazas.addItem(2);
-		comboPlazas.addItem(4);
-		comboPlazas.addItem(5);
-		comboPlazas.addItem(7);
-		comboPlazas.addItem(9);
+		comboPlazas = new JComboBox();
+		comboPlazas.addItem("1");
+		comboPlazas.addItem("2");
+		comboPlazas.addItem("4");
+		comboPlazas.addItem("5");
+		comboPlazas.addItem("7");
+		comboPlazas.addItem("9");
+		
 		labelColor = new JLabel("Color: ");
-		comboColor = new JComboBox<String>();
+		comboColor = new JComboBox();
 		comboColor.addItem("Negro");
 		comboColor.addItem("Blanco");
 		comboColor.addItem("Azul");
 		comboColor.addItem("Rojo");
 		comboColor.addItem("Gris");
+		
 		labelMarca = new JLabel("Marca: ");
-		comboMarca = new JComboBox<String>();
+		comboMarca = new JComboBox();
 		comboMarca.addItem("Renault");
 		comboMarca.addItem("BMW");
 		comboMarca.addItem("Seat");
@@ -152,6 +159,12 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		checkTechoPanoramico = new JCheckBox("Techo panorámico");
 		checkTraccion = new JCheckBox("Tracción 4x4");
 		checkModoDeportivo = new JCheckBox("Modo deportivo");
+		buscarButton= new JButton("Buscar");
+		buscarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO Crear action listener para que busque el coche con las caracteristicas seleccionadas
+			}
+		});
 
 		gridPanel.add(labelCaballos);
 		gridPanel.add(comboCaballos);
@@ -166,12 +179,14 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		gridPanel.add(checkTechoPanoramico);
 		gridPanel.add(checkTraccion);
 		gridPanel.add(checkModoDeportivo);
-
+		buscarPanel.add(buscarButton);
+		
 		centerPanel = new JPanel();
 		centerPanel.setLayout(new GridLayout());
 		centerPanel.setBorder(new LineBorder(Color.BLACK, 3));
 	
 		middlePanel.add(gridPanel);
+		middlePanel.add(buscarPanel);
 		//TODO poner el panel del boton buscar debajo del panel con los datos del coche
 		mainContainer.add(centerPanel);
 		mainContainer.add(middlePanel, BorderLayout.WEST);
@@ -180,7 +195,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getSource()==cerrarSesionItem) {
-			VentanaInicial.abrirVentanaInicial();
+			VentanaInicial.abirVentanaInicial();
 			dispose();
 			JOptionPane.showMessageDialog(null, "Se ha cerrado la sesion correctamente...");
 		} else if(evento.getSource()==cochesItem){

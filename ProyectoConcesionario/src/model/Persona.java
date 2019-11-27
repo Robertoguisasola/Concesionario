@@ -14,7 +14,7 @@ public class Persona {
 	protected String nombre;
 	protected String apellidos;
 	protected Date fechaNacimiento;
-	private SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+	public static SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public Persona(String login, String password, String email, String dNI, String nombre, String apellidos,
 			Date fechaNacimiento) {

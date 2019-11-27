@@ -4,12 +4,14 @@ public class Venta {
 	private Cliente comprador;
 	private Vehiculo vehiculo;
 	private int precio;
+	private String matricula;
 	
-	public Venta(Cliente comprador, Vehiculo vehiculo, int precio) {
+	public Venta(Cliente comprador, Vehiculo vehiculo, int precio, String matricula) {
 		super();
 		this.comprador = comprador;
 		this.vehiculo = vehiculo;
 		this.precio = precio;
+		this.matricula = matricula;
 	}
 	
 	public Venta() {
@@ -17,6 +19,7 @@ public class Venta {
 		this.comprador = null;
 		this.vehiculo = null;
 		this.precio = 0;
+		this.matricula = null;
 	}
 	
 	public Venta(Venta v) {
@@ -24,6 +27,7 @@ public class Venta {
 		this.comprador = v.comprador;
 		this.vehiculo = v.vehiculo;
 		this.precio = v.precio;
+		this.matricula = v.matricula;
 	}
 	
 	public Cliente getComprador() {
@@ -44,9 +48,20 @@ public class Venta {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-	
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
 	@Override
 	public String toString() {
-		return "Venta [comprador=" + comprador + ", vehiculo=" + vehiculo + ", precio=" + precio + "]";
+		return "Venta [comprador=" + comprador + ", vehiculo=" + vehiculo + ", precio=" + precio + ", matricula="
+				+ matricula + "]";
 	}
+	
+	
 }	

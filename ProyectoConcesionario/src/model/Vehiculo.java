@@ -1,22 +1,20 @@
 package model;
 
 public class Vehiculo {
-	
-	protected String matricula;
+
 	protected int numRuedas;
 	protected int caballos;
 	protected int nPlazas;
-	protected String color;
+	protected Color color;
 	protected String marca;
 	protected String modelo;
 	protected boolean automatico;
 	protected boolean lucesLed;
 	
 	
-	public Vehiculo(String matricula, int numRuedas, int caballos, int nPlazas, String color, String marca,
+	public Vehiculo(int numRuedas, int caballos, int nPlazas, Color color, String marca,
 			String modelo, boolean automatico, boolean lucesLed) {
 		super();
-		this.matricula = matricula;
 		this.numRuedas = numRuedas;
 		this.caballos = caballos;
 		this.nPlazas = nPlazas;
@@ -30,11 +28,10 @@ public class Vehiculo {
 
 	public Vehiculo() {
 		super();
-		this.matricula = "";
 		this.numRuedas = 0;
 		this.caballos = 0;
 		this.nPlazas = 0;
-		this.color = "";
+		this.color = null;
 		this.marca = "";
 		this.modelo = "";
 		this.automatico = false;
@@ -44,7 +41,6 @@ public class Vehiculo {
 
 	public Vehiculo(Vehiculo v) {
 		super();
-		this.matricula = v.matricula;
 		this.numRuedas = v.numRuedas;
 		this.caballos = v.caballos;
 		this.nPlazas = v.nPlazas;
@@ -53,14 +49,6 @@ public class Vehiculo {
 		this.modelo = v.modelo;
 		this.automatico = v.automatico;
 		this.lucesLed = v.lucesLed;
-	}
-
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
 	}
 
 	public int getNumRuedas() {
@@ -87,11 +75,11 @@ public class Vehiculo {
 		this.nPlazas = nPlazas;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
@@ -130,10 +118,8 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas="
-				+ nPlazas + ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", automatico="
-				+ automatico + ", lucesLed=" + lucesLed + "]";
+		return "Vehiculo [numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas=" + nPlazas + ", color="
+				+ color + ", marca=" + marca + ", modelo=" + modelo + ", automatico=" + automatico + ", lucesLed="
+				+ lucesLed + "]";
 	}
-
-
 }
