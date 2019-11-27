@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import dataBase.GestorBD;
 import model.Cliente;
+import model.Persona;
 import model.Trabajador;
 
 public class VentanaContratarTrabajador extends JFrame{
@@ -206,6 +207,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	private void contratar() {
 		try {
 			GestorBD bd = new GestorBD();
+			
 			String usuario = usuarioField.getText();
 			String contra = new String(passwordField.getPassword());
 			String email = emailField.getText();
@@ -213,13 +215,15 @@ public class VentanaContratarTrabajador extends JFrame{
 			String nombre = nombreField.getText();
 			String apellidos = apellidosField.getText();
 			String fechaNacimientoString = fechaNacimientoField.getText();
+			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			int sueldo= Integer.parseInt(sueldoField.getText());
 			
-			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, null, sueldo);
-			t.setFechaNacimientoString(fechaNacimientoString);
+			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, sueldo);
+			
 			
 			bd.anadirNuevoTrabajador(t);
 			bd.desconectar();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");

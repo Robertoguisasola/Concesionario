@@ -139,3 +139,140 @@
   <message>Conectado a la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-27T23:48:57</date>
+  <millis>1574894937168</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-27T23:55:48</date>
+  <millis>1574895348760</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-27T23:56:01</date>
+  <millis>1574895361072</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-27T23:56:21</date>
+  <millis>1574895381735</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-28T00:02:21</date>
+  <millis>1574895741989</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-28T00:03:03</date>
+  <millis>1574895783480</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-28T00:03:50</date>
+  <millis>1574895830780</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-28T00:03:50</date>
+  <millis>1574895830793</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El cliente 1234 ha sido añadido</message>
+</record>
+<record>
+  <date>2019-11-28T00:04:11</date>
+  <millis>1574895851982</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-28T00:04:36</date>
+  <millis>1574895876110</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-28T00:04:36</date>
+  <millis>1574895876120</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El trabajador 1234 ha sido añadido</message>
+</record>
+</log>

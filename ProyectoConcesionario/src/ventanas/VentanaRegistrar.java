@@ -255,6 +255,8 @@ public class VentanaRegistrar extends JFrame {
 			
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
+			limpiarCajas();
+			
 		} 
 		catch (ParseException ex) {
 			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
