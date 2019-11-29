@@ -6,17 +6,10 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import javax.swing.border.Border;
  
-/**
- * @author DiscoDurodeRoer
- */
 public class Fondo implements Border {
      
     private BufferedImage mImagen = null;
     
-    /**
-     * Constructor, indicamos la imagen que queremos que se redimensione
-     * @param pImagen ImageIO.read(new File(ruta imagen))
-     */
     public Fondo(BufferedImage pImagen) {
         mImagen = pImagen;       
     }
