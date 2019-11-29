@@ -15,6 +15,11 @@ public class MainConcesionario {
 	//TODO pensar si hay alguna interfaz posible y si eso, lanzarla
 	//TODO pensar hilos posibles para el proyecto
 	//TODO pensar si hay posibilidad de alguna recursividad
+	//TODO revisar todas las excepciones
+	//TODO solicitar pruebas de un coche, ventana parecida a la de comprar coche
+	//TODO cambiar tamaño de las ventanas a 480,360
+	//TODO comprobar si cuando se llama a las ventanas es necesario que se pase el tamaño y el setVisible, o si hay que quitarlo en el constructor
+	//TODO escoger foto fondo
 
 	public static void main(String[] args) {				
 		Inicio.abirVentanaInicial();	

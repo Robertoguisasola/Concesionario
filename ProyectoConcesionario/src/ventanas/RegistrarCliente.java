@@ -157,7 +157,7 @@ public class RegistrarCliente extends JFrame {
 			}
 		});
 		fechaNacimietoField.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaNacimietoField.setText("dd-MM-yyyy");
+		fechaNacimietoField.setText("dd/MM/yyyy");
 		
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
