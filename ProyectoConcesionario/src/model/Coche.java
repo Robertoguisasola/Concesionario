@@ -6,7 +6,7 @@ public class Coche extends Vehiculo {
 	protected boolean traccion4x4;
 	protected boolean modoDeportivo;
 	
-	public Coche(int numRuedas, int caballos, int nPlazas, Color color, String marca, String modelo,
+	public Coche(int numRuedas, int caballos, int nPlazas, Colores color, String marca, String modelo,
 			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
 			boolean modoDeportivo) {
 		super(numRuedas, caballos, nPlazas, color, marca, modelo, automatico, lucesLed);

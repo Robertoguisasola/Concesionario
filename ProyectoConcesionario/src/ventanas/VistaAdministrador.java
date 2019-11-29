@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,15 +12,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class VentanaAdministrador extends JFrame {
+public class VistaAdministrador extends JFrame {
 	
+	//TODO poner menú para poder importar desde ficheros los trabajadores, clientes y vehículos
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton contratarTrabajadorButton;
 	private JButton despedirTrabajadorButton;
 	private JButton cancelButton;
 	
-	public VentanaAdministrador(){
+	public VistaAdministrador(){
 		this.setTitle("Menu del administrador");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +62,7 @@ public class VentanaAdministrador extends JFrame {
 		cancelButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaLogin ventanaLogin = new VentanaLogin();
+				Login ventanaLogin = new Login();
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();

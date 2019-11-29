@@ -14,15 +14,19 @@ import javax.swing.JPanel;
 
 import model.Trabajador;
 
-public class VentanaTrabajador extends JFrame{
+public class VistaTrabajador extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton anadirCocheButton;
 	private JButton retirarCocheButton;
 	private JButton cancelButton;
 	
-	public VentanaTrabajador(Trabajador t) {
+	public VistaTrabajador(Trabajador t) {
 		//TODO titulo personalizado
 		//this.setTitle("Bienvenido "+t.getNombre()+t.getApellidos());
 		this.setTitle("Bienvenido");
@@ -57,7 +61,7 @@ public class VentanaTrabajador extends JFrame{
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaLogin ventanaLogin = new VentanaLogin();
+				Login ventanaLogin = new Login();
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();

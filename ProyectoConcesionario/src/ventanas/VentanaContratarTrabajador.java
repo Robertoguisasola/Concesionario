@@ -1,12 +1,10 @@
 package ventanas;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -19,12 +17,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dataBase.GestorBD;
-import model.Cliente;
 import model.Persona;
 import model.Trabajador;
 
 public class VentanaContratarTrabajador extends JFrame{
+	//TODO eliminar y convertir en tabla
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -184,7 +186,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+			VistaAdministrador ventanaAdmin = new VistaAdministrador();
 			ventanaAdmin.setVisible(true);
 			ventanaAdmin.setSize(450,260);
 			ventanaAdmin.setLocationRelativeTo(null);

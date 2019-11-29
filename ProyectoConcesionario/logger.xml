@@ -276,3 +276,66 @@
   <message>El trabajador 1234 ha sido añadido</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-29T12:29:49</date>
+  <millis>1575026989123</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-29T12:31:01</date>
+  <millis>1575027061147</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-29T12:31:48</date>
+  <millis>1575027108257</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-11-29T12:31:48</date>
+  <millis>1575027108271</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>El cliente Roberto ha sido añadido</message>
+</record>
+<record>
+  <date>2019-11-29T12:31:57</date>
+  <millis>1575027117467</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>

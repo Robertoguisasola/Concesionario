@@ -1,6 +1,8 @@
 package model;
 
 public class Venta {
+	//TODO meter todos los valores de una venta
+	
 	private Cliente comprador;
 	private Vehiculo vehiculo;
 	private int precio;

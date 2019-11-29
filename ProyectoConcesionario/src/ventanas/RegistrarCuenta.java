@@ -25,8 +25,12 @@ import dataBase.GestorBD;
 import model.Cliente;
 import model.Persona;
 
-public class VentanaRegistrar extends JFrame {
+public class RegistrarCuenta extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -66,7 +70,7 @@ public class VentanaRegistrar extends JFrame {
 	
 	//TODO Como poner que la ventan se ajuste al tamaño
 	
-	public VentanaRegistrar() {
+	public RegistrarCuenta() {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -205,7 +209,7 @@ public class VentanaRegistrar extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaInicial menu = new VentanaInicial();
+				Inicio menu = new Inicio();
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);

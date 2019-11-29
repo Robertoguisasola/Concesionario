@@ -22,7 +22,7 @@ import dataBase.GestorBD;
 import model.Cliente;
 import model.Trabajador;
 
-public class VentanaLogin extends JFrame {
+public class Login extends JFrame {
 	
 	/**
 	 * 
@@ -42,7 +42,7 @@ public class VentanaLogin extends JFrame {
 	private JButton cancelButton;
 	private JLabel falloInicio;
 	
-	public VentanaLogin(){
+	public Login(){
 		this.setTitle("Login");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +97,7 @@ public class VentanaLogin extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaInicial menu = new VentanaInicial();
+				Inicio menu = new Inicio();
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);
@@ -133,17 +133,17 @@ public class VentanaLogin extends JFrame {
 			Cliente c = null;
 			Trabajador t = null;
 			if ((c =bd.iniciarSesionCliente(usuario, contra)) != null) {
-				VentanaCliente ventanaCliente = new VentanaCliente(c);
+				VistaCliente ventanaCliente = new VistaCliente(c);
 				ventanaCliente.setLocationRelativeTo(null);
 				ventanaCliente.setVisible(true);
 				dispose();
 			}else if ((t =bd.iniciarSesionTrabajador(usuario, contra)) != null) {
-				VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
+				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();
 			}else if (usuario.equals("admin")&& contra.equals("1234")) {
-				VentanaAdministrador ventanaAdministrador= new VentanaAdministrador();
+				VistaAdministrador ventanaAdministrador= new VistaAdministrador();
 				ventanaAdministrador.setLocationRelativeTo(null);
 				ventanaAdministrador.setVisible(true);
 				dispose();

@@ -4,7 +4,7 @@ public class Coche2 extends Coche {
 	
 	private int kilometros;
 
-	public Coche2(int numRuedas, int caballos, int nPlazas, Color color, String marca, String modelo,
+	public Coche2(int numRuedas, int caballos, int nPlazas, Colores color, String marca, String modelo,
 			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo,
 			int kilometros) {
 		super(numRuedas, caballos, nPlazas, color, marca, modelo, automatico, lucesLed, techoPanoramico,

@@ -17,6 +17,12 @@ import model.Cliente;
 import model.Trabajador;
 
 public class GestorBD {
+	//TODO método de añadir coche
+	//TODO método de añadir coche de 2ª mano
+	//TODO método crear venta
+	//TODO método ver ventas
+	//TODO poner loggers
+	
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
 	private static Logger logger = null;
@@ -69,13 +75,10 @@ public class GestorBD {
 				stmt.setString(7, t.getFechaNacimientoString());
 				stmt.setInt(8, t.getSueldo());
 
-				stmt.executeUpdate();
-				
-				
+				stmt.executeUpdate();				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		}
 	}	
 

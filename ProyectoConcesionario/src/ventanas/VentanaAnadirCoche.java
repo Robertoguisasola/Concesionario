@@ -22,7 +22,12 @@ import model.Coche;
 import model.Trabajador;
 
 public class VentanaAnadirCoche extends JFrame {
+	//TODO eliminar y convertir en tabla
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private JPanel botonesPanel;
 	private Box buttonsBox;
@@ -42,7 +47,7 @@ public class VentanaAnadirCoche extends JFrame {
 	private JComboBox<Integer> comboPlazas;
 	
 	private JLabel labelColor;
-	private JComboBox<model.Color> comboColor;
+	private JComboBox<model.Colores> comboColor;
 	
 	private JLabel labelMarca;
 	private JComboBox<String> comboMarca;
@@ -96,8 +101,8 @@ public class VentanaAnadirCoche extends JFrame {
 		comboPlazas.addItem(9);
 		
 		labelColor = new JLabel("Color: ");
-		comboColor = new JComboBox<model.Color>();
-		for(model.Color color : model.Color.values())
+		comboColor = new JComboBox<model.Colores>();
+		for(model.Colores color : model.Colores.values())
 			comboColor.addItem(color);
 
 		
@@ -150,7 +155,7 @@ public class VentanaAnadirCoche extends JFrame {
 				c.setNumRuedas((int)comboNRuedas.getSelectedItem());
 				c.setCaballos((int)comboCaballos.getSelectedItem());
 				c.setnPlazas((int)comboPlazas.getSelectedItem());
-				c.setColor((model.Color) comboColor.getSelectedItem());
+				c.setColor((model.Colores) comboColor.getSelectedItem());
 				c.setMarca(comboMarca.getSelectedItem().toString());
 				c.setModelo(fieldModelo.getText());
 				c.setAutomatico(checkAutomatico.isSelected());
@@ -165,7 +170,7 @@ public class VentanaAnadirCoche extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaTrabajador ventanaTrabajador = new VentanaTrabajador(t);
+				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();

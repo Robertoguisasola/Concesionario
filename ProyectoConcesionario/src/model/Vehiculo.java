@@ -5,14 +5,14 @@ public class Vehiculo {
 	protected int numRuedas;
 	protected int caballos;
 	protected int nPlazas;
-	protected Color color;
+	protected Colores color;
 	protected String marca;
 	protected String modelo;
 	protected boolean automatico;
 	protected boolean lucesLed;
 	
 	
-	public Vehiculo(int numRuedas, int caballos, int nPlazas, Color color, String marca,
+	public Vehiculo(int numRuedas, int caballos, int nPlazas, Colores color, String marca,
 			String modelo, boolean automatico, boolean lucesLed) {
 		super();
 		this.numRuedas = numRuedas;
@@ -75,11 +75,11 @@ public class Vehiculo {
 		this.nPlazas = nPlazas;
 	}
 
-	public Color getColor() {
+	public Colores getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(Colores color) {
 		this.color = color;
 	}
 

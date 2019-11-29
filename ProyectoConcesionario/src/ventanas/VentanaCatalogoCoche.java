@@ -23,7 +23,12 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class VentanaCatalogoCoche extends JFrame implements ActionListener{
+	//TODO eliminar y convertir en tabla
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuBar barraCatalogo;
 	private JMenu vehiculosCatalogo;
 	private JMenu ofertasCatalogo;
@@ -76,7 +81,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		motosItem.addActionListener(this);
 		iniciarSesionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaLogin ventanaLogin = new VentanaLogin();
+				Login ventanaLogin = new Login();
 				ventanaLogin.setVisible(true);
 				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
@@ -195,7 +200,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getSource()==cerrarSesionItem) {
-			VentanaInicial.abirVentanaInicial();
+			Inicio.abirVentanaInicial();
 			dispose();
 			JOptionPane.showMessageDialog(null, "Se ha cerrado la sesion correctamente...");
 		} else if(evento.getSource()==cochesItem){

@@ -16,6 +16,10 @@ import javax.swing.JTextField;
 
 public class VentanaDespedirTrabajador extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box trabajadorBox;
 	private JLabel trabajadorLabel;
@@ -53,7 +57,7 @@ public class VentanaDespedirTrabajador extends JFrame{
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+				VistaAdministrador ventanaAdmin = new VistaAdministrador();
 				ventanaAdmin.setVisible(true);
 				ventanaAdmin.setSize(450,260);
 				ventanaAdmin.setLocationRelativeTo(null);

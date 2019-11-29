@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class VentanaInicial extends JFrame {
+public class Inicio extends JFrame {
 	
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class VentanaInicial extends JFrame {
 	private JButton iniciarSesionButton;
 	private JButton registrarCuentaButton;
 	
-	public VentanaInicial(){
+	public Inicio(){
 		this.setTitle("Inicio");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class VentanaInicial extends JFrame {
 		iniciarSesionButton = new JButton("Iniciar sesión");
 		iniciarSesionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaLogin ventanaLogin = new VentanaLogin();
+				Login ventanaLogin = new Login();
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();
@@ -48,7 +48,7 @@ public class VentanaInicial extends JFrame {
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaRegistrar ventanaRegistrat = new VentanaRegistrar();
+				RegistrarCuenta ventanaRegistrat = new RegistrarCuenta();
 				ventanaRegistrat.setLocationRelativeTo(null);
 				ventanaRegistrat.setVisible(true);
 				dispose();
@@ -69,7 +69,7 @@ public class VentanaInicial extends JFrame {
 	}
 	
 	public static void abirVentanaInicial() {
-		VentanaInicial inicio = new VentanaInicial();
+		Inicio inicio = new Inicio();
 		inicio.setVisible(true);
 		inicio.setSize(450,260);
 		inicio.setLocationRelativeTo(null);

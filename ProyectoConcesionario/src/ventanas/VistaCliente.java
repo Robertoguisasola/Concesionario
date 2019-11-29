@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,13 +14,18 @@ import javax.swing.JPanel;
 
 import model.Cliente;
 
-public class VentanaCliente extends JFrame {
+public class VistaCliente extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton catalogoCochesButton;
 	
-	public VentanaCliente(Cliente c) {
+	public VistaCliente(Cliente c) {
+		//TODO no saca el nombre del cliente
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
