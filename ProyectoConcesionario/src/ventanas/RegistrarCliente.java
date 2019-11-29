@@ -25,12 +25,13 @@ import dataBase.GestorBD;
 import model.Cliente;
 import model.Persona;
 
-public class RegistrarCuenta extends JFrame {
+public class RegistrarCliente extends JFrame {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -67,10 +68,9 @@ public class RegistrarCuenta extends JFrame {
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	
 	//TODO Como poner que la ventan se ajuste al tamaño
 	
-	public RegistrarCuenta() {
+	public RegistrarCliente() {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,9 +94,7 @@ public class RegistrarCuenta extends JFrame {
 		
 		usuarioLabel = new JLabel("Nombre de usuario: ");
 		usuarioField = new JTextField(12);
-		
-		//TODO mover cajas vacias con windowBuilder para alinear todos los cuadros
-		
+			
 		usuarioBox = new Box(BoxLayout.X_AXIS);
 		usuarioBox.add(usuarioLabel);
 		usuarioBox.add(Box.createRigidArea(new Dimension(46, 12)));
@@ -201,6 +199,7 @@ public class RegistrarCuenta extends JFrame {
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO sacar JOptionPane para la verificación y no registrar
 				registrar();
 			}
 			

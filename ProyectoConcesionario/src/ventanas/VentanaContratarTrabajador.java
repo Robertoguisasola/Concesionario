@@ -132,8 +132,6 @@ public class VentanaContratarTrabajador extends JFrame{
 	apellidosBox.add(apellidosLabel);
 	apellidosBox.add(Box.createRigidArea(new Dimension(40,0)));
 	apellidosBox.add(apellidosField);
-
-	//TODO cambiar a dia, mes año
 	
 	fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
 	fechaNacimientoField = new JTextField();

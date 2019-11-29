@@ -4,13 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Concesionario {
+	//TODO como rellenar el hashmap de vehículos
+	
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	private HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
 	private List<Trabajador> trabajadores = new ArrayList<Trabajador>();
-	private List<Venta> ventas = new ArrayList<Venta>();
+	private Map<String, List<Venta>> ventas = new HashMap<String, List<Venta>>();
 	
 	public List<Cliente> getClientes() {
 		return clientes;
@@ -35,21 +38,22 @@ public class Concesionario {
 	public void setTrabajadores(List<Trabajador> trabajadores) {
 		this.trabajadores = trabajadores;
 	}
-	
-	public List<Venta> getVentas() {
+		
+	public Map<String, List<Venta>> getVentas() {
 		return ventas;
 	}
 
-	public void setVentas(List<Venta> ventas) {
+	public void setVentas(Map<String, List<Venta>> ventas) {
 		this.ventas = ventas;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Concesionario [clientes=" + clientes + ", vehiculos=" + vehiculos + ", trabajadores=" + trabajadores
 				+ ", ventas=" + ventas + "]";
 	}
-	
+
 	//TODO métodos para añadir los elementos a la bbd
 	public void cargarClientes() {
 		try {

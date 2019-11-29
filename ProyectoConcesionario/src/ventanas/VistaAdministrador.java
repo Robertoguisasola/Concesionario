@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class VistaAdministrador extends JFrame {
 	
 	//TODO poner menú para poder importar desde ficheros los trabajadores, clientes y vehículos
+	//TODO pasar los botones a un menú y poner un texto de bienvenida al concesionario en la ventana con la info del cliente
 	
 	/**
 	 * 
