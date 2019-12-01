@@ -61,7 +61,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public VentanaContratarTrabajador(){
+	public VentanaContratarTrabajador(Trabajador t){
 		
 	this.setTitle("Contratar Trabajador");
 	
@@ -184,7 +184,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VistaAdministrador ventanaAdmin = new VistaAdministrador();
+			VistaAdministrador ventanaAdmin = new VistaAdministrador(t);
 			ventanaAdmin.setVisible(true);
 			ventanaAdmin.setSize(450,260);
 			ventanaAdmin.setLocationRelativeTo(null);

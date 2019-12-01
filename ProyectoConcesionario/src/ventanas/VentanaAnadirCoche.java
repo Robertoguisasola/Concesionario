@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import model.Coche;
@@ -189,6 +190,18 @@ public class VentanaAnadirCoche extends JFrame {
 		
 		this.setVisible(true);
 
+	}
+	
+	public static void main(String[] args) {
+		Trabajador t = new Trabajador();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				new VentanaAnadirCoche(t);
+			}
+		});
 	}
 }
 

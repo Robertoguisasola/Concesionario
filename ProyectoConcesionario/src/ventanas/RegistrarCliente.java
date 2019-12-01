@@ -68,8 +68,6 @@ public class RegistrarCliente extends JFrame {
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	//TODO Como poner que la ventan se ajuste al tamaño
-	
 	public RegistrarCliente() {
 		this.setTitle("Regístrate");
 		
@@ -199,7 +197,7 @@ public class RegistrarCliente extends JFrame {
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO sacar JOptionPane para la verificación y no registrar
+				
 				registrar();
 			}
 			

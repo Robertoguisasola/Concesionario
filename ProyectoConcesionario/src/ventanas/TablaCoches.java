@@ -28,7 +28,7 @@ public class TablaCoches extends JFrame {
 	private JButton eliminarButton;
 	private JTable tabla;
 	
-	//TODO R terminar ventana
+	//TODO terminar ventana
 	public TablaCoches(Trabajador t) {
 		this.setTitle("Tabla de coches");
 		
@@ -37,7 +37,7 @@ public class TablaCoches extends JFrame {
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		
-		//TODO rellenar columnas
+		//TODO rellenar columnas y sacar datos
 		String[] columNames = {"Column1", "Column2"};
 		String[][] data = {
 				{"Nombre1", "Dato1"},
@@ -97,6 +97,7 @@ public class TablaCoches extends JFrame {
 	//TODO borrar cuando funcione como queremos
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
+		t.setNombre("Pruebaaaa");
 
 		SwingUtilities.invokeLater(new Runnable() {
 			

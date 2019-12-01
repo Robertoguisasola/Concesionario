@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import model.Trabajador;
 
+//NO TOCAR, SOLO AÑADIR COSAS
 public class VistaTrabajador extends JFrame{
 
 	/**
@@ -28,7 +29,6 @@ public class VistaTrabajador extends JFrame{
 	private JButton cerrarButton;
 	
 	//TODO menú parte superior
-	//NO TOCAR, SOLO AÑADIR COSAS
 	public VistaTrabajador(Trabajador t) {
 		this.setTitle("Bienvenido "+ t.getNombre()+ " " + t.getApellidos());
 		

@@ -28,7 +28,7 @@ public class TablaVentas extends JFrame {
 	private JButton cancelarButton;
 	private JTable tabla;
 	
-	//TODO R terminar ventana
+	//TODO terminar ventana
 	public TablaVentas(Trabajador t) {
 		this.setTitle("Tabla de coches");
 		
@@ -37,7 +37,7 @@ public class TablaVentas extends JFrame {
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		
-		//TODO rellenar columnas
+		//TODO rellenar columnas y sacar datos
 		String[] columNames = {"Column1", "Column2"};
 		String[][] data = {
 				{"Nombre1", "Dato1"},
