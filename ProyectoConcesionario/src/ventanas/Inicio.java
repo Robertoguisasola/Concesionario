@@ -72,7 +72,7 @@ public class Inicio extends JFrame {
 	public static void abrirInicio() {
 		Inicio inicio = new Inicio();
 		inicio.setVisible(true);
-		inicio.setSize(450,260);
+		inicio.setSize(480,360);
 		inicio.setLocationRelativeTo(null);
 		inicio.setVisible(true);
 	}
