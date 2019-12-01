@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
-import model.Persona;
+import model.Trabajador;
 
 public class TablaCoches extends JFrame {
 	
@@ -29,7 +29,7 @@ public class TablaCoches extends JFrame {
 	private JTable tabla;
 	
 	//TODO R terminar ventana
-	public TablaCoches() {
+	public TablaCoches(Trabajador t) {
 		this.setTitle("Tabla de coches");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,8 +62,10 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Hola");
+				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
+				ventanaAnadirCoche.setLocationRelativeTo(null);
+				ventanaAnadirCoche.setVisible(true);
+				dispose();
 			}
 		});
 		
@@ -71,8 +73,11 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("d");
+				// TODO Hacer que borre el seleccionado
+				String[] opciones = {"Sí", "No"};
+				JOptionPane.showOptionDialog( null, "¿Está seguro de borrar el coche?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+				System.out.println();
 			}
 		});
 		
@@ -91,11 +96,13 @@ public class TablaCoches extends JFrame {
 	
 	//TODO borrar cuando funcione como queremos
 	public static void main(String[] args) {
+		Trabajador t = new Trabajador();
+
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				new TablaCoches();
+				new TablaCoches(t);
 			}
 		});
 	}
