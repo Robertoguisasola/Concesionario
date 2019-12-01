@@ -1,8 +1,8 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,20 +12,37 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import model.Trabajador;
 
+
 public class VistaAdministrador extends JFrame {
 	
 	//TODO poner menú para poder importar desde ficheros los trabajadores, clientes y vehículos
 	//TODO pasar los botones a un menú
+	//TODO completar el menú
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JMenuBar barraMenu;
+	private JMenu clientesMenu;
+	private JMenu trabajadoresMenu;
+	private JMenu ventasMenu;
+	private JMenu cochesMenu;
+	private JMenu clientesEditarMenu;
+	private JMenuItem clientesVerItem;
+	private JMenuItem clientesAñadirItem;
+	private JMenuItem clientesEliminarItem;
+	private JMenuItem datosItem;
+	private JMenuItem cerrarSesionItem;
 	
 	private JPanel panelSuperior;
 	private JButton cerrarButton;
@@ -44,13 +61,35 @@ public class VistaAdministrador extends JFrame {
 	private JLabel cochesLabel;
 	private JButton cochesButton;
 
-	
 	public VistaAdministrador(Trabajador t){
 		this.setTitle("Bienvenido "+ t.getNombre()+ " " + t.getApellidos());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(480,360);
 		this.setResizable(true);
+		
+		barraMenu= new JMenuBar();
+		
+		clientesMenu = new JMenu("Clientes");
+		trabajadoresMenu = new JMenu("Trabajadores");
+		ventasMenu = new JMenu("Ventas");
+		cochesMenu = new JMenu("Coches");
+		
+		clientesVerItem = new JMenuItem("Ver");
+		clientesMenu.add(clientesVerItem);
+		
+		clientesEditarMenu = new JMenu("Editar");
+		clientesMenu.add(clientesEditarMenu);
+		
+		
+		
+		
+		barraMenu.add(clientesMenu);
+		barraMenu.add(trabajadoresMenu);
+		barraMenu.add(ventasMenu);
+		barraMenu.add(cochesMenu);
+		
+		setJMenuBar(barraMenu);		
 		
 		panelSuperior  =new JPanel();
 		
