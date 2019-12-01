@@ -61,7 +61,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	private Box buttonBox;
 	
 	public VentanaCatalogoCoche() {
-		this.setSize(700, 800);
+		this.setSize(480,360);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				

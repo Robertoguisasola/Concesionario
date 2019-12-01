@@ -46,7 +46,7 @@ public class Login extends JFrame {
 		this.setTitle("Login");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(450,260);
+		this.setSize(480,360);
 		this.setResizable(true);
 		
 		formPanel = new JPanel();

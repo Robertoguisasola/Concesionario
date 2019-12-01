@@ -66,7 +66,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	this.setTitle("Contratar Trabajador");
 	
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	this.setSize(450,420);
+	this.setSize(480,360);
 	this.setResizable(true);
 	
 	formPanel = new JPanel();

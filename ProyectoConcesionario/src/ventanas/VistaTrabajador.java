@@ -32,7 +32,7 @@ public class VistaTrabajador extends JFrame{
 		this.setTitle("Bienvenido");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(320, 240);
+		this.setSize(480,360);
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
