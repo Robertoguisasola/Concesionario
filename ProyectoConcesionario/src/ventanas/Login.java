@@ -28,6 +28,9 @@ public class Login extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	//NO TOCAR
+	
 	private JPanel formPanel;
 	private JLabel loginLabel;
 	private JTextField loginField;
@@ -132,18 +135,20 @@ public class Login extends JFrame {
 			
 			Cliente c = null;
 			Trabajador t = null;
-			if ((c =bd.iniciarSesionCliente(usuario, contra)) != null) {
+			if ((c = bd.iniciarSesionCliente(usuario, contra)) != null) {
 				VistaCliente ventanaCliente = new VistaCliente(c);
 				ventanaCliente.setLocationRelativeTo(null);
 				ventanaCliente.setVisible(true);
 				dispose();
-			}else if ((t =bd.iniciarSesionTrabajador(usuario, contra)) != null) {
+			}else if ((t = bd.iniciarSesionTrabajador(usuario, contra)) != null) {
 				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();
 			}else if (usuario.equals("admin")&& contra.equals("1234")) {
-				VistaAdministrador ventanaAdministrador= new VistaAdministrador();
+				Trabajador admin = new Trabajador(t);
+				t.setNombre("Administrador");
+				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin);
 				ventanaAdministrador.setLocationRelativeTo(null);
 				ventanaAdministrador.setVisible(true);
 				dispose();

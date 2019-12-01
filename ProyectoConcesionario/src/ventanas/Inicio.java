@@ -13,17 +13,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+//NO TOCAR
 public class Inicio extends JFrame {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton iniciarSesionButton;
 	private JButton registrarCuentaButton;
 	
+	//NO TOCAR
 	public Inicio(){
 		this.setTitle("Inicio");
 		

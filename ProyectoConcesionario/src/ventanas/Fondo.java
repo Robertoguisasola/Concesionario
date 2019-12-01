@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import javax.swing.border.Border;
  
+//NO TOCAR
 public class Fondo implements Border {
      
     private BufferedImage mImagen = null;
