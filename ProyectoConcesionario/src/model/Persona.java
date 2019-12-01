@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Persona {
 	
+	//TODO no parsea la fecha para los test
 
 	protected String login;
 	protected String password;
