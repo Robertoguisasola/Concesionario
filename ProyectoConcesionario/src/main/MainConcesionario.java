@@ -21,6 +21,6 @@ public class MainConcesionario {
 	//TODO escoger foto fondo
 
 	public static void main(String[] args) {				
-		Inicio.abirVentanaInicial();	
+		Inicio.abrirInicio();	
 	}
 }

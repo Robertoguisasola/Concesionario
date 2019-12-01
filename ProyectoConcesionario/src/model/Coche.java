@@ -5,11 +5,10 @@ public class Coche extends Vehiculo {
 	protected boolean techoPanoramico;
 	protected boolean traccion4x4;
 	protected boolean modoDeportivo;
-	
-	public Coche(int numRuedas, int caballos, int nPlazas, Colores color, String marca, String modelo,
-			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4,
-			boolean modoDeportivo) {
-		super(numRuedas, caballos, nPlazas, color, marca, modelo, automatico, lucesLed);
+
+	public Coche(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
+			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
+		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed);
 		this.techoPanoramico = techoPanoramico;
 		this.traccion4x4 = traccion4x4;
 		this.modoDeportivo = modoDeportivo;
@@ -23,7 +22,7 @@ public class Coche extends Vehiculo {
 	}
 
 	public Coche(Coche c) {
-		super(c.numRuedas, c.caballos, c.nPlazas, c.color, c.marca, c.modelo, c.automatico, c.lucesLed);
+		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed);
 		this.techoPanoramico = c.techoPanoramico;
 		this.traccion4x4 = c.traccion4x4;
 		this.modoDeportivo = c.modoDeportivo;
@@ -56,8 +55,10 @@ public class Coche extends Vehiculo {
 	@Override
 	public String toString() {
 		return "Coche [techoPanoramico=" + techoPanoramico + ", traccion4x4=" + traccion4x4 + ", modoDeportivo="
-				+ modoDeportivo + ", numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas=" + nPlazas
-				+ ", color=" + color + ", marca=" + marca + ", modelo=" + modelo + ", automatico=" + automatico
+				+ modoDeportivo + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos="
+				+ caballos + ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", automatico=" + automatico
 				+ ", lucesLed=" + lucesLed + "]";
 	}
+
+	
 }

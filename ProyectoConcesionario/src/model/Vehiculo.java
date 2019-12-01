@@ -2,85 +2,50 @@ package model;
 
 public class Vehiculo {
 
-	protected int numRuedas;
-	protected int caballos;
-	protected int nPlazas;
-	protected Colores color;
 	protected String marca;
 	protected String modelo;
+	protected Colores color;
+	protected int caballos;
+	protected int numRuedas;
+	protected int nPlazas;
 	protected boolean automatico;
 	protected boolean lucesLed;
 	
-	
-	public Vehiculo(int numRuedas, int caballos, int nPlazas, Colores color, String marca,
-			String modelo, boolean automatico, boolean lucesLed) {
+	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
+			boolean automatico, boolean lucesLed) {
 		super();
-		this.numRuedas = numRuedas;
-		this.caballos = caballos;
-		this.nPlazas = nPlazas;
-		this.color = color;
 		this.marca = marca;
 		this.modelo = modelo;
+		this.color = color;
+		this.caballos = caballos;
+		this.numRuedas = numRuedas;
+		this.nPlazas = nPlazas;
 		this.automatico = automatico;
 		this.lucesLed = lucesLed;
 	}
 
-
 	public Vehiculo() {
 		super();
-		this.numRuedas = 0;
-		this.caballos = 0;
-		this.nPlazas = 0;
+		this.marca = null;
+		this.modelo = null;
 		this.color = null;
-		this.marca = "";
-		this.modelo = "";
+		this.caballos = 0;
+		this.numRuedas = 0;
+		this.nPlazas = 0;
 		this.automatico = false;
 		this.lucesLed = false;
 	}
 
-
 	public Vehiculo(Vehiculo v) {
 		super();
-		this.numRuedas = v.numRuedas;
-		this.caballos = v.caballos;
-		this.nPlazas = v.nPlazas;
-		this.color = v.color;
 		this.marca = v.marca;
 		this.modelo = v.modelo;
+		this.color = v.color;
+		this.caballos = v.caballos;
+		this.numRuedas = v.numRuedas;
+		this.nPlazas = v.nPlazas;
 		this.automatico = v.automatico;
 		this.lucesLed = v.lucesLed;
-	}
-
-	public int getNumRuedas() {
-		return numRuedas;
-	}
-
-	public void setNumRuedas(int numRuedas) {
-		this.numRuedas = numRuedas;
-	}
-
-	public int getCaballos() {
-		return caballos;
-	}
-
-	public void setCaballos(int caballos) {
-		this.caballos = caballos;
-	}
-
-	public int getnPlazas() {
-		return nPlazas;
-	}
-
-	public void setnPlazas(int nPlazas) {
-		this.nPlazas = nPlazas;
-	}
-
-	public Colores getColor() {
-		return color;
-	}
-
-	public void setColor(Colores color) {
-		this.color = color;
 	}
 
 	public String getMarca() {
@@ -99,6 +64,38 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 
+	public Colores getColor() {
+		return color;
+	}
+
+	public void setColor(Colores color) {
+		this.color = color;
+	}
+
+	public int getCaballos() {
+		return caballos;
+	}
+
+	public void setCaballos(int caballos) {
+		this.caballos = caballos;
+	}
+
+	public int getNumRuedas() {
+		return numRuedas;
+	}
+
+	public void setNumRuedas(int numRuedas) {
+		this.numRuedas = numRuedas;
+	}
+
+	public int getnPlazas() {
+		return nPlazas;
+	}
+
+	public void setnPlazas(int nPlazas) {
+		this.nPlazas = nPlazas;
+	}
+
 	public boolean isAutomatico() {
 		return automatico;
 	}
@@ -115,11 +112,13 @@ public class Vehiculo {
 		this.lucesLed = lucesLed;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Vehiculo [numRuedas=" + numRuedas + ", caballos=" + caballos + ", nPlazas=" + nPlazas + ", color="
-				+ color + ", marca=" + marca + ", modelo=" + modelo + ", automatico=" + automatico + ", lucesLed="
+		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
+				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", automatico=" + automatico + ", lucesLed="
 				+ lucesLed + "]";
 	}
+	
+	
+	
 }
