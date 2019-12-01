@@ -166,7 +166,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		buscarButton= new JButton("Buscar");
 		buscarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO Crear action listener para que busque el coche con las caracteristicas seleccionadas
+				//TODO Crear venta
 			}
 		});
 

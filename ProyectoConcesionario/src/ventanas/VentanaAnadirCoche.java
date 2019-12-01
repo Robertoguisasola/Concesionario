@@ -23,12 +23,13 @@ import model.Coche;
 import model.Trabajador;
 
 public class VentanaAnadirCoche extends JFrame {
-	//TODO eliminar y convertir en tabla
+	//TODO Poner los campos requeridos
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel opcionesPanel;
 	private JPanel botonesPanel;
 	private Box buttonsBox;
@@ -171,10 +172,19 @@ public class VentanaAnadirCoche extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
-				ventanaTrabajador.setLocationRelativeTo(null);
-				ventanaTrabajador.setVisible(true);
-				dispose();
+				String nombreT = t.getNombre();
+
+				if (nombreT.equals("admin")) {
+					VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
+					vistaAdministrador.setLocationRelativeTo(null);
+					vistaAdministrador.setVisible(true);
+					dispose();
+				}else {
+					VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
+					ventanaTrabajador.setLocationRelativeTo(null);
+					ventanaTrabajador.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		

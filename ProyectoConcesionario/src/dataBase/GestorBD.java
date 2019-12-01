@@ -29,17 +29,16 @@ public class GestorBD {
 
 	public GestorBD() {
 		conectar();
-		
 	}
 
 	private void conectar(){
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:ficheros/baseDeDatos.db");
-			log( Level.INFO, "Conectado a la base de datos", null );
+			log(Level.INFO, "Conectado a la base de datos", null);
 		} catch (ClassNotFoundException | SQLException e) {
 			lastError = e;
-			log( Level.SEVERE, "Error en conexión de base de datos ", e);
+			log(Level.SEVERE, "Error en conexión de base de datos ", e);
 			e.printStackTrace();
 		}
 	}
