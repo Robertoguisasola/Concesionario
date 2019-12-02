@@ -380,3 +380,103 @@
   <message>Conectado a la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-02T19:09:40</date>
+  <millis>1575310180376</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-02T19:09:40</date>
+  <millis>1575310180382</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>sesión iniciada como cliente con éxtido</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-02T19:10:30</date>
+  <millis>1575310230426</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-02T19:10:30</date>
+  <millis>1575310230431</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>sesión iniciada como cliente con éxtido</message>
+</record>
+<record>
+  <date>2019-12-02T19:10:30</date>
+  <millis>1575310230449</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>base de daatos desconectada</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-02T19:11:39</date>
+  <millis>1575310299345</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-02T19:11:39</date>
+  <millis>1575310299352</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>sesión iniciada como cliente con éxtido</message>
+</record>
+<record>
+  <date>2019-12-02T19:11:39</date>
+  <millis>1575310299352</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>sesión iniciada como trabajador con éxtido</message>
+</record>
+</log>

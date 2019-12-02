@@ -46,7 +46,6 @@ public class GestorBD {
 	public void desconectar(){
 		try {
 			conn.close();
-			log(Level.INFO, "base de daatos desconectada", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al desconectar la base de datos", e);
 			e.printStackTrace();
@@ -77,7 +76,7 @@ public class GestorBD {
 				stmt.setInt(8, t.getSueldo());
 
 				stmt.executeUpdate();	
-				log(Level.INFO, "trabajadores importados con éxito a la base de datos", null);
+				
 			}
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al importar los trabajadores a la base de datos ", e);
@@ -110,7 +109,7 @@ public class GestorBD {
 				stmt.setLong(8, c.getNumTarjeta());
 
 				stmt.executeUpdate();
-				log(Level.INFO, "trabajadores importados con éxito a la base de datos", null);
+				
 			}	
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al importar los clientes a la base de datos ", e);
@@ -146,7 +145,7 @@ public class GestorBD {
 				t.setSueldo(rs.getInt("sueldo"));
 
 				trabajadores.add(t);
-				log(Level.INFO, "trabajadores obtenidos con éxito", null);
+				
 			}
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los trabajadores", e);
@@ -185,7 +184,7 @@ public class GestorBD {
 				c.setNumTarjeta(rs.getLong("numTarjeta"));
 
 				clientes.add(c);
-				log(Level.INFO, "clientes obtenidos con éxito", null);
+				
 			}
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los clientes", e);
@@ -230,7 +229,7 @@ public class GestorBD {
 				}	
 				
 			}
-			log(Level.INFO, "sesión iniciada como cliente con éxtido", null);
+			
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al iniciar sesión con la cuenta", e);
 			e.printStackTrace();
@@ -272,7 +271,7 @@ public class GestorBD {
 					}
 				}	
 			}
-			log(Level.INFO, "sesión iniciada como"+ usuario.getUsuario() +"con éxtido", null);
+			
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al iniciar sesión con la cuenta ", e);
 			e.printStackTrace();
