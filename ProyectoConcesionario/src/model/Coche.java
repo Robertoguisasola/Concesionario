@@ -7,8 +7,8 @@ public class Coche extends Vehiculo {
 	protected boolean modoDeportivo;
 
 	public Coche(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
-		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed);
+			boolean automatico, boolean lucesLed, String urlFoto, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
+		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed, urlFoto);
 		this.techoPanoramico = techoPanoramico;
 		this.traccion4x4 = traccion4x4;
 		this.modoDeportivo = modoDeportivo;
@@ -22,7 +22,7 @@ public class Coche extends Vehiculo {
 	}
 
 	public Coche(Coche c) {
-		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed);
+		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed, c.urlFoto);
 		this.techoPanoramico = c.techoPanoramico;
 		this.traccion4x4 = c.traccion4x4;
 		this.modoDeportivo = c.modoDeportivo;

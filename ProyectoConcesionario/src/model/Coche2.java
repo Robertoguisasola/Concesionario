@@ -5,9 +5,9 @@ public class Coche2 extends Coche {
 	private int kilometros;
 
 	public Coche2(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			boolean automatico, boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo,
+			boolean automatico, boolean lucesLed, String urlFoto, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo,
 			int kilometros) {
-		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed, techoPanoramico, traccion4x4,
+		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed, urlFoto, techoPanoramico, traccion4x4,
 				modoDeportivo);
 		this.kilometros = kilometros;
 	}
@@ -18,7 +18,7 @@ public class Coche2 extends Coche {
 	}
 
 	public Coche2(Coche2 c) {
-		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed, c.techoPanoramico, c.traccion4x4,
+		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed, c.urlFoto, c.techoPanoramico, c.traccion4x4,
 				c.modoDeportivo);
 		this.kilometros = c.kilometros;
 	}

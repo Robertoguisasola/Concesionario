@@ -41,7 +41,7 @@ public class Bienvenida extends JFrame {
             
             //TODO aaaa centrar en la ventana
             //TODO cambiar tamaño, color etc....
-            bienvenida = new JLabel("Bienvenido a ");
+            bienvenida = new JLabel("Bienvenido al concesionario");
             bienvenida.setForeground(Color.RED);
             
             accederButton = new JButton("Acceder");

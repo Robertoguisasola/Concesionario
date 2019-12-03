@@ -10,9 +10,10 @@ public class Vehiculo {
 	protected int nPlazas;
 	protected boolean automatico;
 	protected boolean lucesLed;
+	protected String urlFoto;
 	
 	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			boolean automatico, boolean lucesLed) {
+			boolean automatico, boolean lucesLed, String urlFoto) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -22,6 +23,7 @@ public class Vehiculo {
 		this.nPlazas = nPlazas;
 		this.automatico = automatico;
 		this.lucesLed = lucesLed;
+		this.urlFoto = urlFoto;
 	}
 
 	public Vehiculo() {
@@ -34,6 +36,7 @@ public class Vehiculo {
 		this.nPlazas = 0;
 		this.automatico = false;
 		this.lucesLed = false;
+		this.urlFoto = "";
 	}
 
 	public Vehiculo(Vehiculo v) {
@@ -46,6 +49,7 @@ public class Vehiculo {
 		this.nPlazas = v.nPlazas;
 		this.automatico = v.automatico;
 		this.lucesLed = v.lucesLed;
+		this.urlFoto = v.urlFoto;
 	}
 
 	public String getMarca() {
@@ -111,12 +115,20 @@ public class Vehiculo {
 	public void setLucesLed(boolean lucesLed) {
 		this.lucesLed = lucesLed;
 	}
+	
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+	
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
 
 	@Override
 	public String toString() {
 		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
 				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", automatico=" + automatico + ", lucesLed="
-				+ lucesLed + "]";
+				+ lucesLed + "urlFoto="+ urlFoto +"]";
 	}
 	
 	

@@ -116,7 +116,7 @@ public class Concesionario {
 		}
 	}
 	
-	//TODO añadir vehículos
+	//TODO añadir vehículos hay que hacer algo para que se pueda meeter en la clave la marva que es el campo 0 y todo slos demás campos en la lista del hasMap
 	
 	/*public static void addVehiculo(Vehiculo vehiculo){
 		//Crea para cada marca un arrayList de vehiculos (Honda tiene las dos)
@@ -125,4 +125,36 @@ public class Concesionario {
 		}
 		vehiculos.get(vehiculo.getMarca()).add(vehiculo);
 	}*/
+	
+	
+	public static void cargarVehiculo() {
+		try {
+			File f = new File("ficheros/coches.csv");
+			Scanner sc = new Scanner(f);
+			
+			while (sc.hasNextLine()) {
+				String linea = sc.nextLine();
+				
+			Coche c = new Coche();	
+				
+				String[] campos = linea.split(";");
+				
+				c.setMarca(campos[0]);
+				c.setModelo(campos[1]);
+				c.setColor(Colores.valueOf(campos[2])); //convierte el string en un enum
+				c.setCaballos(Integer.parseInt(campos[3]));
+				c.setNumRuedas(Integer.parseInt(campos[4]));
+				c.setnPlazas(Integer.parseInt(campos[5]));
+				c.setAutomatico(Boolean.parseBoolean(campos[6]));
+				c.setLucesLed(Boolean.parseBoolean(campos[7]));
+				c.setUrlFoto(campos[8]);
+				c.setTechoPanoramico(Boolean.parseBoolean(campos[9]));
+				c.setTraccion4x4(Boolean.parseBoolean(campos[10]));
+				c.setModoDeportivo(Boolean.parseBoolean(campos[11]));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 }
