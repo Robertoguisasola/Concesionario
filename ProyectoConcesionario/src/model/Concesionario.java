@@ -139,18 +139,15 @@ public class Concesionario {
 				
 				String[] campos = linea.split(";");
 				
+				//TODO modificar según el fichero
+				
 				c.setMarca(campos[0]);
 				c.setModelo(campos[1]);
 				c.setColor(Colores.valueOf(campos[2])); //convierte el string en un enum
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
 				c.setnPlazas(Integer.parseInt(campos[5]));
-				c.setAutomatico(Boolean.parseBoolean(campos[6]));
-				c.setLucesLed(Boolean.parseBoolean(campos[7]));
 				c.setUrlFoto(campos[8]);
-				c.setTechoPanoramico(Boolean.parseBoolean(campos[9]));
-				c.setTraccion4x4(Boolean.parseBoolean(campos[10]));
-				c.setModoDeportivo(Boolean.parseBoolean(campos[11]));
 				sc.close();
 			}
 		} catch (Exception e) {

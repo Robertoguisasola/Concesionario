@@ -7,6 +7,9 @@ public class Venta {
 	private Vehiculo vehiculo;
 	private int precio;
 	private String matricula;
+	protected boolean automatico;
+	protected boolean lucesLed;
+	
 	
 	public Venta(Cliente comprador, Vehiculo vehiculo, int precio, String matricula) {
 		super();

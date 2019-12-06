@@ -2,63 +2,37 @@ package model;
 
 public class Coche extends Vehiculo {
 
-	protected boolean techoPanoramico;
-	protected boolean traccion4x4;
-	protected boolean modoDeportivo;
+	protected boolean motorDiesel;
 
-	public Coche(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			boolean automatico, boolean lucesLed, String urlFoto, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
-		super(marca, modelo, color, caballos, numRuedas, nPlazas, automatico, lucesLed, urlFoto);
-		this.techoPanoramico = techoPanoramico;
-		this.traccion4x4 = traccion4x4;
-		this.modoDeportivo = modoDeportivo;
+	public Coche(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, String urlFoto,
+			boolean motorDiesel) {
+		super(marca, modelo, color, caballos, numRuedas, nPlazas, urlFoto);
+		this.motorDiesel = motorDiesel;
 	}
 
 	public Coche() {
-		super();
-		this.techoPanoramico = false;
-		this.traccion4x4 = false;
-		this.modoDeportivo = false;
+		super("", "", null, 0, 0, 0, null);
+		this.motorDiesel = false;
 	}
 
 	public Coche(Coche c) {
-		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.automatico, c.lucesLed, c.urlFoto);
-		this.techoPanoramico = c.techoPanoramico;
-		this.traccion4x4 = c.traccion4x4;
-		this.modoDeportivo = c.modoDeportivo;
+		super(c.marca, c.modelo, c.color, c.caballos, c.numRuedas, c.nPlazas, c.urlFoto);
+		this.motorDiesel = c.motorDiesel;
 	}
 
-	public boolean isTechoPanoramico() {
-		return techoPanoramico;
+	public boolean isMotorDiesel() {
+		return motorDiesel;
 	}
 
-	public void setTechoPanoramico(boolean techoPanoramico) {
-		this.techoPanoramico = techoPanoramico;
-	}
-
-	public boolean isTraccion4x4() {
-		return traccion4x4;
-	}
-
-	public void setTraccion4x4(boolean traccion4x4) {
-		this.traccion4x4 = traccion4x4;
-	}
-
-	public boolean isModoDeportivo() {
-		return modoDeportivo;
-	}
-
-	public void setModoDeportivo(boolean modoDeportivo) {
-		this.modoDeportivo = modoDeportivo;
+	public void setMotorDiesel(boolean motorDiesel) {
+		this.motorDiesel = motorDiesel;
 	}
 
 	@Override
 	public String toString() {
-		return "Coche [techoPanoramico=" + techoPanoramico + ", traccion4x4=" + traccion4x4 + ", modoDeportivo="
-				+ modoDeportivo + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos="
-				+ caballos + ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", automatico=" + automatico
-				+ ", lucesLed=" + lucesLed + "]";
+		return "Coche [motorDiesel=" + motorDiesel + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
+				+ ", caballos=" + caballos + ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", urlFoto="
+				+ urlFoto + "]";
 	}
-
 	
 }

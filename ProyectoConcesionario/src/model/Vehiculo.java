@@ -8,12 +8,10 @@ public class Vehiculo {
 	protected int caballos;
 	protected int numRuedas;
 	protected int nPlazas;
-	protected boolean automatico;
-	protected boolean lucesLed;
 	protected String urlFoto;
 	
 	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			boolean automatico, boolean lucesLed, String urlFoto) {
+			String urlFoto) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -21,8 +19,6 @@ public class Vehiculo {
 		this.caballos = caballos;
 		this.numRuedas = numRuedas;
 		this.nPlazas = nPlazas;
-		this.automatico = automatico;
-		this.lucesLed = lucesLed;
 		this.urlFoto = urlFoto;
 	}
 
@@ -34,8 +30,6 @@ public class Vehiculo {
 		this.caballos = 0;
 		this.numRuedas = 0;
 		this.nPlazas = 0;
-		this.automatico = false;
-		this.lucesLed = false;
 		this.urlFoto = "";
 	}
 
@@ -47,8 +41,6 @@ public class Vehiculo {
 		this.caballos = v.caballos;
 		this.numRuedas = v.numRuedas;
 		this.nPlazas = v.nPlazas;
-		this.automatico = v.automatico;
-		this.lucesLed = v.lucesLed;
 		this.urlFoto = v.urlFoto;
 	}
 
@@ -100,22 +92,6 @@ public class Vehiculo {
 		this.nPlazas = nPlazas;
 	}
 
-	public boolean isAutomatico() {
-		return automatico;
-	}
-
-	public void setAutomatico(boolean automatico) {
-		this.automatico = automatico;
-	}
-
-	public boolean isLucesLed() {
-		return lucesLed;
-	}
-
-	public void setLucesLed(boolean lucesLed) {
-		this.lucesLed = lucesLed;
-	}
-	
 	public String getUrlFoto() {
 		return urlFoto;
 	}
@@ -127,10 +103,6 @@ public class Vehiculo {
 	@Override
 	public String toString() {
 		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
-				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", automatico=" + automatico + ", lucesLed="
-				+ lucesLed + "urlFoto="+ urlFoto +"]";
+				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", urlFoto=" + urlFoto + "]";
 	}
-	
-	
-	
 }
