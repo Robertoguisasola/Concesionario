@@ -160,11 +160,6 @@ public class VentanaAnadirCoche extends JFrame {
 				c.setColor((model.Colores) comboColor.getSelectedItem());
 				c.setMarca(comboMarca.getSelectedItem().toString());
 				c.setModelo(fieldModelo.getText());
-				c.setAutomatico(checkAutomatico.isSelected());
-				c.setLucesLed(checkLucesLed.isSelected());
-				c.setTechoPanoramico(checkTechoPanoramico.isSelected());
-				c.setTraccion4x4(checkTraccion.isSelected());
-				c.setModoDeportivo(checkModoDeportivo.isSelected());
 				//TODO FALTA REGISTRAR EL COCHE EN LA BASE DE DATOS
 			}
 		});

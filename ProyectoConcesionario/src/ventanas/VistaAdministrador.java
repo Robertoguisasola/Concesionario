@@ -38,10 +38,9 @@ public class VistaAdministrador extends JFrame {
 	private JMenu cochesMenu;
 	private JMenu clientesEditarMenu;
 	private JMenuItem clientesVerItem;
-	private JMenuItem clientesAñadirItem;
+	private JMenuItem clientesAddItem;
 	private JMenuItem clientesEliminarItem;
-	private JMenuItem datosItem;
-	private JMenuItem cerrarSesionItem;
+
 	
 	private JPanel panelSuperior;
 	private JButton cerrarButton;
@@ -75,11 +74,44 @@ public class VistaAdministrador extends JFrame {
 		cochesMenu = new JMenu("Coches");
 		
 		clientesVerItem = new JMenuItem("Ver");
+		clientesVerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaClientes tablaClientes = new TablaClientes(t);
+				tablaClientes.setLocationRelativeTo(null);
+				tablaClientes.setVisible(true);
+				dispose();				
+			}
+		});
 		clientesMenu.add(clientesVerItem);
 		
 		clientesEditarMenu = new JMenu("Editar");
 		clientesMenu.add(clientesEditarMenu);
 		
+		clientesAddItem = new JMenuItem("Añadir cliente");
+		clientesAddItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		clientesEditarMenu.add(clientesAddItem);
+		
+		clientesEliminarItem = new JMenuItem("Eliminar cliente");
+		clientesEliminarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaClientes tablaClientes = new TablaClientes(t);
+				tablaClientes.setLocationRelativeTo(null);
+				tablaClientes.setVisible(true);
+				dispose();
+			}
+		});
+		clientesEditarMenu.add(clientesEliminarItem);
 		
 		
 		
