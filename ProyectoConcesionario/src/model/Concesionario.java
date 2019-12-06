@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import dataBase.GestorBD;
 
 public class Concesionario {
 	//TODO como rellenar el hashmap de vehículos
@@ -14,6 +19,7 @@ public class Concesionario {
 	private HashMap<String, List<Vehiculo>> vehiculos = new HashMap<String, List<Vehiculo>>();
 	private List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 	private Map<String, List<Venta>> ventas = new HashMap<String, List<Venta>>();
+	private static Logger logger = null;
 	
 	public List<Cliente> getClientes() {
 		return clientes;
@@ -54,7 +60,7 @@ public class Concesionario {
 				+ ", ventas=" + ventas + "]";
 	}
 
-	//TODO métodos para añadir los elementos a la bbd
+	//TODO métodos para añadir los elementos a la bbdd
 	public void cargarClientes() {
 		try {
 			File f = new File("ficheros/clientes.csv");
@@ -112,7 +118,7 @@ public class Concesionario {
 			
 			sc.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log(Level.SEVERE, "Error al cargar trabajadores desde el fichero", null);
 		}
 	}
 	
@@ -151,7 +157,29 @@ public class Concesionario {
 				sc.close();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			log(Level.SEVERE, "Error al cargar vehículos desde fichero", null);		}
+	}
+	
+	public static void setLogger( Logger logger ) {
+		Concesionario.logger = logger;
+	}
+	// Método local para loggear (si no se asigna un logger externo, se asigna uno local)
+	private static void log(Level level, String msg, Throwable excepcion) {
+		if (logger==null) {  // Logger por defecto local:
+			logger = Logger.getLogger( GestorBD.class.getName() );  // Nombre del logger - el de la clase
+			logger.setLevel( Level.ALL );  // Loguea todos los niveles
+			try {
+				// logger.addHandler( new FileHandler( "bd-" + System.currentTimeMillis() + ".log.xml" ) );  // Y saca el log a fichero xml
+				logger.addHandler( new FileHandler("logger.xml", true ) );  // Y saca el log a fichero xml
+			} catch (Exception e) {
+				logger.log( Level.SEVERE, "No se pudo crear fichero de log", e );
+			}
+		}
+		if (excepcion==null) {
+			logger.log(level, msg);
+		}
+		else {
+			logger.log(level, msg, excepcion);
 		}
 	}
 }
