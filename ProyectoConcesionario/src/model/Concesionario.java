@@ -151,7 +151,7 @@ public class Concesionario {
 				c.setTechoPanoramico(Boolean.parseBoolean(campos[9]));
 				c.setTraccion4x4(Boolean.parseBoolean(campos[10]));
 				c.setModoDeportivo(Boolean.parseBoolean(campos[11]));
-				
+				sc.close();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
