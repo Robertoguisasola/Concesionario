@@ -106,12 +106,9 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		mainContainer = this.getContentPane();
 		mainContainer.setLayout(new BorderLayout(8,6));
 		
-		//PanelTop
-		topPanel = new JPanel();
-		topPanel.setBorder(new LineBorder(Color.BLACK, 3));//TODO esto solo es para ver bien los paneles, luego borrar.
-		topPanel.setLayout(new FlowLayout(5));
-		mainContainer.add(topPanel, BorderLayout.NORTH);
-		topPanel.add(barraCatalogo);
+		setJMenuBar(barraCatalogo);	
+		
+		//TODO esto solo es para ver bien los paneles, luego borrar.
 	
 		middlePanel = new JPanel();
 		middlePanel.setBorder(new LineBorder(Color.black, 3));
