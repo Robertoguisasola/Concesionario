@@ -153,7 +153,6 @@ public class Concesionario {
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
 				c.setnPlazas(Integer.parseInt(campos[5]));
-				c.setUrlFoto(campos[8]);
 				sc.close();
 			}
 		} catch (Exception e) {

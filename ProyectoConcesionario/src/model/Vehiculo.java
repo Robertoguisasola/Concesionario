@@ -8,10 +8,8 @@ public class Vehiculo {
 	protected int caballos;
 	protected int numRuedas;
 	protected int nPlazas;
-	protected String urlFoto;
 	
-	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas,
-			String urlFoto) {
+	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -19,7 +17,6 @@ public class Vehiculo {
 		this.caballos = caballos;
 		this.numRuedas = numRuedas;
 		this.nPlazas = nPlazas;
-		this.urlFoto = urlFoto;
 	}
 
 	public Vehiculo() {
@@ -30,7 +27,6 @@ public class Vehiculo {
 		this.caballos = 0;
 		this.numRuedas = 0;
 		this.nPlazas = 0;
-		this.urlFoto = "";
 	}
 
 	public Vehiculo(Vehiculo v) {
@@ -41,7 +37,6 @@ public class Vehiculo {
 		this.caballos = v.caballos;
 		this.numRuedas = v.numRuedas;
 		this.nPlazas = v.nPlazas;
-		this.urlFoto = v.urlFoto;
 	}
 
 	public String getMarca() {
@@ -92,17 +87,9 @@ public class Vehiculo {
 		this.nPlazas = nPlazas;
 	}
 
-	public String getUrlFoto() {
-		return urlFoto;
-	}
-	
-	public void setUrlFoto(String urlFoto) {
-		this.urlFoto = urlFoto;
-	}
-
 	@Override
 	public String toString() {
 		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
-				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + ", urlFoto=" + urlFoto + "]";
+				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + "]";
 	}
 }
