@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 //NO TOCAR
 public class Bienvenida extends JFrame {
@@ -42,7 +44,10 @@ public class Bienvenida extends JFrame {
             //TODO aaaa centrar en la ventana
             //TODO cambiar tamaño, color etc....
             bienvenida = new JLabel("Bienvenido al concesionario");
-            bienvenida.setForeground(Color.RED);
+            bienvenida.setFont(new Font("Tahoma", Font.BOLD, 30));
+            bienvenida.setVerticalAlignment(SwingConstants.BOTTOM);
+            bienvenida.setHorizontalAlignment(SwingConstants.CENTER);
+            bienvenida.setForeground(Color.PINK);
             
             accederButton = new JButton("Acceder");
             accederButton.addActionListener(new ActionListener() {
