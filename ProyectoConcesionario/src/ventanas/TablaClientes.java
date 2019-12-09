@@ -26,6 +26,7 @@ public class TablaClientes extends JFrame {
 	private JPanel botonesPanel;
 	private JButton anadirButton;
 	private JButton eliminarButton;
+	private JButton atrasButton;
 	private JTable tabla;
 	
 	//TODO terminar ventana
@@ -58,6 +59,9 @@ public class TablaClientes extends JFrame {
 		eliminarButton = new JButton("Eliminar");
 		botonesPanel.add(eliminarButton);
 		
+		atrasButton = new JButton("Atrás");
+		botonesPanel.add(atrasButton);
+		
 		anadirButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -79,6 +83,19 @@ public class TablaClientes extends JFrame {
 				JOptionPane.showOptionDialog( null, "¿Está seguro de borrar los datos del cliente .... ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 				System.out.println();
+			}
+		});
+		
+		atrasButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
+				vistaAdministrador.setLocationRelativeTo(null);
+				vistaAdministrador.setVisible(true);
+				dispose();
+				
+				
 			}
 		});
 		
