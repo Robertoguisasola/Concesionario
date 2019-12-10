@@ -53,6 +53,8 @@ public class GestorBD {
 	}
 
 	public void importarBBDDTrabajadoresFichero(List<Trabajador> trabajadores){
+		
+		
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 

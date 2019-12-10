@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import model.Concesionario;
+
 import java.awt.Font;
 
 //NO TOCAR
@@ -36,6 +39,9 @@ public class Bienvenida extends JFrame {
 		this.setSize(480,360);
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
+		
+		//TODO rellenar el concesionario
+		Concesionario c = new Concesionario();
 		
 		try {
             fondo = new Fondo(ImageIO.read(new File("img/VolvoXC90Fondo.jpg")));

@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import dataBase.GestorBD;
 import model.Cliente;
+import model.Concesionario;
 import model.Trabajador;
 
 public class Login extends JFrame {
@@ -45,7 +46,7 @@ public class Login extends JFrame {
 	private JButton cancelButton;
 	private JLabel falloInicio;
 	
-	public Login(){
+	public Login(Concesionario cn){
 		this.setTitle("Login");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +72,7 @@ public class Login extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				int tecla = e.getKeyCode();
 				if(tecla == 10 ) {
-					iniciarSesion();
+					iniciarSesion(cn);
 				}
 			}
 			
@@ -100,7 +101,7 @@ public class Login extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio();
+				Inicio menu = new Inicio(cn);
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);
@@ -113,7 +114,7 @@ public class Login extends JFrame {
 		
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				iniciarSesion();
+				iniciarSesion(cn);
 			}
 		});
 		buttonsBox.add(Box.createRigidArea(new Dimension(10,0)));
@@ -127,7 +128,7 @@ public class Login extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private void iniciarSesion() {
+	private void iniciarSesion(Concesionario cn) {
 		try {
 			GestorBD bd = new GestorBD();
 			String usuario = loginField.getText();
@@ -136,19 +137,19 @@ public class Login extends JFrame {
 			Cliente c = null;
 			Trabajador t = null;
 			if ((c = bd.iniciarSesionCliente(usuario, contra)) != null) {
-				VistaCliente ventanaCliente = new VistaCliente(c);
+				VistaCliente ventanaCliente = new VistaCliente(c, cn);
 				ventanaCliente.setLocationRelativeTo(null);
 				ventanaCliente.setVisible(true);
 				dispose();
 			}else if ((t = bd.iniciarSesionTrabajador(usuario, contra)) != null) {
-				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
+				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t, cn);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();
 			}else if (usuario.equals("admin")&& contra.equals("1234")) {
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
-				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin);
+				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin, cn);
 				ventanaAdministrador.setLocationRelativeTo(null);
 				ventanaAdministrador.setVisible(true);
 				dispose();

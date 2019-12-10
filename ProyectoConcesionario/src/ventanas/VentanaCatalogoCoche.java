@@ -21,6 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.Cliente;
+import model.Concesionario;
+
 public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	//TODO eliminar y convertir en tabla
 	
@@ -59,7 +62,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	private JButton buscarButton;
 	private Box buttonBox;
 	
-	public VentanaCatalogoCoche() {
+	public VentanaCatalogoCoche(Cliente c, Concesionario cn) {
 		this.setSize(480,360);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -80,7 +83,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		motosItem.addActionListener(this);
 		iniciarSesionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login();
+				Login ventanaLogin = new Login(cn);
 				ventanaLogin.setVisible(true);
 				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
@@ -122,7 +125,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		buscarPanel.setLayout(new GridLayout(1,2));
 		buscarPanel.setBorder(new LineBorder(Color.BLACK, 3));
 		
-		//meter los componentes del girdPanel.
+		//TODO meter los componentes del girdPanel.
 		//TODO hay que meter los items en los JComoBoxes
 		labelCaballos = new JLabel("Caballos: ");
 		comboCaballos = new JComboBox();

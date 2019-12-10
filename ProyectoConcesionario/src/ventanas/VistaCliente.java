@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import model.Cliente;
+import model.Concesionario;
 
 public class VistaCliente extends JFrame {
 	
@@ -24,7 +25,7 @@ public class VistaCliente extends JFrame {
 	private Box buttonsBox;
 	private JButton catalogoCochesButton;
 	
-	public VistaCliente(Cliente c) {
+	public VistaCliente(Cliente c, Concesionario cn) {
 		//TODO no saca el nombre del cliente
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());
 		
@@ -39,7 +40,7 @@ public class VistaCliente extends JFrame {
 		catalogoCochesButton = new JButton("Mirar catalogo coches");
 		catalogoCochesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaCatalogoCoche ventanaCoches = new VentanaCatalogoCoche();
+				VentanaCatalogoCoche ventanaCoches = new VentanaCatalogoCoche(c, cn);
 				ventanaCoches.setLocationRelativeTo(null);
 				ventanaCoches.setVisible(true);
 				dispose();

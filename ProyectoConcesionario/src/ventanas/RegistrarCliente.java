@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
 import model.Cliente;
+import model.Concesionario;
 import model.Persona;
 
 public class RegistrarCliente extends JFrame {
@@ -68,7 +69,7 @@ public class RegistrarCliente extends JFrame {
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public RegistrarCliente() {
+	public RegistrarCliente(Concesionario cn) {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,7 +207,7 @@ public class RegistrarCliente extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio();
+				Inicio menu = new Inicio(cn);
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);

@@ -17,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import model.Concesionario;
 import model.Trabajador;
 
 
@@ -40,6 +41,8 @@ public class VistaAdministrador extends JFrame {
 	private JMenuItem clientesVerItem;
 	private JMenuItem clientesAddItem;
 	private JMenuItem clientesEliminarItem;
+	private JMenuItem clientesImportar;
+	private JMenuItem clientesExportar;
 
 	
 	private JPanel panelSuperior;
@@ -59,7 +62,7 @@ public class VistaAdministrador extends JFrame {
 	private JLabel cochesLabel;
 	private JButton cochesButton;
 
-	public VistaAdministrador(Trabajador t){
+	public VistaAdministrador(Trabajador t, Concesionario cn){
 		this.setTitle("Bienvenido "+ t.getNombre()+ " " + t.getApellidos());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +81,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
+				TablaClientes tablaClientes = new TablaClientes(t, cn);
 				tablaClientes.setLocationRelativeTo(null);
 				tablaClientes.setVisible(true);
 				dispose();				
@@ -105,7 +108,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
+				TablaClientes tablaClientes = new TablaClientes(t, cn);
 				tablaClientes.setLocationRelativeTo(null);
 				tablaClientes.setVisible(true);
 				dispose();
@@ -113,6 +116,27 @@ public class VistaAdministrador extends JFrame {
 		});
 		clientesEditarMenu.add(clientesEliminarItem);
 		
+		clientesImportar = new JMenuItem("Importar");
+		clientesImportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		clientesMenu.add(clientesImportar);
+		
+		clientesExportar = new JMenuItem("Exportar");
+		clientesExportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		clientesMenu.add(clientesExportar);
 		
 		
 		barraMenu.add(clientesMenu);
@@ -127,7 +151,7 @@ public class VistaAdministrador extends JFrame {
 		cerrarButton = new JButton("Cerrar sesión");
 		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login();
+				Login ventanaLogin = new Login(cn);
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();
@@ -149,7 +173,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
+				TablaClientes tablaClientes = new TablaClientes(t, cn);
 				tablaClientes.setLocationRelativeTo(null);
 				tablaClientes.setVisible(true);
 				dispose();					
@@ -168,7 +192,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
+				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t, cn);
 				tablaTrabajadores.setLocationRelativeTo(null);
 				tablaTrabajadores.setVisible(true);
 				dispose();				
@@ -187,7 +211,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaVentas tablaVentas = new TablaVentas(t);
+				TablaVentas tablaVentas = new TablaVentas(t, cn);
 				tablaVentas.setLocationRelativeTo(null);
 				tablaVentas.setVisible(true);
 				dispose();
@@ -205,7 +229,7 @@ public class VistaAdministrador extends JFrame {
 		cochesButton = new JButton("Ver coches");
 		cochesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TablaCoches tablaCoches = new TablaCoches(t);
+				TablaCoches tablaCoches = new TablaCoches(t, cn);
 				tablaCoches.setLocationRelativeTo(null);
 				tablaCoches.setVisible(true);
 				dispose();
@@ -237,12 +261,13 @@ public class VistaAdministrador extends JFrame {
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		t.setNombre("admin");
+		Concesionario cn = new Concesionario();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				new VistaAdministrador(t);
+				new VistaAdministrador(t, cn);
 			}
 		});
 	}

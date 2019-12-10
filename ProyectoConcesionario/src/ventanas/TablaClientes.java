@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
+import model.Concesionario;
 import model.Trabajador;
 
 public class TablaClientes extends JFrame {
@@ -30,7 +31,7 @@ public class TablaClientes extends JFrame {
 	private JTable tabla;
 	
 	//TODO terminar ventana
-	public TablaClientes(Trabajador t) {
+	public TablaClientes(Trabajador t, Concesionario cn) {
 		this.setTitle("Tabla de coches");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +67,7 @@ public class TablaClientes extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
+				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t, cn);
 				ventanaAnadirCoche.setLocationRelativeTo(null);
 				ventanaAnadirCoche.setVisible(true);
 				dispose();
@@ -90,7 +91,7 @@ public class TablaClientes extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
+				VistaAdministrador vistaAdministrador = new VistaAdministrador(t, cn);
 				vistaAdministrador.setLocationRelativeTo(null);
 				vistaAdministrador.setVisible(true);
 				dispose();
@@ -115,12 +116,13 @@ public class TablaClientes extends JFrame {
 	//TODO borrar cuando funcione como queremos
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
+		Concesionario cn = new Concesionario();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				new TablaClientes(t);
+				new TablaClientes(t, cn);
 			}
 		});
 	}

@@ -547,3 +547,40 @@
   <message>Conectado a la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-10T18:38:32</date>
+  <millis>1575999512050</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-10T18:38:37</date>
+  <millis>1575999517007</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-10T18:38:40</date>
+  <millis>1575999520513</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
