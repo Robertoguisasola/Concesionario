@@ -24,7 +24,7 @@ import javax.swing.border.LineBorder;
 import model.Cliente;
 import model.Concesionario;
 
-public class VentanaCatalogoCoche extends JFrame implements ActionListener{
+public class VentanaCatalogoCoche extends JFrame {
 	//TODO eliminar y convertir en tabla
 	
 	/**
@@ -79,8 +79,22 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		datosItem = new JMenuItem("VER MIS DATOS");
 		cerrarSesionItem = new JMenuItem("CERRAR SESION");
 		
-		cochesItem.addActionListener(this);
-		motosItem.addActionListener(this);
+		cochesItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		motosItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		iniciarSesionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Login ventanaLogin = new Login(cn);
@@ -91,8 +105,21 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 				dispose();
 			}
 		});
-		datosItem.addActionListener(this);
-		cerrarSesionItem.addActionListener(this);
+		datosItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Inicio.abrirInicio(cn);
+				dispose();				
+			}
+		});
+		cerrarSesionItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				visualizarPanelesCoche();				
+			}
+		});
 		
 		vehiculosCatalogo.add(cochesItem);
 		vehiculosCatalogo.add(motosItem);
@@ -195,17 +222,6 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 		mainContainer.add(centerPanel);
 		mainContainer.add(middlePanel, BorderLayout.WEST);
  	}
-
-	@Override
-	public void actionPerformed(ActionEvent evento) {
-		if(evento.getSource()==cerrarSesionItem) {
-			Inicio.abrirInicio(cn);
-			dispose();
-			JOptionPane.showMessageDialog(null, "Se ha cerrado la sesion correctamente...");
-		} else if(evento.getSource()==cochesItem){
-			visualizarPanelesCoche();
-		}
-	}
 	
 	public void visualizarPanelesCoche() {
 		//MiddlePanel				
