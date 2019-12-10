@@ -199,7 +199,7 @@ public class VentanaCatalogoCoche extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getSource()==cerrarSesionItem) {
-			Inicio.abrirInicio();
+			Inicio.abrirInicio(cn);
 			dispose();
 			JOptionPane.showMessageDialog(null, "Se ha cerrado la sesion correctamente...");
 		} else if(evento.getSource()==cochesItem){

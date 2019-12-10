@@ -60,7 +60,8 @@ public class Bienvenida extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Inicio.abrirInicio();
+					Concesionario cn = new Concesionario();
+					Inicio.abrirInicio(cn);
 					dispose();
 				}
 			});
