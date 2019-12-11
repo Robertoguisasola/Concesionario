@@ -25,6 +25,10 @@ public class VistaCliente extends JFrame {
 	private Box buttonsBox;
 	private JButton catalogoCochesButton;
 	
+	//TODO completar con más componentes, NO DOY A BASTOOOOOOOOOOOOOO
+	//Podriais pensar al menos algo que añadirle a este punto o algo así, porque no solo se querrán comprar coches....
+	//OTRAS FUNCIONES POR DIOOOOS
+	
 	public VistaCliente(Cliente c, Concesionario cn) {
 		//TODO no saca el nombre del cliente
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());

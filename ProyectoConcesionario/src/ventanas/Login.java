@@ -146,7 +146,7 @@ public class Login extends JFrame {
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();
-			}else if (usuario.equals("admin")&& contra.equals("1234")) {
+			}else if (usuario.equals("admin")&& contra.equals("admin")) {
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
 				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin, cn);

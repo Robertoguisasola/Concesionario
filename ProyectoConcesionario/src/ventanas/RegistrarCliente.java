@@ -73,8 +73,9 @@ public class RegistrarCliente extends JFrame {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
-		this.setResizable(true);
+		//NO MODIFICAR; SINO NO SALE EL ÚLTIMO CAMPOOO
+		this.setSize(480,400);
+		this.setResizable(false);
 		
 		bienvenidaPanel = new JPanel();
 		
@@ -198,8 +199,7 @@ public class RegistrarCliente extends JFrame {
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				
-				registrar();
+				registrar(cn);
 			}
 			
 		});
@@ -240,7 +240,7 @@ public class RegistrarCliente extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
-	private void registrar() {
+	private void registrar(Concesionario cn) {
 		try {
 			String fechaNacimientoString = fechaNacimietoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
@@ -257,7 +257,27 @@ public class RegistrarCliente extends JFrame {
 			
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
-			limpiarCajas();
+			
+			
+			String[] opciones = {"Sí", "No"};
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+			
+			switch (respuesta) {
+			case 0:
+				limpiarCajas();
+				break;
+			case 1:
+				Inicio menu = new Inicio(cn);
+				menu.setVisible(true);
+				menu.setSize(450,260);
+				menu.setLocationRelativeTo(null);
+				menu.setVisible(true);
+				dispose();
+
+			default:
+				break;
+			}
 			
 		} 
 		catch (ParseException ex) {

@@ -41,7 +41,7 @@ public class Bienvenida extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		//TODO rellenar el concesionario
-		Concesionario c = new Concesionario();
+		Concesionario cn = new Concesionario();
 		
 		try {
             fondo = new Fondo(ImageIO.read(new File("img/VolvoXC90Fondo.jpg")));
@@ -60,7 +60,6 @@ public class Bienvenida extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Concesionario cn = new Concesionario();
 					Inicio.abrirInicio(cn);
 					dispose();
 				}
