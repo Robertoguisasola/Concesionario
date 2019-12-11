@@ -36,9 +36,7 @@ public class Bienvenida extends JFrame {
 		this.setTitle("Bienvenida");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
 		this.setResizable(true);
-		this.setLocationRelativeTo(null);
 		
 		//TODO rellenar el concesionario
 		Concesionario cn = new Concesionario();

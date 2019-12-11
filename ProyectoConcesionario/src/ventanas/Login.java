@@ -134,14 +134,14 @@ public class Login extends JFrame {
 			String usuario = loginField.getText();
 			String contra = new String(passwordField.getPassword());
 			
-			Cliente c = null;
-			Trabajador t = null;
-			if ((c = bd.iniciarSesionCliente(usuario, contra)) != null) {
+			Cliente c =  bd.iniciarSesionCliente(usuario, contra);
+			Trabajador t = bd.iniciarSesionTrabajador(usuario, contra);
+			if (c!= null) {
 				VistaCliente ventanaCliente = new VistaCliente(c, cn);
 				ventanaCliente.setLocationRelativeTo(null);
 				ventanaCliente.setVisible(true);
 				dispose();
-			}else if ((t = bd.iniciarSesionTrabajador(usuario, contra)) != null) {
+			}else if (t != null) {
 				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t, cn);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
@@ -161,5 +161,13 @@ public class Login extends JFrame {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
 		}
+	}
+	
+	public static void abrirLogin(Concesionario cn) {
+		Login login = new Login(cn);
+		login.setVisible(true);
+		login.setSize(480,360);
+		login.setLocationRelativeTo(null);
+		login.setVisible(true);
 	}
 }

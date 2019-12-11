@@ -198,7 +198,7 @@ public class GestorBD {
 	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
-		String sql = "SELECT login, password FROM cliente";
+		String sql = "SELECT * FROM cliente";
 		PreparedStatement stmt;
 
 		List<Cliente> clientes = new ArrayList<Cliente>();
@@ -209,9 +209,11 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
+				//TODO reformatear esto, tiene que rellenar todo de un cliente, aunque no lo use, para luego devolverlo al metodo de iniciarSesion
 				Cliente c = new Cliente();
 				c.setLogin(rs.getString("login"));
 				c.setPassword(rs.getString("password"));
+				c.setEmail(rs.getString("email"));
 
 				clientes.add(c);
 			}
