@@ -8,6 +8,7 @@ public class Vehiculo {
 	protected int caballos;
 	protected int numRuedas;
 	protected int nPlazas;
+	//TODO poner imagen como string y al seleccionar que imagen quieres, que la copie a img y guarde esa ruta de img
 	
 	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas) {
 		super();

@@ -132,7 +132,7 @@ public class Concesionario {
 		vehiculos.get(vehiculo.getMarca()).add(vehiculo);
 	}*/
 	
-	
+	//TODO eliminar clase y pasar métodos a la BBDD
 	public static void cargarVehiculo() {
 		try {
 			File f = new File("ficheros/coches.csv");
