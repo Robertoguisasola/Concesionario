@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Concesionario;
 import model.Trabajador;
 
 //NO TOCAR, SOLO AÑADIR COSAS
@@ -30,7 +29,7 @@ public class VistaTrabajador extends JFrame{
 	private JButton cerrarButton;
 	
 	//TODO menú parte superior
-	public VistaTrabajador(Trabajador t, Concesionario cn) {
+	public VistaTrabajador(Trabajador t) {
 		this.setTitle("Bienvenido "+ t.getNombre()+ " " + t.getApellidos());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,9 +41,7 @@ public class VistaTrabajador extends JFrame{
 		cerrarButton = new JButton("Cerrar sesión");
 		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login(cn);
-				ventanaLogin.setLocationRelativeTo(null);
-				ventanaLogin.setVisible(true);
+				Login.abrirLogin();
 				dispose();
 			}
 		});
@@ -60,7 +57,7 @@ public class VistaTrabajador extends JFrame{
 		cochesButton = new JButton("Ver coches");
 		cochesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TablaCoches tablaCoches = new TablaCoches(t, cn);
+				TablaCoches tablaCoches = new TablaCoches(t);
 				tablaCoches.setLocationRelativeTo(null);
 				tablaCoches.setVisible(true);
 				dispose();

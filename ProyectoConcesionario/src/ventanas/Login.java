@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Concesionario;
 import model.Trabajador;
 
 public class Login extends JFrame {
@@ -46,7 +45,7 @@ public class Login extends JFrame {
 	private JButton cancelButton;
 	private JLabel falloInicio;
 	
-	public Login(Concesionario cn){
+	public Login(){
 		this.setTitle("Login");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +71,7 @@ public class Login extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				int tecla = e.getKeyCode();
 				if(tecla == 10 ) {
-					iniciarSesion(cn);
+					iniciarSesion();
 				}
 			}
 			
@@ -101,7 +100,7 @@ public class Login extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio(cn);
+				Inicio menu = new Inicio();
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);
@@ -114,7 +113,7 @@ public class Login extends JFrame {
 		
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				iniciarSesion(cn);
+				iniciarSesion();
 			}
 		});
 		buttonsBox.add(Box.createRigidArea(new Dimension(10,0)));
@@ -128,7 +127,7 @@ public class Login extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private void iniciarSesion(Concesionario cn) {
+	private void iniciarSesion() {
 		try {
 			GestorBD bd = new GestorBD();
 			String usuario = loginField.getText();
@@ -137,19 +136,19 @@ public class Login extends JFrame {
 			Cliente c =  bd.iniciarSesionCliente(usuario, contra);
 			Trabajador t = bd.iniciarSesionTrabajador(usuario, contra);
 			if (c!= null) {
-				VistaCliente ventanaCliente = new VistaCliente(c, cn);
+				VistaCliente ventanaCliente = new VistaCliente(c);
 				ventanaCliente.setLocationRelativeTo(null);
 				ventanaCliente.setVisible(true);
 				dispose();
 			}else if (t != null) {
-				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t, cn);
+				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
 				ventanaTrabajador.setLocationRelativeTo(null);
 				ventanaTrabajador.setVisible(true);
 				dispose();
 			}else if (usuario.equals("admin")&& contra.equals("admin")) {
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
-				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin, cn);
+				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin);
 				ventanaAdministrador.setLocationRelativeTo(null);
 				ventanaAdministrador.setVisible(true);
 				dispose();
@@ -163,8 +162,8 @@ public class Login extends JFrame {
 		}
 	}
 	
-	public static void abrirLogin(Concesionario cn) {
-		Login login = new Login(cn);
+	public static void abrirLogin() {
+		Login login = new Login();
 		login.setVisible(true);
 		login.setSize(480,360);
 		login.setLocationRelativeTo(null);

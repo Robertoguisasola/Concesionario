@@ -20,7 +20,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import model.Coche;
-import model.Concesionario;
 import model.Trabajador;
 
 public class VentanaAnadirCoche extends JFrame {
@@ -64,7 +63,7 @@ public class VentanaAnadirCoche extends JFrame {
 	private JCheckBox checkTraccion;
 	private JCheckBox checkModoDeportivo;
 	
-	public VentanaAnadirCoche(Trabajador t, Concesionario cn) {
+	public VentanaAnadirCoche(Trabajador t) {
 		//TODO que muestre un titulo personalizado para el trabajador
 		//this.setTitle(t.getNombre()+" "+t.getApellidos()+", añada un coche a la base de datos");
 		this.setTitle("Añadir coche");
@@ -171,12 +170,12 @@ public class VentanaAnadirCoche extends JFrame {
 				String nombreT = t.getNombre();
 
 				if (nombreT.equals("admin")) {
-					VistaAdministrador vistaAdministrador = new VistaAdministrador(t, cn);
+					VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
 					vistaAdministrador.setLocationRelativeTo(null);
 					vistaAdministrador.setVisible(true);
 					dispose();
 				}else {
-					VistaTrabajador ventanaTrabajador = new VistaTrabajador(t, cn);
+					VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
 					ventanaTrabajador.setLocationRelativeTo(null);
 					ventanaTrabajador.setVisible(true);
 					dispose();
@@ -200,14 +199,13 @@ public class VentanaAnadirCoche extends JFrame {
 	
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
-		Concesionario cn = new Concesionario();
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				
-				new VentanaAnadirCoche(t, cn);
+				new VentanaAnadirCoche(t);
 			}
 		});
 	}

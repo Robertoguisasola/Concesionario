@@ -17,12 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import model.Cliente;
-import model.Concesionario;
 
 public class VentanaCatalogoCoche extends JFrame {
 	//TODO eliminar y convertir en tabla
@@ -62,7 +60,7 @@ public class VentanaCatalogoCoche extends JFrame {
 	private JButton buscarButton;
 	private Box buttonBox;
 	
-	public VentanaCatalogoCoche(Cliente c, Concesionario cn) {
+	public VentanaCatalogoCoche(Cliente c) {
 		this.setSize(480,360);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -97,7 +95,7 @@ public class VentanaCatalogoCoche extends JFrame {
 		});
 		iniciarSesionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login(cn);
+				Login ventanaLogin = new Login();
 				ventanaLogin.setVisible(true);
 				ventanaLogin.setSize(450,260);
 				ventanaLogin.setLocationRelativeTo(null);
@@ -109,7 +107,7 @@ public class VentanaCatalogoCoche extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Inicio.abrirInicio(cn);
+				Inicio.abrirInicio();
 				dispose();				
 			}
 		});

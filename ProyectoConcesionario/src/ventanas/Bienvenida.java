@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,10 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import model.Concesionario;
-
-import java.awt.Font;
 
 //NO TOCAR
 public class Bienvenida extends JFrame {
@@ -38,18 +35,13 @@ public class Bienvenida extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		
-		//TODO rellenar el concesionario
-		Concesionario cn = new Concesionario();
-		
 		try {
             fondo = new Fondo(ImageIO.read(new File("img/VolvoXC90Fondo.jpg")));
             panel = (JPanel) this.getContentPane();
             
-            //TODO aaaa centrar en la ventana
-            //TODO cambiar tamaño, color etc....
             bienvenida = new JLabel("Bienvenido al concesionario");
             bienvenida.setFont(new Font("Tahoma", Font.BOLD, 30));
-            bienvenida.setVerticalAlignment(SwingConstants.BOTTOM);
+            bienvenida.setVerticalAlignment(SwingConstants.CENTER);
             bienvenida.setHorizontalAlignment(SwingConstants.CENTER);
             bienvenida.setForeground(Color.PINK);
             
@@ -58,7 +50,7 @@ public class Bienvenida extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Inicio.abrirInicio(cn);
+					Inicio.abrirInicio();
 					dispose();
 				}
 			});

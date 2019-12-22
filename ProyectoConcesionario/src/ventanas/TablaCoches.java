@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
-import model.Concesionario;
 import model.Trabajador;
 
 public class TablaCoches extends JFrame {
@@ -30,7 +29,7 @@ public class TablaCoches extends JFrame {
 	private JTable tabla;
 	
 	//TODO terminar ventana
-	public TablaCoches(Trabajador t, Concesionario cn) {
+	public TablaCoches(Trabajador t) {
 		this.setTitle("Tabla de coches");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +62,7 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t, cn);
+				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
 				ventanaAnadirCoche.setLocationRelativeTo(null);
 				ventanaAnadirCoche.setVisible(true);
 				dispose();
@@ -99,13 +98,12 @@ public class TablaCoches extends JFrame {
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		t.setNombre("Pruebaaaa");
-		Concesionario cn = new Concesionario();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				new TablaCoches(t, cn);
+				new TablaCoches(t);
 			}
 		});
 	}

@@ -13,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Concesionario;
-
 //NO TOCAR
 public class Inicio extends JFrame {
 	
@@ -29,7 +27,7 @@ public class Inicio extends JFrame {
 	private JButton registrarCuentaButton;
 	
 	//NO TOCAR
-	public Inicio(Concesionario cn){
+	public Inicio(){
 		this.setTitle("Inicio");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +41,7 @@ public class Inicio extends JFrame {
 		iniciarSesionButton = new JButton("Iniciar sesión");
 		iniciarSesionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login(cn);
+				Login ventanaLogin = new Login();
 				ventanaLogin.setLocationRelativeTo(null);
 				ventanaLogin.setVisible(true);
 				dispose();
@@ -53,7 +51,7 @@ public class Inicio extends JFrame {
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarCliente ventanaRegistrat = new RegistrarCliente(cn);
+				RegistrarCliente ventanaRegistrat = new RegistrarCliente();
 				ventanaRegistrat.setLocationRelativeTo(null);
 				ventanaRegistrat.setVisible(true);
 				dispose();
@@ -73,8 +71,8 @@ public class Inicio extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public static void abrirInicio(Concesionario cn) {
-		Inicio inicio = new Inicio(cn);
+	public static void abrirInicio() {
+		Inicio inicio = new Inicio();
 		inicio.setVisible(true);
 		inicio.setSize(480,360);
 		inicio.setLocationRelativeTo(null);

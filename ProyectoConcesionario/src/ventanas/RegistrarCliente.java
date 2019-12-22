@@ -23,7 +23,6 @@ import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Concesionario;
 import model.Persona;
 
 public class RegistrarCliente extends JFrame {
@@ -69,7 +68,7 @@ public class RegistrarCliente extends JFrame {
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public RegistrarCliente(Concesionario cn) {
+	public RegistrarCliente() {
 		this.setTitle("Regístrate");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -199,7 +198,7 @@ public class RegistrarCliente extends JFrame {
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				registrar(cn);
+				registrar();
 			}
 			
 		});
@@ -207,7 +206,7 @@ public class RegistrarCliente extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio(cn);
+				Inicio menu = new Inicio();
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);
@@ -240,7 +239,7 @@ public class RegistrarCliente extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
-	private void registrar(Concesionario cn) {
+	private void registrar() {
 		try {
 			String fechaNacimientoString = fechaNacimietoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
@@ -268,7 +267,7 @@ public class RegistrarCliente extends JFrame {
 				limpiarCajas();
 				break;
 			case 1:
-				Inicio menu = new Inicio(cn);
+				Inicio menu = new Inicio();
 				menu.setVisible(true);
 				menu.setSize(450,260);
 				menu.setLocationRelativeTo(null);

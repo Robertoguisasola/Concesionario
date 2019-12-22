@@ -29,7 +29,6 @@ public class Coche extends Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Coche [motorDiesel=" + motorDiesel + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
-				+ ", caballos=" + caballos + ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + "]";
+		return marca + " " + modelo + " " + color + ", " + caballos + "cv";
 	}	
 }

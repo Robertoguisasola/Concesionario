@@ -17,7 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dataBase.GestorBD;
-import model.Concesionario;
 import model.Persona;
 import model.Trabajador;
 
@@ -62,7 +61,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public VentanaContratarTrabajador(Trabajador t, Concesionario cn){
+	public VentanaContratarTrabajador(Trabajador t){
 		
 	this.setTitle("Contratar Trabajador");
 	
@@ -185,7 +184,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VistaAdministrador ventanaAdmin = new VistaAdministrador(t, cn);
+			VistaAdministrador ventanaAdmin = new VistaAdministrador(t);
 			ventanaAdmin.setVisible(true);
 			ventanaAdmin.setSize(450,260);
 			ventanaAdmin.setLocationRelativeTo(null);

@@ -1,5 +1,6 @@
 package dataBase;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,8 +54,37 @@ public class GestorBD {
 		}
 	}
 
-	public void importarBBDDTrabajadoresFichero(List<Trabajador> trabajadores){
+	public void importarBBDDTrabajadoresFichero(){
+		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 		
+		try {
+			File f = new File("ficheros/trabajadores.csv");
+			Scanner sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				Trabajador t = new Trabajador();
+				
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				
+				t.setLogin(campos[0]);
+				t.setPassword(campos[1]);
+				t.setEmail(campos[2]);
+				t.setdNI(campos[3]);
+				t.setNombre(campos[4]);
+				t.setApellidos(campos[5]);
+				t.setFechaNacimientoString((campos[6]));
+				t.setSueldo(Integer.parseInt(campos[7]));
+				
+				trabajadores.add(t);	
+			}
+			
+			sc.close();
+		} catch (Exception e) {
+			log(Level.SEVERE, "Error al cargar trabajadores desde el fichero", null);
+		}
 		
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
@@ -87,7 +118,37 @@ public class GestorBD {
 		}
 	}	
 
-	public void importarBBDDClientesFichero(List<Cliente> clientes) {
+	public void importarBBDDClientesFichero() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		
+		try {
+			File f = new File("ficheros/clientes.csv");
+			Scanner sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				Cliente c = new Cliente();
+				
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				
+				c.setLogin(campos[0]);
+				c.setPassword(campos[1]);
+				c.setEmail(campos[2]);
+				c.setdNI(campos[3]);
+				c.setNombre(campos[4]);
+				c.setApellidos(campos[5]);
+				c.setFechaNacimientoString((campos[6]));
+				c.setNumTarjeta(Long.parseLong(campos[7]));
+				
+				clientes.add(c);	
+			}
+			sc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		//TODO crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 
