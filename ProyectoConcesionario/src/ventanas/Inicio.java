@@ -71,6 +71,7 @@ public class Inicio extends JFrame {
 		this.setVisible(true);
 	}
 	
+	//TODO zzzzzz hacer que todas las ventanas se abran así, con un método aparte
 	public static void abrirInicio() {
 		Inicio inicio = new Inicio();
 		inicio.setVisible(true);
