@@ -22,8 +22,7 @@ import model.Trabajador;
 public class VistaAdministrador extends JFrame {
 	
 	//TODO poner menú para poder importar desde ficheros los trabajadores, clientes y vehículos
-	//TODO pasar los botones a un menú
-	//TODO completar el menú
+
 	
 	/**
 	 * 
@@ -36,11 +35,29 @@ public class VistaAdministrador extends JFrame {
 	private JMenu ventasMenu;
 	private JMenu cochesMenu;
 	private JMenu clientesEditarMenu;
+	private JMenu trabajadoresEditarMenu;
+	private JMenu ventasEditarMenu;
+	private JMenu cochesEditarMenu;
 	private JMenuItem clientesVerItem;
 	private JMenuItem clientesAddItem;
 	private JMenuItem clientesEliminarItem;
 	private JMenuItem clientesImportar;
 	private JMenuItem clientesExportar;
+	private JMenuItem trabajadoresVerItem;
+	private JMenuItem trabajadoresAddItem;
+	private JMenuItem trabajadoresEliminarItem;
+	private JMenuItem trabajadoresImportar;
+	private JMenuItem trabajadoresExportar;
+	private JMenuItem ventasVerItem;
+	private JMenuItem ventasAddItem;
+	private JMenuItem ventasEliminarItem;
+	private JMenuItem ventasImportar;
+	private JMenuItem ventasExportar;
+	private JMenuItem cochesVerItem;
+	private JMenuItem cochesAddItem;
+	private JMenuItem cochesEliminarItem;
+	private JMenuItem cochesImportar;
+	private JMenuItem cochesExportar;
 
 	
 	private JPanel panelSuperior;
@@ -136,6 +153,191 @@ public class VistaAdministrador extends JFrame {
 		});
 		clientesMenu.add(clientesExportar);
 		
+		trabajadoresVerItem = new JMenuItem("Ver");
+		trabajadoresVerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
+				tablaTrabajadores.setLocationRelativeTo(null);
+				tablaTrabajadores.setVisible(true);
+				dispose();				
+			}
+		});
+		trabajadoresMenu.add(trabajadoresVerItem);
+		
+		trabajadoresEditarMenu = new JMenu("Editar");
+		trabajadoresMenu.add(trabajadoresEditarMenu);
+		
+		trabajadoresAddItem = new JMenuItem("Añadir trabajador");
+		trabajadoresAddItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		trabajadoresEditarMenu.add(trabajadoresAddItem);
+		
+		trabajadoresEliminarItem = new JMenuItem("Despedir trabajador");
+		trabajadoresEliminarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
+				tablaTrabajadores.setLocationRelativeTo(null);
+				tablaTrabajadores.setVisible(true);
+				dispose();	
+			}
+		});
+		trabajadoresEditarMenu.add(trabajadoresEliminarItem);
+		
+		trabajadoresImportar = new JMenuItem("Importar");
+		trabajadoresImportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		trabajadoresMenu.add(trabajadoresImportar);
+		
+		trabajadoresExportar = new JMenuItem("Exportar");
+		trabajadoresExportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		trabajadoresMenu.add(trabajadoresExportar);
+		
+		ventasVerItem = new JMenuItem("Ver");
+		ventasVerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaVentas tablaVentas = new TablaVentas(t);
+				tablaVentas.setLocationRelativeTo(null);
+				tablaVentas.setVisible(true);
+				dispose();				
+			}
+		});
+		ventasMenu.add(ventasVerItem);
+		
+		ventasEditarMenu = new JMenu("Editar");
+		ventasMenu.add(ventasEditarMenu);
+		
+		ventasAddItem = new JMenuItem("Añadir venta");
+		ventasAddItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		ventasEditarMenu.add(ventasAddItem);
+		
+		ventasEliminarItem = new JMenuItem("Eliminar venta");
+		ventasEliminarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaVentas tablaVentas = new TablaVentas(t);
+				tablaVentas.setLocationRelativeTo(null);
+				tablaVentas.setVisible(true);
+				dispose();	
+			}
+		});
+		ventasEditarMenu.add(ventasEliminarItem);
+		
+		ventasImportar = new JMenuItem("Importar");
+		ventasImportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		ventasMenu.add(ventasImportar);
+		
+		ventasExportar = new JMenuItem("Exportar");
+		ventasExportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		ventasMenu.add(ventasExportar);
+		
+		cochesVerItem = new JMenuItem("Ver");
+		cochesVerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaCoches tablaCoches = new TablaCoches(t);
+				tablaCoches.setLocationRelativeTo(null);
+				tablaCoches.setVisible(true);
+				dispose();			
+			}
+		});
+		cochesMenu.add(cochesVerItem);
+		
+		cochesEditarMenu = new JMenu("Editar");
+		cochesMenu.add(cochesEditarMenu);
+		
+		cochesAddItem = new JMenuItem("Añadir coche");
+		cochesAddItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		cochesEditarMenu.add(cochesAddItem);
+		
+		cochesEliminarItem = new JMenuItem("Eliminar coche");
+		cochesEliminarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaCoches tablaCoches = new TablaCoches(t);
+				tablaCoches.setLocationRelativeTo(null);
+				tablaCoches.setVisible(true);
+				dispose();
+			}
+		});
+		cochesEditarMenu.add(cochesEliminarItem);
+		
+		cochesImportar = new JMenuItem("Importar");
+		cochesImportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		cochesMenu.add(cochesImportar);
+		
+		cochesExportar = new JMenuItem("Exportar");
+		cochesExportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		cochesMenu.add(cochesExportar);
 		
 		barraMenu.add(clientesMenu);
 		barraMenu.add(trabajadoresMenu);
