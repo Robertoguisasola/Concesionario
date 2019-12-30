@@ -60,5 +60,12 @@ public class VistaCliente extends JFrame {
 		
 		this.setVisible(true);
 	}
-
+	
+	public static void abrirVistaCliente(Cliente c) {
+		VistaCliente vistaCliente = new VistaCliente(c);
+		vistaCliente.setVisible(true);
+		vistaCliente.setSize(480,360);
+		vistaCliente.setLocationRelativeTo(null);
+		vistaCliente.setVisible(true);
+	}
 }

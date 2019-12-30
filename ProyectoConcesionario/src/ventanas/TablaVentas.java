@@ -62,9 +62,7 @@ public class TablaVentas extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
+				//TODO ir a crear venta o algo así
 				dispose();
 			}
 		});
@@ -92,6 +90,14 @@ public class TablaVentas extends JFrame {
 		
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirTablaVentas(Trabajador t) {
+		TablaVentas tablaVentas = new TablaVentas(t);
+		tablaVentas.setVisible(true);
+		tablaVentas.setSize(480,360);
+		tablaVentas.setLocationRelativeTo(null);
+		tablaVentas.setVisible(true);
 	}
 	
 	//TODO borrar cuando funcione como queremos

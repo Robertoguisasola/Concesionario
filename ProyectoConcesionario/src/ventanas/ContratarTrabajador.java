@@ -20,7 +20,7 @@ import dataBase.GestorBD;
 import model.Persona;
 import model.Trabajador;
 
-public class VentanaContratarTrabajador extends JFrame{
+public class ContratarTrabajador extends JFrame{
 	//TODO eliminar y convertir en tabla
 
 	/**
@@ -61,7 +61,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public VentanaContratarTrabajador(Trabajador t){
+	public ContratarTrabajador(Trabajador t){
 		
 	this.setTitle("Contratar Trabajador");
 	
@@ -228,6 +228,14 @@ public class VentanaContratarTrabajador extends JFrame{
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
 		}
+	}
+	
+	public static void abrirContratarTrabajador(Trabajador t) {
+		ContratarTrabajador contratarTrabajador= new ContratarTrabajador(t);
+		contratarTrabajador.setVisible(true);
+		contratarTrabajador.setSize(480,360);
+		contratarTrabajador.setLocationRelativeTo(null);
+		contratarTrabajador.setVisible(true);
 	}
 }
 

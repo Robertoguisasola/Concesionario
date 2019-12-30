@@ -31,7 +31,7 @@ public class TablaClientes extends JFrame {
 	
 	//TODO terminar ventana
 	public TablaClientes(Trabajador t) {
-		this.setTitle("Tabla de coches");
+		this.setTitle("Tabla de clientes");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(480,360);
@@ -66,9 +66,7 @@ public class TablaClientes extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
+				//TODO llamar a añadir cliente
 				dispose();
 			}
 		});
@@ -93,9 +91,7 @@ public class TablaClientes extends JFrame {
 				VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
 				vistaAdministrador.setLocationRelativeTo(null);
 				vistaAdministrador.setVisible(true);
-				dispose();
-				
-				
+				dispose();			
 			}
 		});
 		
@@ -110,6 +106,14 @@ public class TablaClientes extends JFrame {
 		
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirTablaClientes(Trabajador t) {
+		TablaClientes tablaClientes = new TablaClientes(t);
+		tablaClientes.setVisible(true);
+		tablaClientes.setSize(480,360);
+		tablaClientes.setLocationRelativeTo(null);
+		tablaClientes.setVisible(true);
 	}
 	
 	//TODO borrar cuando funcione como queremos

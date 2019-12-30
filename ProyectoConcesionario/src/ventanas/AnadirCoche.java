@@ -22,7 +22,7 @@ import javax.swing.border.LineBorder;
 import model.Coche;
 import model.Trabajador;
 
-public class VentanaAnadirCoche extends JFrame {
+public class AnadirCoche extends JFrame {
 	//TODO Poner los campos requeridos
 	
 	/**
@@ -63,7 +63,7 @@ public class VentanaAnadirCoche extends JFrame {
 	private JCheckBox checkTraccion;
 	private JCheckBox checkModoDeportivo;
 	
-	public VentanaAnadirCoche(Trabajador t) {
+	public AnadirCoche(Trabajador t) {
 		//TODO que muestre un titulo personalizado para el trabajador
 		//this.setTitle(t.getNombre()+" "+t.getApellidos()+", añada un coche a la base de datos");
 		this.setTitle("Añadir coche");
@@ -197,6 +197,14 @@ public class VentanaAnadirCoche extends JFrame {
 
 	}
 	
+	public static void abrirAnadirCoche(Trabajador t) {
+		AnadirCoche anadirCoche = new AnadirCoche(t);
+		anadirCoche.setVisible(true);
+		anadirCoche.setSize(480,360);
+		anadirCoche.setLocationRelativeTo(null);
+		anadirCoche.setVisible(true);
+	}
+	
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		
@@ -205,7 +213,7 @@ public class VentanaAnadirCoche extends JFrame {
 			@Override
 			public void run() {
 				
-				new VentanaAnadirCoche(t);
+				new AnadirCoche(t);
 			}
 		});
 	}

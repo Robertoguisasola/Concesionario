@@ -52,7 +52,7 @@ public class TablaTrabajadores extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir trabajador");
+		anadirButton = new JButton("Contratar trabajador");
 		botonesPanel.add(anadirButton);
 		
 		despedirButton = new JButton("Despedir trabajador");
@@ -62,9 +62,7 @@ public class TablaTrabajadores extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
+				ContratarTrabajador.abrirContratarTrabajador(t);
 				dispose();
 			}
 		});
@@ -93,6 +91,14 @@ public class TablaTrabajadores extends JFrame {
 		
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirTablaTrabajadores(Trabajador t) {
+		TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
+		tablaTrabajadores.setVisible(true);
+		tablaTrabajadores.setSize(480,360);
+		tablaTrabajadores.setLocationRelativeTo(null);
+		tablaTrabajadores.setVisible(true);
 	}
 	
 	//TODO borrar cuando funcione como queremos

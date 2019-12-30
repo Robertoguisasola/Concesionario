@@ -74,4 +74,12 @@ public class VistaTrabajador extends JFrame{
 		
 		this.setVisible(true);
 	}
+	
+	public static void abrirVistaTrabajador(Trabajador t) {
+		VistaTrabajador vistaTrabajador = new VistaTrabajador(t);
+		vistaTrabajador.setVisible(true);
+		vistaTrabajador.setSize(480,360);
+		vistaTrabajador.setLocationRelativeTo(null);
+		vistaTrabajador.setVisible(true);
+	}
 }

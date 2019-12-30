@@ -455,6 +455,14 @@ public class VistaAdministrador extends JFrame {
 		this.setVisible(true);
 	}
 	
+	public static void abrirVistaAdministrador(Trabajador t) {
+		VistaAdministrador vistaAdministrador= new VistaAdministrador(t);
+		vistaAdministrador.setVisible(true);
+		vistaAdministrador.setSize(480,360);
+		vistaAdministrador.setLocationRelativeTo(null);
+		vistaAdministrador.setVisible(true);
+	}
+	
 	//TODO borrar cuando funciones como queremos
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();

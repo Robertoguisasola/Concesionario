@@ -287,4 +287,12 @@ public class RegistrarCliente extends JFrame {
 			System.out.println("No conecta a la base de datos");
 		}
 	}
+	
+	public static void abrirRegistrarCliente() {
+		RegistrarCliente registrarCliente = new RegistrarCliente();
+		registrarCliente.setVisible(true);
+		registrarCliente.setSize(480,360);
+		registrarCliente.setLocationRelativeTo(null);
+		registrarCliente.setVisible(true);
+	}
 }

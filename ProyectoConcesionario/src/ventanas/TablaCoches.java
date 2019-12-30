@@ -62,9 +62,7 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
+				AnadirCoche.abrirAnadirCoche(t);
 				dispose();
 			}
 		});
@@ -92,6 +90,14 @@ public class TablaCoches extends JFrame {
 		
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirTablaCoches(Trabajador t) {
+		TablaCoches tablaCoches = new TablaCoches(t);
+		tablaCoches.setVisible(true);
+		tablaCoches.setSize(480,360);
+		tablaCoches.setLocationRelativeTo(null);
+		tablaCoches.setVisible(true);
 	}
 	
 	//TODO borrar cuando funcione como queremos

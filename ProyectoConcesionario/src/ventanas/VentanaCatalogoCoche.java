@@ -24,6 +24,7 @@ import model.Cliente;
 
 public class VentanaCatalogoCoche extends JFrame {
 	//TODO eliminar y convertir en tabla
+	//TODO que coño hace?????
 	
 	/**
 	 * 
@@ -223,6 +224,15 @@ public class VentanaCatalogoCoche extends JFrame {
 	
 	public void visualizarPanelesCoche() {
 		//MiddlePanel				
+	}
+	
+	//TODO modificar
+	public static void abrirInicio() {
+		Inicio inicio = new Inicio();
+		inicio.setVisible(true);
+		inicio.setSize(480,360);
+		inicio.setLocationRelativeTo(null);
+		inicio.setVisible(true);
 	}
 	
 }
