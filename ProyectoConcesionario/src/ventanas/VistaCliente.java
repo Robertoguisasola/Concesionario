@@ -32,8 +32,7 @@ public class VistaCliente extends JFrame {
 		//TODO no saca el nombre del cliente
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
+		
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
@@ -59,6 +58,13 @@ public class VistaCliente extends JFrame {
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirVistaCliente() {
+		VistaCliente vistaCliente = new VistaCliente(null);
+		vistaCliente.setSize(480,360);
+		vistaCliente.setLocationRelativeTo(null);
+		vistaCliente.setVisible(true);
 	}
 
 }

@@ -90,9 +90,7 @@ public class TablaClientes extends JFrame {
 			//TODO hacer que vuelva al admin o al trabajador
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
-				vistaAdministrador.setLocationRelativeTo(null);
-				vistaAdministrador.setVisible(true);
+				VistaAdministrador.abrirVistaAdministrador();
 				dispose();
 				
 				

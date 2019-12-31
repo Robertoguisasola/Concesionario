@@ -32,9 +32,6 @@ public class VistaTrabajador extends JFrame{
 	public VistaTrabajador(Trabajador t) {
 		this.setTitle("Bienvenido "+ t.getNombre()+ " " + t.getApellidos());
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
-		this.setResizable(true);
 		
 		panelSuperior  =new JPanel();
 		
@@ -73,5 +70,12 @@ public class VistaTrabajador extends JFrame{
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
+	}
+	
+	public static void abrirVistaTrabajador() {
+		VistaTrabajador vistaTrabajador = new VistaTrabajador(null);//TODO ZZZz que le pasamos como trabajador t? 
+		vistaTrabajador.setSize(480,360);
+		vistaTrabajador.setLocationRelativeTo(null);
+		vistaTrabajador.setVisible(true);
 	}
 }

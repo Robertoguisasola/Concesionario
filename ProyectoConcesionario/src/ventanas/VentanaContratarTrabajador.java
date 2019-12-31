@@ -184,7 +184,7 @@ public class VentanaContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VistaAdministrador ventanaAdmin = new VistaAdministrador(t);
+			VistaAdministrador ventanaAdmin = new VistaAdministrador(t); //TODO zzzzzz esto no me deja abrirlo con el metodo estatico
 			ventanaAdmin.setVisible(true);
 			ventanaAdmin.setSize(450,260);
 			ventanaAdmin.setLocationRelativeTo(null);

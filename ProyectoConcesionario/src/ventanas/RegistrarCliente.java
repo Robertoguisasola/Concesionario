@@ -69,12 +69,12 @@ public class RegistrarCliente extends JFrame {
 	private Box buttonsBox;
 	
 	public RegistrarCliente() {
-		this.setTitle("Regístrate");
+		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//NO MODIFICAR; SINO NO SALE EL ÚLTIMO CAMPOOO
-		this.setSize(480,400);
-		this.setResizable(false);
+		//this.setSize(480,400);
+		//this.setResizable(false);
 		
 		bienvenidaPanel = new JPanel();
 		
@@ -286,5 +286,15 @@ public class RegistrarCliente extends JFrame {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
 		}
+	}
+	
+	public static void abrirRegistrarCliente() {
+		
+		RegistrarCliente registrarCliente= new RegistrarCliente();
+		registrarCliente.setTitle("Regístrate");
+		registrarCliente.setVisible(true);
+		registrarCliente.setSize(480,360);
+		registrarCliente.setLocationRelativeTo(null);
+		registrarCliente.setVisible(true);
 	}
 }

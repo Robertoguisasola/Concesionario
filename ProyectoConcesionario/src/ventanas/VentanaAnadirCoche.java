@@ -170,14 +170,10 @@ public class VentanaAnadirCoche extends JFrame {
 				String nombreT = t.getNombre();
 
 				if (nombreT.equals("admin")) {
-					VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
-					vistaAdministrador.setLocationRelativeTo(null);
-					vistaAdministrador.setVisible(true);
+					VistaAdministrador.abrirVistaAdministrador();
 					dispose();
 				}else {
-					VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
-					ventanaTrabajador.setLocationRelativeTo(null);
-					ventanaTrabajador.setVisible(true);
+					VistaTrabajador.abrirVistaTrabajador();
 					dispose();
 				}
 			}
@@ -208,6 +204,14 @@ public class VentanaAnadirCoche extends JFrame {
 				new VentanaAnadirCoche(t);
 			}
 		});
+	}
+	
+	public static void abrirVentanaAnadirCoche() {
+		VentanaAnadirCoche ventanaAnadirCocoche = new VentanaAnadirCoche(null);
+		ventanaAnadirCocoche.setTitle("Inicio");
+		ventanaAnadirCocoche.setSize(480,360);
+		ventanaAnadirCocoche.setLocationRelativeTo(null);
+		ventanaAnadirCocoche.setVisible(true);
 	}
 }
 

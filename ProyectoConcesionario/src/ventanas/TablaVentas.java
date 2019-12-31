@@ -62,9 +62,7 @@ public class TablaVentas extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaAnadirCoche ventanaAnadirCoche = new VentanaAnadirCoche(t);
-				ventanaAnadirCoche.setLocationRelativeTo(null);
-				ventanaAnadirCoche.setVisible(true);
+				VentanaAnadirCoche.abrirVentanaAnadirCoche();
 				dispose();
 			}
 		});

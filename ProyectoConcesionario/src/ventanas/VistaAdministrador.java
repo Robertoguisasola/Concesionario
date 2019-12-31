@@ -468,4 +468,12 @@ public class VistaAdministrador extends JFrame {
 			}
 		});
 	}
+	
+	public static void abrirVistaAdministrador() {
+		VistaAdministrador ventanaAdministrador = new VistaAdministrador(null);
+		ventanaAdministrador.setTitle("Ventana Administrador");
+		ventanaAdministrador.setSize(480,360);
+		ventanaAdministrador.setLocationRelativeTo(null);
+		ventanaAdministrador.setVisible(true);
+	}
 }

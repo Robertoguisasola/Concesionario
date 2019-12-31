@@ -136,16 +136,12 @@ public class Login extends JFrame {
 			Cliente c =  bd.iniciarSesionCliente(usuario, contra);
 			Trabajador t = bd.iniciarSesionTrabajador(usuario, contra);
 			if (c!= null) {
-				VistaCliente ventanaCliente = new VistaCliente(c);
-				ventanaCliente.setLocationRelativeTo(null);
-				ventanaCliente.setVisible(true);
+				VistaCliente.abrirVistaCliente();
 				dispose();
 			}else if (t != null) {
-				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
-				ventanaTrabajador.setLocationRelativeTo(null);
-				ventanaTrabajador.setVisible(true);
+				VistaTrabajador.abrirVistaTrabajador();
 				dispose();
-			}else if (usuario.equals("admin")&& contra.equals("admin")) {
+			}else if (usuario.equals("admin")&& contra.equals("admin")) { //TODO zzzz no se como hacer esto
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
 				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin);
