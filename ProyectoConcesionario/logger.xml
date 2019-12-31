@@ -791,3 +791,55 @@
   <message>Conectado a la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-30T19:02:32</date>
+  <millis>1577728952473</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-30T19:02:36</date>
+  <millis>1577728956294</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>14</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-12-30T20:04:14</date>
+  <millis>1577732654374</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>16</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2019-12-30T20:04:14</date>
+  <millis>1577732654413</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>16</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>

@@ -100,11 +100,7 @@ public class Login extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio();
-				menu.setVisible(true);
-				menu.setSize(450,260);
-				menu.setLocationRelativeTo(null);
-				menu.setVisible(true);
+				Inicio.abrirInicio();
 				dispose();
 			}
 		});
@@ -136,21 +132,15 @@ public class Login extends JFrame {
 			Cliente c =  bd.iniciarSesionCliente(usuario, contra);
 			Trabajador t = bd.iniciarSesionTrabajador(usuario, contra);
 			if (c!= null) {
-				VistaCliente ventanaCliente = new VistaCliente(c);
-				ventanaCliente.setLocationRelativeTo(null);
-				ventanaCliente.setVisible(true);
+				VistaCliente.abrirVistaCliente(c);
 				dispose();
 			}else if (t != null) {
-				VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
-				ventanaTrabajador.setLocationRelativeTo(null);
-				ventanaTrabajador.setVisible(true);
+				VistaTrabajador.abrirVistaTrabajador(t);
 				dispose();
 			}else if (usuario.equals("admin")&& contra.equals("admin")) {
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
-				VistaAdministrador ventanaAdministrador= new VistaAdministrador(admin);
-				ventanaAdministrador.setLocationRelativeTo(null);
-				ventanaAdministrador.setVisible(true);
+				VistaAdministrador.abrirVistaAdministrador(admin);
 				dispose();
 			}else {
 				falloInicio.setVisible(true);
