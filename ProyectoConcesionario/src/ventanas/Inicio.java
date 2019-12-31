@@ -28,10 +28,10 @@ public class Inicio extends JFrame {
 	
 	//NO TOCAR
 	public Inicio(){
-		this.setTitle("Inicio");
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480, 360);
+		//TODO no se que es el realizable
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setSize(480, 360);
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
@@ -41,9 +41,7 @@ public class Inicio extends JFrame {
 		iniciarSesionButton = new JButton("Iniciar sesión");
 		iniciarSesionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login();
-				ventanaLogin.setLocationRelativeTo(null);
-				ventanaLogin.setVisible(true);
+				Login.abrirLogin();
 				dispose();
 			}
 		});
@@ -51,9 +49,7 @@ public class Inicio extends JFrame {
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarCliente ventanaRegistrat = new RegistrarCliente();
-				ventanaRegistrat.setLocationRelativeTo(null);
-				ventanaRegistrat.setVisible(true);
+				RegistrarCliente.abrirRegistrarCliente();
 				dispose();
 			}
 		});
@@ -73,7 +69,7 @@ public class Inicio extends JFrame {
 	
 	public static void abrirInicio() {
 		Inicio inicio = new Inicio();
-		inicio.setVisible(true);
+		inicio.setTitle("Inicio");
 		inicio.setSize(480,360);
 		inicio.setLocationRelativeTo(null);
 		inicio.setVisible(true);

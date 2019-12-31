@@ -62,7 +62,11 @@ public class TablaVentas extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				//TODO ir a crear venta o algo así
+=======
+				VentanaAnadirCoche.abrirVentanaAnadirCoche();
+>>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 				dispose();
 			}
 		});

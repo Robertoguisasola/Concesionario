@@ -32,8 +32,7 @@ public class VistaCliente extends JFrame {
 		//TODO no saca el nombre del cliente
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
+		
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
@@ -61,6 +60,7 @@ public class VistaCliente extends JFrame {
 		this.setVisible(true);
 	}
 	
+<<<<<<< HEAD
 	public static void abrirVistaCliente(Cliente c) {
 		VistaCliente vistaCliente = new VistaCliente(c);
 		vistaCliente.setVisible(true);
@@ -68,4 +68,13 @@ public class VistaCliente extends JFrame {
 		vistaCliente.setLocationRelativeTo(null);
 		vistaCliente.setVisible(true);
 	}
+=======
+	public static void abrirVistaCliente() {
+		VistaCliente vistaCliente = new VistaCliente(null);
+		vistaCliente.setSize(480,360);
+		vistaCliente.setLocationRelativeTo(null);
+		vistaCliente.setVisible(true);
+	}
+
+>>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 }

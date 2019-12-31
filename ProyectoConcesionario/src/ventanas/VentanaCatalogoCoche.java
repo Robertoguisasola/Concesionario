@@ -96,11 +96,7 @@ public class VentanaCatalogoCoche extends JFrame {
 		});
 		iniciarSesionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login ventanaLogin = new Login();
-				ventanaLogin.setVisible(true);
-				ventanaLogin.setSize(450,260);
-				ventanaLogin.setLocationRelativeTo(null);
-				ventanaLogin.setVisible(true);
+				Login.abrirLogin();
 				dispose();
 			}
 		});
@@ -226,6 +222,7 @@ public class VentanaCatalogoCoche extends JFrame {
 		//MiddlePanel				
 	}
 	
+<<<<<<< HEAD
 	//TODO modificar
 	public static void abrirInicio() {
 		Inicio inicio = new Inicio();
@@ -233,6 +230,14 @@ public class VentanaCatalogoCoche extends JFrame {
 		inicio.setSize(480,360);
 		inicio.setLocationRelativeTo(null);
 		inicio.setVisible(true);
+=======
+	public static void abrirVentanaCatalogoCoche() {
+		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(null);//TODO zzzzz esto igual no creo que sea un null
+		ventanaCatalogoCoche.setVisible(true);
+		ventanaCatalogoCoche.setSize(480,360);
+		ventanaCatalogoCoche.setLocationRelativeTo(null);
+		ventanaCatalogoCoche.setVisible(true);
+>>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 	}
 	
 }
