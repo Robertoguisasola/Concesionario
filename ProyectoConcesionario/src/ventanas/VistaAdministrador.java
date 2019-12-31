@@ -17,12 +17,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import dataBase.GestorBD;
 import model.Trabajador;
 
-public class VistaAdministrador extends JFrame {
+public class VistaAdministrador extends JFrame implements ActionListener{
 	
-	//TODO poner menú para poder importar desde ficheros los trabajadores, clientes y vehículos
-
+	//TODO poner menú para poder importar desde ficheros los coches y ventas
 	
 	/**
 	 * 
@@ -58,7 +58,6 @@ public class VistaAdministrador extends JFrame {
 	private JMenuItem cochesEliminarItem;
 	private JMenuItem cochesImportar;
 	private JMenuItem cochesExportar;
-
 	
 	private JPanel panelSuperior;
 	private JButton cerrarButton;
@@ -96,9 +95,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
-				tablaClientes.setLocationRelativeTo(null);
-				tablaClientes.setVisible(true);
+				TablaClientes.abrirTablaClientes(t);
 				dispose();				
 			}
 		});
@@ -123,9 +120,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
-				tablaClientes.setLocationRelativeTo(null);
-				tablaClientes.setVisible(true);
+				TablaClientes.abrirTablaClientes(t);
 				dispose();
 			}
 		});
@@ -136,8 +131,9 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.importarBBDDClientesFichero();
+				bd.desconectar();
 			}
 		});
 		clientesMenu.add(clientesImportar);
@@ -158,9 +154,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
-				tablaTrabajadores.setLocationRelativeTo(null);
-				tablaTrabajadores.setVisible(true);
+				TablaTrabajadores.abrirTablaTrabajadores(t);
 				dispose();				
 			}
 		});
@@ -174,8 +168,8 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				ContratarTrabajador.abrirContratarTrabajador(t);
+				dispose();
 			}
 		});
 		trabajadoresEditarMenu.add(trabajadoresAddItem);
@@ -185,9 +179,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
-				tablaTrabajadores.setLocationRelativeTo(null);
-				tablaTrabajadores.setVisible(true);
+				TablaTrabajadores.abrirTablaTrabajadores(t);
 				dispose();	
 			}
 		});
@@ -198,8 +190,9 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.importarBBDDTrabajadoresFichero();
+				bd.desconectar();
 			}
 		});
 		trabajadoresMenu.add(trabajadoresImportar);
@@ -220,9 +213,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaVentas tablaVentas = new TablaVentas(t);
-				tablaVentas.setLocationRelativeTo(null);
-				tablaVentas.setVisible(true);
+				TablaVentas.abrirTablaVentas(t);
 				dispose();				
 			}
 		});
@@ -247,9 +238,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaVentas tablaVentas = new TablaVentas(t);
-				tablaVentas.setLocationRelativeTo(null);
-				tablaVentas.setVisible(true);
+				TablaVentas.abrirTablaVentas(t);
 				dispose();	
 			}
 		});
@@ -282,9 +271,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches tablaCoches = new TablaCoches(t);
-				tablaCoches.setLocationRelativeTo(null);
-				tablaCoches.setVisible(true);
+				TablaCoches.abrirTablaCoches(t);
 				dispose();			
 			}
 		});
@@ -298,8 +285,8 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				AnadirCoche.abrirAnadirCoche(t);
+				dispose();
 			}
 		});
 		cochesEditarMenu.add(cochesAddItem);
@@ -309,9 +296,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches tablaCoches = new TablaCoches(t);
-				tablaCoches.setLocationRelativeTo(null);
-				tablaCoches.setVisible(true);
+				TablaCoches.abrirTablaCoches(t);
 				dispose();
 			}
 		});
@@ -371,10 +356,8 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaClientes tablaClientes = new TablaClientes(t);
-				tablaClientes.setLocationRelativeTo(null);
-				tablaClientes.setVisible(true);
-				dispose();					
+				TablaClientes.abrirTablaClientes(t);
+				dispose();
 			}
 		});
 		
@@ -390,10 +373,8 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaTrabajadores tablaTrabajadores = new TablaTrabajadores(t);
-				tablaTrabajadores.setLocationRelativeTo(null);
-				tablaTrabajadores.setVisible(true);
-				dispose();				
+				TablaTrabajadores.abrirTablaTrabajadores(t);
+				dispose();
 			}
 		});
 		
@@ -409,9 +390,7 @@ public class VistaAdministrador extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaVentas tablaVentas = new TablaVentas(t);
-				tablaVentas.setLocationRelativeTo(null);
-				tablaVentas.setVisible(true);
+				TablaVentas.abrirTablaVentas(t);
 				dispose();
 				
 			}
@@ -427,9 +406,7 @@ public class VistaAdministrador extends JFrame {
 		cochesButton = new JButton("Ver coches");
 		cochesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TablaCoches tablaCoches = new TablaCoches(t);
-				tablaCoches.setLocationRelativeTo(null);
-				tablaCoches.setVisible(true);
+				TablaCoches.abrirTablaCoches(t);
 				dispose();
 			}
 		});
@@ -455,6 +432,15 @@ public class VistaAdministrador extends JFrame {
 		this.setVisible(true);
 	}
 	
+	//TODO aaaaaa hacer que llame al método genérico de la BBDD desde los objetos del menú
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if (clientesImportar.isSelected()) {
+			
+		}
+		
+	}
+	
 	public static void abrirVistaAdministrador(Trabajador t) {
 		VistaAdministrador vistaAdministrador= new VistaAdministrador(t);
 		vistaAdministrador.setVisible(true);
@@ -476,4 +462,6 @@ public class VistaAdministrador extends JFrame {
 			}
 		});
 	}
+
+	
 }
