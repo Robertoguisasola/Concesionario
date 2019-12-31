@@ -88,17 +88,8 @@ public class TablaClientes extends JFrame {
 			//TODO hacer que vuelva al admin o al trabajador
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
-				vistaAdministrador.setLocationRelativeTo(null);
-				vistaAdministrador.setVisible(true);
-				dispose();			
-=======
 				VistaAdministrador.abrirVistaAdministrador();
 				dispose();
-				
-				
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 			}
 		});
 		

@@ -462,11 +462,7 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 			}
 		});
 	}
-<<<<<<< HEAD
 
-	
-=======
-	
 	public static void abrirVistaAdministrador() {
 		VistaAdministrador ventanaAdministrador = new VistaAdministrador(null);
 		ventanaAdministrador.setTitle("Ventana Administrador");
@@ -474,5 +470,4 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 		ventanaAdministrador.setLocationRelativeTo(null);
 		ventanaAdministrador.setVisible(true);
 	}
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 }

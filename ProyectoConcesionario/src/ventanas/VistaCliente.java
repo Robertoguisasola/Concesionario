@@ -59,22 +59,12 @@ public class VistaCliente extends JFrame {
 		
 		this.setVisible(true);
 	}
-	
-<<<<<<< HEAD
+
 	public static void abrirVistaCliente(Cliente c) {
 		VistaCliente vistaCliente = new VistaCliente(c);
-		vistaCliente.setVisible(true);
-		vistaCliente.setSize(480,360);
-		vistaCliente.setLocationRelativeTo(null);
-		vistaCliente.setVisible(true);
-	}
-=======
-	public static void abrirVistaCliente() {
-		VistaCliente vistaCliente = new VistaCliente(null);
 		vistaCliente.setSize(480,360);
 		vistaCliente.setLocationRelativeTo(null);
 		vistaCliente.setVisible(true);
 	}
 
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 }

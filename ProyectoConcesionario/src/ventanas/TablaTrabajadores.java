@@ -62,11 +62,7 @@ public class TablaTrabajadores extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 				ContratarTrabajador.abrirContratarTrabajador(t);
-=======
-				VentanaAnadirCoche.abrirVentanaAnadirCoche();
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 				dispose();
 			}
 		});

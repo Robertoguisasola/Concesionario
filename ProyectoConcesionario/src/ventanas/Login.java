@@ -132,20 +132,12 @@ public class Login extends JFrame {
 			Cliente c =  bd.iniciarSesionCliente(usuario, contra);
 			Trabajador t = bd.iniciarSesionTrabajador(usuario, contra);
 			if (c!= null) {
-<<<<<<< HEAD
 				VistaCliente.abrirVistaCliente(c);
-=======
-				VistaCliente.abrirVistaCliente();
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 				dispose();
 			}else if (t != null) {
-<<<<<<< HEAD
 				VistaTrabajador.abrirVistaTrabajador(t);
-=======
-				VistaTrabajador.abrirVistaTrabajador();
->>>>>>> branch 'master' of https://github.com/Robertoguisasola/Concesionario
 				dispose();
-			}else if (usuario.equals("admin")&& contra.equals("admin")) { //TODO zzzz no se como hacer esto
+			}else if (usuario.equals("admin")&& contra.equals("admin")) {
 				Trabajador admin = new Trabajador();
 				admin.setNombre("Administrador");
 				VistaAdministrador.abrirVistaAdministrador(admin);
