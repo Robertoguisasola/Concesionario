@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-//NO TOCAR
 public class Inicio extends JFrame {
 	
 	/**
@@ -25,13 +24,9 @@ public class Inicio extends JFrame {
 	private Box buttonsBox;
 	private JButton iniciarSesionButton;
 	private JButton registrarCuentaButton;
-	
-	//NO TOCAR
+
 	public Inicio(){
-		
-		//TODO no se que es el realizable
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setSize(480, 360);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		
 		opcionesPanel = new JPanel();
