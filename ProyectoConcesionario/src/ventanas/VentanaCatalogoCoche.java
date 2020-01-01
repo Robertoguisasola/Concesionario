@@ -224,7 +224,7 @@ public class VentanaCatalogoCoche extends JFrame {
 	}
 	
 	public static void abrirVentanaCatalogoCoche(Persona p) {
-		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(p);//TODO zzzzz esto igual no creo que sea un null
+		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(p);
 		ventanaCatalogoCoche.setVisible(true);
 		ventanaCatalogoCoche.setSize(480,360);
 		ventanaCatalogoCoche.setLocationRelativeTo(null);

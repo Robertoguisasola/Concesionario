@@ -9,7 +9,6 @@ public class MainConcesionario {
 	//TODO pensar si hay alguna interfaz posible y si eso, lanzarla
 	//TODO pensar hilos posibles para el proyecto
 	//TODO pensar si hay posibilidad de alguna recursividad
-	//TODO revisar todas las excepciones
 	//TODO solicitar pruebas de un coche, ventana parecida a la de comprar coche
 
 	public static void main(String[] args) {				

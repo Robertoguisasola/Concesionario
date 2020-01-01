@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -15,18 +17,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
 import model.Persona;
 import model.Trabajador;
 
 public class ContratarTrabajador extends JFrame{
-	//TODO eliminar y convertir en tabla
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -63,7 +65,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	public ContratarTrabajador(Trabajador t){
 		
-	this.setTitle("Contratar Trabajador");
+	this.setTitle("Contratar trabajador");
 	
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setSize(480,360);
@@ -77,9 +79,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	usuarioLabel = new JLabel("Nombre de usuario: ");
 	usuarioField = new JTextField(12);
-	
-	//TODO mover cajas vacias con windowBuilder para alinear todos los cuadros
-	
+		
 	usuarioBox = new Box(BoxLayout.X_AXIS);
 	usuarioBox.add(usuarioLabel);
 	usuarioBox.add(Box.createRigidArea(new Dimension(46, 12)));
@@ -90,7 +90,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	passwordBox = new Box(BoxLayout.X_AXIS);
 	passwordBox.add(passwordLabel);
-	passwordBox.add(Box.createRigidArea(new Dimension(93, 12)));
+	passwordBox.add(Box.createRigidArea(new Dimension(90, 12)));
 	passwordBox.add(passwordField);
 	
 	passwordRLabel = new JLabel("Repita la contraseña: ");
@@ -98,7 +98,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	passwordRBox = new Box(BoxLayout.X_AXIS);
 	passwordRBox.add(passwordRLabel);
-	passwordRBox.add(Box.createRigidArea(new Dimension(40,0)));
+	passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
 	passwordRBox.add(passwordRField);
 	
 	emailLabel = new JLabel("Email: ");
@@ -106,7 +106,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	emailBox = new Box(BoxLayout.X_AXIS);
 	emailBox.add(emailLabel);
-	emailBox.add(Box.createRigidArea(new Dimension(40,0)));
+	emailBox.add(Box.createRigidArea(new Dimension(124, 12)));
 	emailBox.add(emailField);
 	
 	dniLabel = new JLabel("DNI: ");
@@ -114,7 +114,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	dniBox = new Box(BoxLayout.X_AXIS);
 	dniBox.add(dniLabel);
-	dniBox.add(Box.createRigidArea(new Dimension(40,0)));
+	dniBox.add(Box.createRigidArea(new Dimension(135, 12)));
 	dniBox.add(dniField);
 	
 	nombreLabel = new JLabel("Nombre: ");
@@ -122,7 +122,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	nombreBox = new Box(BoxLayout.X_AXIS);
 	nombreBox.add(nombreLabel);
-	nombreBox.add(Box.createRigidArea(new Dimension(40,0)));
+	nombreBox.add(Box.createRigidArea(new Dimension(110, 12)));
 	nombreBox.add(nombreField);
 
 	apellidosLabel = new JLabel("Apellidos: ");
@@ -130,15 +130,23 @@ public class ContratarTrabajador extends JFrame{
 
 	apellidosBox = new Box(BoxLayout.X_AXIS);
 	apellidosBox.add(apellidosLabel);
-	apellidosBox.add(Box.createRigidArea(new Dimension(40,0)));
+	apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
 	apellidosBox.add(apellidosField);
 	
 	fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
 	fechaNacimientoField = new JTextField();
+	fechaNacimientoField.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			fechaNacimientoField.setText("");
+		}
+	});
+	fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
+	fechaNacimientoField.setText("dd/MM/yyyy");
 	
 	fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 	fechaNacimientoBox.add(fechaNacimientoLabel);
-	fechaNacimientoBox.add(Box.createRigidArea(new Dimension(40,0)));
+	fechaNacimientoBox.add(Box.createRigidArea(new Dimension(37, 12)));
 	fechaNacimientoBox.add(fechaNacimientoField);
 	
 	sueldoLabel = new JLabel("Sueldo: ");
@@ -146,7 +154,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	sueldoBox = new Box(BoxLayout.X_AXIS);
 	sueldoBox.add(sueldoLabel);
-	sueldoBox.add(Box.createRigidArea(new Dimension(40,0)));
+	sueldoBox.add(Box.createRigidArea(new Dimension(116, 12)));
 	sueldoBox.add(sueldoField);
 	
 	formPanel = new JPanel();
@@ -173,7 +181,7 @@ public class ContratarTrabajador extends JFrame{
 
 	formPanel.add(formBox);
 	
-	acceptButton = new JButton("Contratar Trabajador");
+	acceptButton = new JButton("Registrarme");
 	acceptButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
 			contratar();
@@ -184,11 +192,11 @@ public class ContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			VistaAdministrador ventanaAdmin = new VistaAdministrador(t);
-			ventanaAdmin.setVisible(true);
-			ventanaAdmin.setSize(450,260);
-			ventanaAdmin.setLocationRelativeTo(null);
-			ventanaAdmin.setVisible(true);
+			Inicio menu = new Inicio();
+			menu.setVisible(true);
+			menu.setSize(450,260);
+			menu.setLocationRelativeTo(null);
+			menu.setVisible(true);
 			dispose();
 		}
 	});
@@ -222,8 +230,7 @@ public class ContratarTrabajador extends JFrame{
 			
 			
 			bd.anadirNuevoTrabajador(t);
-			bd.desconectar();
-			
+			bd.desconectar();			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("No conecta a la base de datos");
