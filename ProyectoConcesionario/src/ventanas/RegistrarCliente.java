@@ -59,7 +59,7 @@ public class RegistrarCliente extends JFrame {
 	private JTextField apellidosField;
 	private Box apellidosBox;
 	private JLabel fechaNacimientoLabel;
-	private JTextField fechaNacimietoField;
+	private JTextField fechaNacimientoField;
 	private Box fechaNacimientoBox;
 	private JLabel numeroTarjetaLabel;
 	private JTextField numeroTarjetaField;
@@ -148,20 +148,20 @@ public class RegistrarCliente extends JFrame {
 		apellidosBox.add(apellidosField);
 		
 		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
-		fechaNacimietoField = new JTextField();
-		fechaNacimietoField.addMouseListener(new MouseAdapter() {
+		fechaNacimientoField = new JTextField();
+		fechaNacimientoField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				fechaNacimietoField.setText("");
+				fechaNacimientoField.setText("");
 			}
 		});
-		fechaNacimietoField.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaNacimietoField.setText("dd/MM/yyyy");
+		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
+		fechaNacimientoField.setText("dd/MM/yyyy");
 		
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
 		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
-		fechaNacimientoBox.add(fechaNacimietoField);
+		fechaNacimientoBox.add(fechaNacimientoField);
 		
 		numeroTarjetaLabel = new JLabel("Número de tarjeta: ");
 		numeroTarjetaField = new JTextField();
@@ -235,13 +235,13 @@ public class RegistrarCliente extends JFrame {
 		dniField.setText(null);
 		nombreField.setText(null);
 		apellidosField.setText(null);
-		fechaNacimietoField.setText(null);
+		fechaNacimientoField.setText(null);
 		numeroTarjetaField.setText(null);
 	}
 	
 	private void registrar() {
 		try {
-			String fechaNacimientoString = fechaNacimietoField.getText();
+			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			GestorBD bd = new GestorBD();
 			String usuario = usuarioField.getText();
