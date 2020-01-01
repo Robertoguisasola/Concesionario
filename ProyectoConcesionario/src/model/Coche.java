@@ -30,5 +30,5 @@ public class Coche extends Vehiculo {
 	@Override
 	public String toString() {
 		return marca + " " + modelo + " " + color + ", " + caballos + "cv";
-	}	
+	}
 }

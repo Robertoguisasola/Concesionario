@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-public class VistaAdministrador extends JFrame implements ActionListener{
+public class VistaAdministrador extends JFrame{
 	
 	//TODO poner menú para poder importar desde ficheros los coches y ventas
 	
@@ -132,7 +132,7 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GestorBD bd = new GestorBD();
-				bd.importarBBDDClientesFichero();
+				bd.importarFicheroABBDD("cliente");
 				bd.desconectar();
 			}
 		});
@@ -191,7 +191,7 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GestorBD bd = new GestorBD();
-				bd.importarBBDDTrabajadoresFichero();
+				bd.importarFicheroABBDD("trabajador");
 				bd.desconectar();
 			}
 		});
@@ -249,8 +249,9 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.importarFicheroABBDD("venta");
+				bd.desconectar();				
 			}
 		});
 		ventasMenu.add(ventasImportar);
@@ -307,8 +308,9 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.importarFicheroABBDD("coche");
+				bd.desconectar();				
 			}
 		});
 		cochesMenu.add(cochesImportar);
@@ -432,15 +434,6 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 	
-	//TODO aaaaaa hacer que llame al método genérico de la BBDD desde los objetos del menú
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if (clientesImportar.isSelected()) {
-			
-		}
-		
-	}
-	
 	public static void abrirVistaAdministrador(Trabajador t) {
 		VistaAdministrador vistaAdministrador= new VistaAdministrador(t);
 		vistaAdministrador.setVisible(true);
@@ -461,13 +454,5 @@ public class VistaAdministrador extends JFrame implements ActionListener{
 				new VistaAdministrador(t);
 			}
 		});
-	}
-
-	public static void abrirVistaAdministrador() {
-		VistaAdministrador ventanaAdministrador = new VistaAdministrador(null);
-		ventanaAdministrador.setTitle("Ventana Administrador");
-		ventanaAdministrador.setSize(480,360);
-		ventanaAdministrador.setLocationRelativeTo(null);
-		ventanaAdministrador.setVisible(true);
 	}
 }

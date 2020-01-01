@@ -16,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import dataBase.GestorBD;
 import model.Trabajador;
 
 //NO TOCAR, SOLO AÑADIR COSAS
@@ -38,17 +37,14 @@ public class VistaTrabajador extends JFrame{
 	private JMenuItem clientesVerItem;
 	private JMenuItem clientesAddItem;
 	private JMenuItem clientesEliminarItem;
-	private JMenuItem clientesImportar;
 	private JMenuItem clientesExportar;
 	private JMenuItem ventasVerItem;
 	private JMenuItem ventasAddItem;
 	private JMenuItem ventasEliminarItem;
-	private JMenuItem ventasImportar;
 	private JMenuItem ventasExportar;
 	private JMenuItem cochesVerItem;
 	private JMenuItem cochesAddItem;
 	private JMenuItem cochesEliminarItem;
-	private JMenuItem cochesImportar;
 	private JMenuItem cochesExportar;
 	
 	private JPanel panelSuperior;
@@ -114,18 +110,6 @@ public class VistaTrabajador extends JFrame{
 		});
 		clientesEditarMenu.add(clientesEliminarItem);
 
-		clientesImportar = new JMenuItem("Importar");
-		clientesImportar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GestorBD bd = new GestorBD();
-				bd.importarBBDDClientesFichero();
-				bd.desconectar();
-			}
-		});
-		clientesMenu.add(clientesImportar);
-
 		clientesExportar = new JMenuItem("Exportar");
 		clientesExportar.addActionListener(new ActionListener() {
 
@@ -173,17 +157,6 @@ public class VistaTrabajador extends JFrame{
 		});
 		ventasEditarMenu.add(ventasEliminarItem);
 
-		ventasImportar = new JMenuItem("Importar");
-		ventasImportar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		ventasMenu.add(ventasImportar);
-
 		ventasExportar = new JMenuItem("Exportar");
 		ventasExportar.addActionListener(new ActionListener() {
 
@@ -230,17 +203,6 @@ public class VistaTrabajador extends JFrame{
 			}
 		});
 		cochesEditarMenu.add(cochesEliminarItem);
-
-		cochesImportar = new JMenuItem("Importar");
-		cochesImportar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		cochesMenu.add(cochesImportar);
 
 		cochesExportar = new JMenuItem("Exportar");
 		cochesExportar.addActionListener(new ActionListener() {

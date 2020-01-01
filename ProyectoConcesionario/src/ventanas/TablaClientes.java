@@ -88,7 +88,7 @@ public class TablaClientes extends JFrame {
 			//TODO hacer que vuelva al admin o al trabajador
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VistaAdministrador.abrirVistaAdministrador();
+				VistaAdministrador.abrirVistaAdministrador(t);
 				dispose();
 			}
 		});
@@ -100,9 +100,6 @@ public class TablaClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 
-		
-		
-		
 		this.setVisible(true);
 	}
 	

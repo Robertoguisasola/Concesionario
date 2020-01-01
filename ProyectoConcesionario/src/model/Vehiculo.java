@@ -93,4 +93,31 @@ public class Vehiculo {
 		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
 				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + "]";
 	}
+	
+	public void setColor(String string) {
+		switch (string) {
+		case "rojo":
+			Colores colorR = Colores.ROJO;
+			setColor(colorR);
+			break;
+		case "azul":
+			Colores colorA = Colores.AZUL;
+			setColor(colorA);
+			break;
+		case "gris":
+			Colores colorG = Colores.GRIS;
+			setColor(colorG);
+			break;
+		case "blanco":
+			Colores colorB = Colores.BLANCO;
+			setColor(colorB);
+			break;
+		case "negro":
+			Colores colorN = Colores.NEGRO;
+			setColor(colorN);
+			break;
+		default:
+			break;
+		}
+	}	
 }
