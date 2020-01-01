@@ -251,7 +251,8 @@ public class VistaAdministrador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				GestorBD bd = new GestorBD();
 				bd.importarFicheroABBDD("venta");
-				bd.desconectar();				
+				bd.desconectar();
+				//TODO crear tabla ventacoche con las carácteristicas, rellenar el fichero y comprobarlo
 			}
 		});
 		ventasMenu.add(ventasImportar);
@@ -310,7 +311,7 @@ public class VistaAdministrador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				GestorBD bd = new GestorBD();
 				bd.importarFicheroABBDD("coche");
-				bd.desconectar();				
+				bd.desconectar();
 			}
 		});
 		cochesMenu.add(cochesImportar);

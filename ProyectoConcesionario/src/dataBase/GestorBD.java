@@ -106,6 +106,7 @@ public class GestorBD {
 			importarCoches();
 			break;
 		case "venta":
+			System.out.println("importar venta");
 			//importarVentasCoches();
 			break;
 		default:
@@ -260,7 +261,7 @@ public class GestorBD {
 				
 				c.setMarca(campos[0]);
 				c.setModelo(campos[1]);
-				c.setColor(campos[2]);
+				c.setColor(campos[2].toLowerCase());
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
 				c.setnPlazas(Integer.parseInt(campos[5]));

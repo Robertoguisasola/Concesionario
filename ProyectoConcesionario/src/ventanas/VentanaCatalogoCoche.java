@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import model.Cliente;
+import model.Persona;
 
 public class VentanaCatalogoCoche extends JFrame {
 	//TODO eliminar y convertir en tabla
@@ -61,7 +62,7 @@ public class VentanaCatalogoCoche extends JFrame {
 	private JButton buscarButton;
 	private Box buttonBox;
 	
-	public VentanaCatalogoCoche(Cliente c) {
+	public VentanaCatalogoCoche(Persona p) {
 		this.setSize(480,360);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -222,8 +223,8 @@ public class VentanaCatalogoCoche extends JFrame {
 		//MiddlePanel				
 	}
 	
-	public static void abrirVentanaCatalogoCoche() {
-		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(null);//TODO zzzzz esto igual no creo que sea un null
+	public static void abrirVentanaCatalogoCoche(Persona p) {
+		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(p);//TODO zzzzz esto igual no creo que sea un null
 		ventanaCatalogoCoche.setVisible(true);
 		ventanaCatalogoCoche.setSize(480,360);
 		ventanaCatalogoCoche.setLocationRelativeTo(null);
