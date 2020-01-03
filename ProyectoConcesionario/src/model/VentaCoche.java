@@ -2,6 +2,7 @@ package model;
 
 public class VentaCoche extends Venta {
 
+	//TODO zzzz crear constructor vacío, copia y getters y setters
 	protected boolean techoPanoramico;
 	protected boolean traccion4x4;
 	protected boolean modoDeportivo;
@@ -13,6 +14,4 @@ public class VentaCoche extends Venta {
 		this.traccion4x4 = traccion4x4;
 		this.modoDeportivo = modoDeportivo;
 	}
-	
-	
 }

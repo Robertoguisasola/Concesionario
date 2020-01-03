@@ -94,7 +94,7 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO zzzz como hacer que identifique si eres el admin o el trabajador
+				//TODO aaaa como hacer que identifique si eres el admin o el trabajador --> boolean isAdmin
 				
 			}
 		});

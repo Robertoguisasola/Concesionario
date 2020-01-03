@@ -365,7 +365,7 @@ public class GestorBD {
 	}
 
 	public Trabajador iniciarSesionTrabajador(String usuario, String contra){
-		//TODO zzzz el metodo de obtener ya devuelve una lista, si lo llamamos??
+		//TODO aaaa llamar al metodo de obtener trabajadores
 		String sql = "SELECT login, password FROM trabajador";
 		PreparedStatement stmt;
 
@@ -539,7 +539,7 @@ public class GestorBD {
 
 			ResultSet rs = stmt.executeQuery();
 					
-			log(Level.SEVERE.INFO, "Obteniendo los coches", null);
+			log(Level.INFO, "Obteniendo los coches", null);
 			
 			return rs;
 		} catch (SQLException e) {
