@@ -1723,3 +1723,535 @@
   <message>Desconectado de la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:36:59</date>
+  <millis>1578004619342</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:36:59</date>
+  <millis>1578004619361</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El cliente de ha sido añadido</message>
+</record>
+<record>
+  <date>2020-01-02T23:36:59</date>
+  <millis>1578004619365</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:20</date>
+  <millis>1578004640503</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:20</date>
+  <millis>1578004640521</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:37:38</date>
+  <millis>1578004658089</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:38</date>
+  <millis>1578004658128</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:41</date>
+  <millis>1578004661336</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:41</date>
+  <millis>1578004661347</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla cliente de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:41</date>
+  <millis>1578004661349</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Clientes cargados desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:41</date>
+  <millis>1578004661359</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Clientes añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:37:41</date>
+  <millis>1578004661362</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:39:04</date>
+  <millis>1578004744364</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:04</date>
+  <millis>1578004744403</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:07</date>
+  <millis>1578004747976</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:07</date>
+  <millis>1578004747990</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla cliente de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:07</date>
+  <millis>1578004747992</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Clientes cargados desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:08</date>
+  <millis>1578004748002</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El cliente Marcos ha sido añadido</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:08</date>
+  <millis>1578004748003</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Clientes añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:39:08</date>
+  <millis>1578004748006</millis>
+  <sequence>7</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:40:28</date>
+  <millis>1578004828384</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:28</date>
+  <millis>1578004828425</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:30</date>
+  <millis>1578004830177</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:30</date>
+  <millis>1578004830194</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla trabajador de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:30</date>
+  <millis>1578004830196</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>SEVERE</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Error al cargar trabajadores desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:30</date>
+  <millis>1578004830196</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Trabajadores añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:40:30</date>
+  <millis>1578004830199</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:45:47</date>
+  <millis>1578005147538</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:47</date>
+  <millis>1578005147578</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:58</date>
+  <millis>1578005158417</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:58</date>
+  <millis>1578005158429</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla trabajador de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:58</date>
+  <millis>1578005158433</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>SEVERE</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Error al cargar los clientes desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:58</date>
+  <millis>1578005158433</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Traabbbaaa añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:45:58</date>
+  <millis>1578005158438</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:46:30</date>
+  <millis>1578005190264</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:46:30</date>
+  <millis>1578005190277</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla trabajador de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:46:30</date>
+  <millis>1578005190279</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>SEVERE</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Error al cargar los clientes desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:46:30</date>
+  <millis>1578005190280</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Traabbbaaa añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:46:30</date>
+  <millis>1578005190283</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-02T23:47:49</date>
+  <millis>1578005269942</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:49</date>
+  <millis>1578005269961</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Borrado de la tabla trabajador de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:49</date>
+  <millis>1578005269966</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Trabajadores cargados desde el fichero</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:49</date>
+  <millis>1578005269987</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El trabajador Mikel ha sido añadido</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:50</date>
+  <millis>1578005270003</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El trabajador Diego ha sido añadido</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:50</date>
+  <millis>1578005270004</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Trabajadores añadidos a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-02T23:47:50</date>
+  <millis>1578005270007</millis>
+  <sequence>6</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>

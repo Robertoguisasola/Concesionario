@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 
 import model.Cliente;
 import model.Coche;
-import model.Colores;
 import model.Trabajador;
 
 public class GestorBD {
@@ -29,7 +28,6 @@ public class GestorBD {
 	//TODO método de añadir coche de 2ª mano
 	//TODO método crear venta
 	//TODO método ver ventas
-	//TODO poner loggers
 	//TODO crear tabla ventacoche con los bool como ints, 0 false, 1 true
 
 	private static Exception lastError = null; //Último error que ha sucedido
@@ -151,34 +149,15 @@ public class GestorBD {
 		//TODO crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
-		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
-				+ " VALUES (?,?,?,?,?,?,?,?)";
-
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement(sql);
 
 			while (it.hasNext()){			
 				Trabajador t  = it.next();
-
-				stmt.setString(1, t.getLogin());
-				stmt.setString(2, t.getPassword());
-				stmt.setString(3, t.getEmail());
-				stmt.setString(4, t.getdNI());
-				stmt.setString(5, t.getNombre());
-				stmt.setString(6, t.getApellidos());
-				stmt.setString(7, t.getFechaNacimientoString());
-				stmt.setInt(8, t.getSueldo());
-
-				stmt.executeUpdate();
+				
+				anadirNuevoTrabajador(t);
 			}
 			log(Level.INFO, "Trabajadores añadidos a la base de datos", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al añador los trabajadores a la base de datos", e);
-			e.printStackTrace();
-		}
-	}	
-
+	}
+	
 	private void importarClientes() {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 
@@ -216,32 +195,12 @@ public class GestorBD {
 		//TODO crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 
-		String sql  = "INSERT INTO cliente (login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta)"
-				+ " VALUES (?,?,?,?,?,?,?,?)";
-
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement(sql);
-
 			while (it.hasNext()){			
 				Cliente c  = it.next();
 
-				stmt.setString(1, c.getLogin());
-				stmt.setString(2, c.getPassword());
-				stmt.setString(3, c.getEmail());
-				stmt.setString(4, c.getdNI());
-				stmt.setString(5, c.getNombre());
-				stmt.setString(6, c.getApellidos());
-				stmt.setString(7, c.getFechaNacimientoString());
-				stmt.setLong(8, c.getNumTarjeta());
-
-				stmt.executeUpdate();
+				anadirNuevoCliente(c);
 			}
 			log(Level.INFO, "Clientes añadidos a la base de datos", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al importar los clientes a la base de datos ", e);
-			e.printStackTrace();
-		}
 	}
 
 	private void importarCoches(){
