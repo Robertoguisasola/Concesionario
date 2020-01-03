@@ -22,7 +22,7 @@ import model.Trabajador;
 
 public class VistaAdministrador extends JFrame{
 	
-	//TODO poner menú para poder importar desde ficheros los coches y ventas
+	//TODO poner menú para poder exportar a ficheros los coches y ventas
 	
 	/**
 	 * 
@@ -252,7 +252,6 @@ public class VistaAdministrador extends JFrame{
 				GestorBD bd = new GestorBD();
 				bd.importarFicheroABBDD("venta");
 				bd.desconectar();
-				//TODO crear tabla ventacoche con las carácteristicas, rellenar el fichero y comprobarlo
 			}
 		});
 		ventasMenu.add(ventasImportar);

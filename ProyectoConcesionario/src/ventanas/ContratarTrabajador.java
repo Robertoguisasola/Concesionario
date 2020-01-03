@@ -224,9 +224,11 @@ public class ContratarTrabajador extends JFrame{
 			String apellidos = apellidosField.getText();
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
-			int sueldo= Integer.parseInt(sueldoField.getText());
+			int sueldo = Integer.parseInt(sueldoField.getText());
+			//TODO poner que si es admin o no
+			boolean isAdmin = false;
 			
-			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, sueldo);
+			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin);
 			
 			
 			bd.anadirNuevoTrabajador(t);

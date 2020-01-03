@@ -69,12 +69,7 @@ public class RegistrarCliente extends JFrame {
 	private Box buttonsBox;
 	
 	public RegistrarCliente() {
-		
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//NO MODIFICAR; SINO NO SALE EL ÚLTIMO CAMPOOO
-		//this.setSize(480,400);
-		//this.setResizable(false);
 		
 		bienvenidaPanel = new JPanel();
 		
@@ -200,7 +195,6 @@ public class RegistrarCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				registrar();
 			}
-			
 		});
 		
 		cancelButton = new JButton("Cancelar");
@@ -226,7 +220,6 @@ public class RegistrarCliente extends JFrame {
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	
 	private void limpiarCajas() {
 		usuarioField.setText(null);
 		passwordField.setText(null);
@@ -241,19 +234,23 @@ public class RegistrarCliente extends JFrame {
 	
 	private void registrar() {
 		try {
+			//TODO zzzz comprobar que no esté vacío ---> meter defaults en bbdd
+			if (usuarioField == null) {
+				
+			}
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
-			GestorBD bd = new GestorBD();
 			String usuario = usuarioField.getText();
 			String contra = new String(passwordField.getPassword());
 			String email = emailField.getText();
 			String dNI = dniField.getText();
 			String nombre = nombreField.getText();
 			String apellidos = apellidosField.getText();
-			long numTarjeta = 0;
+			long numTarjeta = Long.parseLong(numeroTarjetaField.getText());
 			
 			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
 			
+			GestorBD bd = new GestorBD();
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
 			
@@ -267,17 +264,11 @@ public class RegistrarCliente extends JFrame {
 				limpiarCajas();
 				break;
 			case 1:
-				Inicio menu = new Inicio();
-				menu.setVisible(true);
-				menu.setSize(450,260);
-				menu.setLocationRelativeTo(null);
-				menu.setVisible(true);
-				dispose();
-
+				Inicio.abrirInicio();
+				break;
 			default:
 				break;
 			}
-			
 		} 
 		catch (ParseException ex) {
 			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
@@ -292,7 +283,7 @@ public class RegistrarCliente extends JFrame {
 		RegistrarCliente registrarCliente = new RegistrarCliente();
 		registrarCliente.setTitle("Regístrate");
 		registrarCliente.setVisible(true);
-		registrarCliente.setSize(480,360);
+		registrarCliente.setSize(480,420);
 		registrarCliente.setLocationRelativeTo(null);
 		registrarCliente.setVisible(true);
 	}

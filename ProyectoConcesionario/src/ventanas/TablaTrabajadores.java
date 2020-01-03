@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
+import dataBase.GestorBD;
 import model.Trabajador;
 
 public class TablaTrabajadores extends JFrame {
@@ -26,9 +30,10 @@ public class TablaTrabajadores extends JFrame {
 	private JPanel botonesPanel;
 	private JButton anadirButton;
 	private JButton despedirButton;
+	private JButton atrasButton;
 	private JTable tabla;
+	private DefaultTableModel modelo;
 	
-	//TODO terminar ventana
 	public TablaTrabajadores(Trabajador t) {
 		this.setTitle("Tabla de Trabajadores");
 		
@@ -37,17 +42,8 @@ public class TablaTrabajadores extends JFrame {
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		
-		//TODO rellenar columnas y sacar datos
-		String[] columNames = {"Column1", "Column2"};
-		String[][] data = {
-				{"Nombre1", "Dato1"},
-				{"Nombre2", "Dato2"},
-		};
-		
-		tabla = new JTable(data, columNames);
-		
+		setData();
 		tablaPanel = new JScrollPane(tabla);
-		
 		
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
@@ -57,6 +53,9 @@ public class TablaTrabajadores extends JFrame {
 		
 		despedirButton = new JButton("Despedir trabajador");
 		botonesPanel.add(despedirButton);
+		
+		atrasButton = new JButton("Atrás");
+		botonesPanel.add(atrasButton);
 		
 		anadirButton.addActionListener(new ActionListener() {
 			
@@ -72,25 +71,79 @@ public class TablaTrabajadores extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Hacer que borre el seleccionado
-				//TODO hacer que saque el nombre del trabajador
 				String[] opciones = {"Sí", "No"};
-				JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a ... ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-				System.out.println();
+				if(tabla.getSelectedRow() >= 0) {
+					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("nombre"));
+					
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+					
+					switch (respuesta) {
+					case 0:
+						GestorBD bd = new GestorBD();
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("dni"));
+						bd.borrarA("trabajador", dni);
+						bd.desconectar();
+						break;
+					default:
+						break;
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", null, 0);
+				}
+			}
+		});
+		
+atrasButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO zzzz como hacer que identifique si eres el admin o el trabajador
+				
 			}
 		});
 		
 		add(tablaPanel, BorderLayout.CENTER);
 		add(botonesPanel, BorderLayout.SOUTH);
 
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
-
-		
-		
 		
 		this.setVisible(true);
+	}
+	
+	//Añadimos datos
+	
+	private void setData() {
+		modelo = new DefaultTableModel();
+		tabla = new JTable(modelo);
+		
+		// Creamos las columnas.
+		modelo.addColumn("nombre");
+		modelo.addColumn("apellidos");
+		
+		GestorBD bd = new GestorBD();
+		ResultSet rs = bd.rellenarTablaTrabajadores();
+		
+		// Bucle para cada resultado en la consulta
+		try {
+			while (rs.next())
+			{
+			   // Se crea un array que será una de las filas de la tabla.
+			   Object [] fila = new Object[2]; // Hay tres columnas en la tabla
+
+			   // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+			   for (int i=0;i<fila.length;i++)
+			      fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+
+			   // Se añade al modelo la fila completa.
+			   modelo.addRow(fila);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		bd.desconectar();
 	}
 	
 	public static void abrirTablaTrabajadores(Trabajador t) {

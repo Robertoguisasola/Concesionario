@@ -1,7 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Cliente;
@@ -20,42 +21,61 @@ public class VistaCliente extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JPanel panelSuperior;
+	private JButton cerrarButton;
 	private JPanel opcionesPanel;
-	private Box buttonsBox;
-	private JButton catalogoCochesButton;
+	private Box opcionesBox;
+	private JLabel cochesLabel;
+	private JButton cochesButton;
+	private Box cochesBox;
 	
 	//TODO completar con más componentes, NO DOY A BASTOOOOOOOOOOOOOO
 	//Podriais pensar al menos algo que añadirle a este punto o algo así, porque no solo se querrán comprar coches....
 	//OTRAS FUNCIONES POR DIOOOOS
 	
 	public VistaCliente(Cliente c) {
-		//TODO no saca el nombre del cliente
-		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());
-		
-		
+		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());		
 		this.setResizable(true);
 		
-		opcionesPanel = new JPanel();
-		opcionesPanel.setLayout(new GridBagLayout());
+panelSuperior  =new JPanel();
 		
-		buttonsBox = new Box(BoxLayout.Y_AXIS);
-		catalogoCochesButton = new JButton("Mirar catalogo coches");
-		catalogoCochesButton.addActionListener(new ActionListener() {
+		cerrarButton = new JButton("Cerrar sesión");
+		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaCatalogoCoche ventanaCoches = new VentanaCatalogoCoche(c);
-				ventanaCoches.setLocationRelativeTo(null);
-				ventanaCoches.setVisible(true);
+				Login.abrirLogin();
 				dispose();
 			}
 		});
 		
-		buttonsBox.add(catalogoCochesButton);
-				
-		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
-		gbc_buttonsBox.gridx = 0;
-		opcionesPanel.add(buttonsBox, gbc_buttonsBox);
+		panelSuperior.add(Box.createRigidArea(new Dimension(300,0)));
+		panelSuperior.add(cerrarButton);
+			
+		opcionesPanel = new JPanel();
+		opcionesPanel.setLayout(new GridBagLayout());
 		
-		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
+		cochesLabel = new JLabel("Coches");
+		
+		cochesButton = new JButton("Ver coches");
+		cochesButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCatalogoCoche.abrirVentanaCatalogoCoche(c);
+			}
+		});
+		
+		cochesBox = new Box(BoxLayout.Y_AXIS);
+		cochesBox.add(cochesLabel);
+		cochesBox.add(Box.createRigidArea(new Dimension(0, 10)));
+		cochesBox.add(cochesButton);
+		
+		opcionesBox = new Box(BoxLayout.Y_AXIS);
+		opcionesBox.add(cochesBox);
+		
+		opcionesPanel.add(opcionesBox);
+		
+		add(panelSuperior, BorderLayout.NORTH);
+		add(opcionesPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
 	}

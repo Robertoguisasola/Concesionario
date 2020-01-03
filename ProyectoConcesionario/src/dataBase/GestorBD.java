@@ -27,8 +27,6 @@ public class GestorBD {
 	//TODO método de añadir coche
 	//TODO método de añadir coche de 2ª mano
 	//TODO método crear venta
-	//TODO método ver ventas
-	//TODO crear tabla ventacoche con los bool como ints, 0 false, 1 true
 
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
@@ -82,7 +80,7 @@ public class GestorBD {
 					log(Level.SEVERE, "Error al borrar la tabla " + tabla + " de la base de datos", e);
 					e.printStackTrace();
 				}
-			}
+	}
 		
 	public void importarFicheroABBDD(String tabla){	
 		String [] tablas = {"ventacoche"};
@@ -136,6 +134,8 @@ public class GestorBD {
 				t.setApellidos(campos[5]);
 				t.setFechaNacimientoString((campos[6]));
 				t.setSueldo(Integer.parseInt(campos[7]));
+				t.setAdmin(Boolean.parseBoolean(campos[8]));
+				
 
 				trabajadores.add(t);
 			}
@@ -272,7 +272,7 @@ public class GestorBD {
 	//TODO modificar para que saque un table model y meterlo en la tabla
 	public List<Trabajador> obtenerTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM baseDeDatos.db";
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
 		PreparedStatement stmt;
 
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -290,6 +290,7 @@ public class GestorBD {
 				t.setdNI(rs.getString("dNI"));
 				t.setNombre(rs.getString("nombre"));
 				t.setApellidos(rs.getString("apellidos"));
+				t.setAdmin(rs.getInt("isAdmin") == 0);
 				try {
 					t.setFechaNacimientoString(rs.getString("fechaNacimiento"));
 				} catch (ParseException e) {
@@ -298,18 +299,14 @@ public class GestorBD {
 				t.setSueldo(rs.getInt("sueldo"));
 
 				trabajadores.add(t);
-
 			}
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los trabajadores", e);
 			e.printStackTrace();
 		}
-
-
 		return trabajadores;
 	}
-
-	//TODO modificar para que saque un table model y meterlo en la tabla
+	
 	public List<Cliente> obtenerClientes(){
 		//TODO crear test de prueba
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
@@ -338,37 +335,17 @@ public class GestorBD {
 				c.setNumTarjeta(rs.getLong("numTarjeta"));
 
 				clientes.add(c);
-
 			}
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los clientes", e);
 			e.printStackTrace();
 		}
-
-
 		return clientes;
 	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
-		String sql = "SELECT * FROM cliente";
-		PreparedStatement stmt;
-
-		List<Cliente> clientes = new ArrayList<Cliente>();
-
-		try {
-			stmt = conn.prepareStatement(sql);
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()){
-				//TODO reformatear esto, tiene que rellenar todo de un cliente, aunque no lo use, para luego devolverlo al metodo de iniciarSesion
-				Cliente c = new Cliente();
-				c.setLogin(rs.getString("login"));
-				c.setPassword(rs.getString("password"));
-				c.setEmail(rs.getString("email"));
-
-				clientes.add(c);
-			}
+		List<Cliente> clientes = obtenerClientes();
+		
 
 			Iterator<Cliente> itClientes = clientes.iterator();
 
@@ -383,17 +360,12 @@ public class GestorBD {
 						return c;
 					}
 				}	
-
 			}
-
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al iniciar sesión con la cuenta", e);
-			e.printStackTrace();
-		}	
 		return null;
 	}
 
 	public Trabajador iniciarSesionTrabajador(String usuario, String contra){
+		//TODO zzzz el metodo de obtener ya devuelve una lista, si lo llamamos??
 		String sql = "SELECT login, password FROM trabajador";
 		PreparedStatement stmt;
 
@@ -406,9 +378,11 @@ public class GestorBD {
 
 			while (rs.next()){
 				Trabajador t = new Trabajador();
+				//TODO aaaa rellenar todo el trabajador, sin su contraseña
 
 				t.setLogin(rs.getString("login"));
-				t.setPassword(rs.getString("password"));
+				t.setNombre(rs.getString("nombre"));
+				t.setApellidos(rs.getString("apellidos"));
 
 				trabajadores.add(t);
 			}
@@ -427,7 +401,6 @@ public class GestorBD {
 					}
 				}	
 			}
-
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al iniciar sesión con la cuenta ", e);
 			e.printStackTrace();
@@ -488,6 +461,113 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
+
+	public void anadirNuevoCoche(Coche c) {
+		String sql  = "INSERT INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel)"
+				+ " VALUES (?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, c.getMarca());
+			stmt.setString(2, c.getModelo());
+			stmt.setString(3, c.getColor().toString());
+			stmt.setInt(4, c.getCaballos());
+			stmt.setInt(5, c.getNumRuedas());
+			stmt.setInt(6, c.getnPlazas());
+			if (c.isMotorDiesel()) {
+				stmt.setInt(7, 1);
+			}else {
+				stmt.setInt(7, 0);
+			}
+
+			stmt.executeUpdate();
+			
+			log(Level.INFO, "El coche " + c.toString() + " ha sido añadido", null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error al insertar el trabajador" + sql, e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet rellenarTablaTrabajadores(){
+		//TODO crear test de prueba
+		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+			return rs;
+			
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los trabajadores", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ResultSet rellenarTablaClientes(){
+		//TODO crear test de prueba
+		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+			return rs;
+			
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los clientes", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ResultSet rellenarTablaCoches(){
+		//TODO crear test de prueba
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, motorDiesel FROM coche";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+					
+			log(Level.SEVERE.INFO, "Obteniendo los coches", null);
+			
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los coches", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void borrarA(String tabla, String dNI) {
+		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
+		
+		PreparedStatement stmtBorrar;
+
+			try {
+				stmtBorrar = conn.prepareStatement(sqlBorrar);
+				
+				stmtBorrar.setString(1, dNI);
+
+				stmtBorrar.executeUpdate(sqlBorrar);
+
+					log(Level.INFO, "Borrado de la tabla " + tabla + " de la base de datos", null);
+			} catch (SQLException e) {
+					log(Level.SEVERE, "Error al borrar la tabla " + tabla + " de la base de datos", e);
+					e.printStackTrace();
+				}
+	}
+	
 
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {
