@@ -3,10 +3,10 @@ package model;
 public class Venta {
 	//TODO meter todos los valores de una venta
 	
-	private Cliente comprador;
-	private Vehiculo vehiculo;
-	private int precio;
-	private String matricula;
+	protected Cliente comprador;
+	protected Vehiculo vehiculo;
+	protected int precio;
+	protected String matricula;
 	protected boolean automatico;
 	protected boolean lucesLed;
 	
