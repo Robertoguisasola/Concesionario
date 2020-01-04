@@ -360,7 +360,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
-	t.setAdmin(true);
+		t.setAdmin(true);
 	
 		ContratarTrabajador.abrirContratarTrabajador(t);
 	}

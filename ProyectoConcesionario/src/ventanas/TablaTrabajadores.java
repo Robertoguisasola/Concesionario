@@ -72,7 +72,7 @@ public class TablaTrabajadores extends JFrame {
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					//TODO actualizar tabla al borrar
+					//TODO qqqq actualizar tabla al borrar
 					switch (respuesta) {
 					case 0:
 						GestorBD bd = new GestorBD();
