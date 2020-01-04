@@ -66,22 +66,35 @@ public class TablaCoches extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Hacer que borre el seleccionado
 				String[] opciones = {"Sí", "No"};
 				if(tabla.getSelectedRow() >= 0) {
-					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("marca"));
+					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
 					case 0:
-						System.out.println("Borrando coche");
+						GestorBD bd = new GestorBD();
+						String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
+						String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
+						String color = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Color"));
+						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
+						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
+						int diesel;
+						
+						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
+							diesel = 0;
+						} else {
+							diesel = 1;
+						}
+						bd.eliminarVehiculo("coche", marca, modeloc, color, caballos, plazas, diesel);
+						bd.desconectar();
 						break;
 					default:
 						break;
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", null, 0);
 				}
 			}
@@ -93,8 +106,10 @@ public class TablaCoches extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (t.isAdmin()) {
 					VistaAdministrador.abrirVistaAdministrador(t);
+					dispose();
 				} else {
 					VistaTrabajador.abrirVistaTrabajador(t);
+					dispose();
 				}
 			}
 		});
@@ -115,12 +130,12 @@ public class TablaCoches extends JFrame {
 		tabla = new JTable(modelo);
 
 		// Creamos las columnas.
-		modelo.addColumn("marca");
-		modelo.addColumn("modelo");
-		modelo.addColumn("color");
-		modelo.addColumn("caballos");
-		modelo.addColumn("nPlazas");
-		modelo.addColumn("modoDeportivo");
+		modelo.addColumn("Marca");
+		modelo.addColumn("Modelo");
+		modelo.addColumn("Color");
+		modelo.addColumn("Caballos");
+		modelo.addColumn("Plazas");
+		modelo.addColumn("Motor diesel");
 
 		GestorBD bd = new GestorBD();
 		ResultSet rs = bd.rellenarTablaCoches();
@@ -134,8 +149,15 @@ public class TablaCoches extends JFrame {
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++)
-					fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-
+					if (i == 5) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "No";
+						} else {
+							fila[i] = "Si";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
 				// Se añade al modelo la fila completa.
 				modelo.addRow(fila);
 			}
@@ -145,20 +167,11 @@ public class TablaCoches extends JFrame {
 		bd.desconectar();
 	}
 
-
-
 	public static void abrirTablaCoches(Trabajador t) {
 		TablaCoches tablaCoches = new TablaCoches(t);
 		tablaCoches.setVisible(true);
 		tablaCoches.setSize(480,360);
 		tablaCoches.setLocationRelativeTo(null);
 		tablaCoches.setVisible(true);
-	}
-
-	//TODO borrar cuando funcione como queremos
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-
-		TablaCoches.abrirTablaCoches(t);
 	}
 }
