@@ -282,7 +282,6 @@ public class RegistrarCliente extends JFrame {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("No conecta a la base de datos");
 		}
 	}
 	
@@ -291,10 +290,17 @@ public class RegistrarCliente extends JFrame {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un nombre de usuario");
 			return true;
 		}
+		
 		if (new String(passwordField.getPassword()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
 			return true;
 		}
+		
+		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
+			return true;	
+		}
+		
 		return false;
 	}
 	
