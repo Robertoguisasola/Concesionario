@@ -61,7 +61,8 @@ public class TablaCoches extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO cambiar a la clase
+				AnadirCoche.abrirAnadirCoche(t);
+				dispose();
 			}
 		});
 

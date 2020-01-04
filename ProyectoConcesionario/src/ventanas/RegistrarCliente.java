@@ -234,10 +234,10 @@ public class RegistrarCliente extends JFrame {
 	
 	private void registrar() {
 		try {
-			//TODO zzzz comprobar que no esté vacío ---> meter defaults en bbdd
+			//TODO aaaaa comprobar que no esté vacío ---> meter defaults en bbdd -- hechos ---> hacer lo del usuario y contraseña
 			if (usuarioField == null) {
 				
-			}
+			} 
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
