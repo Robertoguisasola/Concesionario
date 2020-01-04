@@ -122,7 +122,9 @@ public class TablaClientes extends JFrame {
 		// Creamos las columnas.
 		modelo.addColumn("nombre");
 		modelo.addColumn("apellidos");
-		modelo.addColumn("dNI");
+		modelo.addColumn("DNI");
+		modelo.addColumn("email");
+		modelo.addColumn("fechaNacimiento");
 
 		GestorBD bd = new GestorBD();
 		ResultSet rs = bd.rellenarTablaClientes();

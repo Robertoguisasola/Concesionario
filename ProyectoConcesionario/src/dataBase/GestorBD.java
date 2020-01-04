@@ -206,7 +206,7 @@ public class GestorBD {
 		List<Coche> coches = new ArrayList<Coche>();
 
 		try {
-			File f = new File("ficheros/trabajadores.csv");
+			File f = new File("ficheros/coches.csv");
 			Scanner sc = new Scanner(f);
 
 			while(sc.hasNextLine()) {
@@ -231,6 +231,7 @@ public class GestorBD {
 			
 			log(Level.INFO, "Coches cargados desde el fichero", null);
 		} catch (Exception e) {
+			e.printStackTrace();
 			log(Level.SEVERE, "Error al cargar los coches desde el fichero", null);
 		}
 
