@@ -70,7 +70,6 @@ public class TablaClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Hacer que borre el seleccionado
 				String[] opciones = {"Sí", "No"};
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("nombre"));
@@ -82,7 +81,7 @@ public class TablaClientes extends JFrame {
 					case 0:
 						GestorBD bd = new GestorBD();
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("dNI"));
-						bd.borrarA("cliente", dni);
+						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
 						break;
 					default:
@@ -119,7 +118,7 @@ public class TablaClientes extends JFrame {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
 
-		//TODO poner las demás columnas y tal...
+		//TODO aaaa poner las demás columnas y tal...
 		// Creamos las columnas.
 		modelo.addColumn("nombre");
 		modelo.addColumn("apellidos");
@@ -143,7 +142,6 @@ public class TablaClientes extends JFrame {
 				modelo.addRow(fila);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		bd.desconectar();

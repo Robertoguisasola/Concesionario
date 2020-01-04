@@ -24,7 +24,6 @@ import model.Trabajador;
 
 public class GestorBD {
 	//TODO métodos para exportar a ficheros
-	//TODO método de añadir coche
 	//TODO método de añadir coche de 2ª mano
 	//TODO método crear venta
 
@@ -269,10 +268,9 @@ public class GestorBD {
 		}
 	}	
 	
-	//TODO modificar para que saque un table model y meterlo en la tabla
 	public List<Trabajador> obtenerTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
+		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -283,6 +281,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
+				//TODO zzzz comprobar que todos los campos del trabajador sean obtenidos
 				Trabajador t = new Trabajador();
 				t.setLogin(rs.getString("login"));
 				t.setPassword(rs.getString("password"));
@@ -290,16 +289,17 @@ public class GestorBD {
 				t.setdNI(rs.getString("dNI"));
 				t.setNombre(rs.getString("nombre"));
 				t.setApellidos(rs.getString("apellidos"));
-				t.setAdmin(rs.getInt("isAdmin") == 0);
 				try {
 					t.setFechaNacimientoString(rs.getString("fechaNacimiento"));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 				t.setSueldo(rs.getInt("sueldo"));
+				t.setAdmin(rs.getInt("isAdmin") == 0);
 
 				trabajadores.add(t);
 			}
+			log(Level.INFO, "Obteniendo los trabajadores", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los trabajadores", e);
 			e.printStackTrace();
@@ -320,6 +320,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
+				//TODO zzzz comprobar que todos los campos del cliente sean obtenidos
 				Cliente c = new Cliente();
 				c.setLogin(rs.getString("login"));
 				c.setPassword(rs.getString("password"));
@@ -336,6 +337,8 @@ public class GestorBD {
 
 				clientes.add(c);
 			}
+			
+			log(Level.INFO, "Obteniendo los clientes", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los clientes", e);
 			e.printStackTrace();
@@ -345,65 +348,40 @@ public class GestorBD {
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
 		List<Cliente> clientes = obtenerClientes();
-		
 
-			Iterator<Cliente> itClientes = clientes.iterator();
+		Iterator<Cliente> itClientes = clientes.iterator();
 
-			while (itClientes.hasNext()) {
-				Cliente c = itClientes.next();
+		while (itClientes.hasNext()) {
+			Cliente c = itClientes.next();
 
-				String login = c.getLogin();
-				String password = c.getPassword();
+			String login = c.getLogin();
+			String password = c.getPassword();
 
-				if (login.equals(usuario)) {
-					if (password.equals(contra)) {
-						return c;
-					}
-				}	
-			}
+			if (login.equals(usuario)) {
+				if (password.equals(contra)) {
+					return c;
+				}
+			}	
+		}
 		return null;
 	}
 
 	public Trabajador iniciarSesionTrabajador(String usuario, String contra){
-		//TODO aaaa llamar al metodo de obtener trabajadores
-		String sql = "SELECT login, password FROM trabajador";
-		PreparedStatement stmt;
+		List<Trabajador> trabajadores = obtenerTrabajadores();
 
-		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
+		Iterator<Trabajador> itTrabajadores = trabajadores.iterator();
 
-		try {
-			stmt = conn.prepareStatement(sql);
+		while (itTrabajadores.hasNext()) {
+			Trabajador t = itTrabajadores.next();
 
-			ResultSet rs = stmt.executeQuery();
+			String login = t.getLogin();
+			String password = t.getPassword();
 
-			while (rs.next()){
-				Trabajador t = new Trabajador();
-				//TODO aaaa rellenar todo el trabajador, sin su contraseña
-
-				t.setLogin(rs.getString("login"));
-				t.setNombre(rs.getString("nombre"));
-				t.setApellidos(rs.getString("apellidos"));
-
-				trabajadores.add(t);
-			}
-
-			Iterator<Trabajador> itTrabajadores = trabajadores.iterator();
-
-			while (itTrabajadores.hasNext()) {
-				Trabajador t = itTrabajadores.next();
-
-				String login = t.getLogin();
-				String password = t.getPassword();
-
-				if (login.equals(usuario)) {
-					if (password.equals(contra)) {
-						return t;
-					}
-				}	
-			}
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al iniciar sesión con la cuenta ", e);
-			e.printStackTrace();
+			if (login.equals(usuario)) {
+				if (password.equals(contra)) {
+					return t;
+				}
+			}	
 		}
 		return null;
 	}
@@ -495,15 +473,16 @@ public class GestorBD {
 	
 	public ResultSet rellenarTablaTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, sueldo FROM trabajador";
+		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
-			return rs;
 			
+			log(Level.INFO, "Obteniendo los trabajadores", null);
+			return rs;
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los trabajadores", e);
 			e.printStackTrace();
@@ -520,8 +499,9 @@ public class GestorBD {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
-			return rs;
 			
+			log(Level.INFO, "Obteniendo los clientes", null);
+			return rs;
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los clientes", e);
 			e.printStackTrace();
@@ -540,7 +520,6 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 					
 			log(Level.INFO, "Obteniendo los coches", null);
-			
 			return rs;
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los coches", e);
@@ -549,25 +528,25 @@ public class GestorBD {
 		return null;
 	}
 	
-	public void borrarA(String tabla, String dNI) {
+	//Método que nos permite eliminar a un cliente o despedir a un trabajador, en función de la tabla que le pasemos y el DNI
+	public void eliminarPersona(String tabla, String dNI) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
-		
+
 		PreparedStatement stmtBorrar;
 
-			try {
-				stmtBorrar = conn.prepareStatement(sqlBorrar);
-				
-				stmtBorrar.setString(1, dNI);
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
-				stmtBorrar.executeUpdate(sqlBorrar);
+			stmtBorrar.setString(1, dNI);
 
-					log(Level.INFO, "Borrado de la tabla " + tabla + " de la base de datos", null);
-			} catch (SQLException e) {
-					log(Level.SEVERE, "Error al borrar la tabla " + tabla + " de la base de datos", e);
-					e.printStackTrace();
-				}
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "El " + tabla + " con DNI " + dNI + " ha sido borrado correctamente", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "No ha sido posible borrar al " + tabla + " con DNI " + dNI, e);
+			e.printStackTrace();
+		}
 	}
-	
 
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {

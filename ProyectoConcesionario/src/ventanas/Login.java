@@ -137,6 +137,7 @@ public class Login extends JFrame {
 				VistaCliente.abrirVistaCliente(c);
 				dispose();
 			}else if (t != null) {
+				//TODO aaaaaaagggggggggggggg me caguen mi puta vida, ahora no entra en el administrador con admin admin si lo borramos jodeeeeeeeee
 				if (t.isAdmin()) {
 					VistaAdministrador.abrirVistaAdministrador(t);
 				}else{

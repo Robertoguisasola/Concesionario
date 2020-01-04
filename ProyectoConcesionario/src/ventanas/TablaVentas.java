@@ -76,7 +76,6 @@ public class TablaVentas extends JFrame {
 				String[] opciones = {"Sí", "No"};
 				JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar el pedido?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-				System.out.println();
 			}
 		});
 		
@@ -86,9 +85,6 @@ public class TablaVentas extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
-
-		
-		
 		
 		this.setVisible(true);
 	}

@@ -94,8 +94,11 @@ public class TablaCoches extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO aaaa como hacer que identifique si eres el admin o el trabajador --> boolean isAdmin
-				
+				if (t.isAdmin()) {
+					VistaAdministrador.abrirVistaAdministrador(t);
+				} else {
+					VistaTrabajador.abrirVistaTrabajador(t);
+				}
 			}
 		});
 
@@ -114,7 +117,7 @@ public class TablaCoches extends JFrame {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
 
-		//TODO poner las demás columnas y tal...
+		//TODO aaaa poner las demás columnas y tal...
 		// Creamos las columnas.
 		modelo.addColumn("marca");
 		modelo.addColumn("modelo");
@@ -141,7 +144,6 @@ public class TablaCoches extends JFrame {
 				modelo.addRow(fila);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		bd.desconectar();

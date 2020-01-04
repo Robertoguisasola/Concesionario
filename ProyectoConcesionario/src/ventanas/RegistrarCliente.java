@@ -234,7 +234,7 @@ public class RegistrarCliente extends JFrame {
 	
 	private void registrar() {
 		try {
-			//TODO aaaa comprobar que no esté vacío ---> meter defaults en bbdd
+			//TODO zzzz comprobar que no esté vacío ---> meter defaults en bbdd
 			if (usuarioField == null) {
 				
 			}

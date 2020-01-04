@@ -70,7 +70,6 @@ public class TablaTrabajadores extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Hacer que borre el seleccionado
 				String[] opciones = {"Sí", "No"};
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("nombre"));
@@ -82,7 +81,7 @@ public class TablaTrabajadores extends JFrame {
 					case 0:
 						GestorBD bd = new GestorBD();
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("dni"));
-						bd.borrarA("trabajador", dni);
+						bd.eliminarPersona("trabajador", dni);
 						bd.desconectar();
 						break;
 					default:
@@ -98,8 +97,11 @@ atrasButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO aaaa como hacer que identifique si eres el admin o el trabajador --> boolean isAdmin
-				
+				if (t.isAdmin()) {
+					VistaAdministrador.abrirVistaAdministrador(t);
+				} else {
+					VistaTrabajador.abrirVistaTrabajador(t);
+				}				
 			}
 		});
 		
@@ -127,8 +129,7 @@ atrasButton.addActionListener(new ActionListener() {
 		
 		// Bucle para cada resultado en la consulta
 		try {
-			while (rs.next())
-			{
+			while (rs.next()){
 			   // Se crea un array que será una de las filas de la tabla.
 			   Object [] fila = new Object[2]; // Hay tres columnas en la tabla
 
@@ -140,7 +141,6 @@ atrasButton.addActionListener(new ActionListener() {
 			   modelo.addRow(fila);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		bd.desconectar();
@@ -157,6 +157,7 @@ atrasButton.addActionListener(new ActionListener() {
 	//TODO borrar cuando funcione como queremos
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
+		t.setAdmin(false);
 
 		SwingUtilities.invokeLater(new Runnable() {
 			
