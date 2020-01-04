@@ -108,7 +108,11 @@ public class GestorBD {
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
 			break;
 		}
-	}	
+	}
+	
+	public void exportarBBDDAFichero() {
+		//TODO exportar a ficheros
+	}
 
 	private void importarTrabajadores(){
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
@@ -135,7 +139,6 @@ public class GestorBD {
 				t.setSueldo(Integer.parseInt(campos[7]));
 				t.setAdmin(Boolean.parseBoolean(campos[8]));
 				
-
 				trabajadores.add(t);
 			}
 			sc.close();
@@ -296,8 +299,14 @@ public class GestorBD {
 					e.printStackTrace();
 				}
 				t.setSueldo(rs.getInt("sueldo"));
-				t.setAdmin(rs.getInt("isAdmin") == 0);
-
+				
+				//TODO aaaa no saca el admin nunca
+				if (rs.getInt("isAdmin") == 0) {
+					t.setAdmin(false);
+				} else {
+					t.setAdmin(true);
+				}
+				
 				trabajadores.add(t);
 			}
 			log(Level.INFO, "Obteniendo los trabajadores", null);
@@ -415,8 +424,8 @@ public class GestorBD {
 	}
 
 	public void anadirNuevoTrabajador(Trabajador t) {
-		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo)"
-				+ " VALUES (?,?,?,?,?,?,?,?)";
+		String sql  = "INSERT INTO trabajador (login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;
 		try {
@@ -430,6 +439,12 @@ public class GestorBD {
 			stmt.setString(6, t.getApellidos());
 			stmt.setString(7, t.getFechaNacimientoString());
 			stmt.setInt(8, t.getSueldo());
+			
+			if (t.isAdmin()) {
+				stmt.setInt(9, 1);
+			} else {
+				stmt.setInt(9, 0);
+			}
 
 			stmt.executeUpdate();
 
@@ -474,7 +489,7 @@ public class GestorBD {
 	
 	public ResultSet rellenarTablaTrabajadores(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
+		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
 		try {
@@ -493,7 +508,7 @@ public class GestorBD {
 	
 	public ResultSet rellenarTablaClientes(){
 		//TODO crear test de prueba
-		String sql = "SELECT login, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
+		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, numTarjeta FROM cliente";
 		PreparedStatement stmt;
 
 		try {
@@ -539,7 +554,7 @@ public class GestorBD {
 			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
 			stmtBorrar.setString(1, dNI);
-
+			
 			stmtBorrar.executeUpdate();
 
 			log(Level.INFO, "El " + tabla + " con DNI " + dNI + " ha sido borrado correctamente", null);

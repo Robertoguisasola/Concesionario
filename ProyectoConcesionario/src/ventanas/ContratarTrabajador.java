@@ -157,6 +157,8 @@ public class ContratarTrabajador extends JFrame{
 	sueldoBox.add(Box.createRigidArea(new Dimension(116, 12)));
 	sueldoBox.add(sueldoField);
 	
+	//TODO poner checkbox de isAdmin
+	
 	formPanel = new JPanel();
 	
 	formBox = new Box(BoxLayout.Y_AXIS);
@@ -181,7 +183,7 @@ public class ContratarTrabajador extends JFrame{
 
 	formPanel.add(formBox);
 	
-	acceptButton = new JButton("Registrarme");
+	acceptButton = new JButton("Contratar");
 	acceptButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
 			contratar();
