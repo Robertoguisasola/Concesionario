@@ -35,7 +35,7 @@ public class Bienvenida extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		
-		try {
+		try { 
             fondo = new Fondo(ImageIO.read(new File("img/VolvoXC90Fondo.jpg")));
             panel = (JPanel) this.getContentPane();
             
