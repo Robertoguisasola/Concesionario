@@ -200,11 +200,7 @@ public class RegistrarCliente extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio menu = new Inicio();
-				menu.setVisible(true);
-				menu.setSize(450,260);
-				menu.setLocationRelativeTo(null);
-				menu.setVisible(true);
+				Inicio.abrirInicio();
 				dispose();
 			}
 		});
@@ -220,6 +216,7 @@ public class RegistrarCliente extends JFrame {
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
+	//TODO test
 	private void limpiarCajas() {
 		usuarioField.setText(null);
 		passwordField.setText(null);
@@ -232,29 +229,36 @@ public class RegistrarCliente extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
+	//TODO test
 	private void registrar() {
 		try {
-			//TODO aaaaa comprobar que no esté vacío ---> meter defaults en bbdd -- hechos ---> hacer lo del usuario y contraseña
-			if (usuarioField == null) {
-				
-			} 
+			
+			if (comprobarVacios()) {
+				return;
+			}
+			
+			if (comprobarContraseñas()) {
+				return;
+			}
+			
+			//TODO zzzz comprobar vacíos y defaults.... ya sabes
+			
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
-			String contra = new String(passwordField.getPassword());
+			String contra = new String(passwordField.getPassword());;
 			String email = emailField.getText();
 			String dNI = dniField.getText();
 			String nombre = nombreField.getText();
 			String apellidos = apellidosField.getText();
 			long numTarjeta = Long.parseLong(numeroTarjetaField.getText());
-			
+
 			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
 			
 			GestorBD bd = new GestorBD();
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
-			
-			
+						
 			String[] opciones = {"Sí", "No"};
 			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
@@ -265,6 +269,7 @@ public class RegistrarCliente extends JFrame {
 				break;
 			case 1:
 				Inicio.abrirInicio();
+				dispose();
 				break;
 			default:
 				break;
@@ -272,6 +277,8 @@ public class RegistrarCliente extends JFrame {
 		} 
 		catch (ParseException ex) {
 			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
+		} catch (NumberFormatException en) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca un número de tarjeta");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -279,6 +286,29 @@ public class RegistrarCliente extends JFrame {
 		}
 	}
 	
+	private boolean comprobarVacios() {
+		if (usuarioField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca un nombre de usuario");
+			return true;
+		}
+		if (new String(passwordField.getPassword()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean comprobarContraseñas() {
+		String contra1 = new String(passwordField.getPassword());
+		String contra2 = new String(passwordRField.getPassword());
+		if (contra1.equals(contra2)) {
+			return false;
+		} else {
+			JOptionPane.showMessageDialog(this, "Las contraseñas tienen que coincidir");
+			return true;
+		}
+	}
+
 	public static void abrirRegistrarCliente() {
 		RegistrarCliente registrarCliente = new RegistrarCliente();
 		registrarCliente.setTitle("Regístrate");
