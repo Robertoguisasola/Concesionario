@@ -23,14 +23,12 @@ import javax.swing.border.LineBorder;
 import model.Cliente;
 import model.Persona;
 
-public class VentanaCatalogoCoche extends JFrame {
-	//TODO eliminar y convertir en tabla
-	//TODO que coño hace?????
-	
+public class ComprarCoche extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JMenuBar barraCatalogo;
 	private JMenu vehiculosCatalogo;
 	private JMenu ofertasCatalogo;
@@ -62,7 +60,7 @@ public class VentanaCatalogoCoche extends JFrame {
 	private JButton buscarButton;
 	private Box buttonBox;
 	
-	public VentanaCatalogoCoche(Persona p) {
+	public ComprarCoche(Persona p) {
 		this.setSize(480,360);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -223,12 +221,11 @@ public class VentanaCatalogoCoche extends JFrame {
 		//MiddlePanel				
 	}
 	
-	public static void abrirVentanaCatalogoCoche(Persona p) {
-		VentanaCatalogoCoche ventanaCatalogoCoche = new VentanaCatalogoCoche(p);
+	public static void abrirComprarCoche(Persona p) {
+		ComprarCoche ventanaCatalogoCoche = new ComprarCoche(p);
 		ventanaCatalogoCoche.setVisible(true);
 		ventanaCatalogoCoche.setSize(480,360);
 		ventanaCatalogoCoche.setLocationRelativeTo(null);
 		ventanaCatalogoCoche.setVisible(true);
 	}
-	
 }
