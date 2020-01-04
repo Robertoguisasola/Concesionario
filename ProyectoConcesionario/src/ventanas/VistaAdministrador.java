@@ -447,12 +447,6 @@ public class VistaAdministrador extends JFrame{
 		Trabajador t = new Trabajador();
 		t.setNombre("admin");
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new VistaAdministrador(t);
-			}
-		});
+		VistaAdministrador.abrirVistaAdministrador(t);
 	}
 }

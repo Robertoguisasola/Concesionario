@@ -166,12 +166,4 @@ public class TablaTrabajadores extends JFrame {
 		tablaTrabajadores.setLocationRelativeTo(null);
 		tablaTrabajadores.setVisible(true);
 	}
-
-	//TODO borrar cuando funcione como queremos
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		t.setAdmin(true);
-
-		TablaTrabajadores.abrirTablaTrabajadores(t);
-	}
 }

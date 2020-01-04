@@ -12,6 +12,6 @@ public class MainConcesionario {
 	//TODO solicitar pruebas de un coche, ventana parecida a la de comprar coche
 
 	public static void main(String[] args) {				
-		Bienvenida.abrirBienvenida();	
+		Bienvenida.abrirBienvenida();
 	}
 }
