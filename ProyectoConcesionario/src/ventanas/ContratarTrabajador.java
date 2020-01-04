@@ -151,7 +151,7 @@ public class ContratarTrabajador extends JFrame{
 	
 	sueldoLabel = new JLabel("Sueldo: ");
 	sueldoField = new JTextField();
-	
+		
 	sueldoBox = new Box(BoxLayout.X_AXIS);
 	sueldoBox.add(sueldoLabel);
 	sueldoBox.add(Box.createRigidArea(new Dimension(116, 12)));
@@ -192,12 +192,7 @@ public class ContratarTrabajador extends JFrame{
 	cancelButton = new JButton("Cancelar");
 	cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			Inicio menu = new Inicio();
-			menu.setVisible(true);
-			menu.setSize(450,260);
-			menu.setLocationRelativeTo(null);
-			menu.setVisible(true);
-			dispose();
+			VistaAdministrador.abrirVistaAdministrador(t);
 		}
 	});
 	
@@ -225,11 +220,10 @@ public class ContratarTrabajador extends JFrame{
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			int sueldo = Integer.parseInt(sueldoField.getText());
-			//TODO poner que si es admin o no
+			//TODO aaaa poner que si es admin o no
 			boolean isAdmin = false;
 			
 			Trabajador t = new Trabajador(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin);
-			
 			
 			bd.anadirNuevoTrabajador(t);
 			bd.desconectar();			

@@ -35,7 +35,7 @@ public class TablaClientes extends JFrame {
 	private DefaultTableModel modelo;	
 
 	public TablaClientes(Trabajador t) {
-		this.setTitle("Tabla de Trabajadores");
+		this.setTitle("Tabla de clientes");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(480,360);
@@ -61,8 +61,7 @@ public class TablaClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ContratarTrabajador.abrirContratarTrabajador(t);
-				dispose();
+				//TODO va a registrar un nuevo cliente
 			}
 		});
 
@@ -87,7 +86,7 @@ public class TablaClientes extends JFrame {
 					default:
 						break;
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", null, 0);
 				}
 			}
@@ -98,7 +97,9 @@ public class TablaClientes extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (t.isAdmin()) {
-					//TODO va a administrador
+					VistaAdministrador.abrirVistaAdministrador(t);
+				} else {
+					VistaTrabajador.abrirVistaTrabajador(t);
 				}
 			}
 		});
