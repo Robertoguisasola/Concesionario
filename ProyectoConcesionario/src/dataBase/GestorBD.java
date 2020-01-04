@@ -25,7 +25,6 @@ import model.Trabajador;
 public class GestorBD {
 	//TODO métodos para exportar a ficheros
 	//TODO método de añadir coche de 2ª mano
-	//TODO método crear venta
 
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
@@ -101,6 +100,7 @@ public class GestorBD {
 			importarCoches();
 			break;
 		case "venta":
+			//TODO importar ventas
 			System.out.println("importar venta");
 			//importarVentasCoches();
 			break;
@@ -110,8 +110,34 @@ public class GestorBD {
 		}
 	}
 	
-	public void exportarBBDDAFichero() {
-		//TODO exportar a ficheros
+	public void exportarBBDDAFichero(String tabla) {
+		String [] tablas = {"ventacoche"};
+
+		if (tabla.equals("venta")) {
+			borrarVentas(tablas);
+		} else {
+			borrar(tabla);			
+		}
+			
+		switch (tabla) {
+		case "trabajador":
+			exportarTrabajadores();
+			break;
+		case "cliente":
+			exportarClientes();
+			break;
+		case "coche":
+			exportarCoches();
+			break;
+		case "venta":
+			//TODO exportar ventas
+			System.out.println("exportar venta");
+			//importarVentasCoches();
+			break;
+		default:
+			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
+			break;
+		}
 	}
 
 	private void importarTrabajadores(){
@@ -231,7 +257,7 @@ public class GestorBD {
 				coches.add(c);
 			}
 			sc.close();
-			
+
 			log(Level.INFO, "Coches cargados desde el fichero", null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -241,36 +267,27 @@ public class GestorBD {
 		//TODO crear test de prueba
 		Iterator<Coche>it = coches.iterator();
 
-		String sql  = "INSERT INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel)"
-				+ " VALUES (?,?,?,?,?,?,?)";
+		while (it.hasNext()){			
+			Coche c  = it.next();
 
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement(sql);
-
-			while (it.hasNext()){			
-				Coche c = it.next();
-
-				stmt.setString(1, c.getMarca());
-				stmt.setString(2, c.getModelo());
-				stmt.setString(3, c.getColor().toString());
-				stmt.setInt(4, c.getCaballos());
-				stmt.setInt(5, c.getNumRuedas());
-				stmt.setInt(6, c.getnPlazas());
-				if (c.isMotorDiesel()) {
-					stmt.setInt(7, 1);
-				}else {
-					stmt.setInt(7, 0);
-				}
-
-				stmt.executeUpdate();
-			}
-			log(Level.INFO, "Coches añadidos a la base de datos", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al añadir los coches a la base de datos", e);
-			e.printStackTrace();
+			anadirNuevoCoche(c);
 		}
-	}	
+		log(Level.INFO, "Clientes añadidos a la base de datos", null);
+	}
+
+
+
+	private void exportarTrabajadores(){
+
+	}
+
+	private void exportarClientes() {
+
+	}
+
+	private void exportarCoches(){
+		
+	}
 	
 	public List<Trabajador> obtenerTrabajadores(){
 		//TODO crear test de prueba
@@ -300,7 +317,6 @@ public class GestorBD {
 				}
 				t.setSueldo(rs.getInt("sueldo"));
 				
-				//TODO aaaa no saca el admin nunca
 				if (rs.getInt("isAdmin") == 0) {
 					t.setAdmin(false);
 				} else {
@@ -354,6 +370,44 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 		return clientes;
+	}
+	
+	public List<Coche> obtenerCoches(){
+		//TODO crear test de prueba
+		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel FROM coche";
+		PreparedStatement stmt;
+
+		List<Coche> coches = new ArrayList<Coche>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+				
+				Coche c = new Coche();
+				c.setMarca(rs.getString("marca"));
+				c.setModelo(rs.getString("modelo"));
+				c.setColor(rs.getString("color").toLowerCase());
+				c.setCaballos(rs.getInt("caballos"));
+				c.setNumRuedas(rs.getInt("numRuedas"));
+				c.setnPlazas(rs.getInt("nPlazas"));
+				if (rs.getInt("motorDiesel") == 0) {
+					c.setMotorDiesel(false);
+				} else {
+					c.setMotorDiesel(true);
+				}
+
+				coches.add(c);
+			}
+			
+			log(Level.INFO, "Obteniendo los coches", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los coches", e);
+			e.printStackTrace();
+		}
+		return coches;
 	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
@@ -563,7 +617,39 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
+	
+	//Método para borrar un vehículo de la bbdd en función de la tabla y otros valores
+	public void eliminarVehiculo(String tabla, String marca, String modelo, String color, int caballos, int plazas, int diesel) {
+		String sqlBorrar= "DELETE FROM " + tabla + " WHERE marca = ? AND modelo = ? AND color = ? "
+				+ "AND caballos = ? AND nPlazas = ? AND motorDiesel = ?";
 
+		PreparedStatement stmtBorrar;
+
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
+
+			stmtBorrar.setString(1, marca);
+			stmtBorrar.setString(2, modelo);
+			stmtBorrar.setString(3, color);
+			stmtBorrar.setInt(4, caballos);
+			stmtBorrar.setInt(5, plazas);
+			stmtBorrar.setInt(6, diesel);
+
+			
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrado correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar el "  + marca + " " + modelo + " de color " + color.toLowerCase() , e);
+			e.printStackTrace();
+		}
+	}
+	
+	//TODO completar método....
+	public void venderCoche() {
+		
+	}
+	
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {
 		GestorBD.logger = logger;
