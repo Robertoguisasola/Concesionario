@@ -281,7 +281,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
-				//TODO zzzz comprobar que todos los campos del trabajador sean obtenidos
+				
 				Trabajador t = new Trabajador();
 				t.setLogin(rs.getString("login"));
 				t.setPassword(rs.getString("password"));
@@ -320,7 +320,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
-				//TODO zzzz comprobar que todos los campos del cliente sean obtenidos
+				
 				Cliente c = new Cliente();
 				c.setLogin(rs.getString("login"));
 				c.setPassword(rs.getString("password"));
