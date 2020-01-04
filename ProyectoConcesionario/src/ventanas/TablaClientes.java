@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import dataBase.GestorBD;
@@ -38,9 +37,6 @@ public class TablaClientes extends JFrame {
 		this.setTitle("Tabla de clientes");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
-		this.setResizable(true);
-		this.setLocationRelativeTo(null);
 
 		setData();
 		tablaPanel = new JScrollPane(tabla);
@@ -61,7 +57,7 @@ public class TablaClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO va a registrar un nuevo cliente
+				//TODO zzzz va a registrar un nuevo cliente ---> no lo hagas, piensa como podemos hacer para que vuelva luego a esta ventana y me dices, yo tengo ya una idea
 			}
 		});
 
@@ -71,7 +67,7 @@ public class TablaClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Sí", "No"};
 				if(tabla.getSelectedRow() >= 0) {
-					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("nombre"));
+					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Nombre"));
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
@@ -79,7 +75,7 @@ public class TablaClientes extends JFrame {
 					switch (respuesta) {
 					case 0:
 						GestorBD bd = new GestorBD();
-						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("dNI"));
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
 						break;
@@ -98,8 +94,10 @@ public class TablaClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (t.isAdmin()) {
 					VistaAdministrador.abrirVistaAdministrador(t);
+					dispose();
 				} else {
 					VistaTrabajador.abrirVistaTrabajador(t);
+					dispose();
 				}
 			}
 		});
@@ -119,13 +117,14 @@ public class TablaClientes extends JFrame {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
 
-		//TODO aaaa poner las demás columnas y tal...
 		// Creamos las columnas.
-		modelo.addColumn("nombre");
-		modelo.addColumn("apellidos");
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Apellidos");
 		modelo.addColumn("DNI");
-		modelo.addColumn("email");
-		modelo.addColumn("fechaNacimiento");
+		modelo.addColumn("E-mail");
+		modelo.addColumn("Nombre de usuario");
+		modelo.addColumn("Fecha de nacimiento");
+		modelo.addColumn("Tarjeta");
 
 		GestorBD bd = new GestorBD();
 		ResultSet rs = bd.rellenarTablaClientes();
@@ -135,11 +134,12 @@ public class TablaClientes extends JFrame {
 			while (rs.next())
 			{
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[3]; // Hay tres columnas en la tabla
+				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
 
-				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
-				for (int i=0;i<fila.length;i++)
+				// Rellenado de las columnas
+				for (int i=0;i<fila.length;i++) {
 					fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+				}
 
 				// Se añade al modelo la fila completa.
 				modelo.addRow(fila);
@@ -149,8 +149,6 @@ public class TablaClientes extends JFrame {
 		}
 		bd.desconectar();
 	}
-
-
 
 	public static void abrirTablaClientes(Trabajador t) {
 		TablaClientes tablaClientes = new TablaClientes(t);
@@ -164,12 +162,6 @@ public class TablaClientes extends JFrame {
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				new TablaClientes(t);
-			}
-		});
+		TablaClientes.abrirTablaClientes(t);
 	}
 }

@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import dataBase.GestorBD;
@@ -38,9 +37,6 @@ public class TablaCoches extends JFrame {
 		this.setTitle("Tabla de coches");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480,360);
-		this.setResizable(true);
-		this.setLocationRelativeTo(null);
 
 		setData();
 		tablaPanel = new JScrollPane(tabla);
@@ -118,7 +114,6 @@ public class TablaCoches extends JFrame {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
 
-		//TODO aaaa poner las demás columnas y tal...
 		// Creamos las columnas.
 		modelo.addColumn("marca");
 		modelo.addColumn("modelo");
@@ -164,12 +159,6 @@ public class TablaCoches extends JFrame {
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				new TablaCoches(t);
-			}
-		});
+		TablaCoches.abrirTablaCoches(t);
 	}
 }

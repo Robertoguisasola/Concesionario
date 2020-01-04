@@ -28,7 +28,6 @@ public class VistaTrabajador extends JFrame{
 	
 	private JMenuBar barraMenu;
 	private JMenu clientesMenu;
-	private JMenu trabajadoresMenu;
 	private JMenu ventasMenu;
 	private JMenu cochesMenu;
 	private JMenu clientesEditarMenu;
@@ -216,7 +215,6 @@ public class VistaTrabajador extends JFrame{
 		cochesMenu.add(cochesExportar);
 
 		barraMenu.add(clientesMenu);
-		barraMenu.add(trabajadoresMenu);
 		barraMenu.add(ventasMenu);
 		barraMenu.add(cochesMenu);
 
