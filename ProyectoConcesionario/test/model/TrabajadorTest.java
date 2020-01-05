@@ -57,7 +57,6 @@ public class TrabajadorTest {
 			fail("El trabajador vacío no es administrador. Revisa el constructor vacío");
 		} else {
 			assertEquals(false, empty.isAdmin());
-
 		}
 
 		if (admin.isAdmin()) {

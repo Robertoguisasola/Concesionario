@@ -90,11 +90,10 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", caballos=" + caballos
-				+ ", numRuedas=" + numRuedas + ", nPlazas=" + nPlazas + "]";
+		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas";
 	}
 	
-	public void setColor(String string) {
+	public void setColorString(String string) {
 		switch (string) {
 		case "rojo":
 			Colores colorR = Colores.ROJO;
@@ -123,4 +122,8 @@ public class Vehiculo {
 			break;  
 		}
 	}	
+	
+	public String getColorString() {
+		return color.toString().toLowerCase();
+	}
 }

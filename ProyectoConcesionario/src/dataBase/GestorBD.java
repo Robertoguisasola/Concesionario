@@ -249,7 +249,7 @@ public class GestorBD {
 
 				c.setMarca(campos[0]);
 				c.setModelo(campos[1]);
-				c.setColor(campos[2].toLowerCase());
+				c.setColorString(campos[2].toLowerCase());
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
 				c.setnPlazas(Integer.parseInt(campos[5]));
@@ -371,7 +371,7 @@ public class GestorBD {
 			for (Coche c : coches) {
 				String marca = c.getMarca();
 				String modelo = c.getModelo();
-				String color = c.getColor().toString();
+				String color = c.getColorString();
 				int caballos = c.getCaballos();
 				int numRuedas = c.getNumRuedas();
 				int nPlazas = c.getnPlazas();
@@ -502,7 +502,7 @@ public class GestorBD {
 				Coche c = new Coche();
 				c.setMarca(rs.getString("marca"));
 				c.setModelo(rs.getString("modelo"));
-				c.setColor(rs.getString("color"));
+				c.setColorString(rs.getString("color"));
 				c.setCaballos(rs.getInt("caballos"));
 				c.setNumRuedas(rs.getInt("numRuedas"));
 				c.setnPlazas(rs.getInt("nPlazas"));
@@ -634,7 +634,7 @@ public class GestorBD {
 
 			stmt.setString(1, c.getMarca().toLowerCase());
 			stmt.setString(2, c.getModelo().toUpperCase());
-			stmt.setString(3, c.getColor().toString().toLowerCase());
+			stmt.setString(3, c.getColorString().toLowerCase());
 			stmt.setInt(4, c.getCaballos());
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
