@@ -116,8 +116,11 @@ public class Vehiculo {
 			Colores colorN = Colores.NEGRO;
 			setColor(colorN);
 			break;
+		case "verde":
+			Colores colorV = Colores.VERDE;
+			setColor(colorV);
 		default:
-			break;
+			break;  
 		}
 	}	
 }
