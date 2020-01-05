@@ -13,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Trabajador;
-
 public class Inicio extends JFrame {
 	
 	/**
@@ -46,8 +44,7 @@ public class Inicio extends JFrame {
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Trabajador t = null;
-				RegistrarCliente.abrirRegistrarCliente(t);
+				RegistrarCliente.abrirRegistrarCliente();
 				dispose();
 			}
 		});

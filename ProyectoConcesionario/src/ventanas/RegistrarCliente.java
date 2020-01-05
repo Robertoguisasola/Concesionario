@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 import dataBase.GestorBD;
 import model.Cliente;
 import model.Persona;
-import model.Trabajador;
 
 public class RegistrarCliente extends JFrame {
 	
@@ -69,7 +68,7 @@ public class RegistrarCliente extends JFrame {
 	private JButton cancelButton;
 	private Box buttonsBox;
 	
-	public RegistrarCliente(Trabajador t) {
+	public RegistrarCliente() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		bienvenidaPanel = new JPanel();
@@ -201,7 +200,8 @@ public class RegistrarCliente extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				volver(t);
+				Inicio.abrirInicio();
+				dispose();
 			}
 		});
 		
@@ -216,21 +216,6 @@ public class RegistrarCliente extends JFrame {
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	private void volver(Trabajador t) {
-		if (t == null) {
-			Inicio.abrirInicio();
-			dispose();
-		} else {
-			if (t.isAdmin()) {
-				VistaAdministrador.abrirVistaAdministrador(t);
-				dispose();
-			} else {
-				VistaTrabajador.abrirVistaTrabajador(t);
-				dispose();
-			}
-		}
-	}
-
 	//TODO test
 	private void limpiarCajas() {
 		usuarioField.setText(null);
@@ -330,11 +315,12 @@ public class RegistrarCliente extends JFrame {
 		}
 	}
 
-	public static void abrirRegistrarCliente(Trabajador t) {
-		RegistrarCliente registrarCliente = new RegistrarCliente(t);
+	public static void abrirRegistrarCliente() {
+		RegistrarCliente registrarCliente = new RegistrarCliente();
 		registrarCliente.setTitle("Regístrate");
 		registrarCliente.setVisible(true);
 		registrarCliente.setSize(480,420);
 		registrarCliente.setLocationRelativeTo(null);
+		registrarCliente.setVisible(true);
 	}
 }
