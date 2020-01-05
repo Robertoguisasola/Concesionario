@@ -228,7 +228,8 @@ public class GestorBD {
 		}
 		log(Level.INFO, "Clientes añadidos a la base de datos", null);
 	}
-
+	
+	//TODO aaaa no funciona
 	private void importarCoches(){
 		List<Coche> coches = new ArrayList<Coche>();
 
@@ -247,8 +248,8 @@ public class GestorBD {
 
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings
 
-				c.setMarca(campos[0]);
-				c.setModelo(campos[1]);
+				c.setMarca(campos[0].toLowerCase());
+				c.setModelo(campos[1].toLowerCase());
 				c.setColorString(campos[2].toLowerCase());
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
@@ -265,15 +266,14 @@ public class GestorBD {
 			sc.close();
 		}
 
-		//TODO tttt crear test de prueba
 		Iterator<Coche>it = coches.iterator();
 
 		while (it.hasNext()){			
 			Coche c  = it.next();
-
+			
 			anadirNuevoCoche(c);
 		}
-		log(Level.INFO, "Clientes añadidos a la base de datos", null);
+		log(Level.INFO, "Coches añadidos a la base de datos", null);
 	}
 	
 	//TODO aaaa completar importar
@@ -631,10 +631,10 @@ public class GestorBD {
 
 		try {			
 			stmt = conn.prepareStatement(sql);
-
-			stmt.setString(1, c.getMarca().toLowerCase());
-			stmt.setString(2, c.getModelo().toUpperCase());
-			stmt.setString(3, c.getColorString().toLowerCase());
+			
+			stmt.setString(1, c.getMarca());
+			stmt.setString(2, c.getModelo());
+			stmt.setString(3, c.getColorString());
 			stmt.setInt(4, c.getCaballos());
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
@@ -645,10 +645,10 @@ public class GestorBD {
 			}
 
 			stmt.executeUpdate();
-
+			
 			log(Level.INFO, "El coche " + c.toString() + " ha sido añadido", null);
 		} catch (SQLException e) {
-			log( Level.SEVERE, "Error al insertar el trabajador" + sql, e );
+			log( Level.SEVERE, "Error al insertar el coche " + c.toString(), e );
 			setLastError(e);
 			e.printStackTrace();
 		}
@@ -701,6 +701,78 @@ public class GestorBD {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo los coches", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los coches", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<String> obtenerMarcas() {
+		String sql = "SELECT DISTINCT marca FROM coche";
+		
+		PreparedStatement stmt;
+
+		List<String> marcas = new ArrayList<String>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+				String marca = rs.getString("marca");
+				
+				marcas.add(marca);
+			}
+
+			log(Level.INFO, "Obteniendo marcas de coches", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener marcas de coches", e);
+			e.printStackTrace();
+		}
+		return marcas;
+	}
+	
+	public List<String> obtenerModelos(String marca) {
+		String sql = "SELECT DISTINCT modelo FROM coche WHERE marca = " + marca;
+		
+		PreparedStatement stmt;
+
+		List<String> modelos = new ArrayList<String>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+				String modelo = rs.getString("modelo");
+				
+				modelos.add(modelo);
+			}
+
+			log(Level.INFO, "Obteniendo modelos de coches", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener modelos de coches", e);
+			e.printStackTrace();
+		}
+		return modelos;
+	}
+	
+	public ResultSet obtenerCochesComprar(String marca, String color, int plazas){
+		//TODO tttt crear test de prueba
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, motorDiesel FROM coche"
+				+ " WHERE marca = '" + marca + "' AND color = '" + color + "' AND nPlazas >= " + plazas;
+		Statement stmt;
+
+		try {
+			stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
 
 			log(Level.INFO, "Obteniendo los coches", null);
 			return rs;

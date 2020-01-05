@@ -97,7 +97,6 @@ public class VehiculoTest {
 		assertEquals(2, v.getnPlazas());
 	}
 
-	//TODO aaaa hacer test de setColor 
 	@Test
 	public void testSetColorString() {
 		v.setColorString("rojo");

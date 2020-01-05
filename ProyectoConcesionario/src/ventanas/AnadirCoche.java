@@ -1,25 +1,29 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
-import model.Coche;
+import dataBase.GestorBD;
+import model.Cliente;
+import model.Persona;
 import model.Trabajador;
 
 public class AnadirCoche extends JFrame {
@@ -30,171 +34,287 @@ public class AnadirCoche extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel opcionesPanel;
-	private JPanel botonesPanel;
+	private JPanel camposPanel;
+	private JLabel camposLabel;
+	private JPanel formPanel;
+	private Box formBox;
+	private JPanel buttonsPanel;
+	private JLabel marcaLabel;
+	private JTextField marcaField;
+	private Box marcaBox;
+	private JLabel modeloLabel;
+	private JTextField modeloField;
+	private Box modeloBox;
+	private JLabel passwordRLabel;
+	private JPasswordField passwordRField;
+	private Box passwordRBox;
+	private JLabel emailLabel;
+	private JTextField emailField;
+	private Box emailBox;
+	private JLabel dniLabel;
+	private JTextField dniField;
+	private Box dniBox;
+	private JLabel nombreLabel;
+	private JTextField nombreField;
+	private Box nombreBox;
+	private JLabel apellidosLabel;
+	private JTextField apellidosField;
+	private Box apellidosBox;
+	private JLabel fechaNacimientoLabel;
+	private JTextField fechaNacimientoField;
+	private Box fechaNacimientoBox;
+	private JLabel numeroTarjetaLabel;
+	private JTextField numeroTarjetaField;
+	private Box numeroTarjetaBox;
+	private JButton agregarButton;
+	private JButton cancelarButton;
 	private Box buttonsBox;
-	private JButton anadirCocheButton;
-	private JButton cancelButton;
-	
-	private JLabel labelMatricula;
-	private JTextField fieldMatricula;
-	
-	private JLabel labelNRuedas;
-	private JComboBox<Integer> comboNRuedas;
-	
-	private JLabel labelCaballos;
-	private JComboBox<Integer> comboCaballos;
-	
-	private JLabel labelPlazas;
-	private JComboBox<Integer> comboPlazas;
-	
-	private JLabel labelColor;
-	private JComboBox<model.Colores> comboColor;
-	
-	private JLabel labelMarca;
-	private JComboBox<String> comboMarca;
-	
-	private JLabel labelModelo;
-	private JTextField fieldModelo;
-	
-	private JCheckBox checkAutomatico;
-	private JCheckBox checkLucesLed;
-	private JCheckBox checkTechoPanoramico;
-	private JCheckBox checkTraccion;
-	private JCheckBox checkModoDeportivo;
 	
 	public AnadirCoche(Trabajador t) {
-		//TODO que muestre un titulo personalizado para el trabajador
-		//this.setTitle(t.getNombre()+" "+t.getApellidos()+", añada un coche a la base de datos");
-		this.setTitle("Añadir coche");
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(480, 360);
-		this.setResizable(true);
+		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo coche");
 		
-		opcionesPanel = new JPanel();
-		opcionesPanel.setLayout(new GridLayout(13,2));
-		opcionesPanel.setBorder(new LineBorder(Color.BLACK, 3));
+		camposPanel = new JPanel();
 		
-		labelMatricula = new JLabel("Matricula: ");
-		fieldMatricula = new JTextField();
+		String rellenar = "<html><body><center>Rellene todos los campos</center></body></html>";
 		
-		labelNRuedas = new JLabel("Nº Ruedas: ");
-		comboNRuedas = new JComboBox<Integer>();
-		comboNRuedas.addItem(2);
-		comboNRuedas.addItem(3);
-		comboNRuedas.addItem(4);
+		camposLabel = new JLabel(rellenar);
+		camposPanel.add(camposLabel);
 		
-		labelCaballos = new JLabel("Caballos: ");
-		comboCaballos = new JComboBox<Integer>();
-		comboCaballos.addItem(70);
-		comboCaballos.addItem(100);
-		comboCaballos.addItem(120);
-		comboCaballos.addItem(150);
-		comboCaballos.addItem(200);
+		getContentPane().add(camposPanel, BorderLayout.NORTH);
 		
-		labelPlazas = new JLabel("Plazas: ");
-		comboPlazas = new JComboBox<Integer>();
-		comboPlazas.addItem(1);
-		comboPlazas.addItem(2);
-		comboPlazas.addItem(4);
-		comboPlazas.addItem(5);
-		comboPlazas.addItem(7);
-		comboPlazas.addItem(9);
+		formPanel = new JPanel();
+		formPanel.setLayout(new GridBagLayout());
 		
-		labelColor = new JLabel("Color: ");
-		comboColor = new JComboBox<model.Colores>();
-		for(model.Colores color : model.Colores.values())
-			comboColor.addItem(color);
+		buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new GridBagLayout());
+		
+		marcaLabel = new JLabel("Marca: ");
+		marcaField = new JTextField();
+			
+		marcaBox = new Box(BoxLayout.X_AXIS);
+		marcaBox.add(marcaLabel);
+		marcaBox.add(Box.createRigidArea(new Dimension(46, 12)));
+		marcaBox.add(marcaLabel);
+		
+		modeloLabel = new JLabel("Modelo: ");
+		modeloField = new JPasswordField();
+		
+		modeloBox = new Box(BoxLayout.X_AXIS);
+		modeloBox.add(modeloLabel);
+		modeloBox.add(Box.createRigidArea(new Dimension(90, 12)));
+		modeloBox.add(modeloField);
+		
+		passwordRLabel = new JLabel("Repita la contraseña: ");
+		passwordRField = new JPasswordField();
+		
+		passwordRBox = new Box(BoxLayout.X_AXIS);
+		passwordRBox.add(passwordRLabel);
+		passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
+		passwordRBox.add(passwordRField);
+		
+		emailLabel = new JLabel("Email: ");
+		emailField = new JTextField();
+		
+		emailBox = new Box(BoxLayout.X_AXIS);
+		emailBox.add(emailLabel);
+		emailBox.add(Box.createRigidArea(new Dimension(124, 12)));
+		emailBox.add(emailField);
+		
+		dniLabel = new JLabel("DNI: ");
+		dniField = new JTextField(9);
+		
+		dniBox = new Box(BoxLayout.X_AXIS);
+		dniBox.add(dniLabel);
+		dniBox.add(Box.createRigidArea(new Dimension(135, 12)));
+		dniBox.add(dniField);
+		
+		nombreLabel = new JLabel("Nombre: ");
+		nombreField = new JTextField();
+		
+		nombreBox = new Box(BoxLayout.X_AXIS);
+		nombreBox.add(nombreLabel);
+		nombreBox.add(Box.createRigidArea(new Dimension(110, 12)));
+		nombreBox.add(nombreField);
 
-		
-		labelMarca = new JLabel("Marca: ");
-		comboMarca = new JComboBox<String>();
-		comboMarca.addItem("Renault");
-		comboMarca.addItem("BMW");
-		comboMarca.addItem("Seat");
-		comboMarca.addItem("Honda");
-		comboMarca.addItem("Kia");
-		
-		labelModelo = new JLabel("Modelo: ");
-		fieldModelo = new JTextField();
-		
-		checkAutomatico = new JCheckBox("Automático");
-		checkLucesLed = new JCheckBox("Luces led");
-		checkTechoPanoramico = new JCheckBox("Techo panorámico");
-		checkTraccion = new JCheckBox("Tracción 4x4");
-		checkModoDeportivo = new JCheckBox("Modo deportivo");
+		apellidosLabel = new JLabel("Apellidos: ");
+		apellidosField = new JTextField();
 
-		opcionesPanel.add(labelMatricula);
-		opcionesPanel.add(fieldMatricula);
-		opcionesPanel.add(labelNRuedas);
-		opcionesPanel.add(comboNRuedas);
-		opcionesPanel.add(labelCaballos);
-		opcionesPanel.add(comboCaballos);
-		opcionesPanel.add(labelPlazas);
-		opcionesPanel.add(comboPlazas);
-		opcionesPanel.add(labelColor);
-		opcionesPanel.add(comboColor);
-		opcionesPanel.add(labelMarca);
-		opcionesPanel.add(comboMarca);
-		opcionesPanel.add(labelModelo);
-		opcionesPanel.add(fieldModelo);
-		opcionesPanel.add(checkAutomatico);
-		opcionesPanel.add(checkLucesLed);
-		opcionesPanel.add(checkTechoPanoramico);
-		opcionesPanel.add(checkTraccion);
-		opcionesPanel.add(checkModoDeportivo);
+		apellidosBox = new Box(BoxLayout.X_AXIS);
+		apellidosBox.add(apellidosLabel);
+		apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
+		apellidosBox.add(apellidosField);
 		
-		botonesPanel = new JPanel();
-		botonesPanel.setLayout(new GridLayout(1,8));
-		botonesPanel.setBorder(new LineBorder(Color.BLACK, 3));
-		buttonsBox = new Box(BoxLayout.Y_AXIS);
+		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
+		fechaNacimientoField = new JTextField();
+		fechaNacimientoField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fechaNacimientoField.setText("");
+			}
+		});
+		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
+		fechaNacimientoField.setText("dd/MM/yyyy");
 		
-		anadirCocheButton = new JButton("Registrar coche");
-		anadirCocheButton.addActionListener(new ActionListener() {
+		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
+		fechaNacimientoBox.add(fechaNacimientoLabel);
+		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
+		fechaNacimientoBox.add(fechaNacimientoField);
+		
+		numeroTarjetaLabel = new JLabel("Número de tarjeta: ");
+		numeroTarjetaField = new JTextField();
+		
+		numeroTarjetaBox = new Box(BoxLayout.X_AXIS);
+		numeroTarjetaBox.add(numeroTarjetaLabel);
+		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(51, 12)));
+		numeroTarjetaBox.add(numeroTarjetaField);
+		
+		formPanel = new JPanel();
+		
+		formBox = new Box(BoxLayout.Y_AXIS);
+		formBox.add(marcaBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(modeloBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(passwordRBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(emailBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(dniBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(nombreBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(apellidosBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(fechaNacimientoBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(numeroTarjetaBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+
+		formPanel.add(formBox);
+		
+		agregarButton = new JButton("Registrarme");
+		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				Coche c= new Coche();
-				c.setNumRuedas((int)comboNRuedas.getSelectedItem());
-				c.setCaballos((int)comboCaballos.getSelectedItem());
-				c.setnPlazas((int)comboPlazas.getSelectedItem());
-				c.setColor((model.Colores) comboColor.getSelectedItem());
-				c.setMarca(comboMarca.getSelectedItem().toString());
-				c.setModelo(fieldModelo.getText());
-				//TODO FALTA REGISTRAR EL COCHE EN LA BASE DE DATOS
+				registrar(t);
 			}
 		});
 		
-		cancelButton = new JButton("Cancelar");
-		cancelButton.addActionListener(new ActionListener() {
+		cancelarButton = new JButton("Cancelar");
+		cancelarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nombreT = t.getNombre();
-
-				if (nombreT.equals("admin")) {
-					VistaAdministrador vistaAdministrador = new VistaAdministrador(t);
-					vistaAdministrador.setLocationRelativeTo(null);
-					vistaAdministrador.setVisible(true);
-					dispose();
-				}else {
-					VistaTrabajador ventanaTrabajador = new VistaTrabajador(t);
-					ventanaTrabajador.setLocationRelativeTo(null);
-					ventanaTrabajador.setVisible(true);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 		
-		buttonsBox.add(anadirCocheButton);
-		buttonsBox.add(cancelButton);
-				
-		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
-		gbc_buttonsBox.gridx = 0;
-		botonesPanel.add(buttonsBox, gbc_buttonsBox);
+		buttonsBox = new Box(BoxLayout.X_AXIS);
+		buttonsBox.add(agregarButton);
+		buttonsBox.add(Box.createRigidArea(new Dimension(40, 0)));
+		buttonsBox.add(cancelarButton);
 		
-		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
-		getContentPane().add(botonesPanel,BorderLayout.SOUTH);
+		buttonsPanel.add(buttonsBox);
 		
-		this.setVisible(true);
+		getContentPane().add(formPanel, BorderLayout.CENTER);
+		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
+	}
+	
+	private void volver(Trabajador t) {
+		if (t == null) {
+			Inicio.abrirInicio();
+			dispose();
+		} else {
+			if (t.isAdmin()) {
+				VistaAdministrador.abrirVistaAdministrador(t);
+				dispose();
+			} else {
+				VistaTrabajador.abrirVistaTrabajador(t);
+				dispose();
+			}
+		}
+	}
 
+	//TODO test
+	private void limpiarCajas(Trabajador t) {
+		marcaField.setText(null);
+		modeloField.setText(null);
+		passwordRField.setText(null);
+		emailField.setText(null);
+		dniField.setText(null);
+		nombreField.setText(null);
+		apellidosField.setText(null);
+		fechaNacimientoField.setText(null);
+		numeroTarjetaField.setText(null);
+	}
+	
+	//TODO test
+	private void registrar(Trabajador t) {
+		try {
+			
+			if (comprobarVacios()) {
+				return;
+			}
+			
+			//TODO zzzz comprobar vacíos y defaults.... ya sabes
+			
+			String fechaNacimientoString = fechaNacimientoField.getText();
+			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
+			String marca = marcaField.getText();
+			String modelo = new String(modeloField.getText());;
+			String email = emailField.getText();
+			String dNI = dniField.getText();
+			String nombre = nombreField.getText();
+			String apellidos = apellidosField.getText();
+			long numTarjeta = Long.parseLong(numeroTarjetaField.getText());
+
+			Cliente c = new Cliente(marca, modelo, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
+			
+			GestorBD bd = new GestorBD();
+			bd.anadirNuevoCliente(c);
+			bd.desconectar();
+						
+			String[] opciones = {"Sí", "No"};
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+			
+			switch (respuesta) {
+			case 0:
+				limpiarCajas(t);
+				break;
+			case 1:
+				volver(t);
+				dispose();
+				break;
+			default:
+				break;
+			}
+		} 
+		catch (ParseException ex) {
+			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
+		} catch (NumberFormatException en) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca un número de tarjeta");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean comprobarVacios() {
+		if (marcaField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca una marca para el coche");
+			return true;
+		}
+		
+		if (new String(modeloField.getText().equals(""))) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
+			return true;
+		}
+		
+		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
+			return true;	
+		}
+		
+		return false;
 	}
 	
 	public static void abrirAnadirCoche(Trabajador t) {
@@ -208,14 +328,6 @@ public class AnadirCoche extends JFrame {
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				
-				new AnadirCoche(t);
-			}
-		});
+		AnadirCoche.abrirAnadirCoche(t);
 	}
 }
-
