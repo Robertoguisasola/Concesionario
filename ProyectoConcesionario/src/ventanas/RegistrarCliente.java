@@ -194,7 +194,7 @@ public class RegistrarCliente extends JFrame {
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				registrar();
+				registrar(t);
 			}
 		});
 		
@@ -232,7 +232,7 @@ public class RegistrarCliente extends JFrame {
 	}
 
 	//TODO test
-	private void limpiarCajas() {
+	private void limpiarCajas(Trabajador t) {
 		usuarioField.setText(null);
 		passwordField.setText(null);
 		passwordRField.setText(null);
@@ -245,7 +245,7 @@ public class RegistrarCliente extends JFrame {
 	}
 	
 	//TODO test
-	private void registrar() {
+	private void registrar(Trabajador t) {
 		try {
 			
 			if (comprobarVacios()) {
@@ -280,10 +280,10 @@ public class RegistrarCliente extends JFrame {
 			
 			switch (respuesta) {
 			case 0:
-				limpiarCajas();
+				limpiarCajas(t);
 				break;
 			case 1:
-				Inicio.abrirInicio();
+				volver(t);
 				dispose();
 				break;
 			default:
