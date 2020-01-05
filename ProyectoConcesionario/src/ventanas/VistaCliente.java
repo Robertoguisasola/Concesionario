@@ -60,7 +60,7 @@ panelSuperior  =new JPanel();
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ComprarCocheeeeeeeee.abrirComprarCoche(c);
+				//TODO que lleve a comprar coche
 			}
 		});
 		
