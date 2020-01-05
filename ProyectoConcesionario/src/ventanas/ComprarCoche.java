@@ -20,7 +20,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import model.Cliente;
 import model.Persona;
 
 public class ComprarCoche extends JFrame {
