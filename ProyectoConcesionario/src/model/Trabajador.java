@@ -44,9 +44,13 @@ public class Trabajador extends Persona{
 
 	@Override
 	public String toString() {
-		return "Trabajador [sueldo=" + sueldo + ", login=" + login + ", password=" + password + ", email=" + email
-				+ ", dNI=" + dNI + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento="
-				+ fechaNacimiento + "]";
+		String admin;
+		if (this.isAdmin) {
+			admin = "es";
+		} else {
+			admin = "no es";
+		}
+		return nombre + " " + apellidos + " con DNI " + dNI + " " + admin + " administrador y posee un sueldo de " + sueldo + "€";
 	}
 
 

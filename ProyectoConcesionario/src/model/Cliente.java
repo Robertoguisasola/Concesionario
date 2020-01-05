@@ -32,9 +32,7 @@ public class Cliente extends Persona {
 
 	@Override
 	public String toString() {
-		return "Cliente [numTarjeta=" + numTarjeta + ", login=" + login + ", password=" + password + ", email=" + email
-				+ ", dNI=" + dNI + ", apellidos=" + apellidos + ", nombre=" + nombre + ", fechaNacimiento="
-				+ fechaNacimiento + "]";
+		return nombre + " " + apellidos + ", con DNI " + dNI + " y número de tarjeta " + numTarjeta;
 	}
 
 	
