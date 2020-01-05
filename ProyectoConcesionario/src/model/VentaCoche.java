@@ -6,23 +6,23 @@ public class VentaCoche extends Venta {
 	protected boolean traccion4x4;
 	protected boolean modoDeportivo;
 	
-	public VentaCoche(Cliente comprador, Vehiculo vehiculo, int precio, String matricula, boolean techoPanoramico,
-			boolean traccion4x4, boolean modoDeportivo) {
-		super(comprador, vehiculo, precio, matricula);
+	public VentaCoche(Cliente comprador, Vehiculo vehiculo, int precio, String matricula, boolean automatico,
+			boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
+		super(comprador, vehiculo, precio, matricula, automatico, lucesLed);
 		this.techoPanoramico = techoPanoramico;
 		this.traccion4x4 = traccion4x4;
 		this.modoDeportivo = modoDeportivo;
 	}
-	
+
 	public VentaCoche() {
-		super(null, null, 0, "");
+		super(null, null, 0, "", false, false);
 		this.techoPanoramico = false;
 		this.traccion4x4 = false;
-		this.modoDeportivo = false; 
+		this.modoDeportivo = false;
 	}
-	
+
 	public VentaCoche(VentaCoche v) {
-		super(v.comprador, v.vehiculo, v.precio, v.matricula);
+		super(v.comprador, v.vehiculo, v.precio, v.matricula, v.automatico, v.lucesLed);
 		this.techoPanoramico = v.techoPanoramico;
 		this.traccion4x4 = v.traccion4x4;
 		this.modoDeportivo = v.modoDeportivo;

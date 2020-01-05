@@ -11,12 +11,14 @@ public class Venta {
 	protected boolean lucesLed;
 	
 	
-	public Venta(Cliente comprador, Vehiculo vehiculo, int precio, String matricula) {
+	public Venta(Cliente comprador, Vehiculo vehiculo, int precio, String matricula, boolean automatico, boolean lucesLed) {
 		super();
 		this.comprador = comprador;
 		this.vehiculo = vehiculo;
 		this.precio = precio;
 		this.matricula = matricula;
+		this.automatico = automatico;
+		this.lucesLed = lucesLed;
 	}
 	
 	public Venta() {
@@ -25,6 +27,8 @@ public class Venta {
 		this.vehiculo = null;
 		this.precio = 0;
 		this.matricula = null;
+		this.automatico = false;
+		this.lucesLed = false;
 	}
 	
 	public Venta(Venta v) {
@@ -33,6 +37,8 @@ public class Venta {
 		this.vehiculo = v.vehiculo;
 		this.precio = v.precio;
 		this.matricula = v.matricula;
+		this.automatico = v.automatico;
+		this.lucesLed = v.lucesLed;
 	}
 	
 	public Cliente getComprador() {
@@ -61,12 +67,25 @@ public class Venta {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+	
+	public boolean isAutomatico() {
+		return automatico;
+	}
+
+	public void setAutomatico(boolean automatico) {
+		this.automatico = automatico;
+	}
+
+	public boolean isLucesLed() {
+		return lucesLed;
+	}
+
+	public void setLucesLed(boolean lucesLed) {
+		this.lucesLed = lucesLed;
+	}
 
 	@Override
 	public String toString() {
-		return "Venta [comprador=" + comprador + ", vehiculo=" + vehiculo + ", precio=" + precio + ", matricula="
-				+ matricula + "]";
-	}
-	
-	
-}	
+		return comprador.toString() + " ha comprado " + vehiculo.toString() + " por " + precio + "€, con matrícula " + matricula;
+	}	
+}
