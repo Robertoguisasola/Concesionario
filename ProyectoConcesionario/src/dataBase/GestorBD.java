@@ -1,6 +1,8 @@
 package dataBase;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +25,6 @@ import model.Coche;
 import model.Trabajador;
 
 public class GestorBD {
-	//TODO métodos para exportar a ficheros
 	//TODO método de añadir coche de 2ª mano
 
 	private static Exception lastError = null; //Último error que ha sucedido
@@ -55,31 +56,31 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//Preparado para tener no solo ventas de coches
 	private void borrarVentas(String[] tablas) {
 		for (int i = 0; i < tablas.length; i++) {
 			borrar(tablas[i]);
 		}		
 	}
-	
+
 	private void borrar(String tabla) {
 		String sqlBorrar= "DELETE FROM " + tabla;
-		
+
 		Statement stmtBorrar;
 
-			try {
-				stmtBorrar = conn.createStatement();
+		try {
+			stmtBorrar = conn.createStatement();
 
-				stmtBorrar.executeUpdate(sqlBorrar);
+			stmtBorrar.executeUpdate(sqlBorrar);
 
-					log(Level.INFO, "Borrado de la tabla " + tabla + " de la base de datos", null);
-			} catch (SQLException e) {
-					log(Level.SEVERE, "Error al borrar la tabla " + tabla + " de la base de datos", e);
-					e.printStackTrace();
-				}
+			log(Level.INFO, "Borrado de la tabla " + tabla + " de la base de datos", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al borrar la tabla " + tabla + " de la base de datos", e);
+			e.printStackTrace();
+		}
 	}
-		
+
 	public void importarFicheroABBDD(String tabla){	
 		String [] tablas = {"ventacoche"};
 
@@ -88,7 +89,7 @@ public class GestorBD {
 		} else {
 			borrar(tabla);			
 		}
-			
+
 		switch (tabla) {
 		case "trabajador":
 			importarTrabajadores();
@@ -100,25 +101,15 @@ public class GestorBD {
 			importarCoches();
 			break;
 		case "venta":
-			//TODO importar ventas
-			System.out.println("importar venta");
-			//importarVentasCoches();
+			importarVentas();
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
 			break;
 		}
 	}
-	
-	public void exportarBBDDAFichero(String tabla) {
-		String [] tablas = {"ventacoche"};
 
-		if (tabla.equals("venta")) {
-			borrarVentas(tablas);
-		} else {
-			borrar(tabla);			
-		}
-			
+	public void exportarBBDDAFichero(String tabla) {	
 		switch (tabla) {
 		case "trabajador":
 			exportarTrabajadores();
@@ -130,9 +121,8 @@ public class GestorBD {
 			exportarCoches();
 			break;
 		case "venta":
-			//TODO exportar ventas
 			System.out.println("exportar venta");
-			//importarVentasCoches();
+			exportarVentas();
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
@@ -143,9 +133,12 @@ public class GestorBD {
 	private void importarTrabajadores(){
 		List<Trabajador> trabajadores = new ArrayList<Trabajador>();
 
+		File f = null;
+		Scanner sc = null;
+
 		try {
-			File f = new File("ficheros/trabajadores.csv");
-			Scanner sc = new Scanner(f);
+			f = new File("ficheros/trabajadores.csv");
+			sc = new Scanner(f);
 
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
@@ -164,34 +157,37 @@ public class GestorBD {
 				t.setFechaNacimientoString((campos[6]));
 				t.setSueldo(Integer.parseInt(campos[7]));
 				t.setAdmin(Boolean.parseBoolean(campos[8]));
-				
+
 				trabajadores.add(t);
 			}
 			sc.close();
-			
+
 			log(Level.INFO, "Trabajadores cargados desde el fichero", null);
 		} catch (Exception e) {
 			log(Level.SEVERE, "Error al cargar trabajadores desde el fichero", null);
 		}
 
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
 
-			while (it.hasNext()){			
-				Trabajador t  = it.next();
-				
-				anadirNuevoTrabajador(t);
-			}
-			log(Level.INFO, "Trabajadores añadidos a la base de datos", null);
+		while (it.hasNext()){			
+			Trabajador t  = it.next();
+
+			anadirNuevoTrabajador(t);
+		}
+		log(Level.INFO, "Trabajadores añadidos a la base de datos", null);
 	}
-	
+
 	private void importarClientes() {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 
+		File f = null;
+		Scanner sc = null;
+
 		try {
-			File f = new File("ficheros/clientes.csv");
-			Scanner sc = new Scanner(f);
+			f = new File("ficheros/clientes.csv");
+			sc = new Scanner(f);
 
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
@@ -213,30 +209,35 @@ public class GestorBD {
 				clientes.add(c);	
 			}
 			sc.close();
-			
+
 			log(Level.INFO, "Clientes cargados desde el fichero", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log(Level.SEVERE, "Error al cargar los clientes desde el fichero", null);
+		} finally {
+			sc.close();
 		}
 
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 
-			while (it.hasNext()){			
-				Cliente c  = it.next();
+		while (it.hasNext()){			
+			Cliente c  = it.next();
 
-				anadirNuevoCliente(c);
-			}
-			log(Level.INFO, "Clientes añadidos a la base de datos", null);
+			anadirNuevoCliente(c);
+		}
+		log(Level.INFO, "Clientes añadidos a la base de datos", null);
 	}
 
 	private void importarCoches(){
 		List<Coche> coches = new ArrayList<Coche>();
 
+		File f = null;
+		Scanner sc = null;
+
 		try {
-			File f = new File("ficheros/coches.csv");
-			Scanner sc = new Scanner(f);
+			f = new File("ficheros/coches.csv");
+			sc = new Scanner(f);
 
 			while(sc.hasNextLine()) {
 				String linea = sc.nextLine();
@@ -245,7 +246,7 @@ public class GestorBD {
 				Coche c = new Coche();
 
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings
-				
+
 				c.setMarca(campos[0]);
 				c.setModelo(campos[1]);
 				c.setColor(campos[2].toLowerCase());
@@ -256,15 +257,15 @@ public class GestorBD {
 
 				coches.add(c);
 			}
-			sc.close();
-
 			log(Level.INFO, "Coches cargados desde el fichero", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log(Level.SEVERE, "Error al cargar los coches desde el fichero", null);
+		} finally {
+			sc.close();
 		}
 
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		Iterator<Coche>it = coches.iterator();
 
 		while (it.hasNext()){			
@@ -274,23 +275,135 @@ public class GestorBD {
 		}
 		log(Level.INFO, "Clientes añadidos a la base de datos", null);
 	}
-
-
+	
+	//TODO aaaa completar importar
+	private void importarVentas() {
+		
+	}
 
 	private void exportarTrabajadores(){
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Trabajador>trabajadores = obtenerTrabajadores();
 
+		try {
+			f = new FileWriter("ficheros/trabajadoresexp.csv");
+
+			for (Trabajador t : trabajadores) {
+				String login = t.getLogin();
+				String password = t.getPassword();
+				String email = t.getEmail();
+				String dNI = t.getdNI();
+				String nombre = t.getNombre();
+				String apellidos = t.getApellidos();
+				String fechaNacimiento = t.getFechaNacimientoString();
+				int sueldo = t.getSueldo();
+				boolean admin = t.isAdmin();
+
+				f.write(login + ";" + password + ";" + email + ";" + dNI + ";" + nombre + ";" + apellidos + ";" + fechaNacimiento + ";" + sueldo + ";" + admin + "\n");
+
+				log(Level.INFO, "El trabajador " + t.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Trabajadores exportados", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar trabajadores", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar trabajadores", e);
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void exportarClientes() {
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Cliente>clientes = obtenerClientes();
 
+		try {
+			f = new FileWriter("ficheros/clientesexp.csv");
+
+			for (Cliente c : clientes) {
+				String login = c.getLogin();
+				String password = c.getPassword();
+				String email = c.getEmail();
+				String dNI = c.getdNI();
+				String nombre = c.getNombre();
+				String apellidos = c.getApellidos();
+				String fechaNacimiento = c.getFechaNacimientoString();
+				long numTarjeta = c.getNumTarjeta();
+
+				f.write(login + ";" + password + ";" + email + ";" + dNI + ";" + nombre + ";" + apellidos + ";" + fechaNacimiento + ";" + numTarjeta + "\n");
+
+				log(Level.INFO, "El cliente " + c.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Clientes exportados", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar clientes", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar clientes", e);
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void exportarCoches(){
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Coche> coches = obtenerCoches();
+
+		try {
+			f = new FileWriter("ficheros/cochesexp.csv");
+
+			for (Coche c : coches) {
+				String marca = c.getMarca();
+				String modelo = c.getModelo();
+				String color = c.getColor().toString();
+				int caballos = c.getCaballos();
+				int numRuedas = c.getNumRuedas();
+				int nPlazas = c.getnPlazas();
+				boolean motorDiesel = c.isMotorDiesel();
+
+				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";"+ motorDiesel + "\n");
+
+				log(Level.INFO, "El coche " + c.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Coches exportados", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar coches", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar coches", e);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	//TODO aaaa terminar
+	private void exportarVentas() {
 		
 	}
-	
 	public List<Trabajador> obtenerTrabajadores(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
@@ -302,7 +415,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
-				
+
 				Trabajador t = new Trabajador();
 				t.setLogin(rs.getString("login"));
 				t.setPassword(rs.getString("password"));
@@ -316,13 +429,13 @@ public class GestorBD {
 					e.printStackTrace();
 				}
 				t.setSueldo(rs.getInt("sueldo"));
-				
+
 				if (rs.getInt("isAdmin") == 0) {
 					t.setAdmin(false);
 				} else {
 					t.setAdmin(true);
 				}
-				
+
 				trabajadores.add(t);
 			}
 			log(Level.INFO, "Obteniendo los trabajadores", null);
@@ -332,9 +445,9 @@ public class GestorBD {
 		}
 		return trabajadores;
 	}
-	
+
 	public List<Cliente> obtenerClientes(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
 		PreparedStatement stmt;
 
@@ -346,7 +459,7 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
-				
+
 				Cliente c = new Cliente();
 				c.setLogin(rs.getString("login"));
 				c.setPassword(rs.getString("password"));
@@ -363,7 +476,7 @@ public class GestorBD {
 
 				clientes.add(c);
 			}
-			
+
 			log(Level.INFO, "Obteniendo los clientes", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los clientes", e);
@@ -371,9 +484,9 @@ public class GestorBD {
 		}
 		return clientes;
 	}
-	
+
 	public List<Coche> obtenerCoches(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel FROM coche";
 		PreparedStatement stmt;
 
@@ -385,11 +498,11 @@ public class GestorBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()){
-				
+
 				Coche c = new Coche();
 				c.setMarca(rs.getString("marca"));
 				c.setModelo(rs.getString("modelo"));
-				c.setColor(rs.getString("color").toLowerCase());
+				c.setColor(rs.getString("color"));
 				c.setCaballos(rs.getInt("caballos"));
 				c.setNumRuedas(rs.getInt("numRuedas"));
 				c.setnPlazas(rs.getInt("nPlazas"));
@@ -401,7 +514,7 @@ public class GestorBD {
 
 				coches.add(c);
 			}
-			
+
 			log(Level.INFO, "Obteniendo los coches", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "Error al obtener los coches", e);
@@ -493,7 +606,7 @@ public class GestorBD {
 			stmt.setString(6, t.getApellidos());
 			stmt.setString(7, t.getFechaNacimientoString());
 			stmt.setInt(8, t.getSueldo());
-			
+
 			if (t.isAdmin()) {
 				stmt.setInt(9, 1);
 			} else {
@@ -518,10 +631,10 @@ public class GestorBD {
 
 		try {			
 			stmt = conn.prepareStatement(sql);
-			
-			stmt.setString(1, c.getMarca());
-			stmt.setString(2, c.getModelo());
-			stmt.setString(3, c.getColor().toString());
+
+			stmt.setString(1, c.getMarca().toLowerCase());
+			stmt.setString(2, c.getModelo().toUpperCase());
+			stmt.setString(3, c.getColor().toString().toLowerCase());
 			stmt.setInt(4, c.getCaballos());
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
@@ -532,7 +645,7 @@ public class GestorBD {
 			}
 
 			stmt.executeUpdate();
-			
+
 			log(Level.INFO, "El coche " + c.toString() + " ha sido añadido", null);
 		} catch (SQLException e) {
 			log( Level.SEVERE, "Error al insertar el trabajador" + sql, e );
@@ -540,9 +653,9 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ResultSet rellenarTablaTrabajadores(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
@@ -550,7 +663,7 @@ public class GestorBD {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
-			
+
 			log(Level.INFO, "Obteniendo los trabajadores", null);
 			return rs;
 		} catch (SQLException e) {
@@ -559,9 +672,9 @@ public class GestorBD {
 		}
 		return null;
 	}
-	
+
 	public ResultSet rellenarTablaClientes(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, numTarjeta FROM cliente";
 		PreparedStatement stmt;
 
@@ -569,7 +682,7 @@ public class GestorBD {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
-			
+
 			log(Level.INFO, "Obteniendo los clientes", null);
 			return rs;
 		} catch (SQLException e) {
@@ -578,9 +691,9 @@ public class GestorBD {
 		}
 		return null;
 	}
-	
+
 	public ResultSet rellenarTablaCoches(){
-		//TODO crear test de prueba
+		//TODO tttt crear test de prueba
 		String sql = "SELECT marca, modelo, color, caballos, nPlazas, motorDiesel FROM coche";
 		PreparedStatement stmt;
 
@@ -588,7 +701,7 @@ public class GestorBD {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
-					
+
 			log(Level.INFO, "Obteniendo los coches", null);
 			return rs;
 		} catch (SQLException e) {
@@ -597,7 +710,7 @@ public class GestorBD {
 		}
 		return null;
 	}
-	
+
 	//Método que nos permite eliminar a un cliente o despedir a un trabajador, en función de la tabla que le pasemos y el DNI
 	public void eliminarPersona(String tabla, String dNI) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
@@ -608,7 +721,7 @@ public class GestorBD {
 			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
 			stmtBorrar.setString(1, dNI);
-			
+
 			stmtBorrar.executeUpdate();
 
 			log(Level.INFO, "El " + tabla + " con DNI " + dNI + " ha sido borrado correctamente", null);
@@ -617,7 +730,7 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//Método para borrar un vehículo de la bbdd en función de la tabla y otros valores
 	public void eliminarVehiculo(String tabla, String marca, String modelo, String color, int caballos, int plazas, int diesel) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE marca = ? AND modelo = ? AND color = ? "
@@ -635,7 +748,7 @@ public class GestorBD {
 			stmtBorrar.setInt(5, plazas);
 			stmtBorrar.setInt(6, diesel);
 
-			
+
 			stmtBorrar.executeUpdate();
 
 			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrado correctamente", null);
@@ -644,12 +757,12 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//TODO completar método....
 	public void venderCoche() {
-		
+
 	}
-	
+
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {
 		GestorBD.logger = logger;

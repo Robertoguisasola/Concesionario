@@ -15,7 +15,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import dataBase.GestorBD;
 import model.Trabajador;
@@ -109,8 +108,8 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				RegistrarCliente.abrirRegistrarCliente(t);
+				dispose();
 			}
 		});
 		clientesEditarMenu.add(clientesAddItem);
@@ -143,8 +142,9 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.exportarBBDDAFichero("cliente");
+				bd.desconectar();	
 			}
 		});
 		clientesMenu.add(clientesExportar);
@@ -202,8 +202,9 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.exportarBBDDAFichero("trabajador");
+				bd.desconectar();				
 			}
 		});
 		trabajadoresMenu.add(trabajadoresExportar);
@@ -320,8 +321,9 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.exportarBBDDAFichero("coche");
+				bd.desconectar();	
 			}
 		});
 		cochesMenu.add(cochesExportar);
