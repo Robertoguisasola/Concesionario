@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,6 +37,7 @@ public class AnadirCoche extends JFrame {
 	
 	private JPanel camposPanel;
 	private JLabel camposLabel;
+	
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -45,9 +47,11 @@ public class AnadirCoche extends JFrame {
 	private JLabel modeloLabel;
 	private JTextField modeloField;
 	private Box modeloBox;
-	private JLabel passwordRLabel;
-	private JPasswordField passwordRField;
-	private Box passwordRBox;
+	private JLabel colorLabel;
+	private JComboBox<model.Colores> colorCombo;
+	private Box colorBox;
+	
+
 	private JLabel emailLabel;
 	private JTextField emailField;
 	private Box emailBox;
@@ -95,7 +99,7 @@ public class AnadirCoche extends JFrame {
 		marcaBox = new Box(BoxLayout.X_AXIS);
 		marcaBox.add(marcaLabel);
 		marcaBox.add(Box.createRigidArea(new Dimension(46, 12)));
-		marcaBox.add(marcaLabel);
+		marcaBox.add(marcaField);
 		
 		modeloLabel = new JLabel("Modelo: ");
 		modeloField = new JPasswordField();
@@ -105,13 +109,15 @@ public class AnadirCoche extends JFrame {
 		modeloBox.add(Box.createRigidArea(new Dimension(90, 12)));
 		modeloBox.add(modeloField);
 		
-		passwordRLabel = new JLabel("Repita la contraseña: ");
-		passwordRField = new JPasswordField();
+		colorLabel = new JLabel("Color: ");
+		colorCombo = new JComboBox<model.Colores>();
+		for(model.Colores color : model.Colores.values())
+			colorCombo.addItem(color);
 		
-		passwordRBox = new Box(BoxLayout.X_AXIS);
-		passwordRBox.add(passwordRLabel);
-		passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
-		passwordRBox.add(passwordRField);
+		colorBox = new Box(BoxLayout.X_AXIS);
+		colorBox.add(colorLabel);
+		colorBox.add(Box.createRigidArea(new Dimension(46, 12)));
+		colorBox.add(colorCombo);
 		
 		emailLabel = new JLabel("Email: ");
 		emailField = new JTextField();
@@ -176,7 +182,7 @@ public class AnadirCoche extends JFrame {
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(modeloBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(passwordRBox);
+		formBox.add(colorBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(emailBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
@@ -237,7 +243,6 @@ public class AnadirCoche extends JFrame {
 	private void limpiarCajas(Trabajador t) {
 		marcaField.setText(null);
 		modeloField.setText(null);
-		passwordRField.setText(null);
 		emailField.setText(null);
 		dniField.setText(null);
 		nombreField.setText(null);
@@ -304,7 +309,7 @@ public class AnadirCoche extends JFrame {
 			return true;
 		}
 		
-		if (new String(modeloField.getText().equals(""))) {
+		if (modeloField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
 			return true;
 		}
