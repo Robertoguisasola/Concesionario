@@ -105,6 +105,7 @@ public class EscogerCoche extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				//TODO aaaa o zzzzz hacer un metodo que dependiendo la marca y los extras te saque un mensaje del precio y otro metodo que lo añada a ventas.
 				
 			}
 		});	
