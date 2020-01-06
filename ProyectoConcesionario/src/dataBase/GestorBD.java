@@ -366,7 +366,7 @@ public class GestorBD {
 		List<Coche> coches = obtenerCoches();
 
 		try {
-			f = new FileWriter("ficheros/cochesexp.csv");
+			f = new FileWriter("ficheros/coches.csv");
 
 			for (Coche c : coches) {
 				String marca = c.getMarca();
@@ -624,7 +624,7 @@ public class GestorBD {
 	}
 
 	public void anadirNuevoCoche(Coche c) {
-		String sql  = "INSERT INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel)"
+		String sql  = "INSERT or REPLACE INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel)"
 				+ " VALUES (?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;

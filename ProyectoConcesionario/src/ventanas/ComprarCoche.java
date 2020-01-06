@@ -76,6 +76,7 @@ public class ComprarCoche extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Login.abrirLogin();
+				dispose();
 				
 			}
 		});

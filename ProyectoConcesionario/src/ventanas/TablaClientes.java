@@ -57,7 +57,8 @@ public class TablaClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO zzzz va a registrar un nuevo cliente ---> no lo hagas, piensa como podemos hacer para que vuelva luego a esta ventana y me dices, yo tengo ya una idea
+				RegistrarCliente2.abrirRegistrarCliente2(t);
+				dispose();
 			}
 		});
 
@@ -78,6 +79,9 @@ public class TablaClientes extends JFrame {
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
+						TablaClientes.abrirTablaClientes(t);
+						dispose();
+						
 						break;
 					default:
 						break;
