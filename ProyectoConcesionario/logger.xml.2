@@ -1114,3 +1114,302 @@
   <message>Desconectado de la base de datos</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-06T03:02:33</date>
+  <millis>1578276153281</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-06T03:02:33</date>
+  <millis>1578276153286</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>SEVERE</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Error al insertar el coche Seat Toledo ROJO, 130cv</message>
+  <exception>
+    <message>org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY]  A PRIMARY KEY constraint failed (UNIQUE constraint failed: coche.motorDiesel)</message>
+    <frame>
+      <class>org.sqlite.core.DB</class>
+      <method>newSQLException</method>
+      <line>909</line>
+    </frame>
+    <frame>
+      <class>org.sqlite.core.DB</class>
+      <method>newSQLException</method>
+      <line>921</line>
+    </frame>
+    <frame>
+      <class>org.sqlite.core.DB</class>
+      <method>execute</method>
+      <line>825</line>
+    </frame>
+    <frame>
+      <class>org.sqlite.core.DB</class>
+      <method>executeUpdate</method>
+      <line>863</line>
+    </frame>
+    <frame>
+      <class>org.sqlite.jdbc3.JDBC3PreparedStatement</class>
+      <method>executeUpdate</method>
+      <line>99</line>
+    </frame>
+    <frame>
+      <class>dataBase.GestorBD</class>
+      <method>anadirNuevoCoche</method>
+      <line>647</line>
+    </frame>
+    <frame>
+      <class>ventanas.AnadirCoche</class>
+      <method>registrar</method>
+      <line>256</line>
+    </frame>
+    <frame>
+      <class>ventanas.AnadirCoche</class>
+      <method>access$0</method>
+      <line>236</line>
+    </frame>
+    <frame>
+      <class>ventanas.AnadirCoche$1</class>
+      <method>actionPerformed</method>
+      <line>191</line>
+    </frame>
+    <frame>
+      <class>javax.swing.AbstractButton</class>
+      <method>fireActionPerformed</method>
+    </frame>
+    <frame>
+      <class>javax.swing.AbstractButton$Handler</class>
+      <method>actionPerformed</method>
+    </frame>
+    <frame>
+      <class>javax.swing.DefaultButtonModel</class>
+      <method>fireActionPerformed</method>
+    </frame>
+    <frame>
+      <class>javax.swing.DefaultButtonModel</class>
+      <method>setPressed</method>
+    </frame>
+    <frame>
+      <class>javax.swing.plaf.basic.BasicButtonListener</class>
+      <method>mouseReleased</method>
+    </frame>
+    <frame>
+      <class>java.awt.Component</class>
+      <method>processMouseEvent</method>
+    </frame>
+    <frame>
+      <class>javax.swing.JComponent</class>
+      <method>processMouseEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.Component</class>
+      <method>processEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.Container</class>
+      <method>processEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.Component</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.Container</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.Component</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.LightweightDispatcher</class>
+      <method>retargetMouseEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.LightweightDispatcher</class>
+      <method>processMouseEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.LightweightDispatcher</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.Container</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.Window</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.Component</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>access$500</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.security.AccessController</class>
+      <method>doPrivileged</method>
+    </frame>
+    <frame>
+      <class>java.security.ProtectionDomain$JavaSecurityAccessImpl</class>
+      <method>doIntersectionPrivilege</method>
+    </frame>
+    <frame>
+      <class>java.security.ProtectionDomain$JavaSecurityAccessImpl</class>
+      <method>doIntersectionPrivilege</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$4</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$4</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.security.AccessController</class>
+      <method>doPrivileged</method>
+    </frame>
+    <frame>
+      <class>java.security.ProtectionDomain$JavaSecurityAccessImpl</class>
+      <method>doIntersectionPrivilege</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpOneEventForFilters</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForFilter</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForHierarchy</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>run</method>
+    </frame>
+  </exception>
+</record>
+<record>
+  <date>2020-01-06T03:02:33</date>
+  <millis>1578276153288</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-01-06T03:05:13</date>
+  <millis>1578276313688</millis>
+  <sequence>0</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-06T03:05:13</date>
+  <millis>1578276313692</millis>
+  <sequence>1</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>El coche Seat Toledo ROJO, 130cv ha sido añadido</message>
+</record>
+<record>
+  <date>2020-01-06T03:05:13</date>
+  <millis>1578276313692</millis>
+  <sequence>2</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+<record>
+  <date>2020-01-06T03:06:08</date>
+  <millis>1578276368070</millis>
+  <sequence>3</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Conectado a la base de datos</message>
+</record>
+<record>
+  <date>2020-01-06T03:06:08</date>
+  <millis>1578276368070</millis>
+  <sequence>4</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Obteniendo los coches</message>
+</record>
+<record>
+  <date>2020-01-06T03:06:08</date>
+  <millis>1578276368071</millis>
+  <sequence>5</sequence>
+  <logger>dataBase.GestorBD</logger>
+  <level>INFO</level>
+  <class>dataBase.GestorBD</class>
+  <method>log</method>
+  <thread>15</thread>
+  <message>Desconectado de la base de datos</message>
+</record>
+</log>
