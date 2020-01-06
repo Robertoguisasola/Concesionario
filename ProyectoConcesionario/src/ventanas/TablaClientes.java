@@ -79,6 +79,9 @@ public class TablaClientes extends JFrame {
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
+						TablaClientes.abrirTablaClientes(t);
+						dispose();
+						
 						break;
 					default:
 						break;
