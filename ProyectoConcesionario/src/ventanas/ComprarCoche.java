@@ -143,7 +143,7 @@ public class ComprarCoche extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO aaaa Buscar el coche
-	
+				setData();
 				}
 		});
 				

@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,15 +17,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
-import model.Cliente;
 import model.Coche;
 import model.Colores;
-import model.Persona;
 import model.Trabajador;
 
 public class AnadirCoche extends JFrame {
@@ -37,9 +32,7 @@ public class AnadirCoche extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private Coche c;
-	
+		
 	private JPanel camposPanel;
 	private JLabel camposLabel;
 	
@@ -65,28 +58,7 @@ public class AnadirCoche extends JFrame {
 	private JTextField nPlazasField;
 	private Box nPlazasBox;
 	private JCheckBox motorDieselCheck;
-	
-	
-	
 
-	private JLabel emailLabel;
-	private JTextField emailField;
-	private Box emailBox;
-	private JLabel dniLabel;
-	private JTextField dniField;
-	private Box dniBox;
-	private JLabel nombreLabel;
-	private JTextField nombreField;
-	private Box nombreBox;
-	private JLabel apellidosLabel;
-	private JTextField apellidosField;
-	private Box apellidosBox;
-	private JLabel fechaNacimientoLabel;
-	private JTextField fechaNacimientoField;
-	private Box fechaNacimientoBox;
-	private JLabel numeroTarjetaLabel;
-	private JTextField numeroTarjetaField;
-	private Box numeroTarjetaBox;
 	private JButton agregarButton;
 	private JButton cancelarButton;
 	private Box buttonsBox;
@@ -144,15 +116,23 @@ public class AnadirCoche extends JFrame {
 		caballosBox.add(Box.createRigidArea(new Dimension(37, 12)));
 		caballosBox.add(caballosField);
 		
-		nRuedasLabel = new JLabel("Num ruedas: ");
+		nRuedasLabel = new JLabel("Número de ruedas: ");
 		nRuedasField = new JTextField();
-		
+		nRuedasField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nRuedasField.setText("");
+			}
+		});
+		nRuedasField.setHorizontalAlignment(SwingConstants.CENTER);
+		nRuedasField.setText("4");
+				
 		nRuedasBox = new Box(BoxLayout.X_AXIS);
 		nRuedasBox.add(nRuedasLabel);
 		nRuedasBox.add(Box.createRigidArea(new Dimension(28, 12)));
 		nRuedasBox.add(nRuedasField);
 		
-		nPlazasLabel = new JLabel("Num plazas: ");
+		nPlazasLabel = new JLabel("Número de plazas: ");
 		nPlazasField = new JTextField();
 		
 		nPlazasBox = new Box(BoxLayout.X_AXIS);
@@ -160,11 +140,7 @@ public class AnadirCoche extends JFrame {
 		nPlazasBox.add(Box.createRigidArea(new Dimension(31, 12)));
 		nPlazasBox.add(nPlazasField);
 	
-		motorDieselCheck = new JCheckBox("Motor diesel");
-		
-		
-		
-		
+		motorDieselCheck = new JCheckBox("Motor diesel");		
 		
 		formPanel = new JPanel();
 		
@@ -188,7 +164,7 @@ public class AnadirCoche extends JFrame {
 		agregarButton = new JButton("Añdir coche");
 		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				registrar(t);
+				anadirCoche(t);
 			}
 		});
 		
@@ -211,17 +187,13 @@ public class AnadirCoche extends JFrame {
 	}
 	
 	private void volver(Trabajador t) {
-		if (t == null) {
-			Inicio.abrirInicio();
-			dispose();
-		} else {
-			if (t.isAdmin()) {
+		if (t.isAdmin()) {
 				VistaAdministrador.abrirVistaAdministrador(t);
 				dispose();
 			} else {
 				VistaTrabajador.abrirVistaTrabajador(t);
 				dispose();
-			}
+			
 		}
 	}
 
@@ -229,18 +201,21 @@ public class AnadirCoche extends JFrame {
 	private void limpiarCajas(Trabajador t) {
 		marcaField.setText(null);
 		modeloField.setText(null);
+		caballosField.setText(null);
+		nRuedasField.setText(null);
+		nPlazasField.setText(null);
+		motorDieselCheck.setEnabled(false);
 		
 	}
 	
 	//TODO test
-	private void registrar(Trabajador t) {
+	private void anadirCoche(Trabajador t) {
 		
 			if (comprobarVacios()) {
 				return;
 			}
 			
 			//TODO zzzz comprobar vacíos y defaults.... ya sabes
-			
 			
 			String marca = marcaField.getText();
 			String modelo = new String(modeloField.getText());
@@ -250,7 +225,7 @@ public class AnadirCoche extends JFrame {
 			int nPlazas = Integer.parseInt(nPlazasField.getText());
 			boolean motorDiesel = motorDieselCheck.isSelected();
 			
-			c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, motorDiesel);
+			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, motorDiesel);
 			
 			GestorBD bd = new GestorBD();
 			bd.anadirNuevoCoche(c);
@@ -271,9 +246,6 @@ public class AnadirCoche extends JFrame {
 			default:
 				break;
 			}
-		
-		
-
 	}
 	
 	private boolean comprobarVacios() {
@@ -283,18 +255,30 @@ public class AnadirCoche extends JFrame {
 		}
 		
 		if (modeloField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca un modelo de coche");
 			return true;
 		}
 		
+		if (caballosField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca los caballos del coche");
+			return true;
+		}
 		
+		if (nRuedasField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca las ruedas del coche");
+			return true;
+		}
+		
+		if (nPlazasField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca las plazas del coche");
+			return true;
+		}
 		
 		return false;
 	}
 	
 	public static void abrirAnadirCoche(Trabajador t) {
 		AnadirCoche anadirCoche = new AnadirCoche(t);
-		anadirCoche.setVisible(true);
 		anadirCoche.setSize(480,360);
 		anadirCoche.setLocationRelativeTo(null);
 		anadirCoche.setVisible(true);

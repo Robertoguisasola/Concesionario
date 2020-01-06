@@ -638,6 +638,7 @@ public class GestorBD {
 			stmt.setInt(4, c.getCaballos());
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
+			
 			if (c.isMotorDiesel()) {
 				stmt.setInt(7, 1);
 			}else {
