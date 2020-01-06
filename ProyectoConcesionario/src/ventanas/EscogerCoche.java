@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import java.sql.SQLException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dataBase.GestorBD;
 import model.Persona;
+import javax.swing.SwingConstants;
 
 public class EscogerCoche extends JFrame{
 	
@@ -42,17 +46,31 @@ public class EscogerCoche extends JFrame{
 	private JButton comprarButton;
 	private JButton probarButton;
 	private Box botonesBox;
-		
+	
+	private JCheckBox techoPanoramicoCheck;
+	private Box techoPanoramicoBox;
+	private JCheckBox traccionCheck;
+	private Box traccionBox;
+	private JCheckBox modoDeportivoCheck;
+	private Box modoDeportivoBox;
+	private JLabel infoCheck;
+	
 	public EscogerCoche(Persona p) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout());
 		
+		JPanel centroPanel = new JPanel();
+		centroPanel.setLayout(new BorderLayout());
+		
+		
 		String frase = "<html><body><left>Busque el coche, seleccionelo en la tabla e indique si quiere probarlo o comprarlo</left></body></html>";
 		
 		informacionLabel = new JLabel(frase);
-		northPanel.add(informacionLabel, BorderLayout.WEST);
+		northPanel.add(informacionLabel, BorderLayout.WEST);	
+		
+		
 		
 		salirButton = new JButton("Salir");
 		salirButton.addActionListener(new ActionListener() {
@@ -71,10 +89,15 @@ public class EscogerCoche extends JFrame{
 		tablaPanel = new JScrollPane(tabla);
 		
 		tablaPanel = new JScrollPane(tabla);
+		
+		
 				
 		tablaBox = new Box(BoxLayout.Y_AXIS);
 		tablaBox.add(Box.createRigidArea(new Dimension(0,10)));
 		tablaBox.add(tablaPanel);
+		
+		 
+		
 		
 		comprarButton = new JButton("Comprar");
 		comprarButton.addActionListener(new ActionListener() {
@@ -96,6 +119,7 @@ public class EscogerCoche extends JFrame{
 			}
 		});
 		
+		
 		botonesBox = new Box(BoxLayout.X_AXIS);
 		botonesBox.add(comprarButton);
 		botonesBox.add(Box.createRigidArea(new Dimension(46, 12)));
@@ -105,9 +129,26 @@ public class EscogerCoche extends JFrame{
 		botonesPanel.setLayout(new GridBagLayout());
 		botonesPanel.add(botonesBox);
 		
-		add(northPanel, BorderLayout.NORTH);
-		add(tablaBox, BorderLayout.CENTER);
-		add(botonesPanel, BorderLayout.SOUTH);
+		JPanel panelCheck = new JPanel();
+		panelCheck.setLayout(new BorderLayout());
+		
+		infoCheck = new JLabel("¿Quieres añadir algo a tu coche? ");
+		techoPanoramicoCheck = new JCheckBox("Techo panorámico ");
+		traccionCheck = new JCheckBox("Tracción 4x4 ");
+		traccionCheck.setHorizontalAlignment(SwingConstants.CENTER);
+		modoDeportivoCheck = new JCheckBox("Modo deportivo ");
+		
+		panelCheck.add(infoCheck, BorderLayout.NORTH);
+		panelCheck.add(techoPanoramicoCheck, BorderLayout.WEST);
+		panelCheck.add(traccionCheck, BorderLayout.CENTER);
+		panelCheck.add(modoDeportivoCheck, BorderLayout.EAST);
+		
+		centroPanel.add(panelCheck, BorderLayout.SOUTH);
+		centroPanel.add(tablaBox, BorderLayout.CENTER);
+		
+		getContentPane().add(northPanel, BorderLayout.NORTH);
+		getContentPane().add(centroPanel, BorderLayout.CENTER);		
+		getContentPane().add(botonesPanel, BorderLayout.SOUTH);
 	}
 	
 	private void setData() {
