@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,7 +17,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import dataBase.GestorBD;
-import model.Coche;
 import model.Trabajador;
 
 public class VistaAdministrador extends JFrame{
@@ -444,13 +442,5 @@ public class VistaAdministrador extends JFrame{
 		vistaAdministrador.setSize(480,360);
 		vistaAdministrador.setLocationRelativeTo(null);
 		vistaAdministrador.setVisible(true);
-	}
-	
-	//TODO borrar cuando funciones como queremos
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		t.setNombre("admin");
-		
-		VistaAdministrador.abrirVistaAdministrador(t);
 	}
 }

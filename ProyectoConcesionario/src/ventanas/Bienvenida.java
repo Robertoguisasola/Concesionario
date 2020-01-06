@@ -60,7 +60,6 @@ public class Bienvenida extends JFrame {
             
             panel.setBorder(fondo);
         } catch (IOException ex) {
-        	//TODO cambiar el JOptionPane por método Logger
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }		
 		this.setVisible(true);

@@ -26,11 +26,12 @@ public class TablaVentas extends JFrame {
 	private JPanel botonesPanel;
 	private JButton anadirButton;
 	private JButton cancelarButton;
+	private JButton atrasButton;
 	private JTable tabla;
 	
 	//TODO terminar ventana
 	public TablaVentas(Trabajador t) {
-		this.setTitle("Tabla de coches");
+		this.setTitle("Tabla de ventas");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(480,360);
@@ -52,19 +53,20 @@ public class TablaVentas extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir");
+		anadirButton = new JButton("Añadir venta");
 		botonesPanel.add(anadirButton);
 		
 		cancelarButton = new JButton("Eliminar");
 		botonesPanel.add(cancelarButton);
 		
+		atrasButton = new JButton("Atrás");
+		botonesPanel.add(atrasButton);
+		
 		anadirButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				AnadirCoche.abrirAnadirCoche(t);
-				dispose();
+				//TODO que vaya a vender coche y listo
 			}
 		});
 		
@@ -76,6 +78,20 @@ public class TablaVentas extends JFrame {
 				String[] opciones = {"Sí", "No"};
 				JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar el pedido?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+			}
+		});
+		
+atrasButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (t.isAdmin()) {
+					VistaAdministrador.abrirVistaAdministrador(t);
+					dispose();
+				} else {
+					VistaTrabajador.abrirVistaTrabajador(t);
+					dispose();
+				}
 			}
 		});
 		

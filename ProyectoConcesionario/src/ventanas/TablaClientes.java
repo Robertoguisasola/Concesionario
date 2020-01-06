@@ -57,7 +57,7 @@ public class TablaClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegistrarCliente2.abrirRegistrarCliente2(t);
+				RegistrarCliente.abrirRegistrarCliente(t);
 				dispose();
 			}
 		});
@@ -160,12 +160,5 @@ public class TablaClientes extends JFrame {
 		tablaClientes.setSize(480,360);
 		tablaClientes.setLocationRelativeTo(null);
 		tablaClientes.setVisible(true);
-	}
-
-	//TODO borrar cuando funcione como queremos
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-
-		TablaClientes.abrirTablaClientes(t);
 	}
 }
