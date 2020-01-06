@@ -161,7 +161,7 @@ public class AnadirCoche extends JFrame {
 
 		formPanel.add(formBox);
 		
-		agregarButton = new JButton("Añdir coche");
+		agregarButton = new JButton("Añadir coche");
 		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				anadirCoche(t);
@@ -204,8 +204,6 @@ public class AnadirCoche extends JFrame {
 		caballosField.setText(null);
 		nRuedasField.setText(null);
 		nPlazasField.setText(null);
-		motorDieselCheck.setEnabled(false);
-		
 	}
 	
 	//TODO test
