@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +25,8 @@ import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
 import model.Cliente;
+import model.Coche;
+import model.Colores;
 import model.Persona;
 import model.Trabajador;
 
@@ -34,6 +37,8 @@ public class AnadirCoche extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Coche c;
 	
 	private JPanel camposPanel;
 	private JLabel camposLabel;
@@ -50,6 +55,18 @@ public class AnadirCoche extends JFrame {
 	private JLabel colorLabel;
 	private JComboBox<model.Colores> colorCombo;
 	private Box colorBox;
+	private JLabel caballosLabel;
+	private JTextField caballosField;
+	private Box caballosBox;
+	private JLabel nRuedasLabel;
+	private JTextField nRuedasField;
+	private Box nRuedasBox;
+	private JLabel nPlazasLabel;
+	private JTextField nPlazasField;
+	private Box nPlazasBox;
+	private JCheckBox motorDieselCheck;
+	
+	
 	
 
 	private JLabel emailLabel;
@@ -98,15 +115,15 @@ public class AnadirCoche extends JFrame {
 			
 		marcaBox = new Box(BoxLayout.X_AXIS);
 		marcaBox.add(marcaLabel);
-		marcaBox.add(Box.createRigidArea(new Dimension(46, 12)));
+		marcaBox.add(Box.createRigidArea(new Dimension(36, 12)));
 		marcaBox.add(marcaField);
 		
 		modeloLabel = new JLabel("Modelo: ");
-		modeloField = new JPasswordField();
+		modeloField = new JTextField();
 		
 		modeloBox = new Box(BoxLayout.X_AXIS);
 		modeloBox.add(modeloLabel);
-		modeloBox.add(Box.createRigidArea(new Dimension(90, 12)));
+		modeloBox.add(Box.createRigidArea(new Dimension(33, 12)));
 		modeloBox.add(modeloField);
 		
 		colorLabel = new JLabel("Color: ");
@@ -119,61 +136,35 @@ public class AnadirCoche extends JFrame {
 		colorBox.add(Box.createRigidArea(new Dimension(46, 12)));
 		colorBox.add(colorCombo);
 		
-		emailLabel = new JLabel("Email: ");
-		emailField = new JTextField();
+		caballosLabel = new JLabel("Caballos: ");
+		caballosField = new JTextField();
 		
-		emailBox = new Box(BoxLayout.X_AXIS);
-		emailBox.add(emailLabel);
-		emailBox.add(Box.createRigidArea(new Dimension(124, 12)));
-		emailBox.add(emailField);
+		caballosBox = new Box(BoxLayout.X_AXIS);
+		caballosBox.add(caballosLabel);
+		caballosBox.add(Box.createRigidArea(new Dimension(37, 12)));
+		caballosBox.add(caballosField);
 		
-		dniLabel = new JLabel("DNI: ");
-		dniField = new JTextField(9);
+		nRuedasLabel = new JLabel("Num ruedas: ");
+		nRuedasField = new JTextField();
 		
-		dniBox = new Box(BoxLayout.X_AXIS);
-		dniBox.add(dniLabel);
-		dniBox.add(Box.createRigidArea(new Dimension(135, 12)));
-		dniBox.add(dniField);
+		nRuedasBox = new Box(BoxLayout.X_AXIS);
+		nRuedasBox.add(nRuedasLabel);
+		nRuedasBox.add(Box.createRigidArea(new Dimension(28, 12)));
+		nRuedasBox.add(nRuedasField);
 		
-		nombreLabel = new JLabel("Nombre: ");
-		nombreField = new JTextField();
+		nPlazasLabel = new JLabel("Num plazas: ");
+		nPlazasField = new JTextField();
 		
-		nombreBox = new Box(BoxLayout.X_AXIS);
-		nombreBox.add(nombreLabel);
-		nombreBox.add(Box.createRigidArea(new Dimension(110, 12)));
-		nombreBox.add(nombreField);
-
-		apellidosLabel = new JLabel("Apellidos: ");
-		apellidosField = new JTextField();
-
-		apellidosBox = new Box(BoxLayout.X_AXIS);
-		apellidosBox.add(apellidosLabel);
-		apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
-		apellidosBox.add(apellidosField);
+		nPlazasBox = new Box(BoxLayout.X_AXIS);
+		nPlazasBox.add(nPlazasLabel);
+		nPlazasBox.add(Box.createRigidArea(new Dimension(31, 12)));
+		nPlazasBox.add(nPlazasField);
+	
+		motorDieselCheck = new JCheckBox("Motor diesel");
 		
-		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
-		fechaNacimientoField = new JTextField();
-		fechaNacimientoField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				fechaNacimientoField.setText("");
-			}
-		});
-		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaNacimientoField.setText("dd/MM/yyyy");
 		
-		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
-		fechaNacimientoBox.add(fechaNacimientoLabel);
-		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
-		fechaNacimientoBox.add(fechaNacimientoField);
 		
-		numeroTarjetaLabel = new JLabel("Número de tarjeta: ");
-		numeroTarjetaField = new JTextField();
 		
-		numeroTarjetaBox = new Box(BoxLayout.X_AXIS);
-		numeroTarjetaBox.add(numeroTarjetaLabel);
-		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(51, 12)));
-		numeroTarjetaBox.add(numeroTarjetaField);
 		
 		formPanel = new JPanel();
 		
@@ -184,22 +175,17 @@ public class AnadirCoche extends JFrame {
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(colorBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(emailBox);
+		formBox.add(caballosBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(dniBox);
+		formBox.add(nRuedasBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(nombreBox);
+		formBox.add(nPlazasBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(apellidosBox);
-		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(fechaNacimientoBox);
-		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(numeroTarjetaBox);
-		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(motorDieselCheck);
 
 		formPanel.add(formBox);
 		
-		agregarButton = new JButton("Registrarme");
+		agregarButton = new JButton("Añdir coche");
 		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				registrar(t);
@@ -243,42 +229,35 @@ public class AnadirCoche extends JFrame {
 	private void limpiarCajas(Trabajador t) {
 		marcaField.setText(null);
 		modeloField.setText(null);
-		emailField.setText(null);
-		dniField.setText(null);
-		nombreField.setText(null);
-		apellidosField.setText(null);
-		fechaNacimientoField.setText(null);
-		numeroTarjetaField.setText(null);
+		
 	}
 	
 	//TODO test
 	private void registrar(Trabajador t) {
-		try {
-			
+		
 			if (comprobarVacios()) {
 				return;
 			}
 			
 			//TODO zzzz comprobar vacíos y defaults.... ya sabes
 			
-			String fechaNacimientoString = fechaNacimientoField.getText();
-			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
+			
 			String marca = marcaField.getText();
-			String modelo = new String(modeloField.getText());;
-			String email = emailField.getText();
-			String dNI = dniField.getText();
-			String nombre = nombreField.getText();
-			String apellidos = apellidosField.getText();
-			long numTarjeta = Long.parseLong(numeroTarjetaField.getText());
-
-			Cliente c = new Cliente(marca, modelo, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
+			String modelo = new String(modeloField.getText());
+			Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
+			int caballos = Integer.parseInt(caballosField.getText());
+			int nRuedas = Integer.parseInt(nRuedasField.getText());
+			int nPlazas = Integer.parseInt(nPlazasField.getText());
+			boolean motorDiesel = motorDieselCheck.isSelected();
+			
+			c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, motorDiesel);
 			
 			GestorBD bd = new GestorBD();
-			bd.anadirNuevoCliente(c);
+			bd.anadirNuevoCoche(c);
 			bd.desconectar();
 						
 			String[] opciones = {"Sí", "No"};
-			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo coche ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 			
 			switch (respuesta) {
@@ -292,15 +271,9 @@ public class AnadirCoche extends JFrame {
 			default:
 				break;
 			}
-		} 
-		catch (ParseException ex) {
-			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
-		} catch (NumberFormatException en) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca un número de tarjeta");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
+
 	}
 	
 	private boolean comprobarVacios() {
@@ -314,10 +287,7 @@ public class AnadirCoche extends JFrame {
 			return true;
 		}
 		
-		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
-			return true;	
-		}
+		
 		
 		return false;
 	}
