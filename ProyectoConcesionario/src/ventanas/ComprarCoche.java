@@ -235,7 +235,7 @@ public class ComprarCoche extends JFrame{
 
 	public static void abrirComprarCoche(Persona p) {
 		ComprarCoche comprarCoche = new ComprarCoche(p);
-		comprarCoche.setTitle("Regístrate");
+		comprarCoche.setTitle("Bienvenido");
 		comprarCoche.setVisible(true);
 		comprarCoche.setSize(550,420);
 		comprarCoche.setLocationRelativeTo(null);
