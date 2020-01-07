@@ -99,6 +99,7 @@ public class EscogerCoche extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//TODO aaaaaa accede a la siguiente ventana sin seleccionar ningun coche 
 				String[] opciones = {"Sí", "No"};
 				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche  ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
