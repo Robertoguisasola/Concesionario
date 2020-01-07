@@ -10,16 +10,19 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import model.Persona;
-import java.awt.FlowLayout;
+
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AnadirExtras extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JCheckBox techoPanoramicoCheck;
 	private JCheckBox traccionCheck;
 	private JCheckBox modoDeportivoCheck;
