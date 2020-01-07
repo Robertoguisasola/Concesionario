@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,13 +48,7 @@ public class EscogerCoche extends JFrame{
 	private JButton probarButton;
 	private Box botonesBox;
 	
-	private JCheckBox techoPanoramicoCheck;
-	private Box techoPanoramicoBox;
-	private JCheckBox traccionCheck;
-	private Box traccionBox;
-	private JCheckBox modoDeportivoCheck;
-	private Box modoDeportivoBox;
-	private JLabel infoCheck;
+	
 	
 	public EscogerCoche(Persona p) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,6 +99,23 @@ public class EscogerCoche extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String[] opciones = {"Sí", "No"};
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche  ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+				
+				switch (respuesta) {
+				case 0:
+					AnadirExtras.abriranadirExtras(p);
+					dispose();
+					break;
+				case 1:
+					System.out.println("Le has dado a que no");
+					dispose();
+					break;
+				default:
+					break;
+				}
+				
 				// TODO Auto-generated method stub
 				//TODO aaaa o zzzzz hacer un metodo que dependiendo la marca y los extras te saque un mensaje del precio y otro metodo que lo añada a ventas.
 				
@@ -130,21 +142,9 @@ public class EscogerCoche extends JFrame{
 		botonesPanel.setLayout(new GridBagLayout());
 		botonesPanel.add(botonesBox);
 		
-		JPanel panelCheck = new JPanel();
-		panelCheck.setLayout(new BorderLayout());
 		
-		infoCheck = new JLabel("¿Quieres añadir algo a tu coche? ");
-		techoPanoramicoCheck = new JCheckBox("Techo panorámico ");
-		traccionCheck = new JCheckBox("Tracción 4x4 ");
-		traccionCheck.setHorizontalAlignment(SwingConstants.CENTER);
-		modoDeportivoCheck = new JCheckBox("Modo deportivo ");
 		
-		panelCheck.add(infoCheck, BorderLayout.NORTH);
-		panelCheck.add(techoPanoramicoCheck, BorderLayout.WEST);
-		panelCheck.add(traccionCheck, BorderLayout.CENTER);
-		panelCheck.add(modoDeportivoCheck, BorderLayout.EAST);
 		
-		centroPanel.add(panelCheck, BorderLayout.SOUTH);
 		centroPanel.add(tablaBox, BorderLayout.CENTER);
 		
 		getContentPane().add(northPanel, BorderLayout.NORTH);
