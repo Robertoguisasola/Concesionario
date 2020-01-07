@@ -74,7 +74,7 @@ public class AnadirExtras extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				//aaaa meter metodo de compra final
 			}
-		});
+		});    
 		
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
