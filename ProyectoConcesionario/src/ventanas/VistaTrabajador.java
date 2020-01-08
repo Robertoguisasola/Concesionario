@@ -142,8 +142,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				EscogerCoche.abrirEscogerCoche(null, t);
+				dispose();
 			}
 		});
 		ventasEditarMenu.add(ventasAddItem);

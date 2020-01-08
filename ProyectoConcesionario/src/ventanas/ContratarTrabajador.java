@@ -41,9 +41,6 @@ public class ContratarTrabajador extends JFrame{
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
 	private Box passwordBox;
-	private JLabel passwordRLabel;
-	private JPasswordField passwordRField;
-	private Box passwordRBox;
 	private JLabel emailLabel;
 	private JTextField emailField;
 	private Box emailBox;
@@ -98,14 +95,6 @@ public class ContratarTrabajador extends JFrame{
 		passwordBox.add(passwordLabel);
 		passwordBox.add(Box.createRigidArea(new Dimension(90, 12)));
 		passwordBox.add(passwordField);
-
-		passwordRLabel = new JLabel("Repita la contraseña: ");
-		passwordRField = new JPasswordField(12);
-
-		passwordRBox = new Box(BoxLayout.X_AXIS);
-		passwordRBox.add(passwordRLabel);
-		passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
-		passwordRBox.add(passwordRField);
 
 		emailLabel = new JLabel("Email: ");
 		emailField = new JTextField();
@@ -178,8 +167,6 @@ public class ContratarTrabajador extends JFrame{
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(passwordBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(passwordRBox);
-		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(emailBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(dniBox);
@@ -224,12 +211,9 @@ public class ContratarTrabajador extends JFrame{
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 
-
-	//TODO test
 	private void limpiarCajas() {
 		usuarioField.setText(null);
 		passwordField.setText(null);
-		passwordRField.setText(null);
 		emailField.setText(null);
 		dniField.setText(null);
 		nombreField.setText(null);
@@ -239,20 +223,13 @@ public class ContratarTrabajador extends JFrame{
 		adminCheckBox.setEnabled(false);
 	}
 	
-	//TODO test
 	private void contratar() {
 		try {
 			
 			if (comprobarVacios()) {
 				return;
 			}
-			
-			if (comprobarContraseñas()) {
-				return;
-			}
-			
-			//TODO zzzz comprobar vacíos y defaults.... ya sabes
-			
+						
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
@@ -340,16 +317,6 @@ public class ContratarTrabajador extends JFrame{
 		return false;
 	}
 	
-	private boolean comprobarContraseñas() {
-		String contra1 = new String(passwordField.getPassword());
-		String contra2 = new String(passwordRField.getPassword());
-		if (contra1.equals(contra2)) {
-			return false;
-		} else {
-			JOptionPane.showMessageDialog(this, "Las contraseñas tienen que coincidir");
-			return true;
-		}
-	}
 	public static void abrirContratarTrabajador(Trabajador t) {
 		ContratarTrabajador contratarTrabajador= new ContratarTrabajador(t);
 		contratarTrabajador.setVisible(true);

@@ -3,8 +3,6 @@ package main;
 import ventanas.Bienvenida;
 
 public class MainConcesionario {
-	//TODO métodos BBDD
-	//TODO ventana para que trabajadores y admin puedan ver las ventas en una tabla y ordenarlas
 	//TODO poner Properties
 	//TODO pensar si hay alguna interfaz posible y si eso, lanzarla
 	//TODO pensar hilos posibles para el proyecto

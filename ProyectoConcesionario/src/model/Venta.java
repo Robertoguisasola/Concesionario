@@ -1,9 +1,8 @@
 package model;
 
 public class Venta {
-	//TODO meter todos los valores de una venta
 	
-	protected Cliente comprador;
+	protected Persona comprador;
 	protected Vehiculo vehiculo;
 	protected int precio;
 	protected String matricula;
@@ -11,7 +10,7 @@ public class Venta {
 	protected boolean lucesLed;
 	
 	
-	public Venta(Cliente comprador, Vehiculo vehiculo, int precio, String matricula, boolean automatico, boolean lucesLed) {
+	public Venta(Persona comprador, Vehiculo vehiculo, int precio, String matricula, boolean automatico, boolean lucesLed) {
 		super();
 		this.comprador = comprador;
 		this.vehiculo = vehiculo;
@@ -41,25 +40,30 @@ public class Venta {
 		this.lucesLed = v.lucesLed;
 	}
 	
-	public Cliente getComprador() {
+	public Persona getComprador() {
 		return comprador;
 	}
+	
 	public void setComprador(Cliente comprador) {
 		this.comprador = comprador;
 	}
+	
 	public Vehiculo getVehiculo() {
 		return vehiculo;
 	}
+	
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	
 	public int getPrecio() {
 		return precio;
 	}
+	
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-
+	
 	public String getMatricula() {
 		return matricula;
 	}

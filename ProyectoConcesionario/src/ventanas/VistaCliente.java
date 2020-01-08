@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Cliente;
+import model.Trabajador;
 
 public class VistaCliente extends JFrame {
 	
@@ -60,7 +61,8 @@ panelSuperior  =new JPanel();
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EscogerCoche.abrirEscogerCoche(c);
+				Trabajador t = null;
+				EscogerCoche.abrirEscogerCoche(c, t);
 			}
 		});
 		

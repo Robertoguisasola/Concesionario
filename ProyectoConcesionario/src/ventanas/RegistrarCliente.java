@@ -100,7 +100,7 @@ public class RegistrarCliente extends JFrame {
 		
 		passwordBox = new Box(BoxLayout.X_AXIS);
 		passwordBox.add(passwordLabel);
-		passwordBox.add(Box.createRigidArea(new Dimension(90, 12)));
+		passwordBox.add(Box.createRigidArea(new Dimension(79, 12)));
 		passwordBox.add(passwordField);
 		
 		passwordRLabel = new JLabel("Repita la contraseña: ");
@@ -116,7 +116,7 @@ public class RegistrarCliente extends JFrame {
 		
 		emailBox = new Box(BoxLayout.X_AXIS);
 		emailBox.add(emailLabel);
-		emailBox.add(Box.createRigidArea(new Dimension(124, 12)));
+		emailBox.add(Box.createRigidArea(new Dimension(113, 12)));
 		emailBox.add(emailField);
 		
 		dniLabel = new JLabel("DNI: ");
@@ -124,7 +124,7 @@ public class RegistrarCliente extends JFrame {
 		
 		dniBox = new Box(BoxLayout.X_AXIS);
 		dniBox.add(dniLabel);
-		dniBox.add(Box.createRigidArea(new Dimension(135, 12)));
+		dniBox.add(Box.createRigidArea(new Dimension(118, 12)));
 		dniBox.add(dniField);
 		
 		nombreLabel = new JLabel("Nombre: ");
@@ -132,7 +132,7 @@ public class RegistrarCliente extends JFrame {
 		
 		nombreBox = new Box(BoxLayout.X_AXIS);
 		nombreBox.add(nombreLabel);
-		nombreBox.add(Box.createRigidArea(new Dimension(110, 12)));
+		nombreBox.add(Box.createRigidArea(new Dimension(100, 12)));
 		nombreBox.add(nombreField);
 
 		apellidosLabel = new JLabel("Apellidos: ");
@@ -140,7 +140,7 @@ public class RegistrarCliente extends JFrame {
 
 		apellidosBox = new Box(BoxLayout.X_AXIS);
 		apellidosBox.add(apellidosLabel);
-		apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
+		apellidosBox.add(Box.createRigidArea(new Dimension(95, 12)));
 		apellidosBox.add(apellidosField);
 		
 		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
@@ -230,8 +230,7 @@ public class RegistrarCliente extends JFrame {
 			}
 		}
 	}
-
-	//TODO test
+	
 	private void limpiarCajas(Trabajador t) {
 		usuarioField.setText(null);
 		passwordField.setText(null);
@@ -244,7 +243,6 @@ public class RegistrarCliente extends JFrame {
 		numeroTarjetaField.setText(null);
 	}
 	
-	//TODO test
 	private void registrar(Trabajador t) {
 		try {
 			
@@ -255,9 +253,7 @@ public class RegistrarCliente extends JFrame {
 			if (comprobarContraseñas()) {
 				return;
 			}
-			
-			//TODO zzzz comprobar vacíos y defaults.... ya sabes
-			
+						
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
@@ -291,7 +287,7 @@ public class RegistrarCliente extends JFrame {
 			}
 		} 
 		catch (ParseException ex) {
-			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
+			JOptionPane.showMessageDialog(this, "<html><body><center>Formato de fecha erroneo. <br/>Por favor, introduzca la fecha de la siguiente forma: <br/>dd/MM/yyyy</center></body><html>");
 		} catch (NumberFormatException en) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un número de tarjeta");
 		}
@@ -311,6 +307,31 @@ public class RegistrarCliente extends JFrame {
 			return true;
 		}
 		
+		if (new String(passwordRField.getPassword()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, repita su contraseña");
+			return true;
+		}
+		
+		if (new String(emailField.getText()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca un email de contacto");
+			return true;
+		}
+		
+		if (new String(dniField.getText()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca su DNI");
+			return true;
+		}
+		
+		if (new String(nombreField.getText()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca su nombre");
+			return true;
+		}
+		
+		if (new String(apellidosField.getText()).equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca al menos un apellido");
+			return true;
+		}
+				
 		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
 			return true;	

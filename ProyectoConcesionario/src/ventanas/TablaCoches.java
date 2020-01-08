@@ -81,6 +81,7 @@ public class TablaCoches extends JFrame {
 						String color = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Color"));
 						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
+						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int diesel;
 						
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
@@ -88,7 +89,8 @@ public class TablaCoches extends JFrame {
 						} else {
 							diesel = 1;
 						}
-						bd.eliminarVehiculo("coche", marca, modeloc, color, caballos, plazas, diesel);
+						
+						bd.eliminarCoche(marca, modeloc, color, caballos, plazas, precio, diesel);
 						bd.desconectar();
 						TablaCoches.abrirTablaCoches(t);
 						break;
@@ -136,6 +138,7 @@ public class TablaCoches extends JFrame {
 		modelo.addColumn("Color");
 		modelo.addColumn("Caballos");
 		modelo.addColumn("Plazas");
+		modelo.addColumn("Precio");
 		modelo.addColumn("Motor diesel");
 
 		GestorBD bd = new GestorBD();
@@ -146,11 +149,11 @@ public class TablaCoches extends JFrame {
 			while (rs.next())
 			{
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[6]; // Hay tres columnas en la tabla
+				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++)
-					if (i == 5) {
+					if (i == 6) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "No";
 						} else {

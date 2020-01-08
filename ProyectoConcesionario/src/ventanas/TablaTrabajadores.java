@@ -135,7 +135,7 @@ public class TablaTrabajadores extends JFrame {
 		try {
 			while (rs.next()){
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[8]; // Hay tres columnas en la tabla
+				Object [] fila = new Object[8]; // Hay ocho columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++) {

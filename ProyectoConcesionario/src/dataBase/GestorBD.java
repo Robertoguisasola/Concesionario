@@ -253,7 +253,8 @@ public class GestorBD {
 				c.setCaballos(Integer.parseInt(campos[3]));
 				c.setNumRuedas(Integer.parseInt(campos[4]));
 				c.setnPlazas(Integer.parseInt(campos[5]));
-				c.setMotorDiesel(Boolean.parseBoolean(campos[6]));
+				c.setPrecio(Integer.parseInt(campos[6]));
+				c.setMotorDiesel(Boolean.parseBoolean(campos[7]));
 
 				coches.add(c);
 			}
@@ -374,9 +375,10 @@ public class GestorBD {
 				int caballos = c.getCaballos();
 				int numRuedas = c.getNumRuedas();
 				int nPlazas = c.getnPlazas();
+				int precio = c.getPrecio();
 				boolean motorDiesel = c.isMotorDiesel();
 
-				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";"+ motorDiesel + "\n");
+				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";" + precio + ";" + motorDiesel + "\n");
 
 				log(Level.INFO, "El coche " + c.toString() + " ha sido exportado correctamente", null);
 			}
@@ -402,7 +404,6 @@ public class GestorBD {
 		
 	}
 	public List<Trabajador> obtenerTrabajadores(){
-		//TODO tttt crear test de prueba
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
@@ -446,7 +447,6 @@ public class GestorBD {
 	}
 
 	public List<Cliente> obtenerClientes(){
-		//TODO tttt crear test de prueba
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta FROM cliente";
 		PreparedStatement stmt;
 
@@ -485,8 +485,7 @@ public class GestorBD {
 	}
 
 	public List<Coche> obtenerCoches(){
-		//TODO tttt crear test de prueba
-		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel FROM coche";
+		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel FROM coche";
 		PreparedStatement stmt;
 
 		List<Coche> coches = new ArrayList<Coche>();
@@ -505,6 +504,8 @@ public class GestorBD {
 				c.setCaballos(rs.getInt("caballos"));
 				c.setNumRuedas(rs.getInt("numRuedas"));
 				c.setnPlazas(rs.getInt("nPlazas"));
+				c.setPrecio(rs.getInt("precio"));
+				
 				if (rs.getInt("motorDiesel") == 0) {
 					c.setMotorDiesel(false);
 				} else {
@@ -623,8 +624,8 @@ public class GestorBD {
 	}
 
 	public void anadirNuevoCoche(Coche c) {
-		String sql  = "INSERT INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, motorDiesel)"
-				+ " VALUES (?,?,?,?,?,?,?)";
+		String sql  = "INSERT INTO coche (marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;
 
@@ -637,11 +638,12 @@ public class GestorBD {
 			stmt.setInt(4, c.getCaballos());
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
+			stmt.setInt(7, c.getPrecio());
 			
 			if (c.isMotorDiesel()) {
-				stmt.setInt(7, 1);
+				stmt.setInt(8, 1);
 			}else {
-				stmt.setInt(7, 0);
+				stmt.setInt(8, 0);
 			}
 
 			stmt.executeUpdate();
@@ -655,7 +657,6 @@ public class GestorBD {
 	}
 
 	public ResultSet rellenarTablaTrabajadores(){
-		//TODO tttt crear test de prueba
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
 
@@ -674,7 +675,6 @@ public class GestorBD {
 	}
 
 	public ResultSet rellenarTablaClientes(){
-		//TODO tttt crear test de prueba
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, numTarjeta FROM cliente";
 		PreparedStatement stmt;
 
@@ -693,8 +693,7 @@ public class GestorBD {
 	}
 
 	public ResultSet rellenarTablaCoches(){
-		//TODO tttt crear test de prueba
-		String sql = "SELECT marca, modelo, color, caballos, nPlazas, motorDiesel FROM coche";
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, motorDiesel FROM coche";
 		PreparedStatement stmt;
 
 		try {
@@ -711,78 +710,24 @@ public class GestorBD {
 		return null;
 	}
 	
-	public List<String> obtenerMarcas() {
-		String sql = "SELECT DISTINCT marca FROM coche";
-		
+	public ResultSet rellenarTablaVentasCoches(){
+		String sql = "SELECT dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo FROM ventacoche";
 		PreparedStatement stmt;
-
-		List<String> marcas = new ArrayList<String>();
 
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
 
-			while (rs.next()){
-				String marca = rs.getString("marca");
-				
-				marcas.add(marca);
-			}
-
-			log(Level.INFO, "Obteniendo marcas de coches", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener marcas de coches", e);
-			e.printStackTrace();
-		}
-		return marcas;
-	}
-	
-	public List<String> obtenerModelos(String marca) {
-		String sql = "SELECT DISTINCT modelo FROM coche WHERE marca = " + marca;
-		
-		PreparedStatement stmt;
-
-		List<String> modelos = new ArrayList<String>();
-
-		try {
-			stmt = conn.prepareStatement(sql);
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()){
-				String modelo = rs.getString("modelo");
-				
-				modelos.add(modelo);
-			}
-
-			log(Level.INFO, "Obteniendo modelos de coches", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener modelos de coches", e);
-			e.printStackTrace();
-		}
-		return modelos;
-	}
-	
-	public ResultSet obtenerCochesComprar(String marca, String color, int plazas){
-		//TODO tttt crear test de prueba
-		String sql = "SELECT marca, modelo, color, caballos, nPlazas, motorDiesel FROM coche"
-				+ " WHERE marca = '" + marca + "' AND color = '" + color + "' AND nPlazas >= " + plazas;
-		Statement stmt;
-
-		try {
-			stmt = conn.createStatement();
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			log(Level.INFO, "Obteniendo los coches", null);
+			log(Level.INFO, "Obteniendo las ventas de los coches", null);
 			return rs;
 		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener los coches", e);
+			log(Level.SEVERE, "Error al obtener las ventas de los coches", e);
 			e.printStackTrace();
 		}
 		return null;
 	}
-
+	
 	//Método que nos permite eliminar a un cliente o despedir a un trabajador, en función de la tabla que le pasemos y el DNI
 	public void eliminarPersona(String tabla, String dNI) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
@@ -804,8 +749,8 @@ public class GestorBD {
 	}
 
 	//Método para borrar un vehículo de la bbdd en función de la tabla y otros valores
-	public void eliminarVehiculo(String tabla, String marca, String modelo, String color, int caballos, int plazas, int diesel) {
-		String sqlBorrar= "DELETE FROM " + tabla + " WHERE marca = ? AND modelo = ? AND color = ? "
+	public void eliminarCoche(String marca, String modelo, String color, int caballos, int plazas, int precio, int diesel) {
+		String sqlBorrar= "DELETE FROM coche WHERE marca = ? AND modelo = ? AND color = ? "
 				+ "AND caballos = ? AND nPlazas = ? AND motorDiesel = ?";
 
 		PreparedStatement stmtBorrar;
@@ -814,7 +759,7 @@ public class GestorBD {
 			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
 			stmtBorrar.setString(1, marca);
-			stmtBorrar.setString(2, modelo);
+			stmtBorrar.setString(2, marca);
 			stmtBorrar.setString(3, color);
 			stmtBorrar.setInt(4, caballos);
 			stmtBorrar.setInt(5, plazas);
@@ -829,10 +774,54 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
+	
+	public void eliminarVentaCoche(String matricula) {
+		String sqlBorrar= "DELETE FROM ventacoche WHERE matricula = ?";
 
-	//TODO completar método....
-	public void venderCoche() {
+		PreparedStatement stmtBorrar;
 
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
+
+			stmtBorrar.setString(1, matricula);
+
+
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "La venta del coche con matrícula " + matricula+ " ha sido borrada correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar la venta del coche con matrícula "  + matricula, e);
+			e.printStackTrace();
+		}
+	}
+
+	public void venderCoche(String dni, String coche, int precio, String matricula, int automatico, int lucesLed, int techoPanoramico, int traccion4x4, int modoDeportivo) {
+		String sql  = "INSERT INTO ventacoche (dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, dni);
+			stmt.setString(2, coche);
+			stmt.setInt(3, precio);
+			stmt.setString(4, matricula);
+			stmt.setInt(5, automatico);
+			stmt.setInt(6, lucesLed);
+			stmt.setInt(7, techoPanoramico);
+			stmt.setInt(8, traccion4x4);
+			stmt.setInt(9, modoDeportivo);
+			
+			stmt.executeUpdate();
+			
+			log(Level.INFO, "La compra del cliente con DNI " + dni + " del coche " + coche + " por un valor de " + precio + " ha sido añadida", null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "La compra del cliente con DNI " + dni + " del coche " + coche + " por un valor de " + precio + " no ha podido ser añadida", e );
+			setLastError(e);
+			e.printStackTrace();
+		}
 	}
 
 	// Método público para asignar un logger externo

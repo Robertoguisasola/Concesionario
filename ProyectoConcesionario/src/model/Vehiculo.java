@@ -8,9 +8,9 @@ public class Vehiculo {
 	protected int caballos;
 	protected int numRuedas;
 	protected int nPlazas;
-	//TODO poner imagen como string y al seleccionar que imagen quieres, que la copie a img y guarde esa ruta de img
+	protected int precio;
 	
-	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas) {
+	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -18,6 +18,7 @@ public class Vehiculo {
 		this.caballos = caballos;
 		this.numRuedas = numRuedas;
 		this.nPlazas = nPlazas;
+		this.precio = precio;
 	}
 
 	public Vehiculo() {
@@ -28,6 +29,7 @@ public class Vehiculo {
 		this.caballos = 0;
 		this.numRuedas = 0;
 		this.nPlazas = 0;
+		this.precio = 0;
 	}
 
 	public Vehiculo(Vehiculo v) {
@@ -38,6 +40,7 @@ public class Vehiculo {
 		this.caballos = v.caballos;
 		this.numRuedas = v.numRuedas;
 		this.nPlazas = v.nPlazas;
+		this.precio = v.precio;
 	}
 
 	public String getMarca() {
@@ -126,4 +129,14 @@ public class Vehiculo {
 	public String getColorString() {
 		return color.toString().toLowerCase();
 	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+	
+	
 }

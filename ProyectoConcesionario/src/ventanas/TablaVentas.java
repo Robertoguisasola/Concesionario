@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,8 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
+import dataBase.GestorBD;
 import model.Trabajador;
 
 public class TablaVentas extends JFrame {
@@ -25,11 +28,11 @@ public class TablaVentas extends JFrame {
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
-	private JButton cancelarButton;
+	private JButton eliminarButton;
 	private JButton atrasButton;
 	private JTable tabla;
+	private DefaultTableModel modelo;
 	
-	//TODO terminar ventana
 	public TablaVentas(Trabajador t) {
 		this.setTitle("Tabla de ventas");
 		
@@ -38,17 +41,8 @@ public class TablaVentas extends JFrame {
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		
-		//TODO rellenar columnas y sacar datos
-		String[] columNames = {"Column1", "Column2"};
-		String[][] data = {
-				{"Nombre1", "Dato1"},
-				{"Nombre2", "Dato2"},
-		};
-		
-		tabla = new JTable(data, columNames);
-		
+		setData();
 		tablaPanel = new JScrollPane(tabla);
-		
 		
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
@@ -56,8 +50,8 @@ public class TablaVentas extends JFrame {
 		anadirButton = new JButton("Añadir venta");
 		botonesPanel.add(anadirButton);
 		
-		cancelarButton = new JButton("Eliminar");
-		botonesPanel.add(cancelarButton);
+		eliminarButton = new JButton("Eliminar venta");
+		botonesPanel.add(eliminarButton);
 		
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
@@ -66,18 +60,35 @@ public class TablaVentas extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO que vaya a vender coche y listo
+				EscogerCoche.abrirEscogerCoche(null, t);
+				dispose();
 			}
 		});
 		
-		cancelarButton.addActionListener(new ActionListener() {
+		eliminarButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Hacer que borre el seleccionado
 				String[] opciones = {"Sí", "No"};
-				JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar el pedido?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+				if(tabla.getSelectedRow() >= 0) {
+					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Matricula"));
+
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+					//TODO qqqq actualizar tabla al borrar
+					switch (respuesta) {
+					case 0:
+						GestorBD bd = new GestorBD();
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
+						bd.eliminarPersona("trabajador", dni);
+						bd.desconectar();
+						break;
+					default:
+						break;
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", null, 0);
+				}
 			}
 		});
 		
@@ -105,24 +116,101 @@ atrasButton.addActionListener(new ActionListener() {
 		this.setVisible(true);
 	}
 	
+
+	private void setData() {
+		modelo = new DefaultTableModel();
+		tabla = new JTable(modelo);
+
+		// Creamos las columnas.
+		modelo.addColumn("DNI cliente");
+		modelo.addColumn("Coche");
+		modelo.addColumn("Precio");
+		modelo.addColumn("Matricula");
+		modelo.addColumn("Automatico");
+		modelo.addColumn("Luces led");
+		modelo.addColumn("Techo panoramico");
+		modelo.addColumn("Traccion 4X4");
+		modelo.addColumn("Modo deportivo");
+
+		GestorBD bd = new GestorBD();
+		ResultSet rs = bd.rellenarTablaVentasCoches();
+
+		// Bucle para cada resultado en la consulta
+		try {
+			while (rs.next()){
+				// Se crea un array que será una de las filas de la tabla.
+				Object [] fila = new Object[9]; // Hay nueve columnas en la tabla
+
+				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+				for (int i = 0;i<fila.length;i++) {
+					//TODO qqqq xq saca 0 y 1???
+					
+					if (i == 4) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
+					
+					if (i == 5) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
+					
+					if (i == 6) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
+					
+					if (i == 7) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
+					
+					if (i == 8) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else {
+						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+					}
+				}
+
+				// Se añade al modelo la fila completa.
+				modelo.addRow(fila);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		bd.desconectar();
+	}
+
+	
 	public static void abrirTablaVentas(Trabajador t) {
 		TablaVentas tablaVentas = new TablaVentas(t);
 		tablaVentas.setVisible(true);
 		tablaVentas.setSize(480,360);
 		tablaVentas.setLocationRelativeTo(null);
 		tablaVentas.setVisible(true);
-	}
-	
-	//TODO borrar cuando funcione como queremos
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new TablaVentas(t);
-			}
-		});
 	}
 }

@@ -13,7 +13,7 @@ public class CocheTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		c = new Coche("Volvo", "GG", Colores.VERDE, 200, 4, 5, true);
+		c = new Coche("Volvo", "GG", Colores.VERDE, 200, 4, 5, 0, true);
 		prueba = new Coche(c);
 		empty = new Coche();
 	}
@@ -35,5 +35,4 @@ public class CocheTest {
 	public void testToString() {
 		assertEquals("Volvo GG VERDE, 200cv", c.toString());
 	}
-	
 }

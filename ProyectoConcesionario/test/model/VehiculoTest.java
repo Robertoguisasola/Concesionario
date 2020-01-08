@@ -14,7 +14,7 @@ public class VehiculoTest {
 
 	@Before
 	public void setUp() {
-		v = new Vehiculo("Volvo", "XC90", Colores.AZUL, 200, 4, 5);
+		v = new Vehiculo("Volvo", "XC90", Colores.AZUL, 200, 4, 5, 89000);
 		prueba = new Vehiculo(v);
 		empty = new Vehiculo();
 	}
@@ -95,6 +95,17 @@ public class VehiculoTest {
 	public void testSetnPlazas() {
 		v.setnPlazas(2);
 		assertEquals(2, v.getnPlazas());
+	}
+	
+	@Test
+	public void testGetPrecio() {
+		assertEquals(89000,v.getPrecio());
+	}
+	
+	@Test
+	public void testSetPrecio() {
+		v.setPrecio(85000);
+		assertEquals(85000, v.getPrecio());
 	}
 
 	@Test

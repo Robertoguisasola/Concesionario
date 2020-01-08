@@ -2,7 +2,6 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,6 @@ import java.sql.SQLException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,8 +20,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import dataBase.GestorBD;
-import model.Persona;
-import javax.swing.SwingConstants;
+import model.Cliente;
+import model.Coche;
+import model.Colores;
+import model.Trabajador;
 
 public class EscogerCoche extends JFrame{
 	
@@ -42,15 +41,13 @@ public class EscogerCoche extends JFrame{
 	private Box tablaBox;
 	
 	private JLabel informacionLabel;
-	private JButton salirButton;
+	private JButton volverButton;
 		
 	private JButton comprarButton;
 	private JButton probarButton;
 	private Box botonesBox;
-	
-	
-	
-	public EscogerCoche(Persona p) {
+		
+	public EscogerCoche(Cliente c, Trabajador t) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		northPanel = new JPanel();
@@ -58,68 +55,82 @@ public class EscogerCoche extends JFrame{
 		
 		JPanel centroPanel = new JPanel();
 		centroPanel.setLayout(new BorderLayout());
-		
-		
+				
 		String frase = "<html><body><left>Busque el coche, seleccionelo en la tabla e indique si quiere probarlo o comprarlo</left></body></html>";
 		
 		informacionLabel = new JLabel(frase);
 		northPanel.add(informacionLabel, BorderLayout.WEST);	
-		
-		
-		
-		salirButton = new JButton("Salir");
-		salirButton.addActionListener(new ActionListener() {
+				
+		volverButton = new JButton("Volver");
+		volverButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Login.abrirLogin();
-				dispose();
-				
+				if (t == null) {
+					VistaCliente.abrirVistaCliente(c);
+				} else {
+					if (t.isAdmin()) {
+						VistaAdministrador.abrirVistaAdministrador(t);
+						dispose();
+					} else {
+						VistaTrabajador.abrirVistaTrabajador(t);
+						dispose();
+					}
+				}
 			}
 		});
 		
-		northPanel.add(salirButton, BorderLayout.EAST);
+		northPanel.add(volverButton, BorderLayout.EAST);
 		
 		setData();
 		tablaPanel = new JScrollPane(tabla);
 		
 		tablaPanel = new JScrollPane(tabla);
 		
-		
-				
 		tablaBox = new Box(BoxLayout.Y_AXIS);
 		tablaBox.add(Box.createRigidArea(new Dimension(0,10)));
 		tablaBox.add(tablaPanel);
-		
-		 
-		
-		
+				
 		comprarButton = new JButton("Comprar");
 		comprarButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO aaaaaa accede a la siguiente ventana sin seleccionar ningun coche 
 				String[] opciones = {"Sí", "No"};
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche  ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				
+				if(tabla.getSelectedRow() >= 0) {
+					String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
+					String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
+					String color = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Color"));
+					int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
+					int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
+					int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
+					boolean diesel;
+					
+					if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
+						diesel = false;
+					} else {
+						diesel = true;
+					}
+					
+					Coche ch = new Coche(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel);
+					
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 				
 				switch (respuesta) {
 				case 0:
-					AnadirExtras.abriranadirExtras(p);
+					AnadirExtras.abriranadirExtras(c, t, ch);
 					dispose();
 					break;
 				case 1:
-					System.out.println("Le has dado a que no");
-					dispose();
+					crearVenta(c, t, ch);
 					break;
 				default:
 					break;
-				}
-				
-				// TODO Auto-generated method stub
+				}				
 				//TODO aaaa o zzzzz hacer un metodo que dependiendo la marca y los extras te saque un mensaje del precio y otro metodo que lo añada a ventas.
-				
+			}
 			}
 		});	
 		
@@ -128,11 +139,10 @@ public class EscogerCoche extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// TODO llevar a probar coche
 				
 			}
 		});
-		
 		
 		botonesBox = new Box(BoxLayout.X_AXIS);
 		botonesBox.add(comprarButton);
@@ -142,9 +152,6 @@ public class EscogerCoche extends JFrame{
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 		botonesPanel.add(botonesBox);
-		
-		
-		
 		
 		centroPanel.add(tablaBox, BorderLayout.CENTER);
 		
@@ -163,6 +170,7 @@ public class EscogerCoche extends JFrame{
 		modelo.addColumn("Color");
 		modelo.addColumn("Caballos");
 		modelo.addColumn("Plazas");
+		modelo.addColumn("Precio");
 		modelo.addColumn("Motor diesel");
 		
 		GestorBD bd = new GestorBD();
@@ -173,11 +181,11 @@ public class EscogerCoche extends JFrame{
 			while (rs.next())
 			{
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[6]; // Hay tres columnas en la tabla
+				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++)
-					if (i == 5) {
+					if (i == 6) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "No";
 						} else {
@@ -195,8 +203,20 @@ public class EscogerCoche extends JFrame{
 		bd.desconectar();
 	}
 
-	public static void abrirEscogerCoche(Persona p) {
-		EscogerCoche escogerCoche = new EscogerCoche(p);
+	private void crearVenta(Cliente c, Trabajador t, Coche ch) {		
+		GestorBD bd = new GestorBD();
+		
+		//TODO qqqq metodo para generar matrículas....
+		if (c == null) 
+			bd.venderCoche(t.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
+		 else 
+			bd.venderCoche(c.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
+		
+		bd.desconectar();		
+	}
+	
+	public static void abrirEscogerCoche(Cliente c, Trabajador t) {
+		EscogerCoche escogerCoche = new EscogerCoche(c, t);
 		escogerCoche.setTitle("Bienvenido");
 		escogerCoche.setVisible(true);
 		escogerCoche.setSize(550,420);
@@ -204,7 +224,9 @@ public class EscogerCoche extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Persona p = new Persona();
-		EscogerCoche.abrirEscogerCoche(p);
+		Cliente c = new Cliente();
+		c.setdNI("71708119F");
+		Trabajador t = null;
+		EscogerCoche.abrirEscogerCoche(c, t);
 	}
 }

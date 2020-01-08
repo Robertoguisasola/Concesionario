@@ -19,10 +19,7 @@ import javax.swing.JPanel;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-public class VistaAdministrador extends JFrame{
-	
-	//TODO poner menú para poder exportar a ficheros los coches y ventas
-	
+public class VistaAdministrador extends JFrame{	
 	/**
 	 * 
 	 */
@@ -228,7 +225,8 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				EscogerCoche.abrirEscogerCoche(null, t);
+				dispose();
 				
 			}
 		});
@@ -262,8 +260,9 @@ public class VistaAdministrador extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				GestorBD bd = new GestorBD();
+				bd.exportarBBDDAFichero("venta");
+				bd.desconectar();				
 			}
 		});
 		ventasMenu.add(ventasExportar);
@@ -442,5 +441,12 @@ public class VistaAdministrador extends JFrame{
 		vistaAdministrador.setSize(480,360);
 		vistaAdministrador.setLocationRelativeTo(null);
 		vistaAdministrador.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		Trabajador t = new Trabajador();
+		t.setAdmin(true);
+		
+		VistaAdministrador.abrirVistaAdministrador(t);
 	}
 }

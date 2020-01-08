@@ -1,7 +1,11 @@
 package ventanas;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -11,11 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Persona;
-
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import model.Cliente;
+import model.Coche;
+import model.Trabajador;
 
 public class AnadirExtras extends JFrame{
 	
@@ -36,7 +38,7 @@ public class AnadirExtras extends JFrame{
 	private Box buttonsBox;
 	JPanel buttonsPanel;
 	
-	public AnadirExtras(Persona p) {
+	public AnadirExtras(Cliente c, Trabajador t, Coche ch) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		String anadirExtr = "<html><body><center>Extras para el coche<br>Escoja los extras que desee para su coche</center></body></html>";
@@ -75,14 +77,14 @@ public class AnadirExtras extends JFrame{
 		acceptButton = new JButton("Aceptar");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//aaaa meter metodo de compra final
+				//TODO aaaa meter metodo de compra final
 			}
 		});    
 		
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//pensar si vuelve atrás y si es así para que siga el coche seleccionado (en los extras hasya que no se acepte no se hace el dispose de la ventana de elegircoche)
+				//TODO pensar si vuelve atrás y si es así para que siga el coche seleccionado (en los extras hasya que no se acepte no se hace el dispose de la ventana de elegircoche)
 			}
 		});
 		
@@ -98,8 +100,8 @@ public class AnadirExtras extends JFrame{
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	public static void abriranadirExtras(Persona p) {
-		AnadirExtras anadirExtras = new AnadirExtras(p);
+	public static void abriranadirExtras(Cliente c, Trabajador t, Coche ch) {
+		AnadirExtras anadirExtras = new AnadirExtras(c, t, ch);
 		anadirExtras.setTitle("Extras");
 		anadirExtras.setVisible(true);
 		anadirExtras.setSize(480,360);

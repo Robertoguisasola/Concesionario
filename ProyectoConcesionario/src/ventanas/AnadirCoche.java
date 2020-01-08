@@ -26,7 +26,6 @@ import model.Colores;
 import model.Trabajador;
 
 public class AnadirCoche extends JFrame {
-	//TODO Poner los campos requeridos
 	
 	/**
 	 * 
@@ -57,6 +56,9 @@ public class AnadirCoche extends JFrame {
 	private JLabel nPlazasLabel;
 	private JTextField nPlazasField;
 	private Box nPlazasBox;
+	private JLabel precioLabel;
+	private JTextField precioField;
+	private Box precioBox;
 	private JCheckBox motorDieselCheck;
 
 	private JButton agregarButton;
@@ -87,7 +89,7 @@ public class AnadirCoche extends JFrame {
 			
 		marcaBox = new Box(BoxLayout.X_AXIS);
 		marcaBox.add(marcaLabel);
-		marcaBox.add(Box.createRigidArea(new Dimension(36, 12)));
+		marcaBox.add(Box.createRigidArea(new Dimension(40, 12)));
 		marcaBox.add(marcaField);
 		
 		modeloLabel = new JLabel("Modelo: ");
@@ -126,24 +128,32 @@ public class AnadirCoche extends JFrame {
 		});
 		nRuedasField.setHorizontalAlignment(SwingConstants.CENTER);
 		nRuedasField.setText("4");
-				
+
 		nRuedasBox = new Box(BoxLayout.X_AXIS);
 		nRuedasBox.add(nRuedasLabel);
 		nRuedasBox.add(Box.createRigidArea(new Dimension(28, 12)));
 		nRuedasBox.add(nRuedasField);
-		
+
 		nPlazasLabel = new JLabel("Número de plazas: ");
 		nPlazasField = new JTextField();
-		
+
 		nPlazasBox = new Box(BoxLayout.X_AXIS);
 		nPlazasBox.add(nPlazasLabel);
 		nPlazasBox.add(Box.createRigidArea(new Dimension(31, 12)));
 		nPlazasBox.add(nPlazasField);
-	
+
+		precioLabel = new JLabel("Precio");
+		precioField = new JTextField();
+
+		precioBox = new Box(BoxLayout.X_AXIS);
+		precioBox.add(precioLabel);
+		precioBox.add(Box.createRigidArea(new Dimension(55, 12)));
+		precioBox.add(precioField);
+
 		motorDieselCheck = new JCheckBox("Motor diesel");		
-		
+
 		formPanel = new JPanel();
-		
+
 		formBox = new Box(BoxLayout.Y_AXIS);
 		formBox.add(marcaBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
@@ -156,6 +166,8 @@ public class AnadirCoche extends JFrame {
 		formBox.add(nRuedasBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(nPlazasBox);
+		formBox.add(Box.createRigidArea(new Dimension(0,10)));
+		formBox.add(precioBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(motorDieselCheck);
 
@@ -197,7 +209,6 @@ public class AnadirCoche extends JFrame {
 		}
 	}
 
-	//TODO test
 	private void limpiarCajas(Trabajador t) {
 		marcaField.setText(null);
 		modeloField.setText(null);
@@ -206,24 +217,22 @@ public class AnadirCoche extends JFrame {
 		nPlazasField.setText(null);
 	}
 	
-	//TODO test
 	private void anadirCoche(Trabajador t) {
 		
 			if (comprobarVacios()) {
 				return;
 			}
-			
-			//TODO zzzz comprobar vacíos y defaults.... ya sabes
-			
+						
 			String marca = marcaField.getText();
 			String modelo = new String(modeloField.getText());
 			Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
 			int caballos = Integer.parseInt(caballosField.getText());
 			int nRuedas = Integer.parseInt(nRuedasField.getText());
 			int nPlazas = Integer.parseInt(nPlazasField.getText());
+			int precio = Integer.parseInt(precioField.getText());
 			boolean motorDiesel = motorDieselCheck.isSelected();
 			
-			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, motorDiesel);
+			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, precio, motorDiesel);
 			
 			GestorBD bd = new GestorBD();
 			bd.anadirNuevoCoche(c);
@@ -269,6 +278,12 @@ public class AnadirCoche extends JFrame {
 		
 		if (nPlazasField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca las plazas del coche");
+			return true;
+		}
+		
+		
+		if (precioField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca el precio del coche");
 			return true;
 		}
 		
