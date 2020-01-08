@@ -77,7 +77,7 @@ public class AnadirExtras extends JFrame{
 		acceptButton = new JButton("Aceptar");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO aaaa meter metodo de compra final
+				crearVenta();
 			}
 		});    
 		
@@ -100,6 +100,11 @@ public class AnadirExtras extends JFrame{
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
+	protected void crearVenta() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static void abriranadirExtras(Cliente c, Trabajador t, Coche ch) {
 		AnadirExtras anadirExtras = new AnadirExtras(c, t, ch);
 		anadirExtras.setTitle("Extras");

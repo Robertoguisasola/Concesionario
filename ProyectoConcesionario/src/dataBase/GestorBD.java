@@ -22,10 +22,10 @@ import javax.swing.JOptionPane;
 
 import model.Cliente;
 import model.Coche;
+import model.Coche2;
 import model.Trabajador;
 
 public class GestorBD {
-	//TODO método de añadir coche de 2ª mano
 
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
@@ -57,13 +57,6 @@ public class GestorBD {
 		}
 	}
 
-	//Preparado para tener no solo ventas de coches
-	private void borrarVentas(String[] tablas) {
-		for (int i = 0; i < tablas.length; i++) {
-			borrar(tablas[i]);
-		}		
-	}
-
 	private void borrar(String tabla) {
 		String sqlBorrar= "DELETE FROM " + tabla;
 
@@ -82,14 +75,8 @@ public class GestorBD {
 	}
 
 	public void importarFicheroABBDD(String tabla){	
-		String [] tablas = {"ventacoche"};
-
-		if (tabla.equals("venta")) {
-			borrarVentas(tablas);
-		} else {
 			borrar(tabla);			
-		}
-
+		
 		switch (tabla) {
 		case "trabajador":
 			importarTrabajadores();
@@ -100,8 +87,8 @@ public class GestorBD {
 		case "coche":
 			importarCoches();
 			break;
-		case "venta":
-			importarVentas();
+		case "coche2":
+			importarCoches2();
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
@@ -167,7 +154,6 @@ public class GestorBD {
 			log(Level.SEVERE, "Error al cargar trabajadores desde el fichero", null);
 		}
 
-		//TODO tttt crear test de prueba
 		Iterator<Trabajador>it = trabajadores.iterator();
 
 
@@ -218,7 +204,6 @@ public class GestorBD {
 			sc.close();
 		}
 
-		//TODO tttt crear test de prueba
 		Iterator<Cliente>it = clientes.iterator();
 
 		while (it.hasNext()){			
@@ -276,11 +261,54 @@ public class GestorBD {
 		log(Level.INFO, "Coches añadidos a la base de datos", null);
 	}
 	
-	//TODO aaaa completar importar
-	private void importarVentas() {
-		
-	}
+	private void importarCoches2(){
+		List<Coche2> coches = new ArrayList<Coche2>();
 
+		File f = null;
+		Scanner sc = null;
+
+		try {
+			f = new File("ficheros/coches2.csv");
+			sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				Coche2 c = new Coche2();
+
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings
+
+				c.setMarca(campos[0].toLowerCase());
+				c.setModelo(campos[1].toLowerCase());
+				c.setColorString(campos[2].toLowerCase());
+				c.setCaballos(Integer.parseInt(campos[3]));
+				c.setNumRuedas(Integer.parseInt(campos[4]));
+				c.setnPlazas(Integer.parseInt(campos[5]));
+				c.setPrecio(Integer.parseInt(campos[6]));
+				c.setMotorDiesel(Boolean.parseBoolean(campos[7]));
+				c.setKilometros(Integer.parseInt(campos[8]));
+
+				coches.add(c);
+			}
+			log(Level.INFO, "Coches de segunda mano cargados desde el fichero", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log(Level.SEVERE, "Error al cargar los coches de segunda mano desde el fichero", null);
+		} finally {
+			sc.close();
+		}
+
+		Iterator<Coche2>it = coches.iterator();
+
+		while (it.hasNext()){			
+			Coche2 c  = it.next();
+			
+			anadirNuevoCoche2(c);
+		}
+		log(Level.INFO, "Coches de segunda mano añadidos a la base de datos", null);
+	}
+	
 	private void exportarTrabajadores(){
 		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
@@ -522,6 +550,47 @@ public class GestorBD {
 		}
 		return coches;
 	}
+	
+	public List<Coche2> obtenerCoches2(){
+		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel, kilometros FROM coche2";
+		PreparedStatement stmt;
+
+		List<Coche2> coches = new ArrayList<Coche2>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+
+				Coche2 c = new Coche2();
+				c.setMarca(rs.getString("marca"));
+				c.setModelo(rs.getString("modelo"));
+				c.setColorString(rs.getString("color"));
+				c.setCaballos(rs.getInt("caballos"));
+				c.setNumRuedas(rs.getInt("numRuedas"));
+				c.setnPlazas(rs.getInt("nPlazas"));
+				c.setPrecio(rs.getInt("precio"));
+				
+				if (rs.getInt("motorDiesel") == 0) {
+					c.setMotorDiesel(false);
+				} else {
+					c.setMotorDiesel(true);
+				}
+				
+				c.setKilometros(rs.getInt("kilometros"));
+
+				coches.add(c);
+			}
+
+			log(Level.INFO, "Obteniendo los coches", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los coches", e);
+			e.printStackTrace();
+		}
+		return coches;
+	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
 		List<Cliente> clientes = obtenerClientes();
@@ -655,6 +724,41 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
+	
+	public void anadirNuevoCoche2(Coche2 c) {
+		String sql  = "INSERT INTO coche2 (marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel, kilometros)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, c.getMarca());
+			stmt.setString(2, c.getModelo());
+			stmt.setString(3, c.getColorString());
+			stmt.setInt(4, c.getCaballos());
+			stmt.setInt(5, c.getNumRuedas());
+			stmt.setInt(6, c.getnPlazas());
+			stmt.setInt(7, c.getPrecio());
+			
+			if (c.isMotorDiesel()) {
+				stmt.setInt(8, 1);
+			}else {
+				stmt.setInt(8, 0);
+			}
+
+			stmt.setInt(9, c.getKilometros());
+			
+			stmt.executeUpdate();
+			
+			log(Level.INFO, "El coche de segunda mano " + c.toString() + " ha sido añadido", null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error al insertar el coche de segunda mano " + c.toString(), e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
 
 	public ResultSet rellenarTablaTrabajadores(){
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
@@ -694,6 +798,24 @@ public class GestorBD {
 
 	public ResultSet rellenarTablaCoches(){
 		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, motorDiesel FROM coche";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo los coches", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener los coches", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ResultSet rellenarTablaCoches2(){
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, motorDiesel, kilometros FROM coche2";
 		PreparedStatement stmt;
 
 		try {

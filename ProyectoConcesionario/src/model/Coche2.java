@@ -28,5 +28,14 @@ public class Coche2 extends Coche {
 		this.kilometros = kilometros;
 	}
 
-//TODO aaaa hacer el toString
+	@Override
+	public String toString() {
+		String diesel;
+		if (motorDiesel) {
+			diesel = "con motor diesel";
+		} else {
+			diesel = "con motor de gasolina";
+		}
+		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas, " + diesel + " y " + kilometros + " kilómetros reales";
+	}
 }

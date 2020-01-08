@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import dataBase.GestorBD;
@@ -30,10 +31,13 @@ public class VistaAdministrador extends JFrame{
 	private JMenu trabajadoresMenu;
 	private JMenu ventasMenu;
 	private JMenu cochesMenu;
+	private JMenu cochesNMenu;
+	private JMenu coches2Menu;
 	private JMenu clientesEditarMenu;
 	private JMenu trabajadoresEditarMenu;
 	private JMenu ventasEditarMenu;
 	private JMenu cochesEditarMenu;
+	private JMenu coches2EditarMenu;
 	private JMenuItem clientesVerItem;
 	private JMenuItem clientesAddItem;
 	private JMenuItem clientesEliminarItem;
@@ -47,13 +51,17 @@ public class VistaAdministrador extends JFrame{
 	private JMenuItem ventasVerItem;
 	private JMenuItem ventasAddItem;
 	private JMenuItem ventasEliminarItem;
-	private JMenuItem ventasImportar;
 	private JMenuItem ventasExportar;
 	private JMenuItem cochesVerItem;
 	private JMenuItem cochesAddItem;
 	private JMenuItem cochesEliminarItem;
 	private JMenuItem cochesImportar;
 	private JMenuItem cochesExportar;
+	private JMenuItem coches2VerItem;
+	private JMenuItem coches2AddItem;
+	private JMenuItem coches2EliminarItem;
+	private JMenuItem coches2Importar;
+	private JMenuItem coches2Exportar;
 	
 	private JPanel panelSuperior;
 	private JButton cerrarButton;
@@ -242,19 +250,7 @@ public class VistaAdministrador extends JFrame{
 			}
 		});
 		ventasEditarMenu.add(ventasEliminarItem);
-		
-		ventasImportar = new JMenuItem("Importar");
-		ventasImportar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GestorBD bd = new GestorBD();
-				bd.importarFicheroABBDD("venta");
-				bd.desconectar();
-			}
-		});
-		ventasMenu.add(ventasImportar);
-		
+				
 		ventasExportar = new JMenuItem("Exportar");
 		ventasExportar.addActionListener(new ActionListener() {
 			
@@ -267,6 +263,9 @@ public class VistaAdministrador extends JFrame{
 		});
 		ventasMenu.add(ventasExportar);
 		
+		cochesNMenu = new JMenu("Coches nuevos");
+		cochesMenu.add(cochesNMenu);
+		
 		cochesVerItem = new JMenuItem("Ver");
 		cochesVerItem.addActionListener(new ActionListener() {
 			
@@ -276,10 +275,10 @@ public class VistaAdministrador extends JFrame{
 				dispose();			
 			}
 		});
-		cochesMenu.add(cochesVerItem);
+		cochesNMenu.add(cochesVerItem);
 		
 		cochesEditarMenu = new JMenu("Editar");
-		cochesMenu.add(cochesEditarMenu);
+		cochesNMenu.add(cochesEditarMenu);
 		
 		cochesAddItem = new JMenuItem("Añadir coche");
 		cochesAddItem.addActionListener(new ActionListener() {
@@ -313,7 +312,7 @@ public class VistaAdministrador extends JFrame{
 				bd.desconectar();
 			}
 		});
-		cochesMenu.add(cochesImportar);
+		cochesNMenu.add(cochesImportar);
 		
 		cochesExportar = new JMenuItem("Exportar");
 		cochesExportar.addActionListener(new ActionListener() {
@@ -325,7 +324,70 @@ public class VistaAdministrador extends JFrame{
 				bd.desconectar();	
 			}
 		});
-		cochesMenu.add(cochesExportar);
+		cochesNMenu.add(cochesExportar);
+		
+		coches2Menu = new JMenu("Coches segunda mano");
+		cochesMenu.add(coches2Menu);
+		
+		coches2VerItem = new JMenuItem("Ver");
+		coches2VerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaCoches.abrirTablaCoches(t);
+				dispose();			
+			}
+		});
+		coches2Menu.add(coches2VerItem);
+		
+		coches2EditarMenu = new JMenu("Editar");
+		coches2Menu.add(coches2EditarMenu);
+		
+		coches2AddItem = new JMenuItem("Añadir coche");
+		coches2AddItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AnadirCoche2.abrirAnadirCoche2(t);
+				dispose();
+			}
+		});
+		coches2EditarMenu.add(coches2AddItem);
+		
+		coches2EliminarItem = new JMenuItem("Eliminar coche");
+		coches2EliminarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablaCoches.abrirTablaCoches(t);
+				dispose();
+			}
+		});
+		coches2EditarMenu.add(coches2EliminarItem);
+		
+		coches2Importar = new JMenuItem("Importar");
+		coches2Importar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestorBD bd = new GestorBD();
+				bd.importarFicheroABBDD("coche2");
+				bd.desconectar();
+			}
+		});
+		coches2Menu.add(coches2Importar);
+		
+		coches2Exportar = new JMenuItem("Exportar");
+		coches2Exportar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestorBD bd = new GestorBD();
+				bd.exportarBBDDAFichero("coche");
+				bd.desconectar();	
+			}
+		});
+		coches2Menu.add(coches2Exportar);
 		
 		barraMenu.add(clientesMenu);
 		barraMenu.add(trabajadoresMenu);
@@ -409,8 +471,23 @@ public class VistaAdministrador extends JFrame{
 		cochesButton = new JButton("Ver coches");
 		cochesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TablaCoches.abrirTablaCoches(t);
-				dispose();
+				String[] opciones = {"Nuevos", "Segunda mano"};
+
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coches deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+					switch (respuesta) {
+					case 0:
+						TablaCoches.abrirTablaCoches(t);
+						dispose();
+						break;
+					case 1:
+						TablaCoches2.abrirTablaCoches2(t);
+						dispose();
+					default:
+						break;
+					}
+			
+				
 			}
 		});
 		
