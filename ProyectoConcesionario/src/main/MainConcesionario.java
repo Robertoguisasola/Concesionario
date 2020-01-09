@@ -4,7 +4,6 @@ import ventanas.Bienvenida;
 
 public class MainConcesionario {
 	//TODO poner Properties
-	//TODO pensar si hay alguna interfaz posible y si eso, lanzarla
 	//TODO pensar hilos posibles para el proyecto
 	//TODO pensar si hay posibilidad de alguna recursividad
 	//TODO solicitar pruebas de un coche, ventana parecida a la de comprar coche

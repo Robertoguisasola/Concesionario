@@ -51,4 +51,7 @@ public class VentaCoche extends Venta {
 	public void setModoDeportivo(boolean modoDeportivo) {
 		this.modoDeportivo = modoDeportivo;
 	}
+	public Coche getCoche() {
+		return (Coche) vehiculo;
+	}
 }

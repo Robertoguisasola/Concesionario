@@ -179,8 +179,7 @@ public class EscogerCoche extends JFrame{
 
 		// Bucle para cada resultado en la consulta
 		try {
-			while (rs.next())
-			{
+			while (rs.next()){
 				// Se crea un array que será una de las filas de la tabla.
 				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
 
@@ -207,19 +206,18 @@ public class EscogerCoche extends JFrame{
 	private void crearVenta(Cliente c, Trabajador t, Coche ch) {
 		VentaCoche vc = new VentaCoche(null, ch, ch.getPrecio(), "", false, false, false, false, false);
 		GestorBD bd = new GestorBD();
-		
+
 		//TODO qqqq metodo para generar matrículas....
 		if (c == null) {
 			vc.setComprador(t);
-			bd.venderCoche(t.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
-
+		} else {
+			vc.setComprador(t);
 		}
-		 else 
-			bd.venderCoche(c.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
-		
+		bd.venderCoche(vc);
+
 		bd.desconectar();		
 	}
-	
+
 	public static void abrirEscogerCoche(Cliente c, Trabajador t) {
 		EscogerCoche escogerCoche = new EscogerCoche(c, t);
 		escogerCoche.setTitle("Bienvenido");

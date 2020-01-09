@@ -24,6 +24,7 @@ import model.Cliente;
 import model.Coche;
 import model.Coche2;
 import model.Trabajador;
+import model.VentaCoche;
 
 public class GestorBD {
 
@@ -918,7 +919,7 @@ public class GestorBD {
 	}
 
 	//TODO aaaaa modificar para q reciba venta
-	public void venderCoche(String dni, String coche, int precio, String matricula, int automatico, int lucesLed, int techoPanoramico, int traccion4x4, int modoDeportivo) {
+	public void venderCoche(VentaCoche vc) {
 		String sql  = "INSERT INTO ventacoche (dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 
@@ -927,21 +928,46 @@ public class GestorBD {
 		try {			
 			stmt = conn.prepareStatement(sql);
 			
-			stmt.setString(1, dni);
-			stmt.setString(2, coche);
-			stmt.setInt(3, precio);
-			stmt.setString(4, matricula);
-			stmt.setInt(5, automatico);
-			stmt.setInt(6, lucesLed);
-			stmt.setInt(7, techoPanoramico);
-			stmt.setInt(8, traccion4x4);
-			stmt.setInt(9, modoDeportivo);
+			stmt.setString(1, vc.getComprador().getdNI());
+			stmt.setString(2, vc.getVehiculo().toString());
+			stmt.setInt(3, vc.getPrecio());
+			stmt.setString(4, vc.getMatricula());
+			
+			if (vc.isAutomatico()) {
+				stmt.setInt(5, 1);
+			} else {
+				stmt.setInt(5, 0);
+			}
+			
+			if (vc.isLucesLed()) {
+				stmt.setInt(6, 1);
+			} else {
+				stmt.setInt(6, 0);
+			}
+			
+			if (vc.isTechoPanoramico()) {
+				stmt.setInt(7, 1);
+			} else {
+				stmt.setInt(7, 0);
+			}
+			
+			if (vc.isTraccion4x4()) {
+				stmt.setInt(8, 1);
+			} else {
+				stmt.setInt(8, 0);
+			}
+			
+			if (vc.isModoDeportivo()){
+				stmt.setInt(9, 1);
+			} else {
+				stmt.setInt(9, 0);
+			}
 			
 			stmt.executeUpdate();
 			
-			log(Level.INFO, "La compra del cliente con DNI " + dni + " del coche " + coche + " por un valor de " + precio + " ha sido añadida", null);
+			log(Level.INFO, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " ha sido añadida", null);
 		} catch (SQLException e) {
-			log( Level.SEVERE, "La compra del cliente con DNI " + dni + " del coche " + coche + " por un valor de " + precio + " no ha podido ser añadida", e );
+			log(Level.SEVERE, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " no ha podido ser añadida", e );
 			setLastError(e);
 			e.printStackTrace();
 		}

@@ -143,7 +143,6 @@ atrasButton.addActionListener(new ActionListener() {
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i = 0;i<fila.length;i++) {
-					//TODO qqqq xq saca 0 y 1???
 					
 					if (i == 4) {
 						if (rs.getObject(i+1).equals(0)) {
@@ -151,41 +150,25 @@ atrasButton.addActionListener(new ActionListener() {
 						} else {
 							fila[i] = "SI";
 						}
-					} else {
-						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-					}
-					
-					if (i == 5) {
+					} else if (i == 5) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "NO";
 						} else {
 							fila[i] = "SI";
 						}
-					} else {
-						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-					}
-					
-					if (i == 6) {
+					} else if (i == 6) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "NO";
 						} else {
 							fila[i] = "SI";
 						}
-					} else {
-						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-					}
-					
-					if (i == 7) {
+					} else if (i == 7) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "NO";
 						} else {
 							fila[i] = "SI";
 						}
-					} else {
-						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-					}
-					
-					if (i == 8) {
+					} else if (i == 8) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "NO";
 						} else {

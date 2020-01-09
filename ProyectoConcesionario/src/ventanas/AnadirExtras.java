@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataBase.GestorBD;
 import model.Cliente;
 import model.Coche;
 import model.Trabajador;
@@ -63,7 +65,6 @@ public class AnadirExtras extends JFrame{
 		lucesLedCheck = new JCheckBox("Luces led ");
 		automaticoCheck = new JCheckBox("Automático ");
 		
-		
 		grupoPanel.add(Box.createRigidArea(new Dimension(180,30)));
 		grupoPanel.add(techoPanoramicoCheck);
 		grupoPanel.add(Box.createRigidArea(new Dimension(0,10)));
@@ -79,6 +80,7 @@ public class AnadirExtras extends JFrame{
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				crearVenta(c,t,ch);
+				//TODO a donde va??
 			}
 		});    
 		
@@ -104,6 +106,20 @@ public class AnadirExtras extends JFrame{
 	private void crearVenta(Cliente c, Trabajador t, Coche ch) {
 		int precio = calculatePrecio(ch);
 		
+		//TODO joptionpane para el precio y así
+		
+		VentaCoche vc = new VentaCoche(null, ch, precio, generarMatricula(), false, false, false, false, false);
+		GestorBD bd = new GestorBD();
+
+		if (c == null) {
+			vc.setComprador(t);
+		} else {
+			vc.setComprador(t);
+		}
+		bd.venderCoche(vc);
+
+		bd.desconectar();
+	}
 
 	private int calculatePrecio(Coche ch) {
 		int precio = ch.getPrecio();
@@ -131,6 +147,28 @@ public class AnadirExtras extends JFrame{
 		return precio;
 	}
 
+	private String generarMatricula() {
+		int numeros;
+		Random r = new Random(System.currentTimeMillis());
+		
+		numeros = r.nextInt(9999);
+		
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuilder sb = new StringBuilder(3);
+		
+		for (int i = 0; i < 3; i++) { 
+			  
+            // generate a random number between 
+            // 0 to AlphaNumericString variable length 
+			int index = (int)(AlphaNumericString.length() * Math.random()); 
+  
+            // add Character one by one in end of sb 
+            sb.append(AlphaNumericString.charAt(index)); 
+        }	
+		
+		return numeros + " " + sb;
+	}
+	
 	public static void abriranadirExtras(Cliente c, Trabajador t, Coche ch) {
 		AnadirExtras anadirExtras = new AnadirExtras(c, t, ch);
 		anadirExtras.setTitle("Extras del coche");
