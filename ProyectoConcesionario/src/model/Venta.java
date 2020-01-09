@@ -44,7 +44,7 @@ public class Venta {
 		return comprador;
 	}
 	
-	public void setComprador(Cliente comprador) {
+	public void setComprador(Persona comprador) {
 		this.comprador = comprador;
 	}
 	

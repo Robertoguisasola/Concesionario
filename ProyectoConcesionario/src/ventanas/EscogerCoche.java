@@ -24,6 +24,7 @@ import model.Cliente;
 import model.Coche;
 import model.Colores;
 import model.Trabajador;
+import model.VentaCoche;
 
 public class EscogerCoche extends JFrame{
 	
@@ -203,12 +204,16 @@ public class EscogerCoche extends JFrame{
 		bd.desconectar();
 	}
 
-	private void crearVenta(Cliente c, Trabajador t, Coche ch) {		
+	private void crearVenta(Cliente c, Trabajador t, Coche ch) {
+		VentaCoche vc = new VentaCoche(null, ch, ch.getPrecio(), "", false, false, false, false, false);
 		GestorBD bd = new GestorBD();
 		
 		//TODO qqqq metodo para generar matrículas....
-		if (c == null) 
+		if (c == null) {
+			vc.setComprador(t);
 			bd.venderCoche(t.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
+
+		}
 		 else 
 			bd.venderCoche(c.getdNI(), ch.toString(), ch.getPrecio(), "", 0, 0, 0, 0, 0);
 		

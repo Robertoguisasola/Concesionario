@@ -917,6 +917,7 @@ public class GestorBD {
 		}
 	}
 
+	//TODO aaaaa modificar para q reciba venta
 	public void venderCoche(String dni, String coche, int precio, String matricula, int automatico, int lucesLed, int techoPanoramico, int traccion4x4, int modoDeportivo) {
 		String sql  = "INSERT INTO ventacoche (dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";

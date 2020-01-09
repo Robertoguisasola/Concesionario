@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import model.Cliente;
 import model.Coche;
 import model.Trabajador;
+import model.VentaCoche;
 
 public class AnadirExtras extends JFrame{
 	
@@ -41,11 +42,11 @@ public class AnadirExtras extends JFrame{
 	public AnadirExtras(Cliente c, Trabajador t, Coche ch) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String anadirExtr = "<html><body><center>Extras para el coche<br>Escoja los extras que desee para su coche</center></body></html>";
+		String anadirExtra = "<html><body><center>Extras para el coche<br>Escoja los extras que desee para su coche</center></body></html>";
 		
 		informacionPanel = new JPanel();
 		
-		infoCheck = new JLabel(anadirExtr);
+		infoCheck = new JLabel(anadirExtra);
 		informacionPanel.add(infoCheck);		
 		
 		getContentPane().add(informacionPanel, BorderLayout.NORTH);
@@ -77,14 +78,14 @@ public class AnadirExtras extends JFrame{
 		acceptButton = new JButton("Aceptar");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				crearVenta();
+				crearVenta(c,t,ch);
 			}
 		});    
 		
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO pensar si vuelve atrás y si es así para que siga el coche seleccionado (en los extras hasya que no se acepte no se hace el dispose de la ventana de elegircoche)
+				EscogerCoche.abrirEscogerCoche(c, t);
 			}
 		});
 		
@@ -100,17 +101,41 @@ public class AnadirExtras extends JFrame{
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	protected void crearVenta() {
-		// TODO Auto-generated method stub
+	private void crearVenta(Cliente c, Trabajador t, Coche ch) {
+		int precio = calculatePrecio(ch);
 		
+
+	private int calculatePrecio(Coche ch) {
+		int precio = ch.getPrecio();
+		
+		if (automaticoCheck.isSelected()) {
+			precio += 1500; 
+		}
+		
+		if (lucesLedCheck.isSelected()) {
+			precio += 1000;
+		}
+		
+		if (techoPanoramicoCheck.isSelected()) {
+			precio += 1700;
+		}
+		
+		if (traccionCheck.isSelected()) {
+			precio += 3500;
+		}
+		
+		if (modoDeportivoCheck.isSelected()) {
+			precio += 1500;
+		}
+		
+		return precio;
 	}
 
 	public static void abriranadirExtras(Cliente c, Trabajador t, Coche ch) {
 		AnadirExtras anadirExtras = new AnadirExtras(c, t, ch);
-		anadirExtras.setTitle("Extras");
+		anadirExtras.setTitle("Extras del coche");
 		anadirExtras.setVisible(true);
 		anadirExtras.setSize(480,360);
 		anadirExtras.setLocationRelativeTo(null);
-	}
-	
+	}	
 }
