@@ -23,6 +23,8 @@ import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Coche;
 import model.Coche2;
+import model.Moto;
+import model.Moto2;
 import model.Trabajador;
 import model.VentaCoche;
 
@@ -75,9 +77,9 @@ public class GestorBD {
 		}
 	}
 
-	public void importarFicheroABBDD(String tabla){	
-			borrar(tabla);			
-		
+	public void importarFicheroABBDD(String tabla){
+		borrar(tabla);
+
 		switch (tabla) {
 		case "trabajador":
 			importarTrabajadores();
@@ -91,13 +93,21 @@ public class GestorBD {
 		case "coche2":
 			importarCoches2();
 			break;
+		case "moto":
+			importarMotos();
+			break;
+		case "moto2":
+			importarMotos2();
+			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
 			break;
 		}
 	}
 
-	public void exportarBBDDAFichero(String tabla) {	
+	public void exportarBBDDAFichero(String tabla) {
+		//TODO exportar ventas de coches, coches de 2ª mano, motos y motos de 2ª mano
+
 		switch (tabla) {
 		case "trabajador":
 			exportarTrabajadores();
@@ -108,10 +118,16 @@ public class GestorBD {
 		case "coche":
 			exportarCoches();
 			break;
-		case "venta":
-			System.out.println("exportar venta");
-			exportarVentas();
+		case "coche2":
+			exportarCoches2();
 			break;
+		case "moto":
+			exportarMotos();
+			break;
+		case "moto2":
+			exportarMotos2();
+			break;
+
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
 			break;
@@ -256,12 +272,12 @@ public class GestorBD {
 
 		while (it.hasNext()){			
 			Coche c  = it.next();
-			
+
 			anadirNuevoCoche(c);
 		}
 		log(Level.INFO, "Coches añadidos a la base de datos", null);
 	}
-	
+
 	private void importarCoches2(){
 		List<Coche2> coches = new ArrayList<Coche2>();
 
@@ -288,7 +304,7 @@ public class GestorBD {
 				c.setnPlazas(Integer.parseInt(campos[5]));
 				c.setPrecio(Integer.parseInt(campos[6]));
 				c.setMotorDiesel(Boolean.parseBoolean(campos[7]));
-				c.setKilometros(Integer.parseInt(campos[8]));
+				c.numKilometros(Integer.parseInt(campos[8]));
 
 				coches.add(c);
 			}
@@ -304,12 +320,105 @@ public class GestorBD {
 
 		while (it.hasNext()){			
 			Coche2 c  = it.next();
-			
+
 			anadirNuevoCoche2(c);
 		}
 		log(Level.INFO, "Coches de segunda mano añadidos a la base de datos", null);
 	}
-	
+	private void importarMotos(){
+		List<Moto> motos = new ArrayList<Moto>();
+
+		File f = null;
+		Scanner sc = null;
+
+		try {
+			f = new File("ficheros/motos.csv");
+			sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				Moto m = new Moto();
+
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings
+
+				m.setMarca(campos[0].toLowerCase());
+				m.setModelo(campos[1].toLowerCase());
+				m.setColorString(campos[2].toLowerCase());
+				m.setCaballos(Integer.parseInt(campos[3]));
+				m.setNumRuedas(Integer.parseInt(campos[4]));
+				m.setnPlazas(Integer.parseInt(campos[5]));
+				m.setPrecio(Integer.parseInt(campos[6]));
+				m.setEstructuraProtectora(Boolean.parseBoolean(campos[7]));
+
+				motos.add(m);
+			}
+			log(Level.INFO, "Motos cargadas desde el fichero", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log(Level.SEVERE, "Error al cargar las motos desde el fichero", null);
+		} finally {
+			sc.close();
+		}
+
+		Iterator<Moto>it = motos.iterator();
+
+		while (it.hasNext()){			
+			Moto m  = it.next();
+
+			anadirNuevaMoto(m);
+		}
+		log(Level.INFO, "Motos añadidas a la base de datos", null);
+	}
+
+	private void importarMotos2(){
+		List<Moto2> motos = new ArrayList<Moto2>();
+
+		File f = null;
+		Scanner sc = null;
+
+		try {
+			f = new File("ficheros/motos2.csv");
+			sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				Moto2 m = new Moto2();
+
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings
+
+				m.setMarca(campos[0].toLowerCase());
+				m.setModelo(campos[1].toLowerCase());
+				m.setColorString(campos[2].toLowerCase());
+				m.setCaballos(Integer.parseInt(campos[3]));
+				m.setNumRuedas(Integer.parseInt(campos[4]));
+				m.setnPlazas(Integer.parseInt(campos[5]));
+				m.setPrecio(Integer.parseInt(campos[6]));
+				m.setEstructuraProtectora(Boolean.parseBoolean(campos[7]));
+				m.numKilometros(Integer.parseInt(campos[8]));
+
+				motos.add(m);
+			}
+			log(Level.INFO, "Motos de segunda mano cargadas desde el fichero", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log(Level.SEVERE, "Error al cargar las motos de segunda mano desde el fichero", null);
+		} finally {
+			sc.close();
+		}
+
+		Iterator<Moto2>it = motos.iterator();
+
+		while (it.hasNext()){			
+			Moto2 m = it.next();
+
+			anadirNuevaMoto2(m);
+		}
+		log(Level.INFO, "Motos de segunda mano añadidas a la base de datos", null);
+	}
 	private void exportarTrabajadores(){
 		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
@@ -412,7 +521,7 @@ public class GestorBD {
 				log(Level.INFO, "El coche " + c.toString() + " ha sido exportado correctamente", null);
 			}
 
-			log(Level.INFO, "Coches exportados", null);
+			log(Level.INFO, "Coches exportados correctamente", null);
 		} catch (IOException e) {
 			log(Level.SEVERE, "Error al abrir el fichero para exportar coches", e);
 			e.printStackTrace();
@@ -428,9 +537,128 @@ public class GestorBD {
 		}
 	}
 
+	private void exportarCoches2(){
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Coche2> coches = obtenerCoches2();
+
+		try {
+			f = new FileWriter("ficheros/coches2exp.csv");
+
+			for (Coche2 c : coches) {
+				String marca = c.getMarca();
+				String modelo = c.getModelo();
+				String color = c.getColorString();
+				int caballos = c.getCaballos();
+				int numRuedas = c.getNumRuedas();
+				int nPlazas = c.getnPlazas();
+				int precio = c.getPrecio();
+				boolean motorDiesel = c.isMotorDiesel();
+				int kilometros = c.getKilometros();
+
+				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";" + precio + ";" + motorDiesel + ";" + kilometros + "\n");
+
+				log(Level.INFO, "El coche de segunda mano " + c.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Coches de segunda mano exportados", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar coches de segunda mano", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar coches de segunda mano", e);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void exportarMotos(){
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Moto> motos = obtenerMotos();
+
+		try {
+			f = new FileWriter("ficheros/motosexp.csv");
+
+			for (Moto m : motos) {
+				String marca = m.getMarca();
+				String modelo = m.getModelo();
+				String color = m.getColorString();
+				int caballos = m.getCaballos();
+				int numRuedas = m.getNumRuedas();
+				int nPlazas = m.getnPlazas();
+				int precio = m.getPrecio();
+				boolean estructuraProtectora = m.isEstructuraProtectora();
+
+				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";" + precio + ";" + estructuraProtectora + "\n");
+
+				log(Level.INFO, "La moto " + m.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Motos exportadas correctamente", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar coches", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar coches", e);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void exportarMotos2(){
+		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
+		FileWriter f = null;
+		List<Moto2> motos = obtenerMotos2();
+
+		try {
+			f = new FileWriter("ficheros/motos2exp.csv");
+
+			for (Moto2 m : motos) {
+				String marca = m.getMarca();
+				String modelo = m.getModelo();
+				String color = m.getColorString();
+				int caballos = m.getCaballos();
+				int numRuedas = m.getNumRuedas();
+				int nPlazas = m.getnPlazas();
+				int precio = m.getPrecio();
+				boolean estructuraProtectora = m.isEstructuraProtectora();
+				int kilometros = m.getKilometros();
+
+				f.write(marca + ";" + modelo + ";" + color + ";" + caballos + ";" + numRuedas + ";" + nPlazas + ";" + precio + ";" + estructuraProtectora + ";" + kilometros + "\n");
+
+				log(Level.INFO, "La moto " + m.toString() + " ha sido exportado correctamente", null);
+			}
+
+			log(Level.INFO, "Motos de segunda mano exportados correctamente", null);
+		} catch (IOException e) {
+			log(Level.SEVERE, "Error al abrir el fichero para exportar motos de segunda mano", e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar motos de segunda mano", e);
+				e.printStackTrace();
+			}
+		}
+	}
 	//TODO aaaa terminar
 	private void exportarVentas() {
-		
+
+
 	}
 	public List<Trabajador> obtenerTrabajadores(){
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
@@ -534,7 +762,7 @@ public class GestorBD {
 				c.setNumRuedas(rs.getInt("numRuedas"));
 				c.setnPlazas(rs.getInt("nPlazas"));
 				c.setPrecio(rs.getInt("precio"));
-				
+
 				if (rs.getInt("motorDiesel") == 0) {
 					c.setMotorDiesel(false);
 				} else {
@@ -551,7 +779,7 @@ public class GestorBD {
 		}
 		return coches;
 	}
-	
+
 	public List<Coche2> obtenerCoches2(){
 		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel, kilometros FROM coche2";
 		PreparedStatement stmt;
@@ -573,24 +801,104 @@ public class GestorBD {
 				c.setNumRuedas(rs.getInt("numRuedas"));
 				c.setnPlazas(rs.getInt("nPlazas"));
 				c.setPrecio(rs.getInt("precio"));
-				
+
 				if (rs.getInt("motorDiesel") == 0) {
 					c.setMotorDiesel(false);
 				} else {
 					c.setMotorDiesel(true);
 				}
-				
-				c.setKilometros(rs.getInt("kilometros"));
+
+				c.numKilometros(rs.getInt("kilometros"));
 
 				coches.add(c);
 			}
 
-			log(Level.INFO, "Obteniendo los coches", null);
+			log(Level.INFO, "Obteniendo los coches de segunda mano", null);
 		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener los coches", e);
+			log(Level.SEVERE, "Error al obtener los coches de segunda manoS", e);
 			e.printStackTrace();
 		}
 		return coches;
+	}
+
+	public List<Moto> obtenerMotos(){
+		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora FROM moto";
+		PreparedStatement stmt;
+
+		List<Moto> motos = new ArrayList<Moto>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+
+				Moto m = new Moto();
+				m.setMarca(rs.getString("marca"));
+				m.setModelo(rs.getString("modelo"));
+				m.setColorString(rs.getString("color"));
+				m.setCaballos(rs.getInt("caballos"));
+				m.setNumRuedas(rs.getInt("numRuedas"));
+				m.setnPlazas(rs.getInt("nPlazas"));
+				m.setPrecio(rs.getInt("precio"));
+
+				if (rs.getInt("estructuraProtectora") == 0) {
+					m.setEstructuraProtectora(false);
+				} else {
+					m.setEstructuraProtectora(true);
+				}
+
+				motos.add(m);
+			}
+
+			log(Level.INFO, "Obteniendo las motos", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las motos", e);
+			e.printStackTrace();
+		}
+		return motos;
+	}
+
+	public List<Moto2> obtenerMotos2(){
+		String sql = "SELECT marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora, kilometros FROM moto2";
+		PreparedStatement stmt;
+
+		List<Moto2> motos = new ArrayList<Moto2>();
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+
+				Moto2 m = new Moto2();
+				m.setMarca(rs.getString("marca"));
+				m.setModelo(rs.getString("modelo"));
+				m.setColorString(rs.getString("color"));
+				m.setCaballos(rs.getInt("caballos"));
+				m.setNumRuedas(rs.getInt("numRuedas"));
+				m.setnPlazas(rs.getInt("nPlazas"));
+				m.setPrecio(rs.getInt("precio"));
+
+				if (rs.getInt("estructuraProtectora") == 0) {
+					m.setEstructuraProtectora(false);
+				} else {
+					m.setEstructuraProtectora(true);
+				}
+
+				m.numKilometros(rs.getInt("kilometros"));
+
+				motos.add(m);
+			}
+
+			log(Level.INFO, "Obteniendo las motos de segunda mano", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las motos de segunda mano", e);
+			e.printStackTrace();
+		}
+		return motos;
 	}
 
 	public Cliente iniciarSesionCliente(String usuario, String contra){
@@ -701,7 +1009,7 @@ public class GestorBD {
 
 		try {			
 			stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, c.getMarca());
 			stmt.setString(2, c.getModelo());
 			stmt.setString(3, c.getColorString());
@@ -709,7 +1017,7 @@ public class GestorBD {
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
 			stmt.setInt(7, c.getPrecio());
-			
+
 			if (c.isMotorDiesel()) {
 				stmt.setInt(8, 1);
 			}else {
@@ -717,7 +1025,7 @@ public class GestorBD {
 			}
 
 			stmt.executeUpdate();
-			
+
 			log(Level.INFO, "El coche " + c.toString() + " ha sido añadido", null);
 		} catch (SQLException e) {
 			log( Level.SEVERE, "Error al insertar el coche " + c.toString(), e );
@@ -725,7 +1033,7 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void anadirNuevoCoche2(Coche2 c) {
 		String sql  = "INSERT INTO coche2 (marca, modelo, color, caballos, numRuedas, nPlazas, precio, motorDiesel, kilometros)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
@@ -734,7 +1042,7 @@ public class GestorBD {
 
 		try {			
 			stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, c.getMarca());
 			stmt.setString(2, c.getModelo());
 			stmt.setString(3, c.getColorString());
@@ -742,7 +1050,7 @@ public class GestorBD {
 			stmt.setInt(5, c.getNumRuedas());
 			stmt.setInt(6, c.getnPlazas());
 			stmt.setInt(7, c.getPrecio());
-			
+
 			if (c.isMotorDiesel()) {
 				stmt.setInt(8, 1);
 			}else {
@@ -750,12 +1058,80 @@ public class GestorBD {
 			}
 
 			stmt.setInt(9, c.getKilometros());
-			
+
 			stmt.executeUpdate();
-			
+
 			log(Level.INFO, "El coche de segunda mano " + c.toString() + " ha sido añadido", null);
 		} catch (SQLException e) {
 			log( Level.SEVERE, "Error al insertar el coche de segunda mano " + c.toString(), e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+
+	public void anadirNuevaMoto(Moto m) {
+		String sql  = "INSERT INTO moto (marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, m.getMarca());
+			stmt.setString(2, m.getModelo());
+			stmt.setString(3, m.getColorString());
+			stmt.setInt(4, m.getCaballos());
+			stmt.setInt(5, m.getNumRuedas());
+			stmt.setInt(6, m.getnPlazas());
+			stmt.setInt(7, m.getPrecio());
+
+			if (m.isEstructuraProtectora()) {
+				stmt.setInt(8, 1);
+			}else {
+				stmt.setInt(8, 0);
+			}
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, "La moto " + m.toString() + " ha sido añadido", null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error al insertar la moto " + m.toString(), e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+
+	public void anadirNuevaMoto2(Moto2 m) {
+		String sql  = "INSERT INTO moto (marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora, kilometros)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, m.getMarca());
+			stmt.setString(2, m.getModelo());
+			stmt.setString(3, m.getColorString());
+			stmt.setInt(4, m.getCaballos());
+			stmt.setInt(5, m.getNumRuedas());
+			stmt.setInt(6, m.getnPlazas());
+			stmt.setInt(7, m.getPrecio());
+
+			if (m.isEstructuraProtectora()) {
+				stmt.setInt(8, 1);
+			}else {
+				stmt.setInt(8, 0);
+			}
+
+			stmt.setInt(9, m.getKilometros());
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, "La moto de segunda mano " + m.toString() + " ha sido añadido", null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error al insertar la moto de segunda mano " + m.toString(), e );
 			setLastError(e);
 			e.printStackTrace();
 		}
@@ -806,15 +1182,15 @@ public class GestorBD {
 
 			ResultSet rs = stmt.executeQuery();
 
-			log(Level.INFO, "Obteniendo los coches", null);
+			log(Level.INFO, "Obteniendo los coches para rellenar la tabla", null);
 			return rs;
 		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener los coches", e);
+			log(Level.SEVERE, "Error al obtener los coches para rellenar la tabla", e);
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public ResultSet rellenarTablaCoches2(){
 		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, motorDiesel, kilometros FROM coche2";
 		PreparedStatement stmt;
@@ -824,15 +1200,51 @@ public class GestorBD {
 
 			ResultSet rs = stmt.executeQuery();
 
-			log(Level.INFO, "Obteniendo los coches", null);
+			log(Level.INFO, "Obteniendo los coches de segunda mano para rellenar la tabla", null);
 			return rs;
 		} catch (SQLException e) {
-			log(Level.SEVERE, "Error al obtener los coches", e);
+			log(Level.SEVERE, "Error al obtener los coches de segunda mano para rellenar la tabla", e);
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
+	public ResultSet rellenarTablaMotos(){
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, estructuraProtectora FROM moto";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las motos para rellenar la tabla", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las motos para rellenar la tabla", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ResultSet rellenarTablaMotos2(){
+		String sql = "SELECT marca, modelo, color, caballos, nPlazas, precio, estructuraProtectora, kilometros FROM moto2";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las motos de segunda mano para rellenar la tabla", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las motos de segunda mano para rellenar la tabla", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public ResultSet rellenarTablaVentasCoches(){
 		String sql = "SELECT dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo FROM ventacoche";
 		PreparedStatement stmt;
@@ -850,7 +1262,7 @@ public class GestorBD {
 		}
 		return null;
 	}
-	
+
 	//Método que nos permite eliminar a un cliente o despedir a un trabajador, en función de la tabla que le pasemos y el DNI
 	public void eliminarPersona(String tabla, String dNI) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
@@ -888,7 +1300,6 @@ public class GestorBD {
 			stmtBorrar.setInt(5, plazas);
 			stmtBorrar.setInt(6, diesel);
 
-
 			stmtBorrar.executeUpdate();
 
 			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrado correctamente", null);
@@ -897,7 +1308,83 @@ public class GestorBD {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void eliminarCoche2(String marca, String modelo, String color, int caballos, int plazas, int precio, int diesel, int kilometros) {
+		String sqlBorrar= "DELETE FROM coche WHERE marca = ? AND modelo = ? AND color = ? "
+				+ "AND caballos = ? AND nPlazas = ? AND motorDiesel = ? AND kilometros = ?";
+
+		PreparedStatement stmtBorrar;
+
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
+
+			stmtBorrar.setString(1, marca);
+			stmtBorrar.setString(2, marca);
+			stmtBorrar.setString(3, color);
+			stmtBorrar.setInt(4, caballos);
+			stmtBorrar.setInt(5, plazas);
+			stmtBorrar.setInt(6, diesel);
+			stmtBorrar.setInt(7, kilometros);
+
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " con " + kilometros + " kilometros ha sido borrado correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar el "  + marca + " " + modelo + " de color " + color.toLowerCase() +  " con " + kilometros + " kilometros", e);
+			e.printStackTrace();
+		}
+	}
+
+	public void eliminarMoto(String marca, String modelo, String color, int caballos, int plazas, int precio, int estructura) {
+		String sqlBorrar= "DELETE FROM moto WHERE marca = ? AND modelo = ? AND color = ? "
+				+ "AND caballos = ? AND nPlazas = ? AND estructuraProtectora = ?";
+
+		PreparedStatement stmtBorrar;
+
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
+
+			stmtBorrar.setString(1, marca);
+			stmtBorrar.setString(2, marca);
+			stmtBorrar.setString(3, color);
+			stmtBorrar.setInt(4, caballos);
+			stmtBorrar.setInt(5, plazas);
+			stmtBorrar.setInt(6, estructura);
+
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "La " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrada correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar la "  + marca + " " + modelo + " de color " + color.toLowerCase() , e);
+			e.printStackTrace();
+		}
+	}
+
+	public void eliminarMoto2(String marca, String modelo, String color, int caballos, int plazas, int precio, int estructura, int kilometros) {
+		String sqlBorrar= "DELETE FROM moto WHERE marca = ? AND modelo = ? AND color = ? "
+				+ "AND caballos = ? AND nPlazas = ? AND estructuraProtectora = ? AND kilometros = ?";
+
+		PreparedStatement stmtBorrar;
+
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
+
+			stmtBorrar.setString(1, marca);
+			stmtBorrar.setString(2, marca);
+			stmtBorrar.setString(3, color);
+			stmtBorrar.setInt(4, caballos);
+			stmtBorrar.setInt(5, plazas);
+			stmtBorrar.setInt(6, estructura);
+
+			stmtBorrar.executeUpdate();
+
+			log(Level.INFO, "La " + marca + " " + modelo + " de color " + color.toLowerCase() + "con " + kilometros + " kilometros ha sido borrada correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar la "  + marca + " " + modelo + " de color " + color.toLowerCase() + "con " + kilometros + " kilometros" , e);
+			e.printStackTrace();
+		}
+	}
+
 	public void eliminarVentaCoche(String matricula) {
 		String sqlBorrar= "DELETE FROM ventacoche WHERE matricula = ?";
 
@@ -927,44 +1414,44 @@ public class GestorBD {
 
 		try {			
 			stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, vc.getComprador().getdNI());
 			stmt.setString(2, vc.getVehiculo().toString());
 			stmt.setInt(3, vc.getPrecio());
 			stmt.setString(4, vc.getMatricula());
-			
+
 			if (vc.isAutomatico()) {
 				stmt.setInt(5, 1);
 			} else {
 				stmt.setInt(5, 0);
 			}
-			
+
 			if (vc.isLucesLed()) {
 				stmt.setInt(6, 1);
 			} else {
 				stmt.setInt(6, 0);
 			}
-			
+
 			if (vc.isTechoPanoramico()) {
 				stmt.setInt(7, 1);
 			} else {
 				stmt.setInt(7, 0);
 			}
-			
+
 			if (vc.isTraccion4x4()) {
 				stmt.setInt(8, 1);
 			} else {
 				stmt.setInt(8, 0);
 			}
-			
+
 			if (vc.isModoDeportivo()){
 				stmt.setInt(9, 1);
 			} else {
 				stmt.setInt(9, 0);
 			}
-			
+
 			stmt.executeUpdate();
-			
+
 			log(Level.INFO, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " ha sido añadida", null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " no ha podido ser añadida", e );
@@ -1004,4 +1491,5 @@ public class GestorBD {
 	public static void setLastError(Exception lastError) {
 		GestorBD.lastError = lastError;
 	}
+
 }

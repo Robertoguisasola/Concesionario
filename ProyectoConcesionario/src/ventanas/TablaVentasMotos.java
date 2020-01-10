@@ -18,93 +18,79 @@ import javax.swing.table.DefaultTableModel;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-public class TablaCoches2 extends JFrame {
-
+public class TablaVentasMotos extends JFrame {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
 	private JButton eliminarButton;
 	private JButton atrasButton;
 	private JTable tabla;
-	private DefaultTableModel modelo;	
-
-	public TablaCoches2(Trabajador t) {
-		this.setTitle("Tabla de coches de segunda mano");
-
+	private DefaultTableModel modelo;
+	
+	public TablaVentasMotos(Trabajador t) {
+		//TODO modificar para que se vean las ventas de motos
+		this.setTitle("Tabla de ventas de motos");
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		setData();
 		tablaPanel = new JScrollPane(tabla);
-
+		
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir coche");
+		anadirButton = new JButton("Añadir venta");
 		botonesPanel.add(anadirButton);
-
-		eliminarButton = new JButton("Eliminar coche");
+		
+		eliminarButton = new JButton("Eliminar venta");
 		botonesPanel.add(eliminarButton);
 		
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
-
+		
 		anadirButton.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AnadirCoche2.abrirAnadirCoche2(t);
+				EscogerCoche.abrirEscogerCoche(null, t);
 				dispose();
 			}
 		});
-
+		
 		eliminarButton.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Sí", "No"};
 				if(tabla.getSelectedRow() >= 0) {
-					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
+					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Matricula"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar el "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar la venta de a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-
+					//TODO qqqq actualizar tabla al borrar
 					switch (respuesta) {
 					case 0:
 						GestorBD bd = new GestorBD();
-						String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
-						String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
-						String color = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Color"));
-						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
-						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
-						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
-						int diesel;
-						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
-						
-						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
-							diesel = 0;
-						} else {
-							diesel = 1;
-						}
-						
-						bd.eliminarCoche2(marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
+						bd.eliminarPersona("trabajador", dni);
 						bd.desconectar();
-						//TODO refrescar tabla
 						break;
 					default:
 						break;
 					}
-				} else {
+				}else {
 					JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla", null, 0);
 				}
 			}
 		});
 		
-		atrasButton.addActionListener(new ActionListener() {
+atrasButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -117,53 +103,80 @@ public class TablaCoches2 extends JFrame {
 				}
 			}
 		});
-
+		
 		add(tablaPanel, BorderLayout.CENTER);
 		add(botonesPanel, BorderLayout.SOUTH);
 
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
-
+		
 		this.setVisible(true);
 	}
-
-	//Añadimos datos
+	
 
 	private void setData() {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
 
 		// Creamos las columnas.
-		modelo.addColumn("Marca");
-		modelo.addColumn("Modelo");
-		modelo.addColumn("Color");
-		modelo.addColumn("Caballos");
-		modelo.addColumn("Plazas");
+		modelo.addColumn("DNI cliente");
+		modelo.addColumn("Coche");
 		modelo.addColumn("Precio");
-		modelo.addColumn("Motor diesel");
-		modelo.addColumn("Kilómetros");
+		modelo.addColumn("Matricula");
+		modelo.addColumn("Automatico");
+		modelo.addColumn("Luces led");
+		modelo.addColumn("Techo panoramico");
+		modelo.addColumn("Traccion 4X4");
+		modelo.addColumn("Modo deportivo");
 
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaCoches2();
+		ResultSet rs = bd.rellenarTablaVentasCoches();
 
 		// Bucle para cada resultado en la consulta
 		try {
-			while (rs.next())
-			{
+			while (rs.next()){
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[8]; // Hay ocho columnas en la tabla
+				Object [] fila = new Object[9]; // Hay nueve columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
-				for (int i=0;i<fila.length;i++)
-					if (i == 6) {
+				for (int i = 0;i<fila.length;i++) {
+					
+					if (i == 4) {
 						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "No";
+							fila[i] = "NO";
 						} else {
-							fila[i] = "Si";
+							fila[i] = "SI";
+						}
+					} else if (i == 5) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else if (i == 6) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else if (i == 7) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
+						}
+					} else if (i == 8) {
+						if (rs.getObject(i+1).equals(0)) {
+							fila[i] = "NO";
+						} else {
+							fila[i] = "SI";
 						}
 					} else {
 						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
 					}
+				}
+
 				// Se añade al modelo la fila completa.
 				modelo.addRow(fila);
 			}
@@ -172,11 +185,11 @@ public class TablaCoches2 extends JFrame {
 		}
 		bd.desconectar();
 	}
-
-	public static void abrirTablaCoches2(Trabajador t) {
-		TablaCoches2 tablaCoches2 = new TablaCoches2(t);
-		tablaCoches2.setVisible(true);
-		tablaCoches2.setSize(480,360);
-		tablaCoches2.setLocationRelativeTo(null);
+	
+	public static void abrirTablaVentasMotos(Trabajador t) {
+		TablaVentasMotos tablaVentas = new TablaVentasMotos(t);
+		tablaVentas.setVisible(true);
+		tablaVentas.setSize(480,360);
+		tablaVentas.setLocationRelativeTo(null);
 	}
 }

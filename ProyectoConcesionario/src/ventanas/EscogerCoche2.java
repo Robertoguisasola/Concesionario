@@ -22,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
 import dataBase.GestorBD;
 import model.Cliente;
 import model.Coche;
+import model.Coche2;
 import model.Colores;
 import model.Trabajador;
 import model.VentaCoche;
 
-public class EscogerCoche extends JFrame{
+public class EscogerCoche2 extends JFrame{
 	
 	/**
 	 * 
@@ -48,7 +49,8 @@ public class EscogerCoche extends JFrame{
 	private JButton probarButton;
 	private Box botonesBox;
 		
-	public EscogerCoche(Cliente c, Trabajador t) {
+	public EscogerCoche2(Cliente c, Trabajador t) {
+		//TODO escoger coche de 2ª mano
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Bienvenido");
 
@@ -108,6 +110,7 @@ public class EscogerCoche extends JFrame{
 					int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 					int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 					boolean diesel;
+					int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
 					
 					if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
 						diesel = false;
@@ -115,7 +118,9 @@ public class EscogerCoche extends JFrame{
 						diesel = true;
 					}
 					
-					Coche ch = new Coche(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel);
+					Coche2 ch = new Coche2(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel, kilometros);
+					
+					//TODO tienen extras???
 					
 				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
@@ -174,6 +179,7 @@ public class EscogerCoche extends JFrame{
 		modelo.addColumn("Plazas");
 		modelo.addColumn("Precio");
 		modelo.addColumn("Motor diesel");
+		modelo.addColumn("Kilometros");
 		
 		GestorBD bd = new GestorBD();
 		ResultSet rs = bd.rellenarTablaCoches();
@@ -182,7 +188,7 @@ public class EscogerCoche extends JFrame{
 		try {
 			while (rs.next()){
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
+				Object [] fila = new Object[8]; // Hay ocho columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++)
@@ -218,8 +224,8 @@ public class EscogerCoche extends JFrame{
 		bd.desconectar();		
 	}
 
-	public static void abrirEscogerCoche(Cliente c, Trabajador t) {
-		EscogerCoche escogerCoche = new EscogerCoche(c, t);
+	public static void abrirEscogerCoche2(Cliente c, Trabajador t) {
+		EscogerCoche2 escogerCoche = new EscogerCoche2(c, t);
 		escogerCoche.setVisible(true);
 		escogerCoche.setSize(550,420);
 		escogerCoche.setLocationRelativeTo(null);
@@ -229,6 +235,6 @@ public class EscogerCoche extends JFrame{
 		Cliente c = new Cliente();
 		c.setdNI("71708119F");
 		Trabajador t = null;
-		EscogerCoche.abrirEscogerCoche(c, t);
+		EscogerCoche2.abrirEscogerCoche2(c, t);
 	}
 }

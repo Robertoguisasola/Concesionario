@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,7 +21,7 @@ import model.Coche;
 import model.Trabajador;
 import model.VentaCoche;
 
-public class AnadirExtras extends JFrame{
+public class AnadirExtrasCoche extends JFrame{
 	
 	/**
 	 * 
@@ -41,8 +40,9 @@ public class AnadirExtras extends JFrame{
 	private Box buttonsBox;
 	JPanel buttonsPanel;
 	
-	public AnadirExtras(Cliente c, Trabajador t, Coche ch) {
+	public AnadirExtrasCoche(Cliente c, Trabajador t, Coche ch) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Extras del coche");
 		
 		String anadirExtra = "<html><body><center>Extras para el coche<br>Escoja los extras que desee para su coche</center></body></html>";
 		
@@ -108,7 +108,7 @@ public class AnadirExtras extends JFrame{
 		
 		//TODO joptionpane para el precio y así
 		
-		VentaCoche vc = new VentaCoche(null, ch, precio, generarMatricula(), false, false, false, false, false);
+		VentaCoche vc = new VentaCoche(null, ch, precio, false, false, false, false, false);
 		GestorBD bd = new GestorBD();
 
 		if (c == null) {
@@ -147,31 +147,8 @@ public class AnadirExtras extends JFrame{
 		return precio;
 	}
 
-	private String generarMatricula() {
-		int numeros;
-		Random r = new Random(System.currentTimeMillis());
-		
-		numeros = r.nextInt(9999);
-		
-		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder sb = new StringBuilder(3);
-		
-		for (int i = 0; i < 3; i++) { 
-			  
-            // generate a random number between 
-            // 0 to AlphaNumericString variable length 
-			int index = (int)(AlphaNumericString.length() * Math.random()); 
-  
-            // add Character one by one in end of sb 
-            sb.append(AlphaNumericString.charAt(index)); 
-        }	
-		
-		return numeros + " " + sb;
-	}
-	
-	public static void abriranadirExtras(Cliente c, Trabajador t, Coche ch) {
-		AnadirExtras anadirExtras = new AnadirExtras(c, t, ch);
-		anadirExtras.setTitle("Extras del coche");
+	public static void abriranadirExtrasCoche(Cliente c, Trabajador t, Coche ch) {
+		AnadirExtrasCoche anadirExtras = new AnadirExtrasCoche(c, t, ch);
 		anadirExtras.setVisible(true);
 		anadirExtras.setSize(480,360);
 		anadirExtras.setLocationRelativeTo(null);

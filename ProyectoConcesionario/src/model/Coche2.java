@@ -1,6 +1,6 @@
 package model;
 
-public class Coche2 extends Coche {
+public class Coche2 extends Coche implements SegundaMano{
 	
 	private int kilometros;
 
@@ -24,10 +24,6 @@ public class Coche2 extends Coche {
 		return kilometros;
 	}
 
-	public void setKilometros(int kilometros) {
-		this.kilometros = kilometros;
-	}
-
 	@Override
 	public String toString() {
 		String diesel;
@@ -37,5 +33,10 @@ public class Coche2 extends Coche {
 			diesel = "con motor de gasolina";
 		}
 		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas, " + diesel + " y " + kilometros + " kilómetros reales";
+	}
+
+	@Override
+	public void numKilometros(int kilometros) {
+		this.kilometros = kilometros;	
 	}
 }

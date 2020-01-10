@@ -70,7 +70,7 @@ public class TablaCoches extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar el "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
@@ -92,7 +92,7 @@ public class TablaCoches extends JFrame {
 						
 						bd.eliminarCoche(marca, modeloc, color, caballos, plazas, precio, diesel);
 						bd.desconectar();
-						TablaCoches.abrirTablaCoches(t);
+						//TODO refrescar tabla
 						break;
 					default:
 						break;
@@ -176,6 +176,5 @@ public class TablaCoches extends JFrame {
 		tablaCoches.setVisible(true);
 		tablaCoches.setSize(480,360);
 		tablaCoches.setLocationRelativeTo(null);
-		tablaCoches.setVisible(true);
 	}
 }

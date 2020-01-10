@@ -72,13 +72,14 @@ public class TablaTrabajadores extends JFrame {
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					//TODO qqqq actualizar tabla al borrar
+					
 					switch (respuesta) {
 					case 0:
 						GestorBD bd = new GestorBD();
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
 						bd.eliminarPersona("trabajador", dni);
 						bd.desconectar();
+						//TODO refrescar tabla
 						break;
 					default:
 						break;

@@ -2,7 +2,7 @@ package model;
 
 public class Moto extends Vehiculo {
 	
-	private boolean estructuraProtectora;
+	protected boolean estructuraProtectora;
 
 	public Moto(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio, boolean estructuraProtectora) {
 		super(marca, modelo, color, caballos, numRuedas, nPlazas, precio);

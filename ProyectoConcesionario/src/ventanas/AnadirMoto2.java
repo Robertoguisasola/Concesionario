@@ -25,7 +25,7 @@ import model.Coche;
 import model.Colores;
 import model.Trabajador;
 
-public class AnadirCoche2 extends JFrame {
+public class AnadirMoto2 extends JFrame {
 	
 	/**
 	 * 
@@ -68,9 +68,10 @@ public class AnadirCoche2 extends JFrame {
 	private JButton cancelarButton;
 	private Box buttonsBox;
 	
-	public AnadirCoche2(Trabajador t) {
+	public AnadirMoto2(Trabajador t) {
+		//TODO modificar con las caracteristicas de la moto de segunda mano
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo coche de segunda mano");
+		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo moto de segunda mano");
 		
 		camposPanel = new JPanel();
 		
@@ -303,16 +304,16 @@ public class AnadirCoche2 extends JFrame {
 		return false;
 	}
 	
-	public static void abrirAnadirCoche2(Trabajador t) {
-		AnadirCoche2 anadirCoche2 = new AnadirCoche2(t);
-		anadirCoche2.setSize(480,360);
-		anadirCoche2.setLocationRelativeTo(null);
-		anadirCoche2.setVisible(true);
+	public static void abrirAnadirMoto2(Trabajador t) {
+		AnadirMoto2 anadirMoto2= new AnadirMoto2(t);
+		anadirMoto2.setSize(480,360);
+		anadirMoto2.setLocationRelativeTo(null);
+		anadirMoto2.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		
-		AnadirCoche2.abrirAnadirCoche2(t);
+		AnadirMoto2.abrirAnadirMoto2(t);
 	}
 }

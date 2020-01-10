@@ -25,7 +25,7 @@ import model.Coche;
 import model.Colores;
 import model.Trabajador;
 
-public class AnadirCoche2 extends JFrame {
+public class AnadirMoto extends JFrame {
 	
 	/**
 	 * 
@@ -60,17 +60,15 @@ public class AnadirCoche2 extends JFrame {
 	private JTextField precioField;
 	private Box precioBox;
 	private JCheckBox motorDieselCheck;
-	private JLabel kilometrosLabel;
-	private JTextField kilometrosField;
-	private Box kilometrosBox;
 
 	private JButton agregarButton;
 	private JButton cancelarButton;
 	private Box buttonsBox;
 	
-	public AnadirCoche2(Trabajador t) {
+	public AnadirMoto(Trabajador t) {
+		//TODO modificar con las características de la moto
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo coche de segunda mano");
+		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo moto");
 		
 		camposPanel = new JPanel();
 		
@@ -153,15 +151,7 @@ public class AnadirCoche2 extends JFrame {
 		precioBox.add(Box.createRigidArea(new Dimension(55, 12)));
 		precioBox.add(precioField);
 
-		motorDieselCheck = new JCheckBox("Motor diesel");
-		
-		kilometrosLabel = new JLabel("Kilómetros");
-		kilometrosField = new JTextField();
-
-		kilometrosBox = new Box(BoxLayout.X_AXIS);
-		kilometrosBox.add(kilometrosLabel);
-		kilometrosBox.add(Box.createRigidArea(new Dimension(55, 12)));
-		kilometrosBox.add(kilometrosField);
+		motorDieselCheck = new JCheckBox("Motor diesel");		
 
 		formPanel = new JPanel();
 
@@ -181,8 +171,6 @@ public class AnadirCoche2 extends JFrame {
 		formBox.add(precioBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(motorDieselCheck);
-		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(kilometrosBox);
 
 		formPanel.add(formBox);
 		
@@ -303,16 +291,16 @@ public class AnadirCoche2 extends JFrame {
 		return false;
 	}
 	
-	public static void abrirAnadirCoche2(Trabajador t) {
-		AnadirCoche2 anadirCoche2 = new AnadirCoche2(t);
-		anadirCoche2.setSize(480,360);
-		anadirCoche2.setLocationRelativeTo(null);
-		anadirCoche2.setVisible(true);
+	public static void abrirAnadirMoto(Trabajador t) {
+		AnadirMoto anadirMoto= new AnadirMoto(t);
+		anadirMoto.setSize(480,360);
+		anadirMoto.setLocationRelativeTo(null);
+		anadirMoto.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		Trabajador t = new Trabajador();
 		
-		AnadirCoche2.abrirAnadirCoche2(t);
+		AnadirMoto.abrirAnadirMoto(t);
 	}
 }

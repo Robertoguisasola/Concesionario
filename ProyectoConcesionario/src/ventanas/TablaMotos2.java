@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-public class TablaCoches2 extends JFrame {
+public class TablaMotos2 extends JFrame {
 
 	/**
 	 * 
@@ -33,8 +33,8 @@ public class TablaCoches2 extends JFrame {
 	private JTable tabla;
 	private DefaultTableModel modelo;	
 
-	public TablaCoches2(Trabajador t) {
-		this.setTitle("Tabla de coches de segunda mano");
+	public TablaMotos2(Trabajador t) {
+		this.setTitle("Tabla de motos de segunda mano");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -44,10 +44,10 @@ public class TablaCoches2 extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir coche");
+		anadirButton = new JButton("Añadir moto");
 		botonesPanel.add(anadirButton);
 
-		eliminarButton = new JButton("Eliminar coche");
+		eliminarButton = new JButton("Eliminar moto");
 		botonesPanel.add(eliminarButton);
 		
 		atrasButton = new JButton("Atrás");
@@ -57,7 +57,7 @@ public class TablaCoches2 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AnadirCoche2.abrirAnadirCoche2(t);
+				AnadirMoto2.abrirAnadirMoto2(t);
 				dispose();
 			}
 		});
@@ -70,7 +70,7 @@ public class TablaCoches2 extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar el "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar la "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
@@ -82,16 +82,16 @@ public class TablaCoches2 extends JFrame {
 						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
-						int diesel;
-						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
-						
-						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
-							diesel = 0;
+int estructura;
+int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+
+						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
+							estructura = 0;
 						} else {
-							diesel = 1;
+							estructura = 1;
 						}
 						
-						bd.eliminarCoche2(marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
+						bd.eliminarMoto2(marca, modeloc, color, caballos, plazas, precio, estructura, kilometros);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;
@@ -140,7 +140,7 @@ public class TablaCoches2 extends JFrame {
 		modelo.addColumn("Caballos");
 		modelo.addColumn("Plazas");
 		modelo.addColumn("Precio");
-		modelo.addColumn("Motor diesel");
+		modelo.addColumn("Estructura protectora");
 		modelo.addColumn("Kilómetros");
 
 		GestorBD bd = new GestorBD();
@@ -173,10 +173,10 @@ public class TablaCoches2 extends JFrame {
 		bd.desconectar();
 	}
 
-	public static void abrirTablaCoches2(Trabajador t) {
-		TablaCoches2 tablaCoches2 = new TablaCoches2(t);
-		tablaCoches2.setVisible(true);
-		tablaCoches2.setSize(480,360);
-		tablaCoches2.setLocationRelativeTo(null);
+	public static void abrirTablaMotos2(Trabajador t) {
+		TablaMotos2 tablaMotos2 = new TablaMotos2(t);
+		tablaMotos2.setVisible(true);
+		tablaMotos2.setSize(480,360);
+		tablaMotos2.setLocationRelativeTo(null);
 	}
 }

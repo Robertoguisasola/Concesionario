@@ -26,7 +26,7 @@ import model.Colores;
 import model.Trabajador;
 import model.VentaCoche;
 
-public class EscogerCoche extends JFrame{
+public class EscogerMoto extends JFrame{
 	
 	/**
 	 * 
@@ -48,9 +48,9 @@ public class EscogerCoche extends JFrame{
 	private JButton probarButton;
 	private Box botonesBox;
 		
-	public EscogerCoche(Cliente c, Trabajador t) {
+	public EscogerMoto(Cliente c, Trabajador t) {
+		//TODO escoger moto
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Bienvenido");
 
 		northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout());
@@ -173,10 +173,10 @@ public class EscogerCoche extends JFrame{
 		modelo.addColumn("Caballos");
 		modelo.addColumn("Plazas");
 		modelo.addColumn("Precio");
-		modelo.addColumn("Motor diesel");
+		modelo.addColumn("Estructura protectora");
 		
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaCoches();
+		ResultSet rs = bd.rellenarTablaMotos();
 
 		// Bucle para cada resultado en la consulta
 		try {
@@ -218,17 +218,17 @@ public class EscogerCoche extends JFrame{
 		bd.desconectar();		
 	}
 
-	public static void abrirEscogerCoche(Cliente c, Trabajador t) {
-		EscogerCoche escogerCoche = new EscogerCoche(c, t);
-		escogerCoche.setVisible(true);
-		escogerCoche.setSize(550,420);
-		escogerCoche.setLocationRelativeTo(null);
+	public static void abrirEscogerMoto(Cliente c, Trabajador t) {
+		EscogerMoto escogerMoto = new EscogerMoto(c, t);
+		escogerMoto.setVisible(true);
+		escogerMoto.setSize(550,420);
+		escogerMoto.setLocationRelativeTo(null);
 	}
 	
 	public static void main(String[] args) {
 		Cliente c = new Cliente();
 		c.setdNI("71708119F");
 		Trabajador t = null;
-		EscogerCoche.abrirEscogerCoche(c, t);
+		EscogerMoto.abrirEscogerMoto(c, t);
 	}
 }

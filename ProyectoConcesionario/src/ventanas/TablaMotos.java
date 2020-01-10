@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-public class TablaCoches2 extends JFrame {
+public class TablaMotos extends JFrame {
 
 	/**
 	 * 
@@ -33,8 +33,9 @@ public class TablaCoches2 extends JFrame {
 	private JTable tabla;
 	private DefaultTableModel modelo;	
 
-	public TablaCoches2(Trabajador t) {
-		this.setTitle("Tabla de coches de segunda mano");
+	public TablaMotos(Trabajador t) {
+		//TODO aaaa modificar las cosas para que saque motos y así
+		this.setTitle("Tabla de motos");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -44,10 +45,10 @@ public class TablaCoches2 extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir coche");
+		anadirButton = new JButton("Añadir moto");
 		botonesPanel.add(anadirButton);
 
-		eliminarButton = new JButton("Eliminar coche");
+		eliminarButton = new JButton("Eliminar moto");
 		botonesPanel.add(eliminarButton);
 		
 		atrasButton = new JButton("Atrás");
@@ -57,7 +58,7 @@ public class TablaCoches2 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AnadirCoche2.abrirAnadirCoche2(t);
+				AnadirMoto.abrirAnadirMoto(t);
 				dispose();
 			}
 		});
@@ -70,7 +71,7 @@ public class TablaCoches2 extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar el "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar la "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
@@ -82,16 +83,15 @@ public class TablaCoches2 extends JFrame {
 						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
-						int diesel;
-						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+						int estructura;
 						
-						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
-							diesel = 0;
+						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
+							estructura = 0;
 						} else {
-							diesel = 1;
+							estructura = 1;
 						}
 						
-						bd.eliminarCoche2(marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
+						bd.eliminarMoto(marca, modeloc, color, caballos, plazas, precio, estructura);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;
@@ -128,7 +128,6 @@ public class TablaCoches2 extends JFrame {
 	}
 
 	//Añadimos datos
-
 	private void setData() {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
@@ -140,18 +139,17 @@ public class TablaCoches2 extends JFrame {
 		modelo.addColumn("Caballos");
 		modelo.addColumn("Plazas");
 		modelo.addColumn("Precio");
-		modelo.addColumn("Motor diesel");
-		modelo.addColumn("Kilómetros");
+		modelo.addColumn("Estructura protectora");
 
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaCoches2();
+		ResultSet rs = bd.rellenarTablaMotos();
 
 		// Bucle para cada resultado en la consulta
 		try {
 			while (rs.next())
 			{
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[8]; // Hay ocho columnas en la tabla
+				Object [] fila = new Object[7]; // Hay siete columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i=0;i<fila.length;i++)
@@ -173,10 +171,10 @@ public class TablaCoches2 extends JFrame {
 		bd.desconectar();
 	}
 
-	public static void abrirTablaCoches2(Trabajador t) {
-		TablaCoches2 tablaCoches2 = new TablaCoches2(t);
-		tablaCoches2.setVisible(true);
-		tablaCoches2.setSize(480,360);
-		tablaCoches2.setLocationRelativeTo(null);
+	public static void abrirTablaMotos(Trabajador t) {
+		TablaMotos tablaMotos = new TablaMotos(t);
+		tablaMotos.setVisible(true);
+		tablaMotos.setSize(480,360);
+		tablaMotos.setLocationRelativeTo(null);
 	}
 }
