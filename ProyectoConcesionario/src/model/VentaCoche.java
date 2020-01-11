@@ -5,7 +5,7 @@ public class VentaCoche extends Venta {
 	protected boolean techoPanoramico;
 	protected boolean traccion4x4;
 	protected boolean modoDeportivo;
-	
+
 	public VentaCoche(Persona comprador, Coche coche, int precio, boolean automatico,
 			boolean lucesLed, boolean techoPanoramico, boolean traccion4x4, boolean modoDeportivo) {
 		super(comprador, coche, precio, automatico, lucesLed);

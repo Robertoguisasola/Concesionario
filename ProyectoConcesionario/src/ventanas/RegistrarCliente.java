@@ -27,12 +27,13 @@ import model.Persona;
 import model.Trabajador;
 
 public class RegistrarCliente extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	//NO TOCAR
+	//TODO ffff si se puede, ajustar los box para que los labels queden alineados
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -68,82 +69,82 @@ public class RegistrarCliente extends JFrame {
 	private JButton acceptButton;
 	private JButton cancelButton;
 	private Box buttonsBox;
-	
+
 	public RegistrarCliente(Trabajador t) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		bienvenidaPanel = new JPanel();
-		
+
 		String bienvenida = "<html><body><center>BIENVENIDO AL CONCESIONARIO <br>Introduzca sus datos para registrarse</center></body></html>";
-		
+
 		bienvenidaLabel = new JLabel(bienvenida);
 		bienvenidaPanel.add(bienvenidaLabel);
-		
+
 		getContentPane().add(bienvenidaPanel, BorderLayout.NORTH);
-		
+
 		formPanel = new JPanel();
 		formPanel.setLayout(new GridBagLayout());
-		
+
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridBagLayout());
-		
-		usuarioLabel = new JLabel("Nombre de usuario: ");
+
+		usuarioLabel = new JLabel("Nombre de usuario:");
 		usuarioField = new JTextField(12);
-			
+
 		usuarioBox = new Box(BoxLayout.X_AXIS);
 		usuarioBox.add(usuarioLabel);
-		usuarioBox.add(Box.createRigidArea(new Dimension(46, 12)));
+		usuarioBox.add(Box.createRigidArea(new Dimension(29, 12)));
 		usuarioBox.add(usuarioField);
-		
-		passwordLabel = new JLabel("Contraseña: ");
+
+		passwordLabel = new JLabel("Contraseña:");
 		passwordField = new JPasswordField(12);
-		
+
 		passwordBox = new Box(BoxLayout.X_AXIS);
 		passwordBox.add(passwordLabel);
-		passwordBox.add(Box.createRigidArea(new Dimension(79, 12)));
+		passwordBox.add(Box.createRigidArea(new Dimension(71, 12)));
 		passwordBox.add(passwordField);
-		
-		passwordRLabel = new JLabel("Repita la contraseña: ");
+
+		passwordRLabel = new JLabel("Repita la contraseña:");
 		passwordRField = new JPasswordField(12);
-		
+
 		passwordRBox = new Box(BoxLayout.X_AXIS);
 		passwordRBox.add(passwordRLabel);
-		passwordRBox.add(Box.createRigidArea(new Dimension(38,0)));
+		passwordRBox.add(Box.createRigidArea(new Dimension(19,0)));
 		passwordRBox.add(passwordRField);
-		
-		emailLabel = new JLabel("Email: ");
+
+		emailLabel = new JLabel("Email:");
 		emailField = new JTextField();
-		
+
 		emailBox = new Box(BoxLayout.X_AXIS);
 		emailBox.add(emailLabel);
-		emailBox.add(Box.createRigidArea(new Dimension(113, 12)));
+		emailBox.add(Box.createRigidArea(new Dimension(100, 12)));
 		emailBox.add(emailField);
-		
-		dniLabel = new JLabel("DNI: ");
+
+		dniLabel = new JLabel("DNI:");
 		dniField = new JTextField(9);
-		
+
 		dniBox = new Box(BoxLayout.X_AXIS);
 		dniBox.add(dniLabel);
-		dniBox.add(Box.createRigidArea(new Dimension(118, 12)));
+		dniBox.add(Box.createRigidArea(new Dimension(111, 12)));
 		dniBox.add(dniField);
-		
-		nombreLabel = new JLabel("Nombre: ");
+
+		nombreLabel = new JLabel("Nombre:");
 		nombreField = new JTextField();
-		
+
 		nombreBox = new Box(BoxLayout.X_AXIS);
 		nombreBox.add(nombreLabel);
-		nombreBox.add(Box.createRigidArea(new Dimension(100, 12)));
+		nombreBox.add(Box.createRigidArea(new Dimension(87, 12)));
 		nombreBox.add(nombreField);
 
-		apellidosLabel = new JLabel("Apellidos: ");
+		apellidosLabel = new JLabel("Apellidos:");
 		apellidosField = new JTextField();
 
 		apellidosBox = new Box(BoxLayout.X_AXIS);
 		apellidosBox.add(apellidosLabel);
 		apellidosBox.add(Box.createRigidArea(new Dimension(95, 12)));
 		apellidosBox.add(apellidosField);
-		
-		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
+
+		fechaNacimientoLabel= new JLabel("Fecha de nacimiento:");
 		fechaNacimientoField = new JTextField();
 		fechaNacimientoField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -153,22 +154,22 @@ public class RegistrarCliente extends JFrame {
 		});
 		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
 		fechaNacimientoField.setText("dd/MM/yyyy");
-		
+
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
 		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
 		fechaNacimientoBox.add(fechaNacimientoField);
-		
-		numeroTarjetaLabel = new JLabel("Número de tarjeta: ");
+
+		numeroTarjetaLabel = new JLabel("Número de tarjeta:");
 		numeroTarjetaField = new JTextField();
-		
+
 		numeroTarjetaBox = new Box(BoxLayout.X_AXIS);
 		numeroTarjetaBox.add(numeroTarjetaLabel);
 		numeroTarjetaBox.add(Box.createRigidArea(new Dimension(51, 12)));
 		numeroTarjetaBox.add(numeroTarjetaField);
-		
+
 		formPanel = new JPanel();
-		
+
 		formBox = new Box(BoxLayout.Y_AXIS);
 		formBox.add(usuarioBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
@@ -190,32 +191,32 @@ public class RegistrarCliente extends JFrame {
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 
 		formPanel.add(formBox);
-		
+
 		acceptButton = new JButton("Registrarme");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				registrar(t);
 			}
 		});
-		
+
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				volver(t);
 			}
 		});
-		
+
 		buttonsBox = new Box(BoxLayout.X_AXIS);
 		buttonsBox.add(acceptButton);
 		buttonsBox.add(Box.createRigidArea(new Dimension(40, 0)));
 		buttonsBox.add(cancelButton);
-		
+
 		buttonsPanel.add(buttonsBox);
-		
+
 		getContentPane().add(formPanel, BorderLayout.CENTER);
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
-	
+
 	private void volver(Trabajador t) {
 		if (t == null) {
 			Inicio.abrirInicio();
@@ -230,7 +231,7 @@ public class RegistrarCliente extends JFrame {
 			}
 		}
 	}
-	
+
 	private void limpiarCajas(Trabajador t) {
 		usuarioField.setText(null);
 		passwordField.setText(null);
@@ -242,18 +243,18 @@ public class RegistrarCliente extends JFrame {
 		fechaNacimientoField.setText(null);
 		numeroTarjetaField.setText(null);
 	}
-	
+
 	private void registrar(Trabajador t) {
 		try {
-			
+
 			if (comprobarVacios()) {
 				return;
 			}
-			
+
 			if (comprobarContraseñas()) {
 				return;
 			}
-						
+
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
@@ -265,15 +266,15 @@ public class RegistrarCliente extends JFrame {
 			long numTarjeta = Long.parseLong(numeroTarjetaField.getText());
 
 			Cliente c = new Cliente(usuario, contra, email, dNI, nombre, apellidos, fechaNacimiento, numTarjeta);
-			
+
 			GestorBD bd = new GestorBD();
 			bd.anadirNuevoCliente(c);
 			bd.desconectar();
-						
+
 			String[] opciones = {"Sí", "No"};
 			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-			
+
 			switch (respuesta) {
 			case 0:
 				limpiarCajas(t);
@@ -295,51 +296,51 @@ public class RegistrarCliente extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private boolean comprobarVacios() {
 		if (usuarioField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un nombre de usuario");
 			return true;
 		}
-		
+
 		if (new String(passwordField.getPassword()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
 			return true;
 		}
-		
+
 		if (new String(passwordRField.getPassword()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, repita su contraseña");
 			return true;
 		}
-		
+
 		if (new String(emailField.getText()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un email de contacto");
 			return true;
 		}
-		
+
 		if (new String(dniField.getText()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca su DNI");
 			return true;
 		}
-		
+
 		if (new String(nombreField.getText()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca su nombre");
 			return true;
 		}
-		
+
 		if (new String(apellidosField.getText()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca al menos un apellido");
 			return true;
 		}
-				
+
 		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
 			return true;	
 		}
-		
+
 		return false;
 	}
-	
+
 	private boolean comprobarContraseñas() {
 		String contra1 = new String(passwordField.getPassword());
 		String contra2 = new String(passwordRField.getPassword());

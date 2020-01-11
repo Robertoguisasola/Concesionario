@@ -9,7 +9,7 @@ public class Vehiculo {
 	protected int numRuedas;
 	protected int nPlazas;
 	protected int precio;
-	
+
 	public Vehiculo(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio) {
 		super();
 		this.marca = marca;
@@ -95,7 +95,7 @@ public class Vehiculo {
 	public String toString() {
 		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas";
 	}
-	
+
 	public void setColorString(String string) {
 		switch (string) {
 		case "rojo":
@@ -125,7 +125,7 @@ public class Vehiculo {
 			break;  
 		}
 	}	
-	
+
 	public String getColorString() {
 		return color.toString().toLowerCase();
 	}
@@ -137,6 +137,6 @@ public class Vehiculo {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-	
-	
+
+
 }

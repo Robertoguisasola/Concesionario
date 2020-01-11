@@ -24,7 +24,7 @@ public class TablaClientes extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -49,7 +49,7 @@ public class TablaClientes extends JFrame {
 
 		eliminarButton = new JButton("Eliminar cliente");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
 
@@ -89,18 +89,12 @@ public class TablaClientes extends JFrame {
 				}
 			}
 		});
-		
+
 		atrasButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 
@@ -150,6 +144,16 @@ public class TablaClientes extends JFrame {
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaClientes(Trabajador t) {

@@ -22,8 +22,7 @@ public class VentaTest {
 	public void setUp() throws Exception {
 		c = new Cliente("roberto", "1234", "robertomargui@yahoo.es", "71708119F", "Roberto", "Guisasola", fecha, 0000);
 		ch = new Vehiculo("Volvo", "GG", Colores.VERDE, 200, 4, 5, 0);
-		//TODO zzzz revisar xq peta, creo que es también la matrícula
-		v = new Venta(c, ch, 89000, "8219GZM", false, false);
+		v = new Venta(c, ch, 89000, false, false);
 		prueba = new Venta(v);
 		empty = new Venta();
 	}
@@ -68,13 +67,6 @@ assertEquals(vh, v.getVehiculo());
 v.setPrecio(84000);
 assertEquals(84000, v.getPrecio());
 }
-
-	@Test
-	public void testGetMatricula() {
-		assertEquals("8219GZM", v.getMatricula());
-		assertEquals("8219GZM", v.getMatricula());
-		assertEquals(null, empty.getMatricula());
-		}
 
 	@Test
 	public void testSetMatricula() {
@@ -138,6 +130,6 @@ assertEquals(true, v.isLucesLed());
 
 	@Test
 	public void testToString() {
-assertEquals(c.toString() + " ha comprado " + ch.toString() + " por 89000€, con matrícula 8219GZM", v.toString());	}
+assertEquals(c.toString() + " ha comprado " + ch.toString() + " por 89000€, con matrícula " + v.getMatricula(), v.toString());	}
 
 }

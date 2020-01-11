@@ -24,7 +24,7 @@ public class TablaMotos2 extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -44,12 +44,12 @@ public class TablaMotos2 extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir moto");
+		anadirButton = new JButton("Añadir moto de segunda mano");
 		botonesPanel.add(anadirButton);
 
 		eliminarButton = new JButton("Eliminar moto");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
 
@@ -82,15 +82,15 @@ public class TablaMotos2 extends JFrame {
 						int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
-int estructura;
-int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+						int estructura;
+						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
 
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
 							estructura = 0;
 						} else {
 							estructura = 1;
 						}
-						
+
 						bd.eliminarMoto2(marca, modeloc, color, caballos, plazas, precio, estructura, kilometros);
 						bd.desconectar();
 						//TODO refrescar tabla
@@ -103,18 +103,12 @@ int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), mode
 				}
 			}
 		});
-		
+
 		atrasButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 
@@ -144,7 +138,7 @@ int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), mode
 		modelo.addColumn("Kilómetros");
 
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaCoches2();
+		ResultSet rs = bd.rellenarTablaMotos2();
 
 		// Bucle para cada resultado en la consulta
 		try {
@@ -171,6 +165,16 @@ int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), mode
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaMotos2(Trabajador t) {

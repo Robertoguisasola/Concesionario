@@ -19,12 +19,12 @@ import dataBase.GestorBD;
 import model.Trabajador;
 
 public class TablaVentasCoches2 extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -32,39 +32,38 @@ public class TablaVentasCoches2 extends JFrame {
 	private JButton atrasButton;
 	private JTable tabla;
 	private DefaultTableModel modelo;
-	
+
 	public TablaVentasCoches2(Trabajador t) {
-		//TODO modificar para coches de segunda mano
 		this.setTitle("Tabla de ventas de coches de segunda mano");
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		setData();
 		tablaPanel = new JScrollPane(tabla);
-		
+
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
 		anadirButton = new JButton("Añadir venta");
 		botonesPanel.add(anadirButton);
-		
+
 		eliminarButton = new JButton("Eliminar venta");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
-		
+
 		anadirButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EscogerCoche.abrirEscogerCoche(null, t);
 				dispose();
 			}
 		});
-		
+
 		eliminarButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Sí", "No"};
@@ -76,9 +75,12 @@ public class TablaVentasCoches2 extends JFrame {
 					//TODO qqqq actualizar tabla al borrar
 					switch (respuesta) {
 					case 0:
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI cliente"));
+						int precio = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
+						String matricula = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Matricula"));
+
 						GestorBD bd = new GestorBD();
-						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
-						bd.eliminarPersona("trabajador", dni);
+						bd.eliminarVenta("ventacoche2", dni, precio, matricula);
 						bd.desconectar();
 						break;
 					default:
@@ -89,31 +91,24 @@ public class TablaVentasCoches2 extends JFrame {
 				}
 			}
 		});
-		
-atrasButton.addActionListener(new ActionListener() {
-			
+
+		atrasButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
-		
+
 		add(tablaPanel, BorderLayout.CENTER);
 		add(botonesPanel, BorderLayout.SOUTH);
 
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
-		
+
 		this.setVisible(true);
 	}
-	
+
 
 	private void setData() {
 		modelo = new DefaultTableModel();
@@ -124,57 +119,20 @@ atrasButton.addActionListener(new ActionListener() {
 		modelo.addColumn("Coche");
 		modelo.addColumn("Precio");
 		modelo.addColumn("Matricula");
-		modelo.addColumn("Automatico");
-		modelo.addColumn("Luces led");
-		modelo.addColumn("Techo panoramico");
-		modelo.addColumn("Traccion 4X4");
-		modelo.addColumn("Modo deportivo");
+		modelo.addColumn("Kilometros");
 
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaVentasCoches();
+		ResultSet rs = bd.rellenarTablaVentasCoches2();
 
 		// Bucle para cada resultado en la consulta
 		try {
 			while (rs.next()){
 				// Se crea un array que será una de las filas de la tabla.
-				Object [] fila = new Object[9]; // Hay nueve columnas en la tabla
+				Object [] fila = new Object[5]; // Hay cico columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i = 0;i<fila.length;i++) {
-					
-					if (i == 4) {
-						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "NO";
-						} else {
-							fila[i] = "SI";
-						}
-					} else if (i == 5) {
-						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "NO";
-						} else {
-							fila[i] = "SI";
-						}
-					} else if (i == 6) {
-						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "NO";
-						} else {
-							fila[i] = "SI";
-						}
-					} else if (i == 7) {
-						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "NO";
-						} else {
-							fila[i] = "SI";
-						}
-					} else if (i == 8) {
-						if (rs.getObject(i+1).equals(0)) {
-							fila[i] = "NO";
-						} else {
-							fila[i] = "SI";
-						}
-					} else {
-						fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-					}
+					fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
 				}
 
 				// Se añade al modelo la fila completa.
@@ -185,11 +143,21 @@ atrasButton.addActionListener(new ActionListener() {
 		}
 		bd.desconectar();
 	}
-	
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
+	}
+
 	public static void abrirTablaVentasCoches2(Trabajador t) {
-		TablaVentasCoches2 tablaVentas = new TablaVentasCoches2(t);
-		tablaVentas.setVisible(true);
-		tablaVentas.setSize(480,360);
-		tablaVentas.setLocationRelativeTo(null);
+		TablaVentasCoches2 tablaVentasCoches2 = new TablaVentasCoches2(t);
+		tablaVentasCoches2.setVisible(true);
+		tablaVentasCoches2.setSize(480,360);
+		tablaVentasCoches2.setLocationRelativeTo(null);
 	}
 }

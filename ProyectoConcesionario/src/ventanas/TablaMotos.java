@@ -24,7 +24,7 @@ public class TablaMotos extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -34,7 +34,6 @@ public class TablaMotos extends JFrame {
 	private DefaultTableModel modelo;	
 
 	public TablaMotos(Trabajador t) {
-		//TODO aaaa modificar las cosas para que saque motos y así
 		this.setTitle("Tabla de motos");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +49,7 @@ public class TablaMotos extends JFrame {
 
 		eliminarButton = new JButton("Eliminar moto");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
 
@@ -84,13 +83,13 @@ public class TablaMotos extends JFrame {
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int estructura;
-						
+
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
 							estructura = 0;
 						} else {
 							estructura = 1;
 						}
-						
+
 						bd.eliminarMoto(marca, modeloc, color, caballos, plazas, precio, estructura);
 						bd.desconectar();
 						//TODO refrescar tabla
@@ -103,9 +102,9 @@ public class TablaMotos extends JFrame {
 				}
 			}
 		});
-		
+
 		atrasButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (t.isAdmin()) {

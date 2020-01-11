@@ -16,12 +16,12 @@ import javax.swing.JPanel;
 import model.Trabajador;
 
 public class Inicio extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	//NO TOCAR
 	private JPanel opcionesPanel;
 	private Box buttonsBox;
 	private JButton iniciarSesionButton;
@@ -30,10 +30,10 @@ public class Inicio extends JFrame {
 	public Inicio(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
-		
+
 		opcionesPanel = new JPanel();
 		opcionesPanel.setLayout(new GridBagLayout());
-		
+
 		buttonsBox = new Box(BoxLayout.Y_AXIS);
 		iniciarSesionButton = new JButton("Iniciar sesión");
 		iniciarSesionButton.addActionListener(new ActionListener() {
@@ -42,7 +42,7 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		registrarCuentaButton = new JButton("Registrar cuenta");
 		registrarCuentaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,20 +51,20 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		buttonsBox.add(iniciarSesionButton);
 		buttonsBox.add(Box.createRigidArea(new Dimension(0,40)));
 		buttonsBox.add(registrarCuentaButton);
-				
+
 		GridBagConstraints gbc_buttonsBox = new GridBagConstraints();
 		gbc_buttonsBox.gridx = 0;
 		opcionesPanel.add(buttonsBox, gbc_buttonsBox);
-		
+
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
-		
+
 		this.setVisible(true);
 	}
-	
+
 	public static void abrirInicio() {
 		Inicio inicio = new Inicio();
 		inicio.setTitle("Inicio");

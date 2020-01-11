@@ -24,7 +24,7 @@ public class TablaTrabajadores extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -72,7 +72,7 @@ public class TablaTrabajadores extends JFrame {
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					
+
 					switch (respuesta) {
 					case 0:
 						GestorBD bd = new GestorBD();
@@ -94,13 +94,7 @@ public class TablaTrabajadores extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}				
+				volver(t);				
 			}
 		});
 
@@ -158,6 +152,16 @@ public class TablaTrabajadores extends JFrame {
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaTrabajadores(Trabajador t) {

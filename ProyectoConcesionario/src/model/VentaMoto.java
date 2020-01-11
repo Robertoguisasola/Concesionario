@@ -1,13 +1,12 @@
 package model;
 
 public class VentaMoto extends Venta {
-	//TODO hacer clase
 	//TODO tttt hacer test
-	
+
 	protected boolean escape;
 	protected boolean paramanos;
 	protected boolean guardabarrosGrande;
-	
+
 	public VentaMoto(Persona comprador, Moto moto, int precio, boolean automatico,
 			boolean lucesLed, boolean escape, boolean paramanos, boolean guardabarrosGrande) {
 		super(comprador, moto, precio, automatico, lucesLed);

@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class Trabajador extends Persona{
-	
+
 	private int sueldo;
 	private boolean isAdmin;
 
@@ -37,7 +37,7 @@ public class Trabajador extends Persona{
 	public boolean isAdmin() {
 		return isAdmin;
 	}
-	
+
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}

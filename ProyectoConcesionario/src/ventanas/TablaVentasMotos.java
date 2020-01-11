@@ -19,12 +19,12 @@ import dataBase.GestorBD;
 import model.Trabajador;
 
 public class TablaVentasMotos extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -32,39 +32,38 @@ public class TablaVentasMotos extends JFrame {
 	private JButton atrasButton;
 	private JTable tabla;
 	private DefaultTableModel modelo;
-	
+
 	public TablaVentasMotos(Trabajador t) {
-		//TODO modificar para que se vean las ventas de motos
 		this.setTitle("Tabla de ventas de motos");
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		setData();
 		tablaPanel = new JScrollPane(tabla);
-		
+
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
 		anadirButton = new JButton("Añadir venta");
 		botonesPanel.add(anadirButton);
-		
+
 		eliminarButton = new JButton("Eliminar venta");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
-		
+
 		anadirButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EscogerCoche.abrirEscogerCoche(null, t);
+				EscogerMoto.abrirEscogerMoto(null, t);
 				dispose();
 			}
 		});
-		
+
 		eliminarButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Sí", "No"};
@@ -76,9 +75,12 @@ public class TablaVentasMotos extends JFrame {
 					//TODO qqqq actualizar tabla al borrar
 					switch (respuesta) {
 					case 0:
+						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI cliente"));
+						int precio = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
+						String matricula = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Matricula"));
+
 						GestorBD bd = new GestorBD();
-						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
-						bd.eliminarPersona("trabajador", dni);
+						bd.eliminarVenta("ventamoto", dni, precio, matricula);
 						bd.desconectar();
 						break;
 					default:
@@ -89,31 +91,24 @@ public class TablaVentasMotos extends JFrame {
 				}
 			}
 		});
-		
-atrasButton.addActionListener(new ActionListener() {
-			
+
+		atrasButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
-		
+
 		add(tablaPanel, BorderLayout.CENTER);
 		add(botonesPanel, BorderLayout.SOUTH);
 
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
-		
+
 		this.setVisible(true);
 	}
-	
 
 	private void setData() {
 		modelo = new DefaultTableModel();
@@ -126,12 +121,12 @@ atrasButton.addActionListener(new ActionListener() {
 		modelo.addColumn("Matricula");
 		modelo.addColumn("Automatico");
 		modelo.addColumn("Luces led");
-		modelo.addColumn("Techo panoramico");
-		modelo.addColumn("Traccion 4X4");
-		modelo.addColumn("Modo deportivo");
+		modelo.addColumn("Escape");
+		modelo.addColumn("Paramanos");
+		modelo.addColumn("Guardabarros grande");
 
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaVentasCoches();
+		ResultSet rs = bd.rellenarTablaVentasMotos();
 
 		// Bucle para cada resultado en la consulta
 		try {
@@ -141,7 +136,7 @@ atrasButton.addActionListener(new ActionListener() {
 
 				// Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
 				for (int i = 0;i<fila.length;i++) {
-					
+
 					if (i == 4) {
 						if (rs.getObject(i+1).equals(0)) {
 							fila[i] = "NO";
@@ -185,7 +180,17 @@ atrasButton.addActionListener(new ActionListener() {
 		}
 		bd.desconectar();
 	}
-	
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
+	}
+
 	public static void abrirTablaVentasMotos(Trabajador t) {
 		TablaVentasMotos tablaVentas = new TablaVentasMotos(t);
 		tablaVentas.setVisible(true);

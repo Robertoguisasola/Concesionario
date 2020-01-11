@@ -28,7 +28,7 @@ public class AnadirExtrasCoche extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JCheckBox techoPanoramicoCheck;
 	private JCheckBox traccionCheck;
 	private JCheckBox modoDeportivoCheck;
@@ -250,7 +250,7 @@ public class AnadirExtrasCoche extends JFrame{
 			return false;
 		}
 	}
-	
+
 	private void volver(Cliente c, Trabajador t) {
 		if (t == null) {
 			VistaCliente.abrirVistaCliente(c);
@@ -270,5 +270,5 @@ public class AnadirExtrasCoche extends JFrame{
 		anadirExtras.setVisible(true);
 		anadirExtras.setSize(480,360);
 		anadirExtras.setLocationRelativeTo(null);
-	}	
+	}
 }

@@ -21,20 +21,20 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
-import model.Coche;
 import model.Colores;
+import model.Moto;
 import model.Trabajador;
 
 public class AnadirMoto extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		
+
 	private JPanel camposPanel;
 	private JLabel camposLabel;
-	
+
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -59,67 +59,66 @@ public class AnadirMoto extends JFrame {
 	private JLabel precioLabel;
 	private JTextField precioField;
 	private Box precioBox;
-	private JCheckBox motorDieselCheck;
+	private JCheckBox estructuraProtectoraCheck;
 
 	private JButton agregarButton;
 	private JButton cancelarButton;
 	private Box buttonsBox;
-	
+
 	public AnadirMoto(Trabajador t) {
-		//TODO modificar con las características de la moto
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(t.getNombre() + " " + t.getApellidos() + " añadiendo moto");
-		
+
 		camposPanel = new JPanel();
-		
+
 		String rellenar = "<html><body><center>Rellene todos los campos</center></body></html>";
-		
+
 		camposLabel = new JLabel(rellenar);
 		camposPanel.add(camposLabel);
-		
+
 		getContentPane().add(camposPanel, BorderLayout.NORTH);
-		
+
 		formPanel = new JPanel();
 		formPanel.setLayout(new GridBagLayout());
-		
+
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridBagLayout());
-		
-		marcaLabel = new JLabel("Marca: ");
+
+		marcaLabel = new JLabel("Marca:");
 		marcaField = new JTextField();
-			
+
 		marcaBox = new Box(BoxLayout.X_AXIS);
 		marcaBox.add(marcaLabel);
-		marcaBox.add(Box.createRigidArea(new Dimension(40, 12)));
+		marcaBox.add(Box.createRigidArea(new Dimension(38, 12)));
 		marcaBox.add(marcaField);
-		
-		modeloLabel = new JLabel("Modelo: ");
+
+		modeloLabel = new JLabel("Modelo:");
 		modeloField = new JTextField();
-		
+
 		modeloBox = new Box(BoxLayout.X_AXIS);
 		modeloBox.add(modeloLabel);
 		modeloBox.add(Box.createRigidArea(new Dimension(33, 12)));
 		modeloBox.add(modeloField);
-		
-		colorLabel = new JLabel("Color: ");
+
+		colorLabel = new JLabel("Color:");
 		colorCombo = new JComboBox<model.Colores>();
 		for(model.Colores color : model.Colores.values())
 			colorCombo.addItem(color);
-		
+
 		colorBox = new Box(BoxLayout.X_AXIS);
 		colorBox.add(colorLabel);
-		colorBox.add(Box.createRigidArea(new Dimension(46, 12)));
+		colorBox.add(Box.createRigidArea(new Dimension(44, 12)));
 		colorBox.add(colorCombo);
-		
-		caballosLabel = new JLabel("Caballos: ");
+
+		caballosLabel = new JLabel("Caballos:");
 		caballosField = new JTextField();
-		
+
 		caballosBox = new Box(BoxLayout.X_AXIS);
 		caballosBox.add(caballosLabel);
-		caballosBox.add(Box.createRigidArea(new Dimension(37, 12)));
+		caballosBox.add(Box.createRigidArea(new Dimension(25, 12)));
 		caballosBox.add(caballosField);
-		
-		nRuedasLabel = new JLabel("Número de ruedas: ");
+
+		nRuedasLabel = new JLabel("Número de ruedas:");
 		nRuedasField = new JTextField();
 		nRuedasField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -135,7 +134,7 @@ public class AnadirMoto extends JFrame {
 		nRuedasBox.add(Box.createRigidArea(new Dimension(28, 12)));
 		nRuedasBox.add(nRuedasField);
 
-		nPlazasLabel = new JLabel("Número de plazas: ");
+		nPlazasLabel = new JLabel("Número de plazas:");
 		nPlazasField = new JTextField();
 
 		nPlazasBox = new Box(BoxLayout.X_AXIS);
@@ -143,15 +142,15 @@ public class AnadirMoto extends JFrame {
 		nPlazasBox.add(Box.createRigidArea(new Dimension(31, 12)));
 		nPlazasBox.add(nPlazasField);
 
-		precioLabel = new JLabel("Precio");
+		precioLabel = new JLabel("Precio:");
 		precioField = new JTextField();
 
 		precioBox = new Box(BoxLayout.X_AXIS);
 		precioBox.add(precioLabel);
-		precioBox.add(Box.createRigidArea(new Dimension(55, 12)));
+		precioBox.add(Box.createRigidArea(new Dimension(38, 12)));
 		precioBox.add(precioField);
 
-		motorDieselCheck = new JCheckBox("Motor diesel");		
+		estructuraProtectoraCheck= new JCheckBox("Estructura protectora");		
 
 		formPanel = new JPanel();
 
@@ -170,43 +169,42 @@ public class AnadirMoto extends JFrame {
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
 		formBox.add(precioBox);
 		formBox.add(Box.createRigidArea(new Dimension(0,10)));
-		formBox.add(motorDieselCheck);
+		formBox.add(estructuraProtectoraCheck);
 
 		formPanel.add(formBox);
-		
-		agregarButton = new JButton("Añadir coche");
+
+		agregarButton = new JButton("Añadir moto");
 		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				anadirCoche(t);
+				anadirMoto(t);
 			}
 		});
-		
+
 		cancelarButton = new JButton("Cancelar");
 		cancelarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				volver(t);
 			}
 		});
-		
+
 		buttonsBox = new Box(BoxLayout.X_AXIS);
 		buttonsBox.add(agregarButton);
 		buttonsBox.add(Box.createRigidArea(new Dimension(40, 0)));
 		buttonsBox.add(cancelarButton);
-		
+
 		buttonsPanel.add(buttonsBox);
-		
+
 		getContentPane().add(formPanel, BorderLayout.CENTER);
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
-	
+
 	private void volver(Trabajador t) {
 		if (t.isAdmin()) {
-				VistaAdministrador.abrirVistaAdministrador(t);
-				dispose();
-			} else {
-				VistaTrabajador.abrirVistaTrabajador(t);
-				dispose();
-			
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
 		}
 	}
 
@@ -215,92 +213,87 @@ public class AnadirMoto extends JFrame {
 		modeloField.setText(null);
 		caballosField.setText(null);
 		nRuedasField.setText(null);
-		nPlazasField.setText(null);
+		nPlazasField.setText("4");
+		precioField.setText(null);
 	}
-	
-	private void anadirCoche(Trabajador t) {
-		
-			if (comprobarVacios()) {
-				return;
-			}
-						
-			String marca = marcaField.getText();
-			String modelo = new String(modeloField.getText());
-			Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
-			int caballos = Integer.parseInt(caballosField.getText());
-			int nRuedas = Integer.parseInt(nRuedasField.getText());
-			int nPlazas = Integer.parseInt(nPlazasField.getText());
-			int precio = Integer.parseInt(precioField.getText());
-			boolean motorDiesel = motorDieselCheck.isSelected();
-			
-			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, precio, motorDiesel);
-			
-			GestorBD bd = new GestorBD();
-			bd.anadirNuevoCoche(c);
-			bd.desconectar();
-						
-			String[] opciones = {"Sí", "No"};
-			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo coche ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-			
-			switch (respuesta) {
-			case 0:
-				limpiarCajas(t);
-				break;
-			case 1:
-				volver(t);
-				dispose();
-				break;
-			default:
-				break;
-			}
+
+	private void anadirMoto(Trabajador t) {
+
+		if (comprobarVacios()) {
+			return;
+		}
+
+		String marca = marcaField.getText();
+		String modelo = new String(modeloField.getText());
+		Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
+		int caballos = Integer.parseInt(caballosField.getText());
+		int nRuedas = Integer.parseInt(nRuedasField.getText());
+		int nPlazas = Integer.parseInt(nPlazasField.getText());
+		int precio = Integer.parseInt(precioField.getText());
+		boolean estructuraProtectora = estructuraProtectoraCheck.isSelected();
+
+		Moto m = new Moto(marca, modelo, color, caballos, nRuedas, nPlazas, precio, estructuraProtectora);
+
+		GestorBD bd = new GestorBD();
+		bd.anadirNuevaMoto(m);
+		bd.desconectar();
+
+		String[] opciones = {"Sí", "No"};
+		int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir una nueva moto?", "Añadir otra moto", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+
+		switch (respuesta) {
+		case 0:
+			limpiarCajas(t);
+			break;
+		case 1:
+			volver(t);
+			dispose();
+			break;
+		default:
+			break;
+		}
 	}
-	
+
 	private boolean comprobarVacios() {
 		if (marcaField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca una marca para el coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca la marca de la moto");
 			return true;
 		}
-		
+
 		if (modeloField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca un modelo de coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca el modelo de la moto");
 			return true;
 		}
-		
+
 		if (caballosField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca los caballos del coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca los caballos de la moto");
 			return true;
 		}
-		
+
 		if (nRuedasField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca las ruedas del coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca las ruedas de la moto");
 			return true;
 		}
-		
+
 		if (nPlazasField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca las plazas del coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca las plazas de la moto");
 			return true;
 		}
-		
-		
+
+
 		if (precioField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca el precio del coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca el precio de la moto");
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public static void abrirAnadirMoto(Trabajador t) {
 		AnadirMoto anadirMoto= new AnadirMoto(t);
 		anadirMoto.setSize(480,360);
 		anadirMoto.setLocationRelativeTo(null);
 		anadirMoto.setVisible(true);
-	}
-	
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		
-		AnadirMoto.abrirAnadirMoto(t);
 	}
 }

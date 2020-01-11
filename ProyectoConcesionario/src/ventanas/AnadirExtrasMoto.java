@@ -22,12 +22,12 @@ import model.Trabajador;
 import model.VentaMoto;
 
 public class AnadirExtrasMoto extends JFrame{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JCheckBox escapeCheck;
 	private JCheckBox paramanosCheck;
 	private JCheckBox guardabarrosGrandeCheck;
@@ -88,7 +88,7 @@ public class AnadirExtrasMoto extends JFrame{
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EscogerCoche.abrirEscogerCoche(c, t);
+				EscogerMoto.abrirEscogerMoto(c, t);
 				dispose();
 			}
 		});
@@ -118,7 +118,7 @@ public class AnadirExtrasMoto extends JFrame{
 			crearVenta(c, t, m, precio);
 			break;
 		case 1:
-			JOptionPane.showMessageDialog(null, "Modifique los extras. En caso de querer cambiar el coche pulse cancelar");
+			JOptionPane.showMessageDialog(null, "Modifique los extras. En caso de querer cambiar la moto pulse cancelar");
 		default:
 			break;
 		}	
@@ -249,7 +249,7 @@ public class AnadirExtrasMoto extends JFrame{
 			return false;
 		}
 	}
-	
+
 	private void volver(Cliente c, Trabajador t) {
 		if (t == null) {
 			VistaCliente.abrirVistaCliente(c);

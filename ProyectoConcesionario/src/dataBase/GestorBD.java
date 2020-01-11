@@ -26,11 +26,12 @@ import model.Coche2;
 import model.Moto;
 import model.Moto2;
 import model.Trabajador;
+import model.Venta2;
 import model.VentaCoche;
 import model.VentaMoto;
 
 public class GestorBD {
-
+	//TODO optimizar clase
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
 	private static Logger logger = null;
@@ -128,7 +129,19 @@ public class GestorBD {
 		case "moto2":
 			exportarMotos2();
 			break;
-
+		case "ventacoche":
+			exportarVentasCoches();
+			break;
+		case "ventacoche2":
+			//TODO aaaa TERMINAR
+			//exportarVentasCoches2();
+			break;
+		case "ventamoto":
+			//exportarVentasMotos();
+			break;
+		case "ventamoto2":
+			//exportarVentasMotos2();
+			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
 			break;
@@ -426,7 +439,7 @@ public class GestorBD {
 		List<Trabajador>trabajadores = obtenerTrabajadores();
 
 		try {
-			f = new FileWriter("ficheros/trabajadoresexp.csv");
+			f = new FileWriter("ficheros/trabajadoresExp.csv");
 
 			for (Trabajador t : trabajadores) {
 				String login = t.getLogin();
@@ -466,7 +479,7 @@ public class GestorBD {
 		List<Cliente>clientes = obtenerClientes();
 
 		try {
-			f = new FileWriter("ficheros/clientesexp.csv");
+			f = new FileWriter("ficheros/clientesExp.csv");
 
 			for (Cliente c : clientes) {
 				String login = c.getLogin();
@@ -505,7 +518,7 @@ public class GestorBD {
 		List<Coche> coches = obtenerCoches();
 
 		try {
-			f = new FileWriter("ficheros/cochesexp.csv");
+			f = new FileWriter("ficheros/cochesExp.csv");
 
 			for (Coche c : coches) {
 				String marca = c.getMarca();
@@ -544,7 +557,7 @@ public class GestorBD {
 		List<Coche2> coches = obtenerCoches2();
 
 		try {
-			f = new FileWriter("ficheros/coches2exp.csv");
+			f = new FileWriter("ficheros/coches2Exp.csv");
 
 			for (Coche2 c : coches) {
 				String marca = c.getMarca();
@@ -584,7 +597,7 @@ public class GestorBD {
 		List<Moto> motos = obtenerMotos();
 
 		try {
-			f = new FileWriter("ficheros/motosexp.csv");
+			f = new FileWriter("ficheros/motosExp.csv");
 
 			for (Moto m : motos) {
 				String marca = m.getMarca();
@@ -623,7 +636,7 @@ public class GestorBD {
 		List<Moto2> motos = obtenerMotos2();
 
 		try {
-			f = new FileWriter("ficheros/motos2exp.csv");
+			f = new FileWriter("ficheros/motos2Exp.csv");
 
 			for (Moto2 m : motos) {
 				String marca = m.getMarca();
@@ -656,11 +669,81 @@ public class GestorBD {
 			}
 		}
 	}
-	//TODO aaaa terminar
-	private void exportarVentas() {
 
+	private void exportarVentasCoches(){
+		FileWriter f = null;
 
+		String sql = "SELECT dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo FROM ventacoche";
+		PreparedStatement stmt;
+
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de los coches", null);
+
+			f = new FileWriter("ficheros/ventasCochesExp.csv");
+
+			for (int i = 0;i<9;i++) {
+				if (i == 4) {
+					if (rs.getObject(i+1).equals(0)) {
+						f.write("NO;");
+					} else {
+						f.write("SI;");
+					}
+				} else if (i == 5) {
+					if (rs.getObject(i+1).equals(0)) {
+						f.write("NO;");
+					} else {
+						f.write("SI;");
+					}
+				} else if (i == 6) {
+					if (rs.getObject(i+1).equals(0)) {
+						f.write("NO;");
+					} else {
+						f.write("SI;");
+					}
+				} else if (i == 7) {
+					if (rs.getObject(i+1).equals(0)) {
+						f.write("NO;");
+					} else {
+						f.write("SI;");
+					}
+				} else if (i == 8) {
+					if (rs.getObject(i+1).equals(0)) {
+						f.write("NO;");
+					} else {
+						f.write("SI;");
+					}
+				} else {
+					f.write(rs.getObject(i+1) + ";");
+				}
+			}
+
+		} catch (IOException e2) {
+			log(Level.SEVERE, "Error al escribir en el fichero de exportar ventas de coches", e2);
+			e2.printStackTrace();
+		} catch (SQLException e1) {
+			log(Level.SEVERE, "Error al obtener las ventas de los coches de la base de datos", e1);
+			e1.printStackTrace();
+		} catch (Exception e) {
+			log(Level.SEVERE, "Error al exportar las ventas de los coches", e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar ventas de coches", e);
+				e.printStackTrace();
+			}
+		}
 	}
+
 	public List<Trabajador> obtenerTrabajadores(){
 		String sql = "SELECT login, password, email, dNI, nombre, apellidos, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
@@ -1104,7 +1187,7 @@ public class GestorBD {
 	}
 
 	public void anadirNuevaMoto2(Moto2 m) {
-		String sql  = "INSERT INTO moto (marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora, kilometros)"
+		String sql  = "INSERT INTO moto2 (marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora, kilometros)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stmt;
@@ -1245,6 +1328,43 @@ public class GestorBD {
 		}
 	}
 
+	public void vender2(Venta2 v) {
+		String sql = "";
+		String logger = "";
+		String loggerf = "";
+
+		if (v.getVehiculo() instanceof Coche2) {
+			sql  = "INSERT INTO ventacoche2 (dNI, coche, precio, matricula, kilometros) VALUES (?,?,?,?,?)";
+			logger = "La compra del cliente con DNI " + v.getComprador().getdNI() + " del coche " + v.getVehiculo().toString() + " por un valor de " + v.getPrecio() + " ha sido añadida";
+			loggerf = "La compra del cliente con DNI " + v.getComprador().getdNI() + " del coche " + v.getVehiculo().toString() + " por un valor de " + v.getPrecio() + " no ha podido ser añadida";
+
+		}else if (v.getVehiculo() instanceof Moto2) {
+			sql  = "INSERT INTO ventamoto2 (dNI, moto, precio, matricula, kilometros) VALUES (?,?,?,?,?)";
+			logger = "La compra del cliente con DNI " + v.getComprador().getdNI() + " de la moto " + v.getVehiculo().toString() + " por un valor de " + v.getPrecio() + " ha sido añadida";
+			loggerf = "La compra del cliente con DNI " + v.getComprador().getdNI() + " de la moto " + v.getVehiculo().toString() + " por un valor de " + v.getPrecio() + " no ha podido ser añadida";
+		}
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, v.getComprador().getdNI());
+			stmt.setString(2, v.getVehiculo().toString());
+			stmt.setInt(3, v.getPrecio());
+			stmt.setString(4, v.getMatricula());
+			stmt.setInt(5, v.getKilometros());
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, logger, null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, loggerf, e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+
 	public ResultSet rellenarTablaTrabajadores(){
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
@@ -1371,6 +1491,59 @@ public class GestorBD {
 		return null;
 	}
 
+	public ResultSet rellenarTablaVentasCoches2(){
+		String sql = "SELECT dNI, coche, precio, matricula, kilometros FROM ventacoche2";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de los coches de segunda mano", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las ventas de los coches de segunda mano", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ResultSet rellenarTablaVentasMotos(){
+		String sql = "SELECT dNI, moto, precio, matricula, isAutomatico, isLucesLed, isEscape, isParamanos, isGuardabarrosGrande FROM ventamoto";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de las motos", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las ventas de las motos", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ResultSet rellenarTablaVentasMotos2(){
+		String sql = "SELECT dNI, moto, precio, matricula, kilometros FROM ventamoto2";
+		PreparedStatement stmt;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de las motos de segunda mano", null);
+			return rs;
+		} catch (SQLException e) {
+			log(Level.SEVERE, "Error al obtener las ventas de las motos de segunda mano", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
 	//Método que nos permite eliminar a un cliente o despedir a un trabajador, en función de la tabla que le pasemos y el DNI
 	public void eliminarPersona(String tabla, String dNI) {
 		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ?";
@@ -1493,47 +1666,26 @@ public class GestorBD {
 		}
 	}
 
-	public void eliminarVentaCoche(String matricula) {
-		String sqlBorrar= "DELETE FROM ventacoche WHERE matricula = ?";
+	public void eliminarVenta(String tabla, String dni, int precio, String matricula) {
+		String sqlBorrar= "DELETE FROM " + tabla + " WHERE dNI = ? AND precio = ? AND matricula = ?";
 
 		PreparedStatement stmtBorrar;
 
 		try {
 			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
-			stmtBorrar.setString(1, matricula);
-
-
-			stmtBorrar.executeUpdate();
-
-			log(Level.INFO, "La venta del coche con matrícula " + matricula+ " ha sido borrada correctamente", null);
-		} catch (SQLException e) { 
-			log(Level.SEVERE, "No ha sido posible borrar la venta del coche con matrícula "  + matricula, e);
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminarVentaMoto(String matricula) {
-		String sqlBorrar= "DELETE FROM ventamoto WHERE matricula = ?";
-
-		PreparedStatement stmtBorrar;
-
-		try {
-			stmtBorrar = conn.prepareStatement(sqlBorrar);
-
-			stmtBorrar.setString(1, matricula);
-
+			stmtBorrar.setString(1, dni);
+			stmtBorrar.setInt(2, precio);
+			stmtBorrar.setString(3, matricula);
 
 			stmtBorrar.executeUpdate();
 
-			log(Level.INFO, "La venta de la moto con matrícula " + matricula+ " ha sido borrada correctamente", null);
+			log(Level.INFO, "La venta del vehiculo con matrícula " + matricula + " realizada por el cliente con DNI " + dni + " ha sido borrada correctamente", null);
 		} catch (SQLException e) { 
-			log(Level.SEVERE, "No ha sido posible borrar la venta de la moto con matrícula "  + matricula, e);
+			log(Level.SEVERE, "No ha sido posible borrar la venta del vehiculo con matrícula " + matricula + " realizada por el cliente con DNI " + dni, e);
 			e.printStackTrace();
 		}
 	}
-
-
 
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {
@@ -1566,5 +1718,4 @@ public class GestorBD {
 	public static void setLastError(Exception lastError) {
 		GestorBD.lastError = lastError;
 	}
-
 }

@@ -26,7 +26,7 @@ public class Coche extends Vehiculo {
 	public void setMotorDiesel(boolean motorDiesel) {
 		this.motorDiesel = motorDiesel;
 	}
-	
+
 	protected String motorDieselString() {
 		String diesel;
 
@@ -42,7 +42,7 @@ public class Coche extends Vehiculo {
 	public String toString() {
 		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas," + motorDieselString();
 	}
-	
+
 	public String venderCoche() {
 		return marca + " " + modelo + " " + getColorString() + motorDieselString() + ", " + caballos + "cv y " + nPlazas + " plazas";
 	}

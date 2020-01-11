@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import model.Cliente;
 
 public class VistaCliente extends JFrame {
-	
+
 	/**
 	 * 
 	 */
@@ -32,11 +32,7 @@ public class VistaCliente extends JFrame {
 	private JLabel motosLabel;
 	private JButton motosButton;
 	private Box motosBox;
-	
-	//TODO completar con más componentes, NO DOY A BASTOOOOOOOOOOOOOO
-	//Podriais pensar al menos algo que añadirle a este punto o algo así, porque no solo se querrán comprar coches....
-	//OTRAS FUNCIONES POR DIOOOOS
-	
+
 	public VistaCliente(Cliente c) {
 		this.setTitle("Bienvenido "+c.getNombre()+" "+c.getApellidos());		
 		this.setResizable(true);
@@ -116,7 +112,7 @@ public class VistaCliente extends JFrame {
 		motosBox.add(motosLabel);
 		motosBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		motosBox.add(motosButton);
-		
+
 		opcionesBox = new Box(BoxLayout.Y_AXIS);
 		opcionesBox.add(cochesBox);
 		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -139,7 +135,7 @@ public class VistaCliente extends JFrame {
 
 	public static void main(String[] args) {
 		Cliente c = new Cliente();
-		
+
 		VistaCliente.abrirVistaCliente(c);
 	}
 }

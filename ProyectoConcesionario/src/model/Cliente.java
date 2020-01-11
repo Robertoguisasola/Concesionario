@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class Cliente extends Persona {
-	
+
 	private long numTarjeta;
 
 	public Cliente(String login, String password, String email, String dNI, String nombre, String apellidos,
@@ -35,5 +35,5 @@ public class Cliente extends Persona {
 		return nombre + " " + apellidos + ", con DNI " + dNI + " y número de tarjeta " + numTarjeta;
 	}
 
-	
+
 }

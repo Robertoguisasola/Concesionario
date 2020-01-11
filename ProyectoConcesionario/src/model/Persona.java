@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Persona {
-	
+
 	protected String login;
 	protected String password;
 	protected String email;
@@ -14,7 +14,7 @@ public class Persona {
 	protected String apellidos;
 	protected Date fechaNacimiento;
 	public static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-	
+
 	public Persona(String login, String password, String email, String dNI, String nombre, String apellidos,
 			Date fechaNacimiento) {
 		super();
@@ -100,7 +100,7 @@ public class Persona {
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	
+
 	public String getFechaNacimientoString() {
 		return df.format(fechaNacimiento);
 	}
@@ -108,7 +108,7 @@ public class Persona {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
+
 	public void setFechaNacimientoString (String fechaNacimiento) throws ParseException {
 		this.fechaNacimiento = df.parse(fechaNacimiento);
 	}

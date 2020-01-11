@@ -21,87 +21,73 @@ import javax.swing.table.DefaultTableModel;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Coche;
 import model.Coche2;
 import model.Colores;
 import model.Trabajador;
-import model.VentaCoche;
+import model.Venta2;
 
 public class EscogerCoche2 extends JFrame{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel northPanel;
 	private JPanel botonesPanel;
-	
+
 	private JScrollPane tablaPanel;
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private Box tablaBox;
-	
+
 	private JLabel informacionLabel;
 	private JButton volverButton;
-		
+
 	private JButton comprarButton;
 	private JButton probarButton;
 	private Box botonesBox;
-		
+
 	public EscogerCoche2(Cliente c, Trabajador t) {
-		//TODO escoger coche de 2ª mano
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Bienvenido");
 
 		northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout());
-		
+
 		JPanel centroPanel = new JPanel();
 		centroPanel.setLayout(new BorderLayout());
-				
+
 		String frase = "<html><body><left>Busque el coche, seleccionelo en la tabla e indique si quiere probarlo o comprarlo</left></body></html>";
-		
+
 		informacionLabel = new JLabel(frase);
 		northPanel.add(informacionLabel, BorderLayout.WEST);	
-				
+
 		volverButton = new JButton("Volver");
 		volverButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t == null) {
-					VistaCliente.abrirVistaCliente(c);
-				} else {
-					if (t.isAdmin()) {
-						VistaAdministrador.abrirVistaAdministrador(t);
-						dispose();
-					} else {
-						VistaTrabajador.abrirVistaTrabajador(t);
-						dispose();
-					}
-				}
+				volver(c, t);
 			}
 		});
-		
+
 		northPanel.add(volverButton, BorderLayout.EAST);
-		
+
 		setData();
 		tablaPanel = new JScrollPane(tabla);
-		
+
 		tablaPanel = new JScrollPane(tabla);
-		
+
 		tablaBox = new Box(BoxLayout.Y_AXIS);
 		tablaBox.add(Box.createRigidArea(new Dimension(0,10)));
 		tablaBox.add(tablaPanel);
-				
+
 		comprarButton = new JButton("Comprar");
 		comprarButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] opciones = {"Sí", "No"};
-				
 				if(tabla.getSelectedRow() >= 0) {
 					String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 					String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
@@ -111,62 +97,46 @@ public class EscogerCoche2 extends JFrame{
 					int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 					boolean diesel;
 					int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
-					
+
 					if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
 						diesel = false;
 					} else {
 						diesel = true;
 					}
-					
+
 					Coche2 ch = new Coche2(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel, kilometros);
-					
-					//TODO tienen extras???
-					
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-				
-				switch (respuesta) {
-				case 0:
-					AnadirExtrasCoche.abriranadirExtrasCoche(c, t, ch);
-					dispose();
-					break;
-				case 1:
-					//TODO joptionPane que muestre precio y confirmar etc
-					crearVenta(c, t, ch);
-					break;
-				default:
-					break;
-				}				
-			}
+
+					confirmarVenta(c, t, ch);	
+				}
 			}
 		});	
-		
+
 		probarButton = new JButton("Probar");
 		probarButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO llevar a probar coche
-				
+				// TODO llevar a probar coche2
+
 			}
 		});
-		
+
 		botonesBox = new Box(BoxLayout.X_AXIS);
 		botonesBox.add(comprarButton);
 		botonesBox.add(Box.createRigidArea(new Dimension(46, 12)));
 		botonesBox.add(probarButton);
-		
+
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 		botonesPanel.add(botonesBox);
-		
+
 		centroPanel.add(tablaBox, BorderLayout.CENTER);
-		
+
 		getContentPane().add(northPanel, BorderLayout.NORTH);
 		getContentPane().add(centroPanel, BorderLayout.CENTER);		
 		getContentPane().add(botonesPanel, BorderLayout.SOUTH);
 	}
-	
+
 	private void setData() {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);
@@ -180,9 +150,9 @@ public class EscogerCoche2 extends JFrame{
 		modelo.addColumn("Precio");
 		modelo.addColumn("Motor diesel");
 		modelo.addColumn("Kilometros");
-		
+
 		GestorBD bd = new GestorBD();
-		ResultSet rs = bd.rellenarTablaCoches();
+		ResultSet rs = bd.rellenarTablaCoches2();
 
 		// Bucle para cada resultado en la consulta
 		try {
@@ -210,18 +180,49 @@ public class EscogerCoche2 extends JFrame{
 		bd.desconectar();
 	}
 
-	private void crearVenta(Cliente c, Trabajador t, Coche ch) {
-		VentaCoche vc = new VentaCoche(null, ch, ch.getPrecio(), false, false, false, false, false);
+	private void confirmarVenta(Cliente c, Trabajador t, Coche2 ch) {
+		String[] opciones = {"Sí, comprar el coche", "No, cambiar"};
+
+		String confirmacion ="<html><body><center>El precio total del coche es de: "  + ch.getPrecio() + "€"+ "</center></body></html>";
+		int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+		switch (respuesta) {
+		case 0:
+			crearVenta2(c, t, ch);
+			break;
+		case 1:
+			JOptionPane.showMessageDialog(null, "Seleccione el coche que desea comprar");
+		default:
+			break;
+		}	
+	}
+
+	private void crearVenta2(Cliente c, Trabajador t, Coche2 ch) {
+		Venta2 v = new Venta2(null, ch, ch.getPrecio(), ch.getKilometros());
 		GestorBD bd = new GestorBD();
 
 		if (c == null) {
-			vc.setComprador(t);
+			v.setComprador(t);
 		} else {
-			vc.setComprador(t);
+			v.setComprador(c);
 		}
-		bd.venderCoche(vc);
+		bd.vender2(v);
 
 		bd.desconectar();		
+	}
+
+	private void volver(Cliente c, Trabajador t) {
+		if (t == null) {
+			VistaCliente.abrirVistaCliente(c);
+		} else {
+			if (t.isAdmin()) {
+				VistaAdministrador.abrirVistaAdministrador(t);
+				dispose();
+			} else {
+				VistaTrabajador.abrirVistaTrabajador(t);
+				dispose();
+			}
+		}
 	}
 
 	public static void abrirEscogerCoche2(Cliente c, Trabajador t) {
@@ -229,12 +230,5 @@ public class EscogerCoche2 extends JFrame{
 		escogerCoche.setVisible(true);
 		escogerCoche.setSize(550,420);
 		escogerCoche.setLocationRelativeTo(null);
-	}
-	
-	public static void main(String[] args) {
-		Cliente c = new Cliente();
-		c.setdNI("71708119F");
-		Trabajador t = null;
-		EscogerCoche2.abrirEscogerCoche2(c, t);
 	}
 }

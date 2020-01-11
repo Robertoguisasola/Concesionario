@@ -260,11 +260,10 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					TablaVentasCoches2.abrirTablaVentasCoches2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}
-				TablaVentasCoches.abrirTablaVentasCoches(t);
-				dispose();				
 			}
 		});
 		ventasCochesMenu.add(ventasCVerItem);
@@ -288,6 +287,8 @@ public class VistaAdministrador extends JFrame{
 					break;
 				case 1:
 					EscogerCoche2.abrirEscogerCoche2(null, t);
+					dispose();
+					break;
 				default:
 					break;
 				}
@@ -312,6 +313,7 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					TablaVentasCoches2.abrirTablaVentasCoches2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}
@@ -351,6 +353,7 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					TablaVentasMotos2.abrirTablaVentasMotos2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}
@@ -378,6 +381,7 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					EscogerMoto2.abrirEscogerMoto2(null, t);
 					dispose();
+					break;
 				default:
 					break;
 				}
@@ -402,6 +406,7 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					TablaVentasMotos2.abrirTablaVentasMotos2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}
@@ -745,13 +750,40 @@ public class VistaAdministrador extends JFrame{
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
-					//TODO preguntar nuevos o de segunda mano
-					TablaVentasCoches.abrirTablaVentasCoches(t);
-					dispose();
+					String[] opciones1 = {"Nuevos", "Segunda mano"};
+
+					int respuesta1 = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones1, opciones1[0]);
+					switch (respuesta1) {
+					case 0:
+						TablaVentasCoches.abrirTablaVentasCoches(t);
+						dispose();
+						break;
+					case 1:
+						TablaVentasCoches2.abrirTablaVentasCoches2(t);
+						dispose();
+						break;
+					default:
+						break;
+					}
 					break;
 				case 1:
-					TablaCoches2.abrirTablaCoches2(t);
-					dispose();
+					String[] opciones2 = {"Nuevas", "Segunda mano"};
+
+					int respuesta2 = JOptionPane.showOptionDialog( null, "¿Qué ventas de motos deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones2, opciones2[0]);
+					switch (respuesta2) {
+					case 0:
+						TablaVentasMotos.abrirTablaVentasMotos(t);
+						dispose();
+						break;
+					case 1:
+						TablaVentasMotos2.abrirTablaVentasMotos2(t);
+						dispose();
+						break;
+					default:
+						break;
+					}
 				default:
 					break;
 				}				

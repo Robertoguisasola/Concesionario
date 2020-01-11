@@ -31,7 +31,7 @@ public class ContratarTrabajador extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -222,14 +222,14 @@ public class ContratarTrabajador extends JFrame{
 		sueldoField.setText(null);
 		adminCheckBox.setEnabled(false);
 	}
-	
+
 	private void contratar() {
 		try {
-			
+
 			if (comprobarVacios()) {
 				return;
 			}
-						
+
 			String fechaNacimientoString = fechaNacimientoField.getText();
 			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
 			String usuario = usuarioField.getText();
@@ -246,11 +246,11 @@ public class ContratarTrabajador extends JFrame{
 			GestorBD bd = new GestorBD();
 			bd.anadirNuevoTrabajador(t);
 			bd.desconectar();
-						
+
 			String[] opciones = {"Sí", "No"};
-			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea contratar a un nuevo trabajador?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea contratar a un nuevo trabajador?", "Contratar", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
-			
+
 			switch (respuesta) {
 			case 0:
 				limpiarCajas();
@@ -272,51 +272,51 @@ public class ContratarTrabajador extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private boolean comprobarVacios() {
 		if (usuarioField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un nombre de usuario");
 			return true;
 		}
-		
+
 		if (new String(passwordField.getPassword()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña");
 			return true;
 		}
-		
+
 		if (emailField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el email de contacto del trabajador");
 			return true;
 		}
-		
+
 		if (dniField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el DNI del trabajador");
 			return true;
 		}
-		
+
 		if (nombreField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el nombre del trabajador");
 			return true;
 		}
-		
+
 		if (apellidosField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca los apellidos");
 			return true;	
 		}
-		
+
 		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca la fecha de nacimiento");
 			return true;	
 		}
-		
+
 		if (sueldoField.getText().equals("") || sueldoField.getText().equals("0")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el sueldo del trabajador");
 			return true;	
 		}
-		
+
 		return false;
 	}
-	
+
 	public static void abrirContratarTrabajador(Trabajador t) {
 		ContratarTrabajador contratarTrabajador= new ContratarTrabajador(t);
 		contratarTrabajador.setVisible(true);
@@ -324,12 +324,4 @@ public class ContratarTrabajador extends JFrame{
 		contratarTrabajador.setLocationRelativeTo(null);
 		contratarTrabajador.setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		t.setAdmin(true);
-	
-		ContratarTrabajador.abrirContratarTrabajador(t);
-	}
 }
-

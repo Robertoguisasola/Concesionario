@@ -4,7 +4,7 @@ public class Moto2 extends Moto implements SegundaMano {
 
 	//TODO tttt hacer el test de moto2
 	private int kilometros;
-	
+
 	public Moto2(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio,
 			boolean estructuraProtectora, int kilometros) {
 		super(marca, modelo, color, caballos, numRuedas, nPlazas, precio, estructuraProtectora);
@@ -20,7 +20,7 @@ public class Moto2 extends Moto implements SegundaMano {
 		super(m.marca, m.modelo, m.color, m.caballos, m.numRuedas, m.nPlazas, m.precio, m.estructuraProtectora);
 		this.kilometros = m.kilometros;
 	}
-	
+
 	public int getKilometros() {
 		return kilometros;
 	}
@@ -28,7 +28,7 @@ public class Moto2 extends Moto implements SegundaMano {
 	@Override
 	public String toString() {
 		String estructura;
-		
+
 		if (estructuraProtectora) {
 			estructura = "con ";
 		} else {
@@ -41,7 +41,7 @@ public class Moto2 extends Moto implements SegundaMano {
 	public void numKilometros(int kilometros) {
 		this.kilometros = kilometros;
 	}
-	
+
 	public String venderMoto2() {
 		return marca + " " + modelo + " " + getColorString() + estructuraProtectoraString() + ", " + caballos + " cv y " + nPlazas + " plazas y " + kilometros + " kilómetros reales";
 	}

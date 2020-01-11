@@ -28,9 +28,7 @@ public class Login extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	//NO TOCAR
-
 	private JPanel formPanel;
 	private JLabel loginLabel;
 	private JTextField loginField;
@@ -74,7 +72,6 @@ public class Login extends JFrame {
 					iniciarSesion();
 				}
 			}
-
 		});
 
 		passwordBox = new Box(BoxLayout.X_AXIS);
@@ -104,6 +101,7 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
+
 		acceptButton = new JButton("Aceptar");
 		buttonsPanel.add(acceptButton);
 

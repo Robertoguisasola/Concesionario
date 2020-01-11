@@ -2,7 +2,7 @@ package model;
 
 public class Coche2 extends Coche implements SegundaMano{
 	//TODO tttt hacer test de coche2
-	
+
 	private int kilometros;
 
 	public Coche2(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio,
@@ -27,14 +27,14 @@ public class Coche2 extends Coche implements SegundaMano{
 
 	@Override
 	public String toString() {
-		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas, " + motorDieselString() + " y " + kilometros + " kilómetros reales";
+		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas," + motorDieselString() + " y " + kilometros + " kilómetros reales";
 	}
 
 	@Override
 	public void numKilometros(int kilometros) {
 		this.kilometros = kilometros;	
 	}
-	
+
 	public String venderCoche2() {
 		return marca + " " + modelo + " " + getColorString() + motorDieselString() + ", " + caballos + " cv y " + nPlazas + " plazas y " + kilometros + " kilómetros reales";
 	}

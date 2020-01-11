@@ -24,7 +24,7 @@ public class TablaCoches extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -49,7 +49,7 @@ public class TablaCoches extends JFrame {
 
 		eliminarButton = new JButton("Eliminar coche");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
 
@@ -83,13 +83,13 @@ public class TablaCoches extends JFrame {
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int diesel;
-						
+
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
 							diesel = 0;
 						} else {
 							diesel = 1;
 						}
-						
+
 						bd.eliminarCoche(marca, modeloc, color, caballos, plazas, precio, diesel);
 						bd.desconectar();
 						//TODO refrescar tabla
@@ -102,18 +102,12 @@ public class TablaCoches extends JFrame {
 				}
 			}
 		});
-		
+
 		atrasButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 
@@ -169,6 +163,16 @@ public class TablaCoches extends JFrame {
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaCoches(Trabajador t) {

@@ -24,7 +24,7 @@ public class TablaCoches2 extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//NO TOCAR
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -44,12 +44,12 @@ public class TablaCoches2 extends JFrame {
 		botonesPanel = new JPanel();
 		botonesPanel.setLayout(new GridBagLayout());
 
-		anadirButton = new JButton("Añadir coche");
+		anadirButton = new JButton("Añadir coche de segunda mano");
 		botonesPanel.add(anadirButton);
 
 		eliminarButton = new JButton("Eliminar coche");
 		botonesPanel.add(eliminarButton);
-		
+
 		atrasButton = new JButton("Atrás");
 		botonesPanel.add(atrasButton);
 
@@ -84,13 +84,13 @@ public class TablaCoches2 extends JFrame {
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int diesel;
 						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
-						
+
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
 							diesel = 0;
 						} else {
 							diesel = 1;
 						}
-						
+
 						bd.eliminarCoche2(marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
 						bd.desconectar();
 						//TODO refrescar tabla
@@ -103,18 +103,12 @@ public class TablaCoches2 extends JFrame {
 				}
 			}
 		});
-		
+
 		atrasButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 
@@ -171,6 +165,16 @@ public class TablaCoches2 extends JFrame {
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaCoches2(Trabajador t) {
