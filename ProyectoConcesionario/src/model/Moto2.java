@@ -2,6 +2,7 @@ package model;
 
 public class Moto2 extends Moto implements SegundaMano {
 
+	//TODO tttt hacer el test de moto2
 	private int kilometros;
 	
 	public Moto2(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio,
@@ -39,5 +40,9 @@ public class Moto2 extends Moto implements SegundaMano {
 	@Override
 	public void numKilometros(int kilometros) {
 		this.kilometros = kilometros;
+	}
+	
+	public String venderMoto2() {
+		return marca + " " + modelo + " " + getColorString() + estructuraProtectoraString() + ", " + caballos + " cv y " + nPlazas + " plazas y " + kilometros + " kilómetros reales";
 	}
 }

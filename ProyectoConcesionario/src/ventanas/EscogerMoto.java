@@ -58,7 +58,7 @@ public class EscogerMoto extends JFrame{
 		JPanel centroPanel = new JPanel();
 		centroPanel.setLayout(new BorderLayout());
 				
-		String frase = "<html><body><left>Busque el coche, seleccionelo en la tabla e indique si quiere probarlo o comprarlo</left></body></html>";
+		String frase = "<html><body><left>Busque la moto, seleccionela en la tabla e indique si quiere probarla o comprarla</left></body></html>";
 		
 		informacionLabel = new JLabel(frase);
 		northPanel.add(informacionLabel, BorderLayout.WEST);	
@@ -141,7 +141,7 @@ public class EscogerMoto extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO llevar a probar coche
+				// TODO llevar a probar moto
 				
 			}
 		});

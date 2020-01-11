@@ -26,16 +26,24 @@ public class Coche extends Vehiculo {
 	public void setMotorDiesel(boolean motorDiesel) {
 		this.motorDiesel = motorDiesel;
 	}
+	
+	protected String motorDieselString() {
+		String diesel;
+
+		if (motorDiesel) {
+			diesel = " con motor diesel";
+		} else {
+			diesel = " con motor de gasolina";
+		}
+		return diesel;
+	}
 
 	@Override
 	public String toString() {
-		String diesel;
-		
-		if (motorDiesel) {
-			diesel = "con motor diesel";
-		} else {
-			diesel = "con motor de gasolina";
-		}
-		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas, " + diesel;
+		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas," + motorDieselString();
+	}
+	
+	public String venderCoche() {
+		return marca + " " + modelo + " " + getColorString() + motorDieselString() + ", " + caballos + "cv y " + nPlazas + " plazas";
 	}
 }

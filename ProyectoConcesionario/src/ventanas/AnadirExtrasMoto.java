@@ -1,6 +1,5 @@
 package ventanas;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -18,20 +17,20 @@ import javax.swing.JPanel;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Coche;
+import model.Moto;
 import model.Trabajador;
-import model.VentaCoche;
+import model.VentaMoto;
 
-public class AnadirExtrasCoche extends JFrame{
-
+public class AnadirExtrasMoto extends JFrame{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JCheckBox techoPanoramicoCheck;
-	private JCheckBox traccionCheck;
-	private JCheckBox modoDeportivoCheck;
+	private JCheckBox escapeCheck;
+	private JCheckBox paramanosCheck;
+	private JCheckBox guardabarrosGrandeCheck;
 	private JCheckBox lucesLedCheck;
 	private JCheckBox automaticoCheck;
 	private JLabel infoCheck;
@@ -42,11 +41,11 @@ public class AnadirExtrasCoche extends JFrame{
 	private Box buttonsBox;
 	JPanel buttonsPanel;
 
-	public AnadirExtrasCoche(Cliente c, Trabajador t, Coche ch) {
+	public AnadirExtrasMoto(Cliente c, Trabajador t, Moto m) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Extras del coche");
+		setTitle("Extras de la moto");
 
-		String anadirExtra = "<html><body><center>Extras para el coche<br>Escoja los extras que desee para su coche</center></body></html>";
+		String anadirExtra = "<html><body><center>Extras para la moto<br>Escoja los extras que desee para su moto</center></body></html>";
 
 		informacionPanel = new JPanel();
 
@@ -61,18 +60,18 @@ public class AnadirExtrasCoche extends JFrame{
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridBagLayout());
 
-		techoPanoramicoCheck = new JCheckBox("Techo panorámico ");
-		traccionCheck = new JCheckBox("Tracción 4x4 ");		
-		modoDeportivoCheck = new JCheckBox("Modo deportivo ");
-		lucesLedCheck = new JCheckBox("Luces led ");
-		automaticoCheck = new JCheckBox("Automático ");
+		escapeCheck = new JCheckBox("Escape modificado");
+		paramanosCheck = new JCheckBox("Paramanos");		
+		guardabarrosGrandeCheck= new JCheckBox("Guardabarros grande");
+		lucesLedCheck = new JCheckBox("Luces led");
+		automaticoCheck = new JCheckBox("Automático");
 
 		grupoPanel.add(Box.createRigidArea(new Dimension(180,30)));
-		grupoPanel.add(techoPanoramicoCheck);
+		grupoPanel.add(escapeCheck);
 		grupoPanel.add(Box.createRigidArea(new Dimension(0,10)));
-		grupoPanel.add(traccionCheck);
+		grupoPanel.add(paramanosCheck);
 		grupoPanel.add(Box.createRigidArea(new Dimension(0,10)));
-		grupoPanel.add(modoDeportivoCheck);
+		grupoPanel.add(guardabarrosGrandeCheck);
 		grupoPanel.add(Box.createRigidArea(new Dimension(0,10)));
 		grupoPanel.add(lucesLedCheck);
 		grupoPanel.add(Box.createRigidArea(new Dimension(0,10)));
@@ -81,7 +80,7 @@ public class AnadirExtrasCoche extends JFrame{
 		acceptButton = new JButton("Aceptar");
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				confirmarVenta(c,t,ch);
+				confirmarVenta(c,t,m);
 				volver(c, t);
 			}
 		});    
@@ -106,17 +105,17 @@ public class AnadirExtrasCoche extends JFrame{
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 	}
 
-	private void confirmarVenta(Cliente c, Trabajador t, Coche ch) {
-		int precio = calculatePrecio(ch);
+	private void confirmarVenta(Cliente c, Trabajador t, Moto m) {
+		int precio = calculatePrecio(m);
 
-		String[] opciones = {"Sí, comprar el coche", "No, cambiar"};
+		String[] opciones = {"Sí, comprar la moto", "No, cambiar"};
 
-		String confirmacion = confirmacion(ch) + "El precio total del coche es de: "  + precio + "€"+ "</center></body></html>";
+		String confirmacion = confirmacion(m) + "El precio total de la moto es de: "  + precio + "€"+ "</center></body></html>";
 		int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		switch (respuesta) {
 		case 0:
-			crearVenta(c, t, ch, precio);
+			crearVenta(c, t, m, precio);
 			break;
 		case 1:
 			JOptionPane.showMessageDialog(null, "Modifique los extras. En caso de querer cambiar el coche pulse cancelar");
@@ -125,43 +124,43 @@ public class AnadirExtrasCoche extends JFrame{
 		}	
 	}
 
-	private void crearVenta(Cliente c, Trabajador t, Coche ch, int precio) {
-		VentaCoche vc = new VentaCoche(null, ch, precio, false, false, false, false, false);
+	private void crearVenta(Cliente c, Trabajador t, Moto m, int precio) {
+		VentaMoto vm = new VentaMoto(null, m, precio, false, false, false, false, false);
 		GestorBD bd = new GestorBD();
 
 		if (c == null) {
-			vc.setComprador(t);
+			vm.setComprador(t);
 		} else {
-			vc.setComprador(c);
+			vm.setComprador(c);
 		}
 
 		if (automaticoCheck.isSelected()) {
-			vc.setAutomatico(true);
+			vm.setAutomatico(true);
 		}
 
 		if (lucesLedCheck.isSelected()) {
-			vc.setLucesLed(true);
+			vm.setLucesLed(true);
 		}
 
-		if (techoPanoramicoCheck.isSelected()) {
-			vc.setTechoPanoramico(true);
+		if (escapeCheck.isSelected()) {
+			vm.setEscape(true);
 		}
 
-		if (traccionCheck.isSelected()) {
-			vc.setTraccion4x4(true);
+		if (paramanosCheck.isSelected()) {
+			vm.setParamanos(true);
 		}
 
-		if (modoDeportivoCheck.isSelected()) {
-			vc.setModoDeportivo(true);
+		if (guardabarrosGrandeCheck.isSelected()) {
+			vm.setGuardabarrosGrande(true);
 		}
 
-		bd.venderCoche(vc);
+		bd.venderMoto(vm);
 
 		bd.desconectar();
 	}
 
-	private int calculatePrecio(Coche ch) {
-		int precio = ch.getPrecio();
+	private int calculatePrecio(Moto m) {
+		int precio = m.getPrecio();
 
 		if (automaticoCheck.isSelected()) {
 			precio += 1500; 
@@ -171,25 +170,25 @@ public class AnadirExtrasCoche extends JFrame{
 			precio += 1000;
 		}
 
-		if (techoPanoramicoCheck.isSelected()) {
-			precio += 1700;
+		if (escapeCheck.isSelected()) {
+			precio += 2000;
 		}
 
-		if (traccionCheck.isSelected()) {
-			precio += 3500;
+		if (paramanosCheck.isSelected()) {
+			precio += 500;
 		}
 
-		if (modoDeportivoCheck.isSelected()) {
+		if (guardabarrosGrandeCheck.isSelected()) {
 			precio += 1500;
 		}
 
 		return precio;
 	}
 
-	private String confirmacion(Coche ch) {
+	private String confirmacion(Moto m) {
 		String confirmacion = "<html><body><center>";
 		if (oneSelected()) {
-			confirmacion += "Va a comprar un " + ch.venderCoche() + " con las siguientes características: <ul>";
+			confirmacion += "Va a comprar una " + m.venderMoto() + " con las siguientes características: <ul>";
 		} else {
 			String[] opciones = {"No añadir extras", "Añadir extras"};
 
@@ -197,10 +196,10 @@ public class AnadirExtrasCoche extends JFrame{
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			switch (respuesta) {
 			case 0:
-				confirmacion += "Va a comprar un " + ch.venderCoche() + " manual, con falos halógenos y sin traccion 4X4 ni modo deportivo ni techo panorámico</center></body></html>";
+				confirmacion += "Va a comprar una " + m.venderMoto() + " manual, con falos halógenos y sin modificar el escape ni paramanos ni guardabarros grande</center></body></html>";
 				return confirmacion;
 			case 1:
-				JOptionPane.showMessageDialog(null, "Por favor, seleccione los extras que desea añadir al coche");
+				JOptionPane.showMessageDialog(null, "Por favor, seleccione los extras que desea añadir a la moto");
 				break;
 			default:
 				break;
@@ -219,22 +218,22 @@ public class AnadirExtrasCoche extends JFrame{
 			confirmacion += "<li>Faros halógenos</li>";
 		}
 
-		if (techoPanoramicoCheck.isSelected()) {
-			confirmacion += "<li>Techo panorámico</li>";
+		if (escapeCheck.isSelected()) {
+			confirmacion += "<li>Escape modificado</li>";
 		} else {
-			confirmacion += "<li>Techo normal</li>";
+			confirmacion += "<li>Escape normal</li>";
 		}
 
-		if (traccionCheck.isSelected()) {
-			confirmacion += "<li>Tracción 4X4</li>";
+		if (paramanosCheck.isSelected()) {
+			confirmacion += "<li>Con paramanos</li>";
 		} else {
-			confirmacion += "<li>Tracción 4X2</li>";
+			confirmacion += "<li>Sin paramanos</li>";
 		}
 
-		if (modoDeportivoCheck.isSelected()) {
-			confirmacion += "<li>Modo deportivo</li>";
+		if (guardabarrosGrandeCheck.isSelected()) {
+			confirmacion += "<li>Guardabarros grande</li>";
 		} else {
-			confirmacion += "<li>Sin modo deportivo</li>";
+			confirmacion += "<li>Guardabarros normal</li>";
 		}
 
 		confirmacion += "</ul>";
@@ -244,7 +243,7 @@ public class AnadirExtrasCoche extends JFrame{
 
 	private boolean oneSelected() {
 
-		if (automaticoCheck.isSelected() || lucesLedCheck.isSelected() || techoPanoramicoCheck.isSelected() || traccionCheck.isSelected() || modoDeportivoCheck.isSelected()) {
+		if (automaticoCheck.isSelected() || lucesLedCheck.isSelected() || escapeCheck.isSelected() || guardabarrosGrandeCheck.isSelected() || paramanosCheck.isSelected()) {
 			return true;
 		} else {
 			return false;
@@ -265,8 +264,8 @@ public class AnadirExtrasCoche extends JFrame{
 		}
 	}
 
-	public static void abriranadirExtrasCoche(Cliente c, Trabajador t, Coche ch) {
-		AnadirExtrasCoche anadirExtras = new AnadirExtrasCoche(c, t, ch);
+	public static void abriranadirExtrasMoto(Cliente c, Trabajador t, Moto m) {
+		AnadirExtrasMoto anadirExtras = new AnadirExtrasMoto(c, t, m);
 		anadirExtras.setVisible(true);
 		anadirExtras.setSize(480,360);
 		anadirExtras.setLocationRelativeTo(null);

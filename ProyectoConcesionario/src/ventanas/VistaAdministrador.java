@@ -809,6 +809,7 @@ public class VistaAdministrador extends JFrame{
 				case 1:
 					TablaMotos2.abrirTablaMotos2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}

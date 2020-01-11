@@ -117,7 +117,7 @@ public class EscogerCoche extends JFrame{
 					
 					Coche ch = new Coche(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel);
 					
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Desea añadir extras a su coche?", "Extras", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 				
 				switch (respuesta) {
@@ -211,8 +211,9 @@ public class EscogerCoche extends JFrame{
 		if (c == null) {
 			vc.setComprador(t);
 		} else {
-			vc.setComprador(t);
+			vc.setComprador(c);
 		}
+		
 		bd.venderCoche(vc);
 
 		bd.desconectar();		

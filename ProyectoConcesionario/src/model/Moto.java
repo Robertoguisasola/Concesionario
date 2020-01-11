@@ -2,6 +2,7 @@ package model;
 
 public class Moto extends Vehiculo {
 	
+	//TODO tttt hacer test de moto
 	protected boolean estructuraProtectora;
 
 	public Moto(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio, boolean estructuraProtectora) {
@@ -26,17 +27,26 @@ public class Moto extends Vehiculo {
 	public void setEstructuraProtectora(boolean estructuraProtectora) {
 		this.estructuraProtectora = estructuraProtectora;
 	}
+	
+	protected String estructuraProtectoraString() {
+	String estructura;
+		
+		if (estructuraProtectora) {
+			estructura = " con estructura protectora";
+		} else {
+			estructura = " sin estructura protectora";
+		}
+		
+		return estructura;
+	}
 
 	@Override
 	public String toString() {
-		String estructura;
-		
-		if (estructuraProtectora) {
-			estructura = "con ";
-		} else {
-			estructura = "sin ";
-		}
-		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas, " + estructura + "estructura protectora";
+	
+		return marca + " " + modelo + " " + getColorString() + " tiene " + caballos + "cv y " + nPlazas + " plazas," + estructuraProtectoraString();
 	}
 
+	public String venderMoto() {
+		return marca + " " + modelo + " " + getColorString() + estructuraProtectoraString() + ", " + caballos + "cv y " + nPlazas + " plazas";
+	}
 }

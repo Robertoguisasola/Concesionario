@@ -27,6 +27,7 @@ import model.Moto;
 import model.Moto2;
 import model.Trabajador;
 import model.VentaCoche;
+import model.VentaMoto;
 
 public class GestorBD {
 
@@ -1137,6 +1138,113 @@ public class GestorBD {
 		}
 	}
 
+	public void venderCoche(VentaCoche vc) {
+		String sql  = "INSERT INTO ventacoche (dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, vc.getComprador().getdNI());
+			stmt.setString(2, vc.getVehiculo().toString());
+			stmt.setInt(3, vc.getPrecio());
+			stmt.setString(4, vc.getMatricula());
+
+			if (vc.isAutomatico()) {
+				stmt.setInt(5, 1);
+			} else {
+				stmt.setInt(5, 0);
+			}
+
+			if (vc.isLucesLed()) {
+				stmt.setInt(6, 1);
+			} else {
+				stmt.setInt(6, 0);
+			}
+
+			if (vc.isTechoPanoramico()) {
+				stmt.setInt(7, 1);
+			} else {
+				stmt.setInt(7, 0);
+			}
+
+			if (vc.isTraccion4x4()) {
+				stmt.setInt(8, 1);
+			} else {
+				stmt.setInt(8, 0);
+			}
+
+			if (vc.isModoDeportivo()){
+				stmt.setInt(9, 1);
+			} else {
+				stmt.setInt(9, 0);
+			}
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " ha sido añadida", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " no ha podido ser añadida", e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+	public void venderMoto(VentaMoto vm) {
+		String sql  = "INSERT INTO ventamoto (dNI, moto, precio, matricula, isAutomatico, isLucesLed, isEscape, isParamanos, isGuardabarrosGrande)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, vm.getComprador().getdNI());
+			stmt.setString(2, vm.getVehiculo().toString());
+			stmt.setInt(3, vm.getPrecio());
+			stmt.setString(4, vm.getMatricula());
+
+			if (vm.isAutomatico()) {
+				stmt.setInt(5, 1);
+			} else {
+				stmt.setInt(5, 0);
+			}
+
+			if (vm.isLucesLed()) {
+				stmt.setInt(6, 1);
+			} else {
+				stmt.setInt(6, 0);
+			}
+
+			if (vm.isEscape()) {
+				stmt.setInt(7, 1);
+			} else {
+				stmt.setInt(7, 0);
+			}
+
+			if (vm.isParamanos()) {
+				stmt.setInt(8, 1);
+			} else {
+				stmt.setInt(8, 0);
+			}
+
+			if (vm.isGuardabarrosGrande()){
+				stmt.setInt(9, 1);
+			} else {
+				stmt.setInt(9, 0);
+			}
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, "La compra del cliente con DNI " + vm.getComprador().getdNI() + " de la moto " + vm.getVehiculo().toString() + " por un valor de " + vm.getPrecio() + " ha sido añadida", null);
+		} catch (SQLException e) {
+			log(Level.SEVERE, "La compra del cliente con DNI " + vm.getComprador().getdNI() + " de la moto " + vm.getVehiculo().toString() + " por un valor de " + vm.getPrecio() + " no ha podido ser añadida", e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+
 	public ResultSet rellenarTablaTrabajadores(){
 		String sql = "SELECT nombre, apellidos, dNI, email, login, fechaNacimiento, sueldo, isAdmin FROM trabajador";
 		PreparedStatement stmt;
@@ -1405,60 +1513,27 @@ public class GestorBD {
 		}
 	}
 
-	//TODO aaaaa modificar para q reciba venta
-	public void venderCoche(VentaCoche vc) {
-		String sql  = "INSERT INTO ventacoche (dNI, coche, precio, matricula, isAutomatico, isLucesLed, isTechoPanoramico, isTraccion4x4, isModoDeportivo)"
-				+ " VALUES (?,?,?,?,?,?,?,?,?)";
+	public void eliminarVentaMoto(String matricula) {
+		String sqlBorrar= "DELETE FROM ventamoto WHERE matricula = ?";
 
-		PreparedStatement stmt;
+		PreparedStatement stmtBorrar;
 
-		try {			
-			stmt = conn.prepareStatement(sql);
+		try {
+			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
-			stmt.setString(1, vc.getComprador().getdNI());
-			stmt.setString(2, vc.getVehiculo().toString());
-			stmt.setInt(3, vc.getPrecio());
-			stmt.setString(4, vc.getMatricula());
+			stmtBorrar.setString(1, matricula);
 
-			if (vc.isAutomatico()) {
-				stmt.setInt(5, 1);
-			} else {
-				stmt.setInt(5, 0);
-			}
 
-			if (vc.isLucesLed()) {
-				stmt.setInt(6, 1);
-			} else {
-				stmt.setInt(6, 0);
-			}
+			stmtBorrar.executeUpdate();
 
-			if (vc.isTechoPanoramico()) {
-				stmt.setInt(7, 1);
-			} else {
-				stmt.setInt(7, 0);
-			}
-
-			if (vc.isTraccion4x4()) {
-				stmt.setInt(8, 1);
-			} else {
-				stmt.setInt(8, 0);
-			}
-
-			if (vc.isModoDeportivo()){
-				stmt.setInt(9, 1);
-			} else {
-				stmt.setInt(9, 0);
-			}
-
-			stmt.executeUpdate();
-
-			log(Level.INFO, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " ha sido añadida", null);
-		} catch (SQLException e) {
-			log(Level.SEVERE, "La compra del cliente con DNI " + vc.getComprador().getdNI() + " del coche " + vc.getVehiculo().toString() + " por un valor de " + vc.getPrecio() + " no ha podido ser añadida", e );
-			setLastError(e);
+			log(Level.INFO, "La venta de la moto con matrícula " + matricula+ " ha sido borrada correctamente", null);
+		} catch (SQLException e) { 
+			log(Level.SEVERE, "No ha sido posible borrar la venta de la moto con matrícula "  + matricula, e);
 			e.printStackTrace();
 		}
 	}
+
+
 
 	// Método público para asignar un logger externo
 	public static void setLogger( Logger logger ) {

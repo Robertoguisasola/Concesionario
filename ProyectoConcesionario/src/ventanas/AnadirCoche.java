@@ -205,7 +205,6 @@ public class AnadirCoche extends JFrame {
 			} else {
 				VistaTrabajador.abrirVistaTrabajador(t);
 				dispose();
-			
 		}
 	}
 
@@ -215,6 +214,7 @@ public class AnadirCoche extends JFrame {
 		caballosField.setText(null);
 		nRuedasField.setText(null);
 		nPlazasField.setText(null);
+		precioField.setText(null);
 	}
 	
 	private void anadirCoche(Trabajador t) {
@@ -223,14 +223,27 @@ public class AnadirCoche extends JFrame {
 				return;
 			}
 						
-			String marca = marcaField.getText();
-			String modelo = new String(modeloField.getText());
-			Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
-			int caballos = Integer.parseInt(caballosField.getText());
-			int nRuedas = Integer.parseInt(nRuedasField.getText());
-			int nPlazas = Integer.parseInt(nPlazasField.getText());
-			int precio = Integer.parseInt(precioField.getText());
-			boolean motorDiesel = motorDieselCheck.isSelected();
+			String marca = null;
+			String modelo = null;
+			Colores color = null;
+			int caballos = 0;
+			int nRuedas = 4;
+			int nPlazas = 0;
+			int precio = 0;
+			boolean motorDiesel = false;
+			try {
+				marca = marcaField.getText();
+				modelo = new String(modeloField.getText());
+				color = Colores.valueOf(colorCombo.getSelectedItem().toString());
+				caballos = Integer.parseInt(caballosField.getText());
+				nRuedas = Integer.parseInt(nRuedasField.getText());
+				nPlazas = Integer.parseInt(nPlazasField.getText());
+				precio = Integer.parseInt(precioField.getText());
+				motorDiesel = motorDieselCheck.isSelected();
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Por favor, introduzca los números correctamente");
+				e.printStackTrace();
+			}
 			
 			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, precio, motorDiesel);
 			
@@ -257,12 +270,12 @@ public class AnadirCoche extends JFrame {
 	
 	private boolean comprobarVacios() {
 		if (marcaField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca una marca para el coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca la marca del coche");
 			return true;
 		}
 		
 		if (modeloField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca un modelo de coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca el modelo del coche");
 			return true;
 		}
 		
@@ -280,7 +293,6 @@ public class AnadirCoche extends JFrame {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca las plazas del coche");
 			return true;
 		}
-		
 		
 		if (precioField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el precio del coche");

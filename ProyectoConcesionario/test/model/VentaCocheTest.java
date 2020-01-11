@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class VentaCocheTest {
 	
-	//TODO tttt meter coches de 2ª mano, motos...
 	private Cliente c;
 	private Coche ch;
 	private Date fecha = new Date(0);
@@ -23,6 +22,7 @@ public class VentaCocheTest {
 	public void setUp() throws Exception {
 		c = new Cliente("roberto", "1234", "robertomargui@yahoo.es", "71708119F", "Roberto", "Guisasola", fecha, 0000);
 		ch = new Coche("Volvo", "GG", Colores.VERDE, 200, 4, 5, 0, true);
+		//TODO zzzz revisar xq peta, creo que es la matrícula
 		v = new VentaCoche(c, ch, 89000, "8219GZM", false, false, false, true, false);
 		prueba = new VentaCoche(v);
 		empty = new VentaCoche();

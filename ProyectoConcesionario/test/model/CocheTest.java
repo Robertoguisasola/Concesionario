@@ -13,7 +13,7 @@ public class CocheTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		c = new Coche("Volvo", "GG", Colores.VERDE, 200, 4, 5, 0, true);
+		c = new Coche("Volvo", "XC90", Colores.AZUL, 200, 4, 5, 0, true);
 		prueba = new Coche(c);
 		empty = new Coche();
 	}
@@ -33,6 +33,10 @@ public class CocheTest {
 	
 	@Test
 	public void testToString() {
-		assertEquals("Volvo GG VERDE, 200cv", c.toString());
+		assertEquals("Volvo XC90 azul tiene 200cv y 5 plazas, con motor diesel", c.toString());
+	}
+	@Test
+	public void venderCoche() {
+		assertEquals("Volvo XC90 azul con motor diesel, 200cv y 5 plazas", c.venderCoche());
 	}
 }

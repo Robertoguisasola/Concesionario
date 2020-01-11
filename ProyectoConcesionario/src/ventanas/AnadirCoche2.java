@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import dataBase.GestorBD;
-import model.Coche;
+import model.Coche2;
 import model.Colores;
 import model.Trabajador;
 
@@ -87,7 +87,7 @@ public class AnadirCoche2 extends JFrame {
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridBagLayout());
 		
-		marcaLabel = new JLabel("Marca: ");
+		marcaLabel = new JLabel("Marca:");
 		marcaField = new JTextField();
 			
 		marcaBox = new Box(BoxLayout.X_AXIS);
@@ -95,7 +95,7 @@ public class AnadirCoche2 extends JFrame {
 		marcaBox.add(Box.createRigidArea(new Dimension(40, 12)));
 		marcaBox.add(marcaField);
 		
-		modeloLabel = new JLabel("Modelo: ");
+		modeloLabel = new JLabel("Modelo:");
 		modeloField = new JTextField();
 		
 		modeloBox = new Box(BoxLayout.X_AXIS);
@@ -103,7 +103,7 @@ public class AnadirCoche2 extends JFrame {
 		modeloBox.add(Box.createRigidArea(new Dimension(33, 12)));
 		modeloBox.add(modeloField);
 		
-		colorLabel = new JLabel("Color: ");
+		colorLabel = new JLabel("Color:");
 		colorCombo = new JComboBox<model.Colores>();
 		for(model.Colores color : model.Colores.values())
 			colorCombo.addItem(color);
@@ -113,7 +113,7 @@ public class AnadirCoche2 extends JFrame {
 		colorBox.add(Box.createRigidArea(new Dimension(46, 12)));
 		colorBox.add(colorCombo);
 		
-		caballosLabel = new JLabel("Caballos: ");
+		caballosLabel = new JLabel("Caballos:");
 		caballosField = new JTextField();
 		
 		caballosBox = new Box(BoxLayout.X_AXIS);
@@ -121,7 +121,7 @@ public class AnadirCoche2 extends JFrame {
 		caballosBox.add(Box.createRigidArea(new Dimension(37, 12)));
 		caballosBox.add(caballosField);
 		
-		nRuedasLabel = new JLabel("Número de ruedas: ");
+		nRuedasLabel = new JLabel("Número de ruedas:");
 		nRuedasField = new JTextField();
 		nRuedasField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -137,7 +137,7 @@ public class AnadirCoche2 extends JFrame {
 		nRuedasBox.add(Box.createRigidArea(new Dimension(28, 12)));
 		nRuedasBox.add(nRuedasField);
 
-		nPlazasLabel = new JLabel("Número de plazas: ");
+		nPlazasLabel = new JLabel("Número de plazas:");
 		nPlazasField = new JTextField();
 
 		nPlazasBox = new Box(BoxLayout.X_AXIS);
@@ -145,7 +145,7 @@ public class AnadirCoche2 extends JFrame {
 		nPlazasBox.add(Box.createRigidArea(new Dimension(31, 12)));
 		nPlazasBox.add(nPlazasField);
 
-		precioLabel = new JLabel("Precio");
+		precioLabel = new JLabel("Precio:");
 		precioField = new JTextField();
 
 		precioBox = new Box(BoxLayout.X_AXIS);
@@ -155,7 +155,7 @@ public class AnadirCoche2 extends JFrame {
 
 		motorDieselCheck = new JCheckBox("Motor diesel");
 		
-		kilometrosLabel = new JLabel("Kilómetros");
+		kilometrosLabel = new JLabel("Kilómetros:");
 		kilometrosField = new JTextField();
 
 		kilometrosBox = new Box(BoxLayout.X_AXIS);
@@ -186,10 +186,10 @@ public class AnadirCoche2 extends JFrame {
 
 		formPanel.add(formBox);
 		
-		agregarButton = new JButton("Añadir coche");
+		agregarButton = new JButton("Añadir coche de segunda mano");
 		agregarButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				anadirCoche(t);
+				anadirCoche2(t);
 			}
 		});
 		
@@ -218,7 +218,6 @@ public class AnadirCoche2 extends JFrame {
 			} else {
 				VistaTrabajador.abrirVistaTrabajador(t);
 				dispose();
-			
 		}
 	}
 
@@ -226,33 +225,50 @@ public class AnadirCoche2 extends JFrame {
 		marcaField.setText(null);
 		modeloField.setText(null);
 		caballosField.setText(null);
-		nRuedasField.setText(null);
+		nRuedasField.setText("4");
 		nPlazasField.setText(null);
+		precioField.setText(null);
+		kilometrosField.setText(null);
 	}
 	
-	private void anadirCoche(Trabajador t) {
+	private void anadirCoche2(Trabajador t) {
 		
 			if (comprobarVacios()) {
 				return;
 			}
 						
-			String marca = marcaField.getText();
-			String modelo = new String(modeloField.getText());
-			Colores color = Colores.valueOf(colorCombo.getSelectedItem().toString());
-			int caballos = Integer.parseInt(caballosField.getText());
-			int nRuedas = Integer.parseInt(nRuedasField.getText());
-			int nPlazas = Integer.parseInt(nPlazasField.getText());
-			int precio = Integer.parseInt(precioField.getText());
-			boolean motorDiesel = motorDieselCheck.isSelected();
+			String marca = null;
+			String modelo = null;
+			Colores color = null;
+			int caballos = 0;
+			int nRuedas = 4;
+			int nPlazas = 0;
+			int precio = 0;
+			boolean motorDiesel = false;
+			int kilometros = 0;
+			try {
+				marca = marcaField.getText();
+				modelo = new String(modeloField.getText());
+				color = Colores.valueOf(colorCombo.getSelectedItem().toString());
+				caballos = Integer.parseInt(caballosField.getText());
+				nRuedas = Integer.parseInt(nRuedasField.getText());
+				nPlazas = Integer.parseInt(nPlazasField.getText());
+				precio = Integer.parseInt(precioField.getText());
+				motorDiesel = motorDieselCheck.isSelected();
+				kilometros = Integer.parseInt(kilometrosField.getText());
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Por favor, introduzca los números correctamente");
+				e.printStackTrace();
+			}
 			
-			Coche c = new Coche(marca, modelo, color, caballos, nRuedas, nPlazas, precio, motorDiesel);
+			Coche2 c = new Coche2(marca, modelo, color, caballos, nRuedas, nPlazas, precio, motorDiesel, kilometros);
 			
 			GestorBD bd = new GestorBD();
-			bd.anadirNuevoCoche(c);
+			bd.anadirNuevoCoche2(c);
 			bd.desconectar();
 						
 			String[] opciones = {"Sí", "No"};
-			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo coche ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar otro nuevo coche de segunda mano?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 			
 			switch (respuesta) {
@@ -270,12 +286,12 @@ public class AnadirCoche2 extends JFrame {
 	
 	private boolean comprobarVacios() {
 		if (marcaField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca una marca para el coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca la marca del coche");
 			return true;
 		}
 		
 		if (modeloField.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca un modelo de coche");
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca el modelo del coche");
 			return true;
 		}
 		
@@ -294,9 +310,13 @@ public class AnadirCoche2 extends JFrame {
 			return true;
 		}
 		
-		
 		if (precioField.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el precio del coche");
+			return true;
+		}
+		
+		if (kilometrosField.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "Por favor, introduzca los kilómetros del coche");
 			return true;
 		}
 		
@@ -305,7 +325,7 @@ public class AnadirCoche2 extends JFrame {
 	
 	public static void abrirAnadirCoche2(Trabajador t) {
 		AnadirCoche2 anadirCoche2 = new AnadirCoche2(t);
-		anadirCoche2.setSize(480,360);
+		anadirCoche2.setSize(480,400);
 		anadirCoche2.setLocationRelativeTo(null);
 		anadirCoche2.setVisible(true);
 	}
