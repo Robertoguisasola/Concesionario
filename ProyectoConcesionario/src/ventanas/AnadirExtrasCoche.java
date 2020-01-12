@@ -82,6 +82,7 @@ public class AnadirExtrasCoche extends JFrame{
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				confirmarVenta(c,t,ch);
+				volver(c,t);
 			}
 		});    
 

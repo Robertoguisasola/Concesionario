@@ -195,8 +195,7 @@ public class ContratarTrabajador extends JFrame{
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VistaAdministrador.abrirVistaAdministrador(t);
-				dispose();
+				volver(t);
 			}
 		});
 
@@ -323,5 +322,15 @@ public class ContratarTrabajador extends JFrame{
 		contratarTrabajador.setSize(480,400);
 		contratarTrabajador.setLocationRelativeTo(null);
 		contratarTrabajador.setVisible(true);
+	}
+	
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 }

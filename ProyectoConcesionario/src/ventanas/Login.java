@@ -97,8 +97,7 @@ public class Login extends JFrame {
 		cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inicio.abrirInicio();
-				dispose();
+				volver();
 			}
 		});
 
@@ -156,5 +155,10 @@ public class Login extends JFrame {
 		login.setSize(480,360);
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
+	}
+	
+	private void volver() {
+		Inicio.abrirInicio();
+		dispose();
 	}
 }

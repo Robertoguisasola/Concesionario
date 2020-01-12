@@ -691,8 +691,7 @@ public class VistaAdministrador extends JFrame{
 		cerrarButton = new JButton("Cerrar sesión");
 		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login.abrirLogin();
-				dispose();
+				volver();
 			}
 		});
 
@@ -878,6 +877,11 @@ public class VistaAdministrador extends JFrame{
 		vistaAdministrador.setSize(480,450);
 		vistaAdministrador.setLocationRelativeTo(null);
 		vistaAdministrador.setVisible(true);
+	}
+	
+	private void volver() {
+		Login.abrirLogin();
+		dispose();
 	}
 
 	public static void main(String[] args) {

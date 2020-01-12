@@ -42,8 +42,7 @@ public class VistaCliente extends JFrame {
 		cerrarButton = new JButton("Cerrar sesión");
 		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login.abrirLogin();
-				dispose();
+				volver();
 			}
 		});
 
@@ -134,6 +133,11 @@ public class VistaCliente extends JFrame {
 		vistaCliente.setVisible(true);
 	}
 
+	private void volver() {
+		Login.abrirLogin();
+		dispose();
+	}
+	
 	public static void main(String[] args) {
 		Cliente c = new Cliente();
 
