@@ -1,3 +1,10 @@
-volvo;xc90;azul;160;4;5;89000;false
-bmw;x5;negro;200;4;5;75000;true
-renault;clio;blanco;150;4;5;32000;false
+Volvo;xc90;azul;160;4;5;89000;false
+BMW;x5;negro;200;4;5;75000;true
+Opel;Insignia;blanco;190;4;5;60000;false
+Fiat;500;rojo;150;4;4;50000;true
+Citroen;c4;negro;160;4;7;40000;true
+Opel;Combo;negro;170;4;7;60000;false
+Seat;Leon;rojo;155;4;5;35000;true;
+Renault;Scenic;verde;150;4;7;45000;true
+Seat;Ibiza;blanco;145;4;5;35000;false
+Audi;A5;blanco;160;4;5;60000;false
