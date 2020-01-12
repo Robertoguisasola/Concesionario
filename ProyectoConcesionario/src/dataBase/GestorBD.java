@@ -678,6 +678,7 @@ public class GestorBD {
 
 		ResultSet rs = null;
 
+		//TODO no coge todos los coches, solo el primero
 		try {
 			stmt = conn.prepareStatement(sql);
 
@@ -687,42 +688,43 @@ public class GestorBD {
 
 			f = new FileWriter("ficheros/ventasCochesExp.csv");
 
-			for (int i = 0;i<9;i++) {
-				if (i == 4) {
-					if (rs.getObject(i+1).equals(0)) {
-						f.write("NO;");
+			while (rs.next()){
+				for (int i = 0;i<9;i++) {
+					if (i == 4) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 5) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 6) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 7) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 8) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;\n");
+						} else {
+							f.write("SI;\n");
+						}
 					} else {
-						f.write("SI;");
+						f.write(rs.getObject(i+1) + ";");
 					}
-				} else if (i == 5) {
-					if (rs.getObject(i+1).equals(0)) {
-						f.write("NO;");
-					} else {
-						f.write("SI;");
-					}
-				} else if (i == 6) {
-					if (rs.getObject(i+1).equals(0)) {
-						f.write("NO;");
-					} else {
-						f.write("SI;");
-					}
-				} else if (i == 7) {
-					if (rs.getObject(i+1).equals(0)) {
-						f.write("NO;");
-					} else {
-						f.write("SI;");
-					}
-				} else if (i == 8) {
-					if (rs.getObject(i+1).equals(0)) {
-						f.write("NO;");
-					} else {
-						f.write("SI;");
-					}
-				} else {
-					f.write(rs.getObject(i+1) + ";");
 				}
 			}
-
 		} catch (IOException e2) {
 			log(Level.SEVERE, "Error al escribir en el fichero de exportar ventas de coches", e2);
 			e2.printStackTrace();
@@ -1565,34 +1567,25 @@ public class GestorBD {
 	}
 
 	//Método para borrar un vehículo de la bbdd en función de la tabla y otros valores
-	public void eliminarCoche(String marca, String modelo, String color, int caballos, int plazas, int precio, int diesel) {
-		String sqlBorrar= "DELETE FROM coche WHERE marca = ? AND modelo = ? AND color = ? "
-				+ "AND caballos = ? AND nPlazas = ? AND motorDiesel = ?";
-
-		PreparedStatement stmtBorrar;
-
-		try {
-			stmtBorrar = conn.prepareStatement(sqlBorrar);
-
-			stmtBorrar.setString(1, marca);
-			stmtBorrar.setString(2, marca);
-			stmtBorrar.setString(3, color);
-			stmtBorrar.setInt(4, caballos);
-			stmtBorrar.setInt(5, plazas);
-			stmtBorrar.setInt(6, diesel);
-
-			stmtBorrar.executeUpdate();
-
-			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrado correctamente", null);
-		} catch (SQLException e) { 
-			log(Level.SEVERE, "No ha sido posible borrar el "  + marca + " " + modelo + " de color " + color.toLowerCase() , e);
-			e.printStackTrace();
+	public void eliminarVehiculo(String tabla, String marca, String modelo, String color, int caballos, int plazas, int precio, int distincion, int kilometros) {	
+		String sqlBorrar= "DELETE FROM " + tabla + " WHERE marca = ? AND modelo = ? AND color = ? "
+				+ "AND caballos = ? AND nPlazas = ? ";
+		switch (tabla) {
+		case "coche":
+			sqlBorrar += "AND motorDiesel = ?";
+			break;
+		case "moto":
+			sqlBorrar += "AND estructuraProtectora = ?";
+			break;
+		case "coche2":
+			sqlBorrar += "AND motorDiesel = ? AND kilometros = ?";
+			break;
+		case "moto2":
+			sqlBorrar += "AND estructuraProtectora = ? AND kilometros = ?";
+			break;
+		default:
+			break;
 		}
-	}
-
-	public void eliminarCoche2(String marca, String modelo, String color, int caballos, int plazas, int precio, int diesel, int kilometros) {
-		String sqlBorrar= "DELETE FROM coche WHERE marca = ? AND modelo = ? AND color = ? "
-				+ "AND caballos = ? AND nPlazas = ? AND motorDiesel = ? AND kilometros = ?";
 
 		PreparedStatement stmtBorrar;
 
@@ -1600,68 +1593,21 @@ public class GestorBD {
 			stmtBorrar = conn.prepareStatement(sqlBorrar);
 
 			stmtBorrar.setString(1, marca);
-			stmtBorrar.setString(2, marca);
+			stmtBorrar.setString(2, modelo);
 			stmtBorrar.setString(3, color);
 			stmtBorrar.setInt(4, caballos);
 			stmtBorrar.setInt(5, plazas);
-			stmtBorrar.setInt(6, diesel);
-			stmtBorrar.setInt(7, kilometros);
+			stmtBorrar.setInt(6, distincion);
 
-			stmtBorrar.executeUpdate();
-
-			log(Level.INFO, "El " + marca + " " + modelo + " de color " + color.toLowerCase() + " con " + kilometros + " kilometros ha sido borrado correctamente", null);
-		} catch (SQLException e) { 
-			log(Level.SEVERE, "No ha sido posible borrar el "  + marca + " " + modelo + " de color " + color.toLowerCase() +  " con " + kilometros + " kilometros", e);
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminarMoto(String marca, String modelo, String color, int caballos, int plazas, int precio, int estructura) {
-		String sqlBorrar= "DELETE FROM moto WHERE marca = ? AND modelo = ? AND color = ? "
-				+ "AND caballos = ? AND nPlazas = ? AND estructuraProtectora = ?";
-
-		PreparedStatement stmtBorrar;
-
-		try {
-			stmtBorrar = conn.prepareStatement(sqlBorrar);
-
-			stmtBorrar.setString(1, marca);
-			stmtBorrar.setString(2, marca);
-			stmtBorrar.setString(3, color);
-			stmtBorrar.setInt(4, caballos);
-			stmtBorrar.setInt(5, plazas);
-			stmtBorrar.setInt(6, estructura);
+			if (tabla.equals("coche2") || tabla.equals("moto2")) {
+				stmtBorrar.setInt(7, kilometros);
+			}
 
 			stmtBorrar.executeUpdate();
 
 			log(Level.INFO, "La " + marca + " " + modelo + " de color " + color.toLowerCase() + " ha sido borrada correctamente", null);
 		} catch (SQLException e) { 
 			log(Level.SEVERE, "No ha sido posible borrar la "  + marca + " " + modelo + " de color " + color.toLowerCase() , e);
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminarMoto2(String marca, String modelo, String color, int caballos, int plazas, int precio, int estructura, int kilometros) {
-		String sqlBorrar= "DELETE FROM moto WHERE marca = ? AND modelo = ? AND color = ? "
-				+ "AND caballos = ? AND nPlazas = ? AND estructuraProtectora = ? AND kilometros = ?";
-
-		PreparedStatement stmtBorrar;
-
-		try {
-			stmtBorrar = conn.prepareStatement(sqlBorrar);
-
-			stmtBorrar.setString(1, marca);
-			stmtBorrar.setString(2, marca);
-			stmtBorrar.setString(3, color);
-			stmtBorrar.setInt(4, caballos);
-			stmtBorrar.setInt(5, plazas);
-			stmtBorrar.setInt(6, estructura);
-
-			stmtBorrar.executeUpdate();
-
-			log(Level.INFO, "La " + marca + " " + modelo + " de color " + color.toLowerCase() + "con " + kilometros + " kilometros ha sido borrada correctamente", null);
-		} catch (SQLException e) { 
-			log(Level.SEVERE, "No ha sido posible borrar la "  + marca + " " + modelo + " de color " + color.toLowerCase() + "con " + kilometros + " kilometros" , e);
 			e.printStackTrace();
 		}
 	}

@@ -12,5 +12,7 @@ public class Prueba {
 	private Date fechaInicio;
 	private Date fechaFinPermiso;
 	public static SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+	String ciudad;
 
+	
 }
