@@ -34,6 +34,4 @@ public class Cliente extends Persona {
 	public String toString() {
 		return nombre + " " + apellidos + ", con DNI " + dNI + " y número de tarjeta " + numTarjeta;
 	}
-
-
 }

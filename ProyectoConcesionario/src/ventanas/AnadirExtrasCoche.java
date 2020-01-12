@@ -40,7 +40,7 @@ public class AnadirExtrasCoche extends JFrame{
 	private JButton acceptButton;
 	private JButton cancelButton;
 	private Box buttonsBox;
-	JPanel buttonsPanel;
+	private JPanel buttonsPanel;
 
 	public AnadirExtrasCoche(Cliente c, Trabajador t, Coche ch) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,7 +82,6 @@ public class AnadirExtrasCoche extends JFrame{
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				confirmarVenta(c,t,ch);
-				volver(c,t);
 			}
 		});    
 

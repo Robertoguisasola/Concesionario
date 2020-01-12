@@ -25,6 +25,7 @@ import model.Coche;
 import model.Coche2;
 import model.Moto;
 import model.Moto2;
+import model.Prueba;
 import model.Trabajador;
 import model.Venta2;
 import model.VentaCoche;
@@ -1362,6 +1363,30 @@ public class GestorBD {
 			log(Level.INFO, logger, null);
 		} catch (SQLException e) {
 			log(Level.SEVERE, loggerf, e );
+			setLastError(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void probar(Prueba p) {
+		String sql  = "INSERT INTO prueba (dNI, vehiculo, fechaInicio, fechaFinPermiso, ciudad) VALUES (?,?,?,?,?)";
+
+		PreparedStatement stmt;
+
+		try {			
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, p.getProbador().getdNI());
+			stmt.setString(2, p.getVehiculo().toString());
+			stmt.setString(3, p.getFechaInicioString());
+			stmt.setString(4, p.getFechaInicioString());
+			stmt.setString(5, p.getCiudad());
+
+			stmt.executeUpdate();
+
+			log(Level.INFO, p.toString(), null);
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error cuando " + p.toString(), e );
 			setLastError(e);
 			e.printStackTrace();
 		}

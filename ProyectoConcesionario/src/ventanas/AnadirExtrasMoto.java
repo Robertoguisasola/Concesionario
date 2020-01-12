@@ -39,7 +39,7 @@ public class AnadirExtrasMoto extends JFrame{
 	private JButton acceptButton;
 	private JButton cancelButton;
 	private Box buttonsBox;
-	JPanel buttonsPanel;
+	private JPanel buttonsPanel;
 
 	public AnadirExtrasMoto(Cliente c, Trabajador t, Moto m) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,7 +81,6 @@ public class AnadirExtrasMoto extends JFrame{
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				confirmarVenta(c,t,m);
-				volver(c, t);
 			}
 		});    
 
@@ -157,6 +156,8 @@ public class AnadirExtrasMoto extends JFrame{
 		bd.venderMoto(vm);
 
 		bd.desconectar();
+		
+		volver(c, t);
 	}
 
 	private int calculatePrecio(Moto m) {

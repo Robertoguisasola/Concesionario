@@ -116,8 +116,40 @@ public class EscogerMoto2 extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO llevar a probar moto2
+				String[] opciones = {"Sí, probar el coche", "No, cambiar"};
 
+				if(tabla.getSelectedRow() >= 0) {
+					String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
+					String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
+					String color = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Color"));
+					int caballos = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Caballos")).toString());
+					int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
+					int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
+					boolean estructuraProtectora;
+					int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+
+					if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
+						estructuraProtectora = false;
+					} else {
+						estructuraProtectora = true;
+					}
+
+					Moto2 m = new Moto2(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 2, plazas, precio, estructuraProtectora, kilometros);
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Desea probar la "+ m.venderMoto() + "?", "Probar", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
+
+					switch (respuesta) {
+					case 0:
+						ProbarVehiculo.abrirProbarVehiculo(c, t, m);
+						dispose();
+						break;
+					case 1:
+						JOptionPane.showMessageDialog(null, "Seleccione la moto que desea probar");
+						break;
+					default:
+						break;
+					}
+				}
 			}
 		});
 
@@ -208,7 +240,9 @@ public class EscogerMoto2 extends JFrame{
 		}
 		bd.vender2(v);
 
-		bd.desconectar();		
+		bd.desconectar();
+		
+		volver(c, t);
 	}
 
 	private void volver(Cliente c, Trabajador t) {
