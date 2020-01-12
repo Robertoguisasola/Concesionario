@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -84,9 +86,7 @@ public class ProbarVehiculo extends JFrame{
 		concesionarioLabel = new JLabel("Concesionario de recogida:");
 		concesionarioCombo = new JComboBox<String>();
 
-		//TODO aaaa seleccionar concesionarios...
-		ArrayList<String> concesionarios = new ArrayList<String>();
-		concesionarios.add("HOLA");
+		ArrayList<String> concesionarios = concesionarios();
 		for(String concesionario: concesionarios)
 			concesionarioCombo.addItem(concesionario);
 
@@ -209,13 +209,47 @@ public class ProbarVehiculo extends JFrame{
 	private void volver(Cliente c, Trabajador t, Vehiculo v) {
 		if (v instanceof Coche) {
 			EscogerCoche.abrirEscogerCoche(c, t);
+			dispose();
 		} else if (v instanceof Coche2)	{
 			EscogerCoche2.abrirEscogerCoche2(c, t);
+			dispose();
 		} else if (v instanceof Moto) {
 			EscogerMoto.abrirEscogerMoto(c, t);
+			dispose();
 		} else if (v instanceof Moto2)	{
 			EscogerMoto2.abrirEscogerMoto2(c, t);
+			dispose();
 		}
+	}
+	
+	private ArrayList<String> concesionarios(){
+		ArrayList<String> concesionarios = new ArrayList<String>();
+		
+		File f = null;
+		Scanner sc = null;
+
+		try {
+			f = new File("ficheros/concesionarios.csv");
+			sc = new Scanner(f);
+
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+
+				//Cada campo está partido por ;
+				
+				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
+				
+				String c = campos[0];
+
+				concesionarios.add(c);	
+			}
+			sc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sc.close();
+		}		
+		return concesionarios;
 	}
 
 	public static void abrirProbarVehiculo(Cliente c, Trabajador t, Vehiculo v) {

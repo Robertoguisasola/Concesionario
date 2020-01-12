@@ -43,6 +43,7 @@ public class VistaCliente extends JFrame {
 		cerrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				volver();
+				dispose();
 			}
 		});
 
@@ -136,11 +137,5 @@ public class VistaCliente extends JFrame {
 	private void volver() {
 		Login.abrirLogin();
 		dispose();
-	}
-	
-	public static void main(String[] args) {
-		Cliente c = new Cliente();
-
-		VistaCliente.abrirVistaCliente(c);
 	}
 }

@@ -249,6 +249,7 @@ public class EscogerCoche2 extends JFrame{
 	private void volver(Cliente c, Trabajador t) {
 		if (t == null) {
 			VistaCliente.abrirVistaCliente(c);
+			dispose();
 		} else {
 			if (t.isAdmin()) {
 				VistaAdministrador.abrirVistaAdministrador(t);
