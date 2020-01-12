@@ -72,6 +72,7 @@ public class VistaCliente extends JFrame {
 				case 1:
 					EscogerCoche2.abrirEscogerCoche2(c, null);
 					dispose();
+					break;
 				default:
 					break;
 				}			

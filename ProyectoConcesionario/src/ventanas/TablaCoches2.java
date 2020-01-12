@@ -83,7 +83,7 @@ public class TablaCoches2 extends JFrame {
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int diesel;
-						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilómetros")).toString());
 
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Motor diesel")).equals("No")) {
 							diesel = 0;
@@ -91,7 +91,7 @@ public class TablaCoches2 extends JFrame {
 							diesel = 1;
 						}
 
-						bd.eliminarCoche2(marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
+						bd.eliminarVehiculo("coche2", marca, modeloc, color, caballos, plazas, precio, diesel, kilometros);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;

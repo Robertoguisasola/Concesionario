@@ -90,7 +90,7 @@ public class TablaMotos extends JFrame {
 							estructura = 1;
 						}
 
-						bd.eliminarMoto(marca, modeloc, color, caballos, plazas, precio, estructura);
+						bd.eliminarVehiculo("moto", marca, modeloc, color, caballos, plazas, precio, estructura, 0);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;
@@ -107,13 +107,7 @@ public class TablaMotos extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (t.isAdmin()) {
-					VistaAdministrador.abrirVistaAdministrador(t);
-					dispose();
-				} else {
-					VistaTrabajador.abrirVistaTrabajador(t);
-					dispose();
-				}
+				volver(t);
 			}
 		});
 
@@ -168,6 +162,16 @@ public class TablaMotos extends JFrame {
 			e.printStackTrace();
 		}
 		bd.desconectar();
+	}
+
+	private void volver(Trabajador t) {
+		if (t.isAdmin()) {
+			VistaAdministrador.abrirVistaAdministrador(t);
+			dispose();
+		} else {
+			VistaTrabajador.abrirVistaTrabajador(t);
+			dispose();
+		}
 	}
 
 	public static void abrirTablaMotos(Trabajador t) {

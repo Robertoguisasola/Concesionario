@@ -82,7 +82,6 @@ public class AnadirExtrasCoche extends JFrame{
 		acceptButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				confirmarVenta(c,t,ch);
-				volver(c, t);
 			}
 		});    
 
@@ -120,6 +119,7 @@ public class AnadirExtrasCoche extends JFrame{
 			break;
 		case 1:
 			JOptionPane.showMessageDialog(null, "Modifique los extras. En caso de querer cambiar el coche pulse cancelar");
+			break;
 		default:
 			break;
 		}	
@@ -158,6 +158,8 @@ public class AnadirExtrasCoche extends JFrame{
 		bd.venderCoche(vc);
 
 		bd.desconectar();
+		
+		volver(c, t);
 	}
 
 	private int calculatePrecio(Coche ch) {
@@ -254,6 +256,7 @@ public class AnadirExtrasCoche extends JFrame{
 	private void volver(Cliente c, Trabajador t) {
 		if (t == null) {
 			VistaCliente.abrirVistaCliente(c);
+			dispose();
 		} else {
 			if (t.isAdmin()) {
 				VistaAdministrador.abrirVistaAdministrador(t);

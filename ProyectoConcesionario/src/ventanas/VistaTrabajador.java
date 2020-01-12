@@ -168,11 +168,10 @@ public class VistaTrabajador extends JFrame{
 				case 1:
 					TablaVentasCoches2.abrirTablaVentasCoches2(t);
 					dispose();
+					break;
 				default:
 					break;
 				}
-				TablaVentasCoches.abrirTablaVentasCoches(t);
-				dispose();				
 			}
 		});
 		ventasCochesMenu.add(ventasCVerItem);
@@ -196,6 +195,7 @@ public class VistaTrabajador extends JFrame{
 					break;
 				case 1:
 					EscogerCoche2.abrirEscogerCoche2(null, t);
+					break;
 				default:
 					break;
 				}
@@ -490,7 +490,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos2.abrirTablaMotos2(t);	
+				TablaMotos2.abrirTablaMotos2(t);
+				dispose();
 			}
 		});
 		motos2Menu.add(motos2VerItem);

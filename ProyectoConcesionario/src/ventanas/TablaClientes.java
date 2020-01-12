@@ -75,8 +75,9 @@ public class TablaClientes extends JFrame {
 
 					switch (respuesta) {
 					case 0:
-						GestorBD bd = new GestorBD();
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
+						
+						GestorBD bd = new GestorBD();
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
 						//TODO refrescar tabla

@@ -83,7 +83,7 @@ public class TablaMotos2 extends JFrame {
 						int plazas = Integer.parseInt( modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Plazas")).toString());
 						int precio = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Precio")).toString());
 						int estructura;
-						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilometros")).toString());
+						int kilometros = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Kilómetros")).toString());
 
 						if ((boolean) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Estructura protectora")).equals("No")) {
 							estructura = 0;
@@ -91,7 +91,7 @@ public class TablaMotos2 extends JFrame {
 							estructura = 1;
 						}
 
-						bd.eliminarMoto2(marca, modeloc, color, caballos, plazas, precio, estructura, kilometros);
+						bd.eliminarVehiculo("moto2", marca, modeloc, color, caballos, plazas, precio, estructura, kilometros);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;
@@ -122,7 +122,6 @@ public class TablaMotos2 extends JFrame {
 	}
 
 	//Añadimos datos
-
 	private void setData() {
 		modelo = new DefaultTableModel();
 		tabla = new JTable(modelo);

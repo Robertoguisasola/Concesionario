@@ -90,7 +90,7 @@ public class TablaCoches extends JFrame {
 							diesel = 1;
 						}
 
-						bd.eliminarCoche(marca, modeloc, color, caballos, plazas, precio, diesel);
+						bd.eliminarVehiculo("coche", marca, modeloc, color, caballos, plazas, precio, diesel, 0);
 						bd.desconectar();
 						//TODO refrescar tabla
 						break;

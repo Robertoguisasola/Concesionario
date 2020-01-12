@@ -623,7 +623,8 @@ public class VistaAdministrador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos2.abrirTablaMotos2(t);	
+				TablaMotos2.abrirTablaMotos2(t);
+				dispose();
 			}
 		});
 		motos2Menu.add(motos2VerItem);
