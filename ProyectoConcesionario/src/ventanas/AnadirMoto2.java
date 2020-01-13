@@ -130,7 +130,7 @@ public class AnadirMoto2 extends JFrame {
 			}
 		});
 		nRuedasField.setHorizontalAlignment(SwingConstants.CENTER);
-		nRuedasField.setText("4");
+		nRuedasField.setText("2");
 
 		nRuedasBox = new Box(BoxLayout.X_AXIS);
 		nRuedasBox.add(nRuedasLabel);
