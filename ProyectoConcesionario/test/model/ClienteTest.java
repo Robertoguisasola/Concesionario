@@ -36,7 +36,7 @@ assertEquals(0000000000000000, empty.getNumTarjeta());
 
 	@Test
 	public void testToString() {
-assertEquals("Roberto Guisasola, con DNI 71708119F y número de tarjeta 0", c.toString());
+		assertEquals("Roberto Guisasola, con DNI 71708119F y número de tarjeta 0", c.toString());
 }
 
 }
