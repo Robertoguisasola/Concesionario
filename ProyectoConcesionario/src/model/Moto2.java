@@ -42,6 +42,6 @@ public class Moto2 extends Moto implements SegundaMano {
 	}
 
 	public String venderMoto2() {
-		return marca + " " + modelo + " " + getColorString() + estructuraProtectoraString() + ", " + caballos + " cv y " + nPlazas + " plazas y " + kilometros + " kilómetros reales";
+		return marca + " " + modelo + " " + getColorString() + estructuraProtectoraString() + ", " + caballos + "cv y " + nPlazas + " plazas y " + kilometros + " kilómetros reales";
 	}
 }
