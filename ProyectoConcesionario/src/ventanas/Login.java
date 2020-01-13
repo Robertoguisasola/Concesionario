@@ -28,7 +28,7 @@ public class Login extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+	
 	private JPanel formPanel;
 	private JLabel loginLabel;
 	private JTextField loginField;
@@ -156,7 +156,7 @@ public class Login extends JFrame {
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 	}
-	
+
 	private void volver() {
 		Inicio.abrirInicio();
 		dispose();

@@ -24,7 +24,7 @@ public class TablaVentasMotos extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -72,7 +72,7 @@ public class TablaVentasMotos extends JFrame {
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar la venta de la "+ nombre + " ?", "Cancelar venta", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					
+
 					switch (respuesta) {
 					case 0:
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI cliente"));
@@ -82,7 +82,7 @@ public class TablaVentasMotos extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarVenta("ventamoto", dni, precio, matricula);
 						bd.desconectar();
-						
+
 						TablaVentasMotos.abrirTablaVentasMotos(t);
 						dispose();
 						break;

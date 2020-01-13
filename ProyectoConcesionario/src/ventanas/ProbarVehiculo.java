@@ -142,7 +142,7 @@ public class ProbarVehiculo extends JFrame{
 		Date devolucion = calculateDevolucion(fecha);
 
 		Prueba p = new Prueba(null, v, fecha, devolucion, concesionario);
-		
+
 		if (c == null) {
 			p.setProbador(t);
 		} else {
@@ -157,7 +157,7 @@ public class ProbarVehiculo extends JFrame{
 		switch (respuesta) {
 		case 0:
 			GestorBD bd = new GestorBD();
-			
+
 			bd.probar(p);
 
 			bd.desconectar();
@@ -177,9 +177,9 @@ public class ProbarVehiculo extends JFrame{
 		c.setTime(fecha);
 		//En el segundo campo indicamos los días que queremos sumar
 		c.add(Calendar.DAY_OF_MONTH, 7);
-		
+
 		Date devolucion = c.getTime();
-		
+
 		return devolucion;
 	}
 
@@ -221,10 +221,10 @@ public class ProbarVehiculo extends JFrame{
 			dispose();
 		}
 	}
-	
+
 	private ArrayList<String> concesionarios(){
 		ArrayList<String> concesionarios = new ArrayList<String>();
-		
+
 		File f = null;
 		Scanner sc = null;
 
@@ -236,9 +236,9 @@ public class ProbarVehiculo extends JFrame{
 				String linea = sc.nextLine();
 
 				//Cada campo está partido por ;
-				
+
 				String[] campos = linea.split(";");// recibe un argumento y devuleve un array de Strings 
-				
+
 				String c = campos[0];
 
 				concesionarios.add(c);	

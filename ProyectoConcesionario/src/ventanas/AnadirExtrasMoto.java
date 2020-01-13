@@ -156,7 +156,7 @@ public class AnadirExtrasMoto extends JFrame{
 		bd.venderMoto(vm);
 
 		bd.desconectar();
-		
+
 		volver(c, t);
 	}
 

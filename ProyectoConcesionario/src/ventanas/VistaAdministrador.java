@@ -761,7 +761,7 @@ public class VistaAdministrador extends JFrame{
 		trabajadorBox.add(trabajadorLabel);
 		trabajadorBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		trabajadorBox.add(trabajadorButton);
-		
+
 		vehiculosLabel = new JLabel("Vehiculos");
 
 		vehiculosButton = new JButton("Ver vehiculos");
@@ -861,16 +861,9 @@ public class VistaAdministrador extends JFrame{
 		vistaAdministrador.setLocationRelativeTo(null);
 		vistaAdministrador.setVisible(true);
 	}
-	
+
 	private void volver() {
 		Login.abrirLogin();
 		dispose();
-	}
-
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		t.setAdmin(true);
-
-		VistaAdministrador.abrirVistaAdministrador(t);
 	}
 }

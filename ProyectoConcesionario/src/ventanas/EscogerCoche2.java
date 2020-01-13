@@ -115,7 +115,7 @@ public class EscogerCoche2 extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Sí, probar el coche", "No, cambiar"};
-				
+
 				if(tabla.getSelectedRow() >= 0) {
 					String marca = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Marca"));
 					String modeloc = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Modelo"));
@@ -133,7 +133,7 @@ public class EscogerCoche2 extends JFrame{
 					}
 
 					Coche2 ch = new Coche2(marca, modeloc, Colores.valueOf(color.toUpperCase()), caballos, 4, plazas, precio, diesel, kilometros);
-					
+
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Desea probar el "+ ch.venderCoche() + "?", "Probar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 
@@ -240,7 +240,7 @@ public class EscogerCoche2 extends JFrame{
 		bd.vender2(v);
 
 		bd.desconectar();
-		
+
 		volver(c, t);
 	}
 

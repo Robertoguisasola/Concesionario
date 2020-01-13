@@ -25,7 +25,7 @@ public class TablasVehiculos extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JTabbedPane pestanas;
 	private JPanel panelCoches;
 	private JPanel panelCoches2;
@@ -33,7 +33,7 @@ public class TablasVehiculos extends JFrame {
 	private JPanel panelMotos2;
 	private JPanel northPanel;
 	private JButton volverButton;
-	
+
 	private JScrollPane tablaCPanel;
 	private JPanel botonesCPanel;
 	private JButton anadirCButton;
@@ -67,7 +67,7 @@ public class TablasVehiculos extends JFrame {
 		this.setTitle("Tabla de coches");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout());
 
@@ -81,11 +81,11 @@ public class TablasVehiculos extends JFrame {
 		});
 
 		northPanel.add(volverButton, BorderLayout.EAST);
-		
+
 		pestanas = new JTabbedPane(JTabbedPane.TOP);
-		
+
 		panelCoches = new JPanel();
-		
+
 		setDataC();
 		tablaCPanel = new JScrollPane(tablaC);
 
@@ -160,9 +160,9 @@ public class TablasVehiculos extends JFrame {
 
 		panelCoches.add(tablaCPanel, BorderLayout.CENTER);
 		panelCoches.add(botonesCPanel, BorderLayout.SOUTH);
-		
+
 		panelCoches2 = new JPanel();
-		
+
 		setDataC2();
 		tablaC2Panel = new JScrollPane(tablaC2);
 
@@ -235,12 +235,12 @@ public class TablasVehiculos extends JFrame {
 				volver(t);
 			}
 		});
-		
+
 		panelCoches2.add(tablaC2Panel, BorderLayout.CENTER);
 		panelCoches2.add(botonesC2Panel, BorderLayout.SOUTH);
-		
+
 		panelMotos = new JPanel();
-		
+
 		setDataM();
 		tablaMPanel = new JScrollPane(tablaM);
 
@@ -315,9 +315,9 @@ public class TablasVehiculos extends JFrame {
 
 		panelMotos.add(tablaMPanel, BorderLayout.CENTER);
 		panelMotos.add(botonesMPanel, BorderLayout.SOUTH);
-		
+
 		panelMotos2  =new JPanel();
-		
+
 		setDataM2();
 		tablaM2Panel = new JScrollPane(tablaM2);
 
@@ -394,12 +394,12 @@ public class TablasVehiculos extends JFrame {
 		panelMotos2.add(tablaM2Panel, BorderLayout.CENTER);
 		panelMotos2.add(botonesM2Panel, BorderLayout.SOUTH);
 
-		
+
 		pestanas.addTab("Coches", panelCoches);
 		pestanas.addTab("Coches segunda mano", panelCoches2);
 		pestanas.addTab("Motos", panelMotos);
 		pestanas.addTab("Motos segunda mano", panelMotos2);
-		
+
 		add(northPanel, BorderLayout.NORTH);
 		add(pestanas);
 
@@ -497,7 +497,7 @@ public class TablasVehiculos extends JFrame {
 		}
 		bd.desconectar();
 	}
-	
+
 	private void setDataM() {
 		modeloM = new DefaultTableModel();
 		tablaM = new JTable(modeloM);
@@ -540,7 +540,7 @@ public class TablasVehiculos extends JFrame {
 		}
 		bd.desconectar();
 	}
-	
+
 	private void setDataM2() {
 		modeloM2 = new DefaultTableModel();
 		tablaM2 = new JTable(modeloM2);
@@ -584,7 +584,7 @@ public class TablasVehiculos extends JFrame {
 		}
 		bd.desconectar();
 	}
-	
+
 	private void volver(Trabajador t) {
 		if (t.isAdmin()) {
 			VistaAdministrador.abrirVistaAdministrador(t);
@@ -600,9 +600,5 @@ public class TablasVehiculos extends JFrame {
 		tablasVehiculos.setVisible(true);
 		tablasVehiculos.setSize(600,550);
 		tablasVehiculos.setLocationRelativeTo(null);
-	}
-	
-	public static void main(String[] args) {
-		TablasVehiculos.abrirTablasVehiculos(null);
 	}
 }

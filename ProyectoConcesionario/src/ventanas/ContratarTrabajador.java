@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -20,10 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JSpinnerDateEditor;
 
 import dataBase.GestorBD;
-import model.Persona;
 import model.Trabajador;
 
 public class ContratarTrabajador extends JFrame{
@@ -31,7 +29,7 @@ public class ContratarTrabajador extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JPanel formPanel;
 	private Box formBox;
 	private JPanel buttonsPanel;
@@ -54,7 +52,7 @@ public class ContratarTrabajador extends JFrame{
 	private JTextField apellidosField;
 	private Box apellidosBox;
 	private JLabel fechaNacimientoLabel;
-	private JTextField fechaNacimientoField;
+	private JDateChooser fechaNacimientoCalendario;
 	private Box fechaNacimientoBox;
 	private JLabel sueldoLabel;
 	private JTextField sueldoField;
@@ -128,21 +126,15 @@ public class ContratarTrabajador extends JFrame{
 		apellidosBox.add(Box.createRigidArea(new Dimension(104, 12)));
 		apellidosBox.add(apellidosField);
 
-		fechaNacimientoLabel= new JLabel("Fecha de nacimiento: ");
-		fechaNacimientoField = new JTextField();
-		fechaNacimientoField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				fechaNacimientoField.setText("");
-			}
-		});
-		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaNacimientoField.setText("dd/MM/yyyy");
+		fechaNacimientoLabel= new JLabel("Fecha de nacimiento:");
+
+		fechaNacimientoCalendario = new JDateChooser(null, null, null, new JSpinnerDateEditor());
+		fechaNacimientoCalendario.setDateFormatString("dd/MM/yyyy");
 
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
-		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(37, 12)));
-		fechaNacimientoBox.add(fechaNacimientoField);
+		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
+		fechaNacimientoBox.add(fechaNacimientoCalendario);
 
 		sueldoLabel = new JLabel("Sueldo: ");
 		sueldoField = new JTextField();
@@ -217,7 +209,6 @@ public class ContratarTrabajador extends JFrame{
 		dniField.setText(null);
 		nombreField.setText(null);
 		apellidosField.setText(null);
-		fechaNacimientoField.setText(null);
 		sueldoField.setText(null);
 		adminCheckBox.setEnabled(false);
 	}
@@ -229,8 +220,7 @@ public class ContratarTrabajador extends JFrame{
 				return;
 			}
 
-			String fechaNacimientoString = fechaNacimientoField.getText();
-			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
+			Date fechaNacimiento = fechaNacimientoCalendario.getDate();
 			String usuario = usuarioField.getText();
 			String contra = new String(passwordField.getPassword());;
 			String email = emailField.getText();
@@ -262,9 +252,7 @@ public class ContratarTrabajador extends JFrame{
 				break;
 			}
 		} 
-		catch (ParseException ex) {
-			JOptionPane.showMessageDialog(this, "Formato de fecha erroneo");
-		} catch (NumberFormatException en) {
+		catch (NumberFormatException en) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el sueldo del trabajador correctamente");
 		}
 		catch (Exception e) {
@@ -303,11 +291,6 @@ public class ContratarTrabajador extends JFrame{
 			return true;	
 		}
 
-		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca la fecha de nacimiento");
-			return true;	
-		}
-
 		if (sueldoField.getText().equals("") || sueldoField.getText().equals("0")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca el sueldo del trabajador");
 			return true;	
@@ -323,7 +306,7 @@ public class ContratarTrabajador extends JFrame{
 		contratarTrabajador.setLocationRelativeTo(null);
 		contratarTrabajador.setVisible(true);
 	}
-	
+
 	private void volver(Trabajador t) {
 		if (t.isAdmin()) {
 			VistaAdministrador.abrirVistaAdministrador(t);

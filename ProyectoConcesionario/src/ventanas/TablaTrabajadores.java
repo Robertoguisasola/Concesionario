@@ -24,7 +24,7 @@ public class TablaTrabajadores extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -76,11 +76,11 @@ public class TablaTrabajadores extends JFrame {
 					switch (respuesta) {
 					case 0:
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
-						
+
 						GestorBD bd = new GestorBD();
 						bd.eliminarPersona("trabajador", dni);
 						bd.desconectar();
-						
+
 						TablaTrabajadores.abrirTablaTrabajadores(t);
 						dispose();
 						break;

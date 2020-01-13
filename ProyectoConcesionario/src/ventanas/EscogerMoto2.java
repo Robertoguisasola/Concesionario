@@ -239,7 +239,7 @@ public class EscogerMoto2 extends JFrame{
 		bd.vender2(v);
 
 		bd.desconectar();
-		
+
 		volver(c, t);
 	}
 

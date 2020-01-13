@@ -1,6 +1,5 @@
 package ventanas;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -158,7 +157,7 @@ public class AnadirExtrasCoche extends JFrame{
 		bd.venderCoche(vc);
 
 		bd.desconectar();
-		
+
 		volver(c, t);
 	}
 

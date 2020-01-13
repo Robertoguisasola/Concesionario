@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -19,11 +16,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JSpinnerDateEditor;
 
 import dataBase.GestorBD;
 import model.Cliente;
-import model.Persona;
 import model.Trabajador;
 
 public class RegistrarCliente extends JFrame {
@@ -60,7 +58,7 @@ public class RegistrarCliente extends JFrame {
 	private JTextField apellidosField;
 	private Box apellidosBox;
 	private JLabel fechaNacimientoLabel;
-	private JTextField fechaNacimientoField;
+	private JDateChooser fechaNacimientoCalendario;
 	private Box fechaNacimientoBox;
 	private JLabel numeroTarjetaLabel;
 	private JTextField numeroTarjetaField;
@@ -144,20 +142,14 @@ public class RegistrarCliente extends JFrame {
 		apellidosBox.add(apellidosField);
 
 		fechaNacimientoLabel= new JLabel("Fecha de nacimiento:");
-		fechaNacimientoField = new JTextField();
-		fechaNacimientoField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				fechaNacimientoField.setText("");
-			}
-		});
-		fechaNacimientoField.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaNacimientoField.setText("dd/MM/yyyy");
+
+		fechaNacimientoCalendario = new JDateChooser(null, null, null, new JSpinnerDateEditor());
+		fechaNacimientoCalendario.setDateFormatString("dd/MM/yyyy");
 
 		fechaNacimientoBox = new Box(BoxLayout.X_AXIS);
 		fechaNacimientoBox.add(fechaNacimientoLabel);
 		fechaNacimientoBox.add(Box.createRigidArea(new Dimension(39,0)));
-		fechaNacimientoBox.add(fechaNacimientoField);
+		fechaNacimientoBox.add(fechaNacimientoCalendario);
 
 		numeroTarjetaLabel = new JLabel("Número de tarjeta:");
 		numeroTarjetaField = new JTextField();
@@ -239,7 +231,6 @@ public class RegistrarCliente extends JFrame {
 		dniField.setText(null);
 		nombreField.setText(null);
 		apellidosField.setText(null);
-		fechaNacimientoField.setText(null);
 		numeroTarjetaField.setText(null);
 	}
 
@@ -254,8 +245,7 @@ public class RegistrarCliente extends JFrame {
 				return;
 			}
 
-			String fechaNacimientoString = fechaNacimientoField.getText();
-			Date fechaNacimiento = Persona.df.parse(fechaNacimientoString);
+			Date fechaNacimiento = fechaNacimientoCalendario.getDate();
 			String usuario = usuarioField.getText();
 			String contra = new String(passwordField.getPassword());;
 			String email = emailField.getText();
@@ -286,9 +276,7 @@ public class RegistrarCliente extends JFrame {
 				break;
 			}
 		} 
-		catch (ParseException ex) {
-			JOptionPane.showMessageDialog(this, "<html><body><center>Formato de fecha erroneo. <br/>Por favor, introduzca la fecha de la siguiente forma: <br/>dd/MM/yyyy</center></body><html>");
-		} catch (NumberFormatException en) {
+		catch (NumberFormatException en) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca un número de tarjeta");
 		}
 		catch (Exception e) {
@@ -330,11 +318,6 @@ public class RegistrarCliente extends JFrame {
 		if (new String(apellidosField.getText()).equals("")) {
 			JOptionPane.showMessageDialog(this, "Por favor, introduzca al menos un apellido");
 			return true;
-		}
-
-		if (fechaNacimientoField.getText().equals("") || fechaNacimientoField.getText().equals("dd/MM/yyyy")) {
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca su fecha de nacimiento");
-			return true;	
 		}
 
 		return false;

@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import dataBase.GestorBD;
 import model.Trabajador;
 
-//NO TOCAR, SOLO AÑADIR COSAS
 public class VistaTrabajador extends JFrame{
 
 	/**
@@ -674,14 +673,14 @@ public class VistaTrabajador extends JFrame{
 		vehiculosBox.add(vehiculosLabel);
 		vehiculosBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		vehiculosBox.add(vehiculosButton);
-		
+
 		opcionesBox = new Box(BoxLayout.Y_AXIS);
 		opcionesBox.add(clienteBox);
 		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		opcionesBox.add(ventasBox);
 		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		opcionesBox.add(vehiculosBox);
-		
+
 		opcionesPanel.add(opcionesBox);
 
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);
@@ -700,12 +699,5 @@ public class VistaTrabajador extends JFrame{
 	private void volver() {
 		Login.abrirLogin();
 		dispose();
-	}
-	
-	public static void main(String[] args) {
-		Trabajador t = new Trabajador();
-		t.setAdmin(false);
-
-		VistaTrabajador.abrirVistaTrabajador(t);
 	}
 }

@@ -24,7 +24,7 @@ public class TablaClientes extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -76,11 +76,11 @@ public class TablaClientes extends JFrame {
 					switch (respuesta) {
 					case 0:
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI"));
-						
+
 						GestorBD bd = new GestorBD();
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
-						
+
 						TablaClientes.abrirTablaClientes(t);
 						dispose();
 						break;

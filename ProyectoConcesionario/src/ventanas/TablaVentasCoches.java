@@ -24,7 +24,7 @@ public class TablaVentasCoches extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -82,7 +82,7 @@ public class TablaVentasCoches extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarVenta("ventacoche", dni, precio, matricula);
 						bd.desconectar();
-						
+
 						TablaVentasCoches.abrirTablaVentasCoches(t);
 						dispose();
 						break;

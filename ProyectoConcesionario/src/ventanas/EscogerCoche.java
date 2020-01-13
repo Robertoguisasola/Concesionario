@@ -248,7 +248,7 @@ public class EscogerCoche extends JFrame{
 		bd.venderCoche(vc);
 
 		bd.desconectar();
-		
+
 		volver(c, t);
 	}
 

@@ -22,7 +22,7 @@ public class Bienvenida extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+
 	private JPanel panel;
 	private Fondo fondo;
 	private JLabel bienvenida;
