@@ -27,7 +27,6 @@ import model.Trabajador;
 import model.VentaCoche;
 
 public class EscogerCoche extends JFrame{
-	//TODO ffff borrar cuando funcione a la perfeccion
 	/**
 	 * 
 	 */
@@ -40,10 +39,8 @@ public class EscogerCoche extends JFrame{
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private Box tablaBox;
-
 	private JLabel informacionLabel;
 	private JButton volverButton;
-
 	private JButton comprarButton;
 	private JButton probarButton;
 	private Box botonesBox;

@@ -1,7 +1,6 @@
 package model;
 
 public class VentaMoto extends Venta {
-	//TODO tttt hacer test
 
 	protected boolean escape;
 	protected boolean paramanos;

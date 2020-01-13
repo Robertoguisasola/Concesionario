@@ -2,7 +2,6 @@ package model;
 
 public class Moto extends Vehiculo {
 
-	//TODO tttt hacer test de moto
 	protected boolean estructuraProtectora;
 
 	public Moto(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio, boolean estructuraProtectora) {

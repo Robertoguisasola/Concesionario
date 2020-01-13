@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Prueba {
-	//TODO tttt hacer test para probar los coches
 	
 	private Persona probador;
 	private Vehiculo vehiculo;

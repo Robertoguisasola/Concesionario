@@ -24,7 +24,7 @@ public class TablaClientes extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
+	
 	private JScrollPane tablaPanel;
 	private JPanel botonesPanel;
 	private JButton anadirButton;
@@ -70,7 +70,7 @@ public class TablaClientes extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Nombre"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de eliminar a "+ nombre + " ?", "Eliminar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
@@ -80,7 +80,9 @@ public class TablaClientes extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarPersona("cliente", dni);
 						bd.desconectar();
-						//TODO refrescar tabla
+						
+						TablaClientes.abrirTablaClientes(t);
+						dispose();
 						break;
 					default:
 						break;

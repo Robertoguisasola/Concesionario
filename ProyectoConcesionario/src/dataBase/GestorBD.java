@@ -32,7 +32,6 @@ import model.VentaCoche;
 import model.VentaMoto;
 
 public class GestorBD {
-	//TODO optimizar clase
 	private static Exception lastError = null; //Último error que ha sucedido
 	private Connection conn;
 	private static Logger logger = null;
@@ -109,7 +108,6 @@ public class GestorBD {
 	}
 
 	public void exportarBBDDAFichero(String tabla) {
-		//TODO exportar ventas de coches, coches de 2ª mano, motos y motos de 2ª mano
 
 		switch (tabla) {
 		case "trabajador":
@@ -134,14 +132,13 @@ public class GestorBD {
 			exportarVentasCoches();
 			break;
 		case "ventacoche2":
-			//TODO aaaa TERMINAR
-			//exportarVentasCoches2();
+			exportarVentasCoches2();
 			break;
 		case "ventamoto":
-			//exportarVentasMotos();
+			exportarVentasMotos();
 			break;
 		case "ventamoto2":
-			//exportarVentasMotos2();
+			exportarVentasMotos2();
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Pongase en contacto con el desarrollador para importar este fichero");
@@ -435,7 +432,6 @@ public class GestorBD {
 		log(Level.INFO, "Motos de segunda mano añadidas a la base de datos", null);
 	}
 	private void exportarTrabajadores(){
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
 		List<Trabajador>trabajadores = obtenerTrabajadores();
 
@@ -475,7 +471,6 @@ public class GestorBD {
 	}
 
 	private void exportarClientes() {
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
 		List<Cliente>clientes = obtenerClientes();
 
@@ -514,7 +509,6 @@ public class GestorBD {
 	}
 
 	private void exportarCoches(){
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
 		List<Coche> coches = obtenerCoches();
 
@@ -553,7 +547,6 @@ public class GestorBD {
 	}
 
 	private void exportarCoches2(){
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
 		List<Coche2> coches = obtenerCoches2();
 
@@ -593,7 +586,6 @@ public class GestorBD {
 	}
 
 	private void exportarMotos(){
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
 		FileWriter f = null;
 		List<Moto> motos = obtenerMotos();
 
@@ -632,8 +624,7 @@ public class GestorBD {
 	}
 
 	private void exportarMotos2(){
-		//TODO ffff modificar el fichero si funciona bien, para ver si conseguimos que se sobreescriban
-		FileWriter f = null;
+				FileWriter f = null;
 		List<Moto2> motos = obtenerMotos2();
 
 		try {
@@ -679,7 +670,6 @@ public class GestorBD {
 
 		ResultSet rs = null;
 
-		//TODO no coge todos los coches, solo el primero
 		try {
 			stmt = conn.prepareStatement(sql);
 
@@ -742,6 +732,167 @@ public class GestorBD {
 				}
 			} catch (IOException e) {
 				log(Level.SEVERE, "Error al cerrar el fichero de exportar ventas de coches", e);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportarVentasCoches2(){
+		FileWriter f = null;
+
+		String sql = "SELECT dNI, coche, precio, matricula, kilometros FROM ventacoche2";
+		PreparedStatement stmt;
+
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de los coches de segunda mano", null);
+
+			f = new FileWriter("ficheros/ventasCoches2Exp.csv");
+
+			while (rs.next()){
+				for (int i = 0;i<5;i++) {
+						f.write(rs.getObject(i+1) + ";");
+				}
+			}
+		} catch (IOException e2) {
+			log(Level.SEVERE, "Error al escribir en el fichero de exportar ventas de coches de segunda mano", e2);
+			e2.printStackTrace();
+		} catch (SQLException e1) {
+			log(Level.SEVERE, "Error al obtener las ventas de los coches de segunda mano de la base de datos", e1);
+			e1.printStackTrace();
+		} catch (Exception e) {
+			log(Level.SEVERE, "Error al exportar las ventas de los coches de segunda mano", e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar ventas de coches de segunda mano", e);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportarVentasMotos(){
+		FileWriter f = null;
+
+		String sql = "SELECT dNI, moto, precio, matricula, isAutomatico, isLucesLed, isEscape, isParamanos, isGuardabarrosGrande FROM ventamoto";
+		PreparedStatement stmt;
+
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de las motos", null);
+
+			f = new FileWriter("ficheros/ventasMotosExp.csv");
+
+			while (rs.next()){
+				for (int i = 0;i<9;i++) {
+					if (i == 4) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 5) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 6) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 7) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;");
+						} else {
+							f.write("SI;");
+						}
+					} else if (i == 8) {
+						if (rs.getObject(i+1).equals(0)) {
+							f.write("NO;\n");
+						} else {
+							f.write("SI;\n");
+						}
+					} else {
+						f.write(rs.getObject(i+1) + ";");
+					}
+				}
+			}
+		} catch (IOException e2) {
+			log(Level.SEVERE, "Error al escribir en el fichero de exportar ventas de motos", e2);
+			e2.printStackTrace();
+		} catch (SQLException e1) {
+			log(Level.SEVERE, "Error al obtener las ventas de las motos de la base de datos", e1);
+			e1.printStackTrace();
+		} catch (Exception e) {
+			log(Level.SEVERE, "Error al exportar las ventas de las motos", e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar ventas de motos", e);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportarVentasMotos2(){
+		FileWriter f = null;
+
+		String sql = "SELECT dNI, moto, precio, matricula, kilometros FROM ventamoto2";
+		PreparedStatement stmt;
+
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			log(Level.INFO, "Obteniendo las ventas de las motos de segunda mano", null);
+
+			f = new FileWriter("ficheros/ventasMotos2Exp.csv");
+
+			while (rs.next()){
+				for (int i = 0;i<5;i++) {
+						f.write(rs.getObject(i+1) + ";");
+				}
+			}
+		} catch (IOException e2) {
+			log(Level.SEVERE, "Error al escribir en el fichero de exportar ventas de motos de segunda mano", e2);
+			e2.printStackTrace();
+		} catch (SQLException e1) {
+			log(Level.SEVERE, "Error al obtener las ventas de lmas motos de segunda mano de la base de datos", e1);
+			e1.printStackTrace();
+		} catch (Exception e) {
+			log(Level.SEVERE, "Error al exportar las ventas de las motos de segunda mano", e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if(f != null) {
+					f.close();
+				}
+			} catch (IOException e) {
+				log(Level.SEVERE, "Error al cerrar el fichero de exportar ventas de motos de segunda mano", e);
 				e.printStackTrace();
 			}
 		}

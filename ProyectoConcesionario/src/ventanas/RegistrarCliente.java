@@ -32,8 +32,7 @@ public class RegistrarCliente extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//NO TOCAR
-	//TODO ffff si se puede, ajustar los box para que los labels queden alineados
+
 	private JPanel bienvenidaPanel;
 	private JLabel bienvenidaLabel;
 	private JPanel formPanel;
@@ -272,7 +271,7 @@ public class RegistrarCliente extends JFrame {
 			bd.desconectar();
 
 			String[] opciones = {"Sí", "No"};
-			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+			int respuesta = JOptionPane.showOptionDialog( null, "¿Desea registrar un nuevo cliente?", "Registrar otro", JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);	
 
 			switch (respuesta) {

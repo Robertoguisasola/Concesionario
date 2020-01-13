@@ -2,7 +2,6 @@ package model;
 
 public class Moto2 extends Moto implements SegundaMano {
 
-	//TODO tttt hacer el test de moto2
 	private int kilometros;
 
 	public Moto2(String marca, String modelo, Colores color, int caballos, int numRuedas, int nPlazas, int precio,

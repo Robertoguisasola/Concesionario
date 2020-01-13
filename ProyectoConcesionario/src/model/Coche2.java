@@ -1,7 +1,6 @@
 package model;
 
 public class Coche2 extends Coche implements SegundaMano{
-	//TODO tttt hacer test de coche2
 
 	private int kilometros;
 

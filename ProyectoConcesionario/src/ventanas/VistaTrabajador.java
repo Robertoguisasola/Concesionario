@@ -85,12 +85,9 @@ public class VistaTrabajador extends JFrame{
 	private Box ventasBox;
 	private JLabel ventasLabel;
 	private JButton ventasButton;
-	private Box cochesBox;
-	private JLabel cochesLabel;
-	private JButton cochesButton;
-	private Box motosBox;
-	private JLabel motosLabel;
-	private JButton motosButton;
+	private Box vehiculosBox;
+	private JLabel vehiculosLabel;
+	private JButton vehiculosButton;
 
 	public VistaTrabajador(Trabajador t) {
 		barraMenu= new JMenuBar();
@@ -158,7 +155,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevos", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas ver?", "Ver ventas", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -186,7 +183,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevo", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coche deseas comprar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coche deseas comprar?", "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -210,7 +207,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevos", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué venta de coches deseas eliminar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué venta de coches deseas eliminar?", "Cancelar venta", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -232,9 +229,23 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String[] opciones = {"Nuevos", "Segunda mano"};
 				GestorBD bd = new GestorBD();
-				bd.exportarBBDDAFichero("ventacoche");
-				bd.desconectar();				
+
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas exportar?", "Exportar ventas", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+				switch (respuesta) {
+				case 0:
+					bd.exportarBBDDAFichero("ventacoche");
+					bd.desconectar();	
+					break;
+				case 1:
+					bd.exportarBBDDAFichero("ventacoche2");
+					bd.desconectar();	
+					break;
+				default:
+					break;
+				}
 			}
 		});
 		ventasCochesMenu.add(ventasCExportar);
@@ -249,7 +260,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevas", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué motos deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas de motos deseas ver?", "Ver ventas", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -276,7 +287,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nueva", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué moto deseas comprar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué moto deseas comprar?", "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -300,7 +311,7 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nueva", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué venta de moto deseas eliminar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué venta de moto deseas eliminar?", "Cancelar venta", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -323,8 +334,22 @@ public class VistaTrabajador extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GestorBD bd = new GestorBD();
-				bd.exportarBBDDAFichero("ventamoto");
-				bd.desconectar();				
+				String[] opciones = {"Nuevas", "Segunda mano"};
+
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas de motos deseas exportar?", "Exportar ventas", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+				switch (respuesta) {
+				case 0:
+					bd.exportarBBDDAFichero("ventamoto");
+					bd.desconectar();	
+					break;
+				case 1:
+					bd.exportarBBDDAFichero("ventamoto2");
+					bd.desconectar();	
+					break;
+				default:
+					break;
+				}
 			}
 		});
 		ventasMotosMenu.add(ventasMExportar);
@@ -337,8 +362,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches.abrirTablaCoches(t);
-				dispose();			
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();
 			}
 		});
 		cochesNMenu.add(cochesVerItem);
@@ -362,8 +387,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches.abrirTablaCoches(t);
-				dispose();
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();	
 			}
 		});
 		cochesEditarMenu.add(cochesEliminarItem);
@@ -388,7 +413,7 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches2.abrirTablaCoches2(t);
+				TablasVehiculos.abrirTablasVehiculos(t);
 				dispose();			
 			}
 		});
@@ -413,8 +438,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaCoches2.abrirTablaCoches2(t);
-				dispose();
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();		
 			}
 		});
 		coches2EditarMenu.add(coches2EliminarItem);
@@ -439,8 +464,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos.abrirTablaMotos(t);
-				dispose();
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();		
 			}
 		});
 		motosNMenu.add(motosVerItem);
@@ -464,7 +489,7 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos.abrirTablaMotos(t);
+				TablasVehiculos.abrirTablasVehiculos(t);
 				dispose();
 			}
 		});
@@ -490,7 +515,7 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos2.abrirTablaMotos2(t);
+				TablasVehiculos.abrirTablasVehiculos(t);
 				dispose();
 			}
 		});
@@ -515,8 +540,8 @@ public class VistaTrabajador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TablaMotos2.abrirTablaMotos2(t);
-				dispose();
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();		
 			}
 		});
 		motos2EditarMenu.add(motos2EliminarItem);
@@ -583,13 +608,13 @@ public class VistaTrabajador extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Coches", "Motos"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué ventas deseas ver?", "Ver venta", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
 					String[] opciones1 = {"Nuevos", "Segunda mano"};
 
-					int respuesta1 = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta1 = JOptionPane.showOptionDialog( null, "¿Qué ventas de coches deseas ver?", "Ver venta", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones1, opciones1[0]);
 					switch (respuesta1) {
 					case 0:
@@ -607,7 +632,7 @@ public class VistaTrabajador extends JFrame{
 				case 1:
 					String[] opciones2 = {"Nuevas", "Segunda mano"};
 
-					int respuesta2 = JOptionPane.showOptionDialog( null, "¿Qué ventas de motos deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta2 = JOptionPane.showOptionDialog( null, "¿Qué ventas de motos deseas ver?", "Ver venta", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones2, opciones2[0]);
 					switch (respuesta2) {
 					case 0:
@@ -633,71 +658,30 @@ public class VistaTrabajador extends JFrame{
 		ventasBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		ventasBox.add(ventasButton);
 
-		cochesLabel = new JLabel("Coches");
+		vehiculosLabel = new JLabel("Vehiculos");
 
-		cochesButton = new JButton("Ver coches");
-		cochesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String[] opciones = {"Nuevos", "Segunda mano"};
+		vehiculosButton = new JButton("Ver vehiculos");
+		vehiculosButton.addActionListener(new ActionListener() {
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coches deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-				switch (respuesta) {
-				case 0:
-					TablaCoches.abrirTablaCoches(t);
-					dispose();
-					break;
-				case 1:
-					TablaCoches2.abrirTablaCoches2(t);
-					dispose();
-				default:
-					break;
-				}				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TablasVehiculos.abrirTablasVehiculos(t);
+				dispose();	
 			}
 		});
 
-		cochesBox = new Box(BoxLayout.Y_AXIS);
-		cochesBox.add(cochesLabel);
-		cochesBox.add(Box.createRigidArea(new Dimension(0, 10)));
-		cochesBox.add(cochesButton);
-
-		motosLabel = new JLabel("Motos");
-
-		motosButton = new JButton("Ver motos");
-		motosButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String[] opciones = {"Nuevas", "Segunda mano"};
-
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué motos deseas ver?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-				switch (respuesta) {
-				case 0:
-					TablaMotos.abrirTablaMotos(t);
-					dispose();
-					break;
-				case 1:
-					TablaMotos2.abrirTablaMotos2(t);
-					dispose();
-				default:
-					break;
-				}
-			}
-		});
-
-		motosBox = new Box(BoxLayout.Y_AXIS);
-		motosBox.add(motosLabel);
-		motosBox.add(Box.createRigidArea(new Dimension(0, 10)));
-		motosBox.add(motosButton);
-
+		vehiculosBox = new Box(BoxLayout.Y_AXIS);
+		vehiculosBox.add(vehiculosLabel);
+		vehiculosBox.add(Box.createRigidArea(new Dimension(0, 10)));
+		vehiculosBox.add(vehiculosButton);
+		
 		opcionesBox = new Box(BoxLayout.Y_AXIS);
 		opcionesBox.add(clienteBox);
 		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
 		opcionesBox.add(ventasBox);
 		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
-		opcionesBox.add(cochesBox);
-		opcionesBox.add(Box.createRigidArea(new Dimension(0, 10)));
-		opcionesBox.add(motosBox);
-
+		opcionesBox.add(vehiculosBox);
+		
 		opcionesPanel.add(opcionesBox);
 
 		getContentPane().add(opcionesPanel, BorderLayout.CENTER);

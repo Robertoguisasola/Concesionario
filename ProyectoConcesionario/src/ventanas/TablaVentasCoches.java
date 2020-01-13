@@ -70,9 +70,9 @@ public class TablaVentasCoches extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Matricula"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar la venta de a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar la venta del "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					//TODO qqqq actualizar tabla al borrar
+
 					switch (respuesta) {
 					case 0:
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI cliente"));
@@ -82,6 +82,9 @@ public class TablaVentasCoches extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarVenta("ventacoche", dni, precio, matricula);
 						bd.desconectar();
+						
+						TablaVentasCoches.abrirTablaVentasCoches(t);
+						dispose();
 						break;
 					default:
 						break;

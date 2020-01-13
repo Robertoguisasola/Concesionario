@@ -62,7 +62,7 @@ public class VistaCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevos", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coche desea comprar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué coche desea comprar?", "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:
@@ -93,7 +93,7 @@ public class VistaCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] opciones = {"Nuevas", "Segunda mano"};
 
-				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué moto desea comprar?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+				int respuesta = JOptionPane.showOptionDialog( null, "¿Qué moto desea comprar?", "Comprar", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {
 				case 0:

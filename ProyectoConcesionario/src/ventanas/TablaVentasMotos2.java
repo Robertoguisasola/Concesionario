@@ -72,7 +72,7 @@ public class TablaVentasMotos2 extends JFrame {
 
 					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de cancelar la venta de la "+ nombre + " ?", "Cancelar venta", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-					//TODO qqqq actualizar tabla al borrar
+					
 					switch (respuesta) {
 					case 0:
 						String dni = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("DNI cliente"));
@@ -82,6 +82,9 @@ public class TablaVentasMotos2 extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarVenta("ventamoto2", dni, precio, matricula);
 						bd.desconectar();
+						
+						TablaVentasMotos2.abrirTablaVentasMotos2(t);
+						dispose();
 						break;
 					default:
 						break;

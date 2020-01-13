@@ -70,7 +70,7 @@ public class TablaTrabajadores extends JFrame {
 				if(tabla.getSelectedRow() >= 0) {
 					String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), modelo.findColumn("Nombre"));
 
-					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Borrar", JOptionPane.YES_NO_CANCEL_OPTION,
+					int respuesta = JOptionPane.showOptionDialog( null, "¿Está seguro de despedir a "+ nombre + " ?", "Despedir", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
 					switch (respuesta) {
@@ -80,7 +80,9 @@ public class TablaTrabajadores extends JFrame {
 						GestorBD bd = new GestorBD();
 						bd.eliminarPersona("trabajador", dni);
 						bd.desconectar();
-						//TODO refrescar tabla
+						
+						TablaTrabajadores.abrirTablaTrabajadores(t);
+						dispose();
 						break;
 					default:
 						break;
