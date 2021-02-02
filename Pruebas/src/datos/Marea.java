@@ -1,6 +1,8 @@
 package datos;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Marea {
 	private String nombre;
@@ -8,13 +10,12 @@ public class Marea {
 	private Evento salida;
 	private Evento entrada;
 	private int dias;
-	
-	public Marea(Barco barco, Evento salida, Evento entrada) {
-		this.nombre = "";	
-		//T2a
-		
 
-		
+	public Marea(Barco barco, Evento salida, Evento entrada) {
+		GregorianCalendar cal = salida.getFecha();
+		this.nombre = barco.getOceano().substring(0,1) + "_" + barco.getCodigo() + "_" + cal.get(Calendar.DAY_OF_MONTH) + cal.get(Calendar.MONTH) + cal.get(Calendar.YEAR)+ "Salida";	
+		//T2a
+
 		this.barco = barco;
 		this.salida = salida;
 		this.entrada = entrada;
