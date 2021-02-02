@@ -3,7 +3,7 @@ package datos;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class Evento{
+public class Evento implements Comparable<Evento>{
 	private String codigoBarco;
 	private GregorianCalendar fecha;
 	private TipoEvento tipo;
@@ -53,6 +53,15 @@ public class Evento{
 	    String dateFormatted = fmt.format(fecha.getTime());
 		return codigoBarco + " - " + dateFormatted + " " + tipo.toString();
 	}
-	
-	
+
+
+	@Override
+	public int compareTo(Evento e1) {
+		if (fecha.before(e1.getFecha())) {
+			return -1;
+		} else if (fecha.after(e1.getFecha())) {
+			return 1;
+		}
+		return 0;
+	}
 }

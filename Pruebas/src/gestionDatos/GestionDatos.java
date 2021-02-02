@@ -2,6 +2,7 @@ package gestionDatos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,8 @@ public class GestionDatos {
 					evBarco.add(evento);
 				}
 			}
+
+			Collections.sort(evBarco);
 			mapa.put(b.getCodigo(), eventos);
 
 		}
