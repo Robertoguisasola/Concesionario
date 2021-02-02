@@ -3,7 +3,7 @@ package datos;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class Evento {
+public class Evento{
 	private String codigoBarco;
 	private GregorianCalendar fecha;
 	private TipoEvento tipo;
@@ -52,7 +52,7 @@ public class Evento {
 	    fmt.setCalendar(fecha);
 	    String dateFormatted = fmt.format(fecha.getTime());
 		return codigoBarco + " - " + dateFormatted + " " + tipo.toString();
-	}	
+	}
 	
 	
 }

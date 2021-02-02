@@ -1,12 +1,12 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.event.TreeSelectionEvent;
@@ -15,22 +15,21 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import datos.Barco;
-import datos.Evento;
-import gestionDatos.BaseDatos;
 import principal.Examen;
 
 public class VentanaDatos extends JFrame {
-	private static final long serialVersionUID = 8186335640361343371L;
 	DefaultTreeModel modelo;
 	DefaultMutableTreeNode abuelo;
+	
+	JTable tabla;
 	
 	public VentanaDatos() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 		setTitle("Ventana de muestra de datos");
-		setSize( 300, 500 );
+		setSize( 600, 500 );
 		JPanel pCentral = new JPanel();
 		pCentral.setLayout(new BorderLayout());
-		pCentral.add(new JLabel("Gestión de Barcos y Mareas", SwingConstants.CENTER), BorderLayout.NORTH);
+		pCentral.add(new JLabel("Gestión de Barcos", SwingConstants.CENTER), BorderLayout.NORTH);
 		
 		abuelo = new DefaultMutableTreeNode("Gestion Barcos");
 		modelo = new DefaultTreeModel(abuelo);
@@ -43,22 +42,22 @@ public class VentanaDatos extends JFrame {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) e
                         .getPath().getLastPathComponent();
                 if(e.getPath().getPathCount() == 3) {	//Si es un barco, lanzamos el evento
-                    ArrayList<Evento> eventos = new ArrayList<Evento>();
+                	String nodo = node.toString();
+                    System.out.println("Has seleccionado: " + nodo);
                     
-                	BaseDatos.abrirConexion("gestionbarcos.db");
-            		eventos = BaseDatos.getEventosBarco(node.toString());
-            		BaseDatos.cerrarConexion();
-            		
-            		for (Evento evento : eventos) {
-						System.out.println(evento.toString());
-					}
-            		
-                    
+                    //T5
+
+                                        
                 }
             }
         });
-		pCentral.add(tree, BorderLayout.CENTER);
-
+		pCentral.add(tree, BorderLayout.WEST);
+		
+		//T5
+		
+		
+		
+		
 		add(pCentral);
 		
 		setVisible(true);
@@ -74,9 +73,7 @@ public class VentanaDatos extends JFrame {
 				
 				for (Barco b : Examen.getBarcosOceano(o)) {
 					DefaultMutableTreeNode nodoHijo = new DefaultMutableTreeNode(b.getNombre());
-					
 					modelo.insertNodeInto(nodoHijo,nodo,0);
-					
 				}
 			}
 		}

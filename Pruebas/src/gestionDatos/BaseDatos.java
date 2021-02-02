@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 
 import datos.Barco;
 import datos.Evento;
@@ -33,6 +32,8 @@ public class BaseDatos {
 			statement.executeUpdate( sent );
 			sent = "CREATE TABLE IF NOT EXISTS evento (id INTEGER PRIMARY KEY AUTOINCREMENT, codigoBarco varchar(100), tipo varchar(100), fecha int);";
 			statement.executeUpdate( sent );
+			// fin creación bd
+			
 			return true;
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -96,49 +97,27 @@ public class BaseDatos {
 			e.printStackTrace();
 			return null;
 		}
-	}	
+	}
 	
-	public static ArrayList<Evento> getEventosBarco(String b) {
+	/** Borra todo el contenido de la tabla eventos
+	 */
+	public static void resetEventos() {
 		try (Statement statement = conexion.createStatement()) {
-			ArrayList<Barco> barcos = new ArrayList<>();
-			Barco bb = null;
-			String sent = "select * from barco;";
-			System.out.println( sent );
-			ResultSet rs = statement.executeQuery( sent );
-			while( rs.next() ) { // Leer el resultset
-				String nombre = rs.getString("nombre");
-				String codigo = rs.getString("codigo");
-				String tipo = rs.getString("tipo");
-				String oceano = rs.getString("oceano");
-				barcos.add( new Barco ( nombre, null, codigo, TipoBarco.valueOf(tipo), oceano ) );
-			}
-			
-			Iterator<Barco> bar= barcos.iterator();
-			while (bar.hasNext()) {
-				Barco b2 = bar.next();
-				
-				if (b2.getNombre().equals(b)) {
-					bb = b2;
-				}
-			}
-			
-			ArrayList<Evento> eventos = new ArrayList<>();
-			String sent2 = "select * from evento where codigoBarco = '" + bb.getCodigo() + "';";
-			System.out.println( sent2 );
-			ResultSet rs2 = statement.executeQuery( sent2 );
-			
-			while( rs2.next() ) { // Leer el resultset
-				String codigoBarco = rs.getString("codigoBarco");
-				long fecha = rs.getLong("fecha");
-				GregorianCalendar cal = new GregorianCalendar();
-				cal.setTimeInMillis(fecha);
-				String tipo = rs.getString("tipo");
-				eventos.add( new Evento ( codigoBarco, cal, TipoEvento.valueOf(tipo) ) );
-			}
-			return eventos;
+			String sent = "DELETE FROM evento;VACUUM;";
+			statement.executeUpdate( sent );
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
-	}	
+	}
+	
+	/** Guarda un evento en la base de datos.
+	 * Lo inserta si no existe comprobando antes que el barco esté en su tabla correspondiente
+	 * @return	Devuelve true si es correcto y false si ha ocurrido algún error
+	 */
+	public static boolean addEvento(Evento e) {
+		//T1b - Carga de evento en la base de datos
+
+		return false;
+	}
+	
 }

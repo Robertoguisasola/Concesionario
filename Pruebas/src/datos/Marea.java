@@ -10,7 +10,11 @@ public class Marea {
 	private int dias;
 	
 	public Marea(Barco barco, Evento salida, Evento entrada) {
-		this.nombre = "";
+		this.nombre = "";	
+		//T2a
+		
+
+		
 		this.barco = barco;
 		this.salida = salida;
 		this.entrada = entrada;
